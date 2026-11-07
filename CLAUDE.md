@@ -19,6 +19,8 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   precedence** where it differs from DESIGN.md.
 - `docs/spec/DESIGN.md`: the earlier, broader design spec (also covers petrol/TVO). It is used for
   layout and UX intent.
+- `docs/research/06-agco-heritage-2008.md`: current AGCO supply numbers for 35/23C parts from the
+  2008 Heritage catalogue (SRC-038), stored on nodes as `replacementReferences`.
 - `docs/research/01–05`: Phase 1 findings. They override the spec's *assumed* scope lists where
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
@@ -102,6 +104,12 @@ These are enforced by the validator where possible.
 - A status other than `unverified` must cite sources.
 - OEM numbers quoted by suppliers or forums go in `supplierClaimedOem`, never in `oemPartNumber`,
   until checked against parts book 819045M4 (SRC-032).
+- Numbers from the 2008 AGCO Heritage catalogue (SRC-038) go in `replacementReferences`
+  (`{number, description, models, source, page, confidence}`), never in `oemPartNumber`: they are
+  the numbers AGCO supplied the part under in 2008 and may supersede the 1958 number. `confidence`
+  is `listed` when the row names the 23C / 35 diesel / FE35 or the 35 without an engine
+  restriction, and `possible` when it depends on a US serial range or does not name the engine.
+  The validator checks each one cites an accessed source and never repeats `oemPartNumber`.
 - Never present missing data as confirmed in the UI. Show "not yet documented" instead.
 - The Perkins 3.152/A3.152 is **not** 1958 equipment (introduced 1959, c. serial 165596).
 - Live PTO depends on the dual-stage clutch. The owner reports dual-clutch behaviour

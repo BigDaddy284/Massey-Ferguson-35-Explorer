@@ -213,6 +213,11 @@ svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; 
 .badge.variant-dependent { color: var(--st-variant); background: #efebf8; border-color: #d8cfee; }
 .badge.neutral { color: var(--slate); background: var(--silver-light); }
 .badge.claim { color: #8a5a10; background: #fbf1df; border-color: #f0d9ad; font-weight: 500; }
+.badge.replacement { color: var(--blue-strong); background: #e8f0fb; border-color: #c5d6f0; font-weight: 500; }
+.rep-list { list-style: none; margin: 0; padding: 0; }
+.rep-list li { padding: 4px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.rep-list li:last-child { border-bottom: 0; }
+.rep-list .muted { font-size: 12px; margin-top: 2px; }
 
 /* ---------- Workspace: anatomy ---------- */
 .ws-anatomy { display: flex; flex-direction: column; height: 100%; }

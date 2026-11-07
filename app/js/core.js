@@ -231,6 +231,8 @@
         { text: n.id.replace(/-/g, ' '), weight: 6 },
         { text: (n.supplierClaimedOem || []).join(' '), weight: 9, raw: (n.supplierClaimedOem || []) },
         { text: (n.oemPartNumber || ''), weight: 10, raw: n.oemPartNumber ? [n.oemPartNumber] : [] },
+        { text: (n.replacementReferences || []).map(function (r) { return r.number; }).join(' '), weight: 9, raw: (n.replacementReferences || []).map(function (r) { return r.number; }) },
+        { text: (n.replacementReferences || []).map(function (r) { return r.description; }).join(' '), weight: 2 },
         { text: pathNames, weight: 3 },
         { text: n.notes || '', weight: 2 },
         { text: n.kind, weight: 1 }
@@ -320,10 +322,11 @@
       var e = index.byId[id];
       if (e.depth === 0) return;
       var sys = e.path[1];
-      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, model: 0 };
+      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, replacement: 0, model: 0 };
       c.total++;
       c[statusOf(e.node)]++;
       if (e.node.oemPartNumber) c.oem++;
+      if ((e.node.replacementReferences || []).length) c.replacement++;
       if (inModel[id]) c.model++;
     });
     return bySystem;

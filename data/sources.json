@@ -606,14 +606,22 @@
       "reliability": "primary",
       "accessed": true,
       "dateResearched": "2026-11-07",
-      "reference": "Supplied by the owner as a text extract of the PDF (the site blocks downloads). Copyright 2008 AGCO Corporation; a dealer catalogue of genuine parts still supplied for classic tractors, US-oriented, listed by section (filters, electrical, engine, intake and exhaust, clutch, hydraulics, sheet metal and emblems, tyres). The text extract has its columns scrambled, so part numbers cannot be paired with descriptions or model lists from it alone. The PDF itself (or page images) is needed before any number is attached to a component.",
+      "reference": "PDF supplied by the owner via the project files on 2026-11-07 (342 pages; the site itself blocks downloads). Copyright 2008 AGCO Corporation; a dealer catalogue of genuine parts still supplied for classic tractors, US-oriented, listed by section (filters, aesthetics and gauges, engine, fuel, cooling, electrical, intake and exhaust, steering, clutch, hydraulics, PTO and 3-point hitch, rear axle, brakes, tyres and hubs). Every page naming the 35, 35X, TO35, FE 35, TE35 or 23C was read; ambiguous tables were checked on rendered page images. Findings: docs/research/06-agco-heritage-2008.md.",
       "extracted": [
         "Publications table repeats SRC-037: FE 35 (4 cyl. Diesel) operator manual 690274M2, repair manual 819146M4, parts book 819045M4.",
-        "The catalogue carries 35 / 35X / TO35 entries with 23C-specific lines in the engine section (liners, pistons and rings, bearings, gaskets), plus 35 entries in clutch, hydraulics (pump and lift parts by serial break, e.g. 35 Eff. SN 232850), intake and exhaust, electrical (23C diesel starter/dynamo items), filters, sheet metal (35 hood sets, Deluxe Diesel hood set) and emblems.",
-        "Line 'Standard Motor Diesel - 23C 836117V91' appears in the liners section; the pairing of that number with a 23C liner is plausible but unconfirmed because of the column scramble.",
-        "Numbers are current AGCO supply numbers (many with V91/M91 suffixes), i.e. the part as supplied in 2008, which may supersede the number printed in parts book 819045M4. They belong in replacement references, not in oemPartNumber."
+        "23C-specific rows: piston kit 830972V92 and ring kit 836117V91 (p.168); inlet valve 1884123V1, exhaust valve 1884124V1 (p.171); top gasket set 1810028V91 for 35/35X Eff. Eng. SN SJ41890E and TO35 (p.175); bottom gasket set 1810027V91 (p.176, MUO misprinted \"175\"); big-end bearing set std 830899V91 (p.178); timing chain 826094V1 (p.183); fan belt 826960V1 FE 35 Diesel 23C (p.188); fuel lift pump 1884857V91 Eff. Eng. SN SJ37180E and 826154V91 before it (p.209); starter switch 883928V91 FE35 Diesel 23C (p.241); tachometer 1850092V93 (p.67); side panels 826815V91 RH and 826816V91 LH for 23C and 87 mm engines (p.56); brake shoes 830480V93, drum 827707V5, springs 180815M1 and 180832M1 for TO35 (23C and A3-152) and 35 (p.319).",
+        "FE 35 filters (p.92): oil element 1018121V91 (diesel), fuel primary 1012006V2, fuel secondary 1850450V2, sediment bowl element 632952M1.",
+        "35/35X/TO35 rows without engine restriction: clutch set 79022255 (cover 180263V91 = OEM 180263M91, disc 181114V91 = 181114M91, release bearing 833085V2 or 894303V1; single clutch only, no dual clutch listed for the 35); hydraulics (relief valve 883402V92, pump piston 190799V1, control valve 189427V92, lift shaft 184359V91, repair kits 7928769V and 1810684V92); PTO shaft 181204V92, cap 1868778V1; top link 1870075V91; front axle beam 183219V91, pivot 182850V1, front hub 180338V92; radiator cap 3475308V1; rear axle seals 195677V1 and 195678V2; lift cover gasket 886549V2; gearbox countershaft 183054V92 and gears; steering column 1850003V92.",
+        "No 23C entries for liners, camshaft, crankshaft, main bearings, oil pump, water pump, injectors, injection pump, dynamo, starter motor or heater plugs. MF35 engine overhaul kits are Continental and A3.152 only.",
+        "Numbers are current AGCO supply numbers (V91/M91 suffixes), i.e. the part as supplied in 2008, which may supersede the number in parts book 819045M4. They are recorded as replacementReferences on hierarchy nodes, never as oemPartNumber. Serial breaks quoted are US TO35/MF35 serials and are not applied to Coventry serials."
       ],
-      "conflicts": []
+      "conflicts": [
+        "Three fan belt numbers for what reads as the same application: 826960V1 (FE 35 Diesel 23C), 184930V1 (TO 35 Diesel 23C), 186976V1 (35 Diesel) (p.188).",
+        "Engine oil capacity: FE 35 row 7.5 qt (7.0 L), TO35 Standard Motors Diesel row 10 qt (9.5 L) (p.92). SRC-035 gives the sump capacity; the TO35 figure is suspect.",
+        "Two PTO retainer housings (1860889V91 and 1867223V1) are both listed for the 35 with no stated difference (p.309).",
+        "Bottom gasket set 1810027V91 is listed against \"175 23C Diesel Engine\"; the 175 never had a 23C (p.176).",
+        "The earlier text extract paired 836117V91 with a 23C liner; the page image shows it is the ring kit, and no 23C liner is listed."
+      ]
     }
   ]
 }

@@ -451,8 +451,10 @@
       var st = core.displayStatus(index, id, state.resolved);
       var app = core.applicability(index, id, state.resolved);
       var assembly = e.path.slice(1, -1).map(nameOf).join(' › ');
+      var reps = n.replacementReferences || [];
       var pn = n.oemPartNumber ? '<span class="mono">' + esc(n.oemPartNumber) + '</span>' :
-        (n.supplierClaimedOem && n.supplierClaimedOem.length ? '<span class="badge claim" title="Supplier-claimed, not verified">' + n.supplierClaimedOem.length + ' unverified ref' + (n.supplierClaimedOem.length > 1 ? 's' : '') + '</span>' : '<span class="muted">Not yet documented</span>');
+        (reps.length ? '<span class="badge replacement" title="Current AGCO supply number (2008 Heritage catalogue), not the original 1958 number">' + reps.length + ' AGCO replacement ref' + (reps.length > 1 ? 's' : '') + '</span>' :
+        (n.supplierClaimedOem && n.supplierClaimedOem.length ? '<span class="badge claim" title="Supplier-claimed, not verified">' + n.supplierClaimedOem.length + ' unverified ref' + (n.supplierClaimedOem.length > 1 ? 's' : '') + '</span>' : '<span class="muted">Not yet documented</span>'));
       return '<tr class="clickable' + (state.selectedId === id ? ' selected' : '') + '" data-id="' + esc(id) + '">' +
         '<td><strong>' + esc(n.name) + '</strong>' + (app.applies ? '' : ' <span class="badge neutral">not fitted to shown config</span>') + '<div class="muted mono">' + esc(id) + '</div></td>' +
         '<td>' + pn + '</td>' +
@@ -462,7 +464,7 @@
         '<td><a href="#/anatomy/' + encodeURIComponent(id) + '">View</a></td></tr>';
     }).join('');
     return '<div class="page">' +
-      '<div class="page-head"><div><h1>Parts catalogue</h1><p class="lede">Every component identified so far. Original part numbers appear only once checked against the AGCO parts book (819045M4); supplier numbers are shown as unverified references.</p></div></div>' +
+      '<div class="page-head"><div><h1>Parts catalogue</h1><p class="lede">Every component identified so far. Original part numbers appear only once checked against the AGCO parts book (819045M4). AGCO replacement references come from the 2008 Heritage catalogue and may supersede the original number; supplier numbers are shown as unverified references.</p></div></div>' +
       '<div class="filters">' +
       '<input id="cat-q" type="search" placeholder="Search name, part number, assembly…" value="' + esc(c.q) + '" aria-label="Search catalogue">' +
       '<select id="cat-system" aria-label="System"><option value="">All systems</option>' + systems.map(function (s) { return '<option value="' + s + '"' + (c.system === s ? ' selected' : '') + '>' + esc(nameOf(s)) + '</option>'; }).join('') + '</select>' +
@@ -638,7 +640,7 @@
   function viewResearch() {
     var cov = core.coverage(index, modelledIds());
     var sys = index.byId[index.rootId].childIds;
-    var tot = { total: 0, verified: 0, 'partially-verified': 0, unverified: 0, 'variant-dependent': 0, oem: 0, model: 0 };
+    var tot = { total: 0, verified: 0, 'partially-verified': 0, unverified: 0, 'variant-dependent': 0, oem: 0, replacement: 0, model: 0 };
     sys.forEach(function (s) { Object.keys(tot).forEach(function (k) { tot[k] += cov[s][k]; }); });
     var claims = 0;
     index.order.forEach(function (id) { if ((nodeOf(id).supplierClaimedOem || []).length) claims++; });
@@ -649,9 +651,9 @@
     };
     return '<div class="page"><div class="page-head"><div><h1>Research status</h1><p class="lede">How much of the tractor is documented, and from what. Nothing is marked verified until it has been checked against an original Massey Ferguson publication.</p></div></div>' +
       '<div class="stats">' + stat(tot.total, 'Items identified') + stat(tot.verified, 'Verified') + stat(tot['partially-verified'], 'Partially verified') +
-      stat(tot['variant-dependent'], 'Variant dependent') + stat(tot.unverified, 'Unverified') + stat(tot.oem, 'Confirmed OEM numbers') + stat(claims, 'With unverified supplier refs') + stat(tot.model, 'Modelled in 3D') + '</div>' +
-      '<h2>By system</h2><div class="table-wrap"><table><thead><tr><th>System</th><th>Items</th><th>Verified</th><th>Partial</th><th>Variant</th><th>Unverified</th><th>In 3D</th><th>Progress</th></tr></thead><tbody>' +
-      sys.map(function (s) { var c = cov[s]; return '<tr class="clickable" data-goto="' + s + '"><td><strong>' + esc(nameOf(s)) + '</strong></td><td class="mono">' + c.total + '</td><td class="mono">' + c.verified + '</td><td class="mono">' + c['partially-verified'] + '</td><td class="mono">' + c['variant-dependent'] + '</td><td class="mono">' + c.unverified + '</td><td class="mono">' + c.model + '</td><td>' + bar(c) + '</td></tr>'; }).join('') +
+      stat(tot['variant-dependent'], 'Variant dependent') + stat(tot.unverified, 'Unverified') + stat(tot.oem, 'Confirmed OEM numbers') + stat(tot.replacement, 'With AGCO replacement refs') + stat(claims, 'With unverified supplier refs') + stat(tot.model, 'Modelled in 3D') + '</div>' +
+      '<h2>By system</h2><div class="table-wrap"><table><thead><tr><th>System</th><th>Items</th><th>Verified</th><th>Partial</th><th>Variant</th><th>Unverified</th><th>AGCO refs</th><th>In 3D</th><th>Progress</th></tr></thead><tbody>' +
+      sys.map(function (s) { var c = cov[s]; return '<tr class="clickable" data-goto="' + s + '"><td><strong>' + esc(nameOf(s)) + '</strong></td><td class="mono">' + c.total + '</td><td class="mono">' + c.verified + '</td><td class="mono">' + c['partially-verified'] + '</td><td class="mono">' + c['variant-dependent'] + '</td><td class="mono">' + c.unverified + '</td><td class="mono">' + c.replacement + '</td><td class="mono">' + c.model + '</td><td>' + bar(c) + '</td></tr>'; }).join('') +
       '</tbody></table></div>' +
       '<h2>Source register</h2><div class="table-wrap"><table><thead><tr><th>Id</th><th>Source</th><th>Grade</th><th>Read</th></tr></thead><tbody>' +
       DATA.sources.map(function (s) {
@@ -689,6 +691,7 @@
       return '<li><span class="src-id">' + sid + '</span>' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + '</a>' : esc(s.name)) + '<div class="source-grade">' + esc(s.reliability) + (s.accessed ? ' · read ' + esc(s.dateResearched) : ' · not yet obtained') + '</div></li>';
     }).join('');
     var claims = (n.supplierClaimedOem || []);
+    var reps = (n.replacementReferences || []);
 
     el.info.innerHTML =
       '<div class="info-head"><button class="text-btn only-mobile" data-close-info style="float:right">Close</button><div class="info-kind">' + kindLabel(n.kind) + (e.depth > 1 ? ' · ' + esc(nameOf(e.path[1])) : '') + '</div>' +
@@ -696,6 +699,9 @@
 
       '<div class="info-section"><h3>Identification</h3><dl class="fields">' +
       '<dt>Original part no.</dt><dd>' + (n.oemPartNumber ? '<span class="mono">' + esc(n.oemPartNumber) + '</span>' : missing('Not yet documented (needs parts book 819045M4)')) + '</dd>' +
+      '<dt>AGCO replacement no.</dt><dd>' + (reps.length ? '<ul class="rep-list">' + reps.map(function (r) {
+        return '<li><span class="mono">' + esc(r.number) + '</span> <span class="badge ' + (r.confidence === 'possible' ? 'claim' : 'replacement') + '">' + (r.confidence === 'possible' ? 'possible fit' : 'listed for the 35') + '</span><div class="muted">' + esc(r.description) + '. Catalogue row: ' + esc(r.models) + ' (<a href="#/research/' + esc(r.source) + '">' + esc(r.source) + '</a> p.' + esc(String(r.page)) + ')</div></li>';
+      }).join('') + '</ul><p class="muted" style="font-size:12px;margin:4px 0 0">Numbers AGCO used to supply the part in 2008. They may supersede the original 1958 number, which still needs parts book 819045M4.</p>' : missing()) + '</dd>' +
       '<dt>Other references</dt><dd>' + (claims.length ? '<div class="chips">' + claims.map(function (c) { return '<span class="chip mono" style="cursor:default">' + esc(c) + '</span>'; }).join('') + '</div><div style="margin-top:4px"><span class="badge claim">Supplier/forum claim, unverified</span></div>' : missing()) + '</dd>' +
       '<dt>Quantity</dt><dd>' + (n.quantity ? n.quantity + ' per tractor' : missing()) + '</dd>' +
       '<dt>Assembly</dt><dd>' + (e.parentId && e.parentId !== index.rootId ? esc(nameOf(e.parentId)) : esc(nameOf(index.rootId))) + '</dd></dl></div>' +

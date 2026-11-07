@@ -1,5 +1,5 @@
 {
-  "$comment": "Initial component hierarchy (Phase 1). Nested tree: system > assembly > subassembly > component. 'status' is the verification status of the component's EXISTENCE and placement on the target tractor, not of any part number. Omitted status = unverified. 'appliesTo' uses variant axes from data/configurations.json; omitted = all target configurations. 'supplierClaimedOem' lists OEM numbers quoted by suppliers; they are NOT verified OEM part numbers until checked against parts book SRC-032. IDs are stable and must never be renamed once 3D objects reference them.",
+  "$comment": "Initial component hierarchy (Phase 1). Nested tree: system > assembly > subassembly > component. 'status' is the verification status of the component's EXISTENCE and placement on the target tractor, not of any part number. Omitted status = unverified. 'appliesTo' uses variant axes from data/configurations.json; omitted = all target configurations. 'supplierClaimedOem' lists OEM numbers quoted by suppliers; they are NOT verified OEM part numbers until checked against parts book SRC-032. IDs are stable and must never be renamed once 3D objects reference them. 'replacementReferences' lists current AGCO supply numbers (SRC-038, 2008 Heritage catalogue) for the part: they are replacement references, not the original 1958 parts-book number. 'confidence' is 'listed' when the catalogue row names the 23C / 35 diesel / FE35 or the 35 without an engine restriction, and 'possible' when the row depends on a US serial range or does not name the engine.",
   "schemaVersion": 1,
   "root": {
     "id": "mf35",
@@ -67,6 +67,19 @@
                 "name": "Block studs and dowels",
                 "kind": "component"
               }
+            ],
+            "replacementReferences": [
+              {
+                "number": "1810027V91",
+                "description": "Bottom gasket set",
+                "models": "Printed \"175 23C Diesel Engine\"; \"175\" is almost certainly a misprint for 35",
+                "source": "SRC-038",
+                "page": 176,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
             ]
           },
           {
@@ -136,12 +149,23 @@
                     "sources": [
                       "SRC-008",
                       "SRC-019",
-                      "SRC-035"
+                      "SRC-035",
+                      "SRC-038"
                     ],
                     "specifications": {
                       "Clearance (cold)": "0.012 in (0.305 mm)",
                       "Seat angle": "45°"
-                    }
+                    },
+                    "replacementReferences": [
+                      {
+                        "number": "1884123V1",
+                        "description": "Inlet valve",
+                        "models": "35, 35X, TO35 Standard Motors Diesel",
+                        "source": "SRC-038",
+                        "page": 171,
+                        "confidence": "listed"
+                      }
+                    ]
                   },
                   {
                     "id": "exhaust-valve",
@@ -152,12 +176,23 @@
                     "sources": [
                       "SRC-008",
                       "SRC-019",
-                      "SRC-035"
+                      "SRC-035",
+                      "SRC-038"
                     ],
                     "specifications": {
                       "Clearance (cold)": "0.008 in (0.203 mm)",
                       "Seat angle": "45°"
-                    }
+                    },
+                    "replacementReferences": [
+                      {
+                        "number": "1884124V1",
+                        "description": "Exhaust valve",
+                        "models": "35, 35X, TO35 Standard Motors Diesel",
+                        "source": "SRC-038",
+                        "page": 171,
+                        "confidence": "listed"
+                      }
+                    ]
                   },
                   {
                     "id": "inlet-valve-guide",
@@ -166,7 +201,18 @@
                     "quantity": 4,
                     "status": "partially-verified",
                     "sources": [
-                      "SRC-008"
+                      "SRC-008",
+                      "SRC-038"
+                    ],
+                    "replacementReferences": [
+                      {
+                        "number": "825259V1",
+                        "description": "Inlet valve guide",
+                        "models": "TEA20, 35, 35X, TO35, 135 UK (engine not stated)",
+                        "source": "SRC-038",
+                        "page": 172,
+                        "confidence": "possible"
+                      }
                     ]
                   },
                   {
@@ -258,6 +304,19 @@
                   }
                 ]
               }
+            ],
+            "replacementReferences": [
+              {
+                "number": "1810028V91",
+                "description": "Top gasket set",
+                "models": "35 and 35X (Eff. Eng. SN SJ41890E), TO35, 23C diesel",
+                "source": "SRC-038",
+                "page": 175,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
             ]
           },
           {
@@ -309,9 +368,20 @@
                   "SRC-006",
                   "SRC-008",
                   "SRC-019",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
-                "notes": "4-ring and 5-ring versions exist (SRC-008): variant/supersession to resolve. Made by Automotive Engineering or Wellworthy (alternatives); graded F/G/H to match the liners; standard size only (SRC-035 B.33)."
+                "notes": "4-ring and 5-ring versions exist (SRC-008): variant/supersession to resolve. Made by Automotive Engineering or Wellworthy (alternatives); graded F/G/H to match the liners; standard size only (SRC-035 B.33).",
+                "replacementReferences": [
+                  {
+                    "number": "830972V92",
+                    "description": "Piston kit",
+                    "models": "Standard Motor Diesel 23C, MF35X (TO35 column: na)",
+                    "source": "SRC-038",
+                    "page": 168,
+                    "confidence": "listed"
+                  }
+                ]
               },
               {
                 "id": "piston-rings",
@@ -320,7 +390,18 @@
                 "quantity": 4,
                 "status": "partially-verified",
                 "sources": [
-                  "SRC-008"
+                  "SRC-008",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "836117V91",
+                    "description": "Ring kit",
+                    "models": "Standard Motor Diesel 23C, MF35X",
+                    "source": "SRC-038",
+                    "page": 168,
+                    "confidence": "listed"
+                  }
                 ]
               },
               {
@@ -361,7 +442,18 @@
                 "status": "partially-verified",
                 "sources": [
                   "SRC-008",
-                  "SRC-019"
+                  "SRC-019",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "830899V91",
+                    "description": "Big-end bearing set, standard size",
+                    "models": "23C Diesel, Standard Motors Diesel: 35, 35X, TO35 (undersizes not available)",
+                    "source": "SRC-038",
+                    "page": 178,
+                    "confidence": "listed"
+                  }
                 ]
               },
               {
@@ -432,7 +524,18 @@
                 "status": "partially-verified",
                 "sources": [
                   "SRC-008",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "826094V1",
+                    "description": "Timing chain",
+                    "models": "35, 35X, TO35 (23C engine)",
+                    "source": "SRC-038",
+                    "page": 183,
+                    "confidence": "listed"
+                  }
                 ]
               },
               {
@@ -529,11 +632,22 @@
                 "sources": [
                   "SRC-008",
                   "SRC-019",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "specifications": {
                   "Torque to block": "26–28 lb ft"
-                }
+                },
+                "replacementReferences": [
+                  {
+                    "number": "1018121V91",
+                    "description": "Engine oil filter element",
+                    "models": "FE 35 Diesel; TO35 Standard Motors Diesel",
+                    "source": "SRC-038",
+                    "page": 92,
+                    "confidence": "listed"
+                  }
+                ]
               },
               {
                 "id": "oil-pipes",
@@ -576,12 +690,23 @@
                 "name": "Starter ring gear",
                 "kind": "component",
                 "sources": [
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "status": "partially-verified",
                 "specifications": {
                   "Teeth": "113"
-                }
+                },
+                "replacementReferences": [
+                  {
+                    "number": "741138V1",
+                    "description": "Flywheel ring gear, 132 teeth",
+                    "models": "TO35, 35, 20, 30, 40, 50, 65, 135 and others (engine not stated)",
+                    "source": "SRC-038",
+                    "page": 183,
+                    "confidence": "possible"
+                  }
+                ]
               },
               {
                 "id": "flywheel-bolts",
@@ -656,12 +781,23 @@
                 "name": "Fuel tank",
                 "kind": "component",
                 "sources": [
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "status": "partially-verified",
                 "specifications": {
                   "Capacity": "7½ Imp gal (34 l)"
-                }
+                },
+                "replacementReferences": [
+                  {
+                    "number": "520948V91",
+                    "description": "Fuel tank webbing (strap)",
+                    "models": "Pony, Pacer, 50, TE20, TO20, TO30, TO35, 40, 50, 65 and others",
+                    "source": "SRC-038",
+                    "page": 204,
+                    "confidence": "possible"
+                  }
+                ]
               },
               {
                 "id": "fuel-cap",
@@ -671,7 +807,20 @@
               {
                 "id": "fuel-tap",
                 "name": "Fuel tap",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "1851653V91",
+                    "description": "Fuel tap",
+                    "models": "TE 20, TEA 20, 35, 35X, 65, 135 UK, 165 UK and others",
+                    "source": "SRC-038",
+                    "page": 205,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               }
             ]
           },
@@ -683,7 +832,28 @@
               {
                 "id": "sediment-bowl",
                 "name": "Sediment bowl",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "632952M1",
+                    "description": "Sediment bowl element",
+                    "models": "FE 35",
+                    "source": "SRC-038",
+                    "page": 92,
+                    "confidence": "listed"
+                  },
+                  {
+                    "number": "1004498V1",
+                    "description": "Sediment bowl glass",
+                    "models": "Diesel: TO35, 35, 35X, MF50 and others",
+                    "source": "SRC-038",
+                    "page": 208,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               },
               {
                 "id": "fuel-lift-pump",
@@ -692,19 +862,59 @@
                 "status": "partially-verified",
                 "sources": [
                   "SRC-019",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "notes": "SRC-019 lists two different 'Fuel Pump' items for 23C; identity to confirm.",
                 "specifications": {
                   "Type": "AC type YD",
                   "Drive": "Eccentric at rear of camshaft",
                   "Delivery pressure": "4–7 lb/sq in"
-                }
+                },
+                "replacementReferences": [
+                  {
+                    "number": "1884857V91",
+                    "description": "Fuel lift pump",
+                    "models": "35 and 35X, Eff. Eng. SN SJ37180E, 23C engine",
+                    "source": "SRC-038",
+                    "page": 209,
+                    "confidence": "listed"
+                  },
+                  {
+                    "number": "826154V91",
+                    "description": "Fuel lift pump, early",
+                    "models": "35 and 35X, prior to Eng. SN SJ37180E, 23C engine",
+                    "source": "SRC-038",
+                    "page": 209,
+                    "confidence": "listed"
+                  }
+                ]
               },
               {
                 "id": "fuel-filters",
                 "name": "Fuel filter(s)",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "1012006V2",
+                    "description": "Fuel filter, primary",
+                    "models": "FE 35 Diesel; TO35 Standard Motors Diesel",
+                    "source": "SRC-038",
+                    "page": 92,
+                    "confidence": "listed"
+                  },
+                  {
+                    "number": "1850450V2",
+                    "description": "Fuel filter, secondary",
+                    "models": "FE 35 Diesel (500 hr)",
+                    "source": "SRC-038",
+                    "page": 92,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               },
               {
                 "id": "fuel-pipes-lp",
@@ -797,17 +1007,57 @@
                 "kind": "component",
                 "status": "partially-verified",
                 "sources": [
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "specifications": {
                   "Type": "AC oil bath",
                   "Oil": "¾ pint (0.43 l)"
-                }
+                },
+                "replacementReferences": [
+                  {
+                    "number": "71125804V",
+                    "description": "Bottom oil cup, 12 in diameter, 3 to 4 in inlet",
+                    "models": "35 Diesel, 65 Gas, 85, 88, Super 90 and others",
+                    "source": "SRC-038",
+                    "page": 256,
+                    "confidence": "possible"
+                  }
+                ]
               },
               {
                 "id": "air-intake-pipe",
                 "name": "Intake pipe and pre-cleaner",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "890258V1",
+                    "description": "Hose, air cleaner to manifold",
+                    "models": "35, 35X (FE)",
+                    "source": "SRC-038",
+                    "page": 256,
+                    "confidence": "listed"
+                  },
+                  {
+                    "number": "1884897V1",
+                    "description": "Hose connection",
+                    "models": "35, 35X (FE), TO 35",
+                    "source": "SRC-038",
+                    "page": 256,
+                    "confidence": "listed"
+                  },
+                  {
+                    "number": "001210V91",
+                    "description": "Intake assembly",
+                    "models": "35, 35X, 135 UK, 231, 240 and others",
+                    "source": "SRC-038",
+                    "page": 256,
+                    "confidence": "possible"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               }
             ]
           }
@@ -823,17 +1073,49 @@
             "name": "Radiator",
             "kind": "component",
             "sources": [
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
             "status": "partially-verified",
             "specifications": {
               "Cooling system capacity": "15 pints (8.5 l)"
-            }
+            },
+            "replacementReferences": [
+              {
+                "number": "186830V91",
+                "description": "Radiator",
+                "models": "TO35, 35 (Eff. Tr. SN 204181, a US serial), 202",
+                "source": "SRC-038",
+                "page": 195,
+                "confidence": "possible"
+              },
+              {
+                "number": "894319V92",
+                "description": "Radiator",
+                "models": "35 (no note)",
+                "source": "SRC-038",
+                "page": 195,
+                "confidence": "possible"
+              }
+            ]
           },
           {
             "id": "radiator-cap",
             "name": "Radiator cap",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "3475308V1",
+                "description": "Radiator cap, pressurised",
+                "models": "35, 35X, TO35, 135 UK, 165 UK, 175 UK",
+                "source": "SRC-038",
+                "page": 195,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "top-hose",
@@ -843,7 +1125,20 @@
           {
             "id": "bottom-hose",
             "name": "Bottom hose",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "826988V1",
+                "description": "Lower radiator hose",
+                "models": "TO35; 35, 35X (FE) listed under 87 mm petrol and A3.152 rows, 23C not listed separately",
+                "source": "SRC-038",
+                "page": 198,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "water-pump",
@@ -871,7 +1166,36 @@
           {
             "id": "fan-belt",
             "name": "Fan belt",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "826960V1",
+                "description": "Fan belt",
+                "models": "FE 35 Diesel (23C)",
+                "source": "SRC-038",
+                "page": 188,
+                "confidence": "listed"
+              },
+              {
+                "number": "184930V1",
+                "description": "Fan belt",
+                "models": "TO 35 Diesel (23C)",
+                "source": "SRC-038",
+                "page": 188,
+                "confidence": "possible"
+              },
+              {
+                "number": "186976V1",
+                "description": "Fan belt",
+                "models": "35 Diesel",
+                "source": "SRC-038",
+                "page": 188,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "thermostat",
@@ -928,7 +1252,8 @@
             "sources": [
               "SRC-003",
               "SRC-010",
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
             "children": [
               {
@@ -936,17 +1261,41 @@
                 "name": "Driven plate",
                 "kind": "component",
                 "sources": [
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "status": "partially-verified",
                 "specifications": {
                   "Diameter": "10 in (254 mm)"
-                }
+                },
+                "replacementReferences": [
+                  {
+                    "number": "181114V91",
+                    "description": "Clutch disc (OEM equivalent 181114M91)",
+                    "models": "TO 35, 35",
+                    "source": "SRC-038",
+                    "page": 286,
+                    "confidence": "listed"
+                  }
+                ]
               },
               {
                 "id": "clutch-single-cover",
                 "name": "Pressure plate / cover",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "180263V91",
+                    "description": "Clutch cover (OEM equivalent 180263M91)",
+                    "models": "TO 35, 35, 50, 135",
+                    "source": "SRC-038",
+                    "page": 286,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               }
             ],
             "specifications": {
@@ -954,7 +1303,17 @@
               "Thrust springs": "12, green",
               "Pedal free movement": "3/4 in (19 mm)",
               "Torque to flywheel": "26–28 lb ft"
-            }
+            },
+            "replacementReferences": [
+              {
+                "number": "79022255",
+                "description": "Clutch set (cover and disc)",
+                "models": "TO 35, 35",
+                "source": "SRC-038",
+                "page": 286,
+                "confidence": "listed"
+              }
+            ]
           },
           {
             "id": "clutch-dual",
@@ -1014,7 +1373,28 @@
           {
             "id": "release-bearing",
             "name": "Release bearing and carrier",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "833085V2",
+                "description": "Release bearing, 1.526 in wide",
+                "models": "TO 35, 35",
+                "source": "SRC-038",
+                "page": 286,
+                "confidence": "listed"
+              },
+              {
+                "number": "894303V1",
+                "description": "Release bearing, 1.53 in wide",
+                "models": "TO 35, 35",
+                "source": "SRC-038",
+                "page": 286,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "release-fork",
@@ -1065,15 +1445,71 @@
             "name": "Countershaft (layshaft)",
             "kind": "component",
             "sources": [
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
             "status": "partially-verified",
-            "notes": "Hollow on dual-clutch tractors: the pump/PTO drive shaft runs through it (SRC-035 J.4)."
+            "notes": "Hollow on dual-clutch tractors: the pump/PTO drive shaft runs through it (SRC-035 J.4).",
+            "replacementReferences": [
+              {
+                "number": "183054V92",
+                "description": "Countershaft, 15 teeth",
+                "models": "35, 35X, TO35 (Eff. SN 171549), MF50, 65 and others",
+                "source": "SRC-038",
+                "page": 185,
+                "confidence": "listed"
+              }
+            ]
           },
           {
             "id": "gearbox-gears",
             "name": "Gear set",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "180445V1",
+                "description": "Reverse idler shaft",
+                "models": "35, 35X, TO35 and others",
+                "source": "SRC-038",
+                "page": 185,
+                "confidence": "listed"
+              },
+              {
+                "number": "180415V1",
+                "description": "Pinion, 3rd, 33 splines",
+                "models": "35, 35X, TO35, 50, 65 and others",
+                "source": "SRC-038",
+                "page": 186,
+                "confidence": "listed"
+              },
+              {
+                "number": "1682688V1",
+                "description": "Gear, 45 teeth, 18 splines",
+                "models": "35, 35X, TO35 (Eff. SN 171549) and others",
+                "source": "SRC-038",
+                "page": 186,
+                "confidence": "listed"
+              },
+              {
+                "number": "1682691V2",
+                "description": "Gear, 46 and 36 teeth, 18 splines",
+                "models": "35, 35X, MF50 and MH50 (Eff. Trans. SN CN13566) and others",
+                "source": "SRC-038",
+                "page": 186,
+                "confidence": "listed"
+              },
+              {
+                "number": "183040V1",
+                "description": "Gear, reverse cluster, 21 and 13 teeth",
+                "models": "35, 35X, TO35 and others",
+                "source": "SRC-038",
+                "page": 187,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "range-gears",
@@ -1091,7 +1527,26 @@
             "kind": "component",
             "status": "partially-verified",
             "sources": [
-              "SRC-010"
+              "SRC-010",
+              "SRC-038"
+            ],
+            "replacementReferences": [
+              {
+                "number": "180006V91",
+                "description": "Gear lever knob, 3 speed",
+                "models": "Pony, TO20, TEA20, TO30, 35, 40, 50 and others",
+                "source": "SRC-038",
+                "page": 62,
+                "confidence": "possible"
+              },
+              {
+                "number": "180579V3",
+                "description": "Gear shift boot",
+                "models": "TE20, TO20, TO30, TO35, TE35, 35, 40, 50, 65 and others",
+                "source": "SRC-038",
+                "page": 62,
+                "confidence": "possible"
+              }
             ]
           },
           {
@@ -1111,7 +1566,20 @@
           {
             "id": "gearbox-top-cover",
             "name": "Gearbox top cover and gasket",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "181217M3",
+                "description": "Oil-level indicator cover gasket",
+                "models": "TE35, TO35, 35 and others",
+                "source": "SRC-038",
+                "page": 185,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           }
         ],
         "specifications": {
@@ -1131,9 +1599,28 @@
             "kind": "component",
             "status": "partially-verified",
             "sources": [
-              "SRC-003"
+              "SRC-003",
+              "SRC-038"
             ],
-            "notes": "Casting date code on RH side forward of round port (SRC-003)."
+            "notes": "Casting date code on RH side forward of round port (SRC-003).",
+            "replacementReferences": [
+              {
+                "number": "183254V1",
+                "description": "Differential housing gasket",
+                "models": "35, 35X, MF50, MH50, 65, TO30, TO35 and others",
+                "source": "SRC-038",
+                "page": 317,
+                "confidence": "listed"
+              },
+              {
+                "number": "193400V1",
+                "description": "Hydraulic oil dipstick",
+                "models": "MH50, TO20, TE20, TEA20, TO30, TO35, TE35, 40, 50, 65 and others",
+                "source": "SRC-038",
+                "page": 307,
+                "confidence": "listed"
+              }
+            ]
           },
           {
             "id": "differential",
@@ -1148,7 +1635,20 @@
               {
                 "id": "pinion",
                 "name": "Drive pinion",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "532956V1",
+                    "description": "Differential pinion nut, 1-3/4 in NF tapered",
+                    "models": "35, TO35 and others",
+                    "source": "SRC-038",
+                    "page": 316,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               },
               {
                 "id": "diff-cage",
@@ -1176,9 +1676,33 @@
                 },
                 "status": "variant-dependent",
                 "sources": [
-                  "SRC-010"
+                  "SRC-010",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "190968V1",
+                    "description": "Differential lock fork",
+                    "models": "35X (Eff. SN 383201), 35, MF50, MH50 and others",
+                    "source": "SRC-038",
+                    "page": 316,
+                    "confidence": "possible"
+                  }
                 ]
               }
+            ],
+            "replacementReferences": [
+              {
+                "number": "1683757V91",
+                "description": "Crown wheel and pinion, matched set, light duty",
+                "models": "35, 35X, MF50, MH50, TO35 (Eff. SN 169467) and others",
+                "source": "SRC-038",
+                "page": 315,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
             ]
           },
           {
@@ -1195,7 +1719,20 @@
             "id": "half-shaft",
             "name": "Half shaft",
             "kind": "component",
-            "quantity": 2
+            "quantity": 2,
+            "replacementReferences": [
+              {
+                "number": "180596V1",
+                "description": "Axle collar bearing",
+                "models": "35, 35X, MF50, MH50, TO30, TO35 and others",
+                "source": "SRC-038",
+                "page": 316,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "rear-hub",
@@ -1211,7 +1748,28 @@
           {
             "id": "axle-seals",
             "name": "Axle oil seals",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "195677V1",
+                "description": "Rear axle seal, 2-3/4 x 3-5/8 x 19/32 in",
+                "models": "35, 35X, MH50, MF50, TO20, TO30, TO35 and others",
+                "source": "SRC-038",
+                "page": 317,
+                "confidence": "listed"
+              },
+              {
+                "number": "195678V2",
+                "description": "Rear axle seal, 2-1/8 x 2-7/8 x 1/2 in",
+                "models": "35X, MF50, MH50, TO35 and others",
+                "source": "SRC-038",
+                "page": 317,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "brakes",
@@ -1226,17 +1784,64 @@
                 "id": "brake-drum",
                 "name": "Brake drum",
                 "kind": "component",
-                "quantity": 2
+                "quantity": 2,
+                "replacementReferences": [
+                  {
+                    "number": "827707V5",
+                    "description": "Brake drum",
+                    "models": "TO35 (23C and A3-152), 35",
+                    "source": "SRC-038",
+                    "page": 319,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               },
               {
                 "id": "brake-shoes",
                 "name": "Brake shoes and linings",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "830480V93",
+                    "description": "Brake shoes, lined",
+                    "models": "TO35 (23C and A3-152), 35",
+                    "source": "SRC-038",
+                    "page": 319,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               },
               {
                 "id": "brake-springs",
                 "name": "Brake shoe springs",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "180815M1",
+                    "description": "Brake anchor spring",
+                    "models": "TO35 (23C and A3-152), 35",
+                    "source": "SRC-038",
+                    "page": 319,
+                    "confidence": "listed"
+                  },
+                  {
+                    "number": "180832M1",
+                    "description": "Brake return spring (2 per side)",
+                    "models": "TO35 (23C and A3-152), 35",
+                    "source": "SRC-038",
+                    "page": 319,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               },
               {
                 "id": "brake-cam",
@@ -1300,7 +1905,8 @@
             "name": "PTO output shaft (rear)",
             "kind": "component",
             "sources": [
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
             "status": "partially-verified",
             "specifications": {
@@ -1308,12 +1914,51 @@
               "Major diameter": "1.371–1.373 in (34.8 mm)",
               "Minor diameter": "1.098–1.108 in",
               "Speed": "540 rpm at 1,500 engine rpm"
-            }
+            },
+            "replacementReferences": [
+              {
+                "number": "181204V92",
+                "description": "PTO shaft, 540 rpm, 10 spline",
+                "models": "35, 35FE, 50 MF, 50 MH, 65, TO35, 135 and others",
+                "source": "SRC-038",
+                "page": 309,
+                "confidence": "listed"
+              }
+            ]
           },
           {
             "id": "pto-housing",
             "name": "PTO housing / bearing retainer",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "1860889V91",
+                "description": "PTO retainer housing",
+                "models": "35, 35X, MF50, MH50, 65, 30, 135 and others",
+                "source": "SRC-038",
+                "page": 309,
+                "confidence": "possible"
+              },
+              {
+                "number": "1867223V1",
+                "description": "PTO retainer housing",
+                "models": "20, 203, 20C, 2135, 35, 35X, MF50, MH50, 65, TO35 and others",
+                "source": "SRC-038",
+                "page": 309,
+                "confidence": "possible"
+              },
+              {
+                "number": "180465V1",
+                "description": "PTO retainer",
+                "models": "20, 202, 203, 35, 35X, MF50, MH50, 65, TO35 and others",
+                "source": "SRC-038",
+                "page": 310,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "pto-bearings",
@@ -1328,7 +1973,20 @@
           {
             "id": "pto-guard",
             "name": "PTO shield / cap",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "1868778V1",
+                "description": "PTO cap",
+                "models": "TO 35, 35, 35X, MF 50, MH 50 and others",
+                "source": "SRC-038",
+                "page": 309,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           }
         ]
       },
@@ -1355,7 +2013,8 @@
             "sources": [
               "SRC-012",
               "SRC-014",
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
             "supplierClaimedOem": [
               "184472M93",
@@ -1393,11 +2052,30 @@
                 "sources": [
                   "SRC-013",
                   "SRC-014",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "supplierClaimedOem": [
                   "180924M1",
                   "180925M1"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "180924V2",
+                    "description": "Cam block, front",
+                    "models": "Fits most MF style lift pumps, MK I, II, III",
+                    "source": "SRC-038",
+                    "page": 307,
+                    "confidence": "listed"
+                  },
+                  {
+                    "number": "180925V2",
+                    "description": "Cam block, rear",
+                    "models": "Fits most MF style lift pumps, MK I, II, III",
+                    "source": "SRC-038",
+                    "page": 307,
+                    "confidence": "listed"
+                  }
                 ]
               },
               {
@@ -1408,13 +2086,24 @@
                 "sources": [
                   "SRC-012",
                   "SRC-013",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "notes": "23.1 mm (SRC-012). Four cylinders (SRC-035 L.5), worked by two piston yokes; supplier kits supply 2.",
                 "supplierClaimedOem": [
                   "190799M1"
                 ],
-                "quantity": 4
+                "quantity": 4,
+                "replacementReferences": [
+                  {
+                    "number": "190799V1",
+                    "description": "Pump piston, .91 mm",
+                    "models": "35, 35X (Eff. SN 65684), MF50, MH50, TO35 (Eff. SN 179304) and others",
+                    "source": "SRC-038",
+                    "page": 307,
+                    "confidence": "listed"
+                  }
+                ]
               },
               {
                 "id": "hyd-pump-piston-rings",
@@ -1438,18 +2127,42 @@
                   "SRC-012",
                   "SRC-013",
                   "SRC-014",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "supplierClaimedOem": [
                   "184471M1"
                 ],
                 "notes": "Two opposed valve chambers, each with inlet and outlet valves (SRC-035 L.6).",
-                "quantity": 2
+                "quantity": 2,
+                "replacementReferences": [
+                  {
+                    "number": "830997V91",
+                    "description": "Valve chamber repair kit",
+                    "models": "202, 204, 35 Turf, 302, 304, 35, MF50, MH50, 65",
+                    "source": "SRC-038",
+                    "page": 305,
+                    "confidence": "listed"
+                  }
+                ]
               },
               {
                 "id": "hyd-control-valve",
                 "name": "Control valve",
-                "kind": "component"
+                "kind": "component",
+                "replacementReferences": [
+                  {
+                    "number": "189427V92",
+                    "description": "Control valve",
+                    "models": "202, 204, 302, 304, 35, 35X, MF50, MH50, 65, 85, 88, Super 90, TO35",
+                    "source": "SRC-038",
+                    "page": 307,
+                    "confidence": "listed"
+                  }
+                ],
+                "sources": [
+                  "SRC-038"
+                ]
               },
               {
                 "id": "hyd-relief-valve",
@@ -1458,12 +2171,23 @@
                 "status": "partially-verified",
                 "sources": [
                   "SRC-012",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
                 "specifications": {
                   "Opens at": "2,500 lb/sq in nominal (175.9 kg/sq cm)",
                   "Location": "Pump outlet gallery"
-                }
+                },
+                "replacementReferences": [
+                  {
+                    "number": "883402V92",
+                    "description": "Relief valve, 2500 to 3000 psi",
+                    "models": "35, 35X, TO35 (Eff. Tractor SN 168853), MF50, MH50 and others",
+                    "source": "SRC-038",
+                    "page": 305,
+                    "confidence": "listed"
+                  }
+                ]
               },
               {
                 "id": "hyd-strainer",
@@ -1476,7 +2200,25 @@
                 ]
               }
             ],
-            "notes": "Four-cylinder, constant-running, positive-displacement pump in the sump between gearbox and final drive. Body floats on bronze bushes, held by dowel pins through the centre housing (SRC-035 L.5)."
+            "notes": "Four-cylinder, constant-running, positive-displacement pump in the sump between gearbox and final drive. Body floats on bronze bushes, held by dowel pins through the centre housing (SRC-035 L.5).",
+            "replacementReferences": [
+              {
+                "number": "7928769V",
+                "description": "Pump repair kit (.91 mm piston): cam blocks, valve chambers, pistons, rings, O-rings",
+                "models": "TO35, 35, 50, 65",
+                "source": "SRC-038",
+                "page": 306,
+                "confidence": "listed"
+              },
+              {
+                "number": "1810684V92",
+                "description": "Pump O-ring kit (.91 mm piston)",
+                "models": "TO35, 35, 50, 65",
+                "source": "SRC-038",
+                "page": 307,
+                "confidence": "listed"
+              }
+            ]
           },
           {
             "id": "lift-cover",
@@ -1494,7 +2236,18 @@
                 "kind": "component",
                 "status": "partially-verified",
                 "sources": [
-                  "SRC-012"
+                  "SRC-012",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "886549V2",
+                    "description": "Hydraulic lift cover gasket",
+                    "models": "35, 35X, MF50, MH50, 65, TO30 and others",
+                    "source": "SRC-038",
+                    "page": 317,
+                    "confidence": "listed"
+                  }
                 ]
               },
               {
@@ -1504,7 +2257,18 @@
                 "status": "partially-verified",
                 "sources": [
                   "SRC-012",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "190859V1",
+                    "description": "Hydraulic lift cylinder, 3 in",
+                    "models": "35 (Eff. SN 232850, a US serial), 35X, MF50, 65, TO35 (prior to SN 165554)",
+                    "source": "SRC-038",
+                    "page": 304,
+                    "confidence": "possible"
+                  }
                 ]
               },
               {
@@ -1514,9 +2278,20 @@
                 "status": "partially-verified",
                 "sources": [
                   "SRC-012",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
                 ],
-                "notes": "3 in ring set from serial 65685, so applies to all 1958 tractors (SB-001)."
+                "notes": "3 in ring set from serial 65685, so applies to all 1958 tractors (SB-001).",
+                "replacementReferences": [
+                  {
+                    "number": "184443V91",
+                    "description": "Lift piston, 3 in",
+                    "models": "35 (Eff. SN 232850, a US serial), 35X, MF50, 65, TO35 (prior to SN 165554)",
+                    "source": "SRC-038",
+                    "page": 304,
+                    "confidence": "possible"
+                  }
+                ]
               },
               {
                 "id": "lift-piston-rings",
@@ -1524,7 +2299,18 @@
                 "kind": "component",
                 "status": "partially-verified",
                 "sources": [
-                  "SRC-012"
+                  "SRC-012",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "830741V91",
+                    "description": "Lift piston rings",
+                    "models": "35 (Eff. SN 232850, a US serial), 35X, MF50, 65, TO35 (prior to SN 165554)",
+                    "source": "SRC-038",
+                    "page": 304,
+                    "confidence": "possible"
+                  }
                 ]
               },
               {
@@ -1539,7 +2325,18 @@
                 "status": "partially-verified",
                 "sources": [
                   "SRC-012",
-                  "SRC-035"
+                  "SRC-035",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "184359V91",
+                    "description": "Lift shaft",
+                    "models": "TO35, 35, 50, 65, 135, 150, 165, 230",
+                    "source": "SRC-038",
+                    "page": 304,
+                    "confidence": "listed"
+                  }
                 ]
               },
               {
@@ -1595,7 +2392,18 @@
                 "status": "partially-verified",
                 "sources": [
                   "SRC-010",
-                  "SRC-012"
+                  "SRC-012",
+                  "SRC-038"
+                ],
+                "replacementReferences": [
+                  {
+                    "number": "825753V1",
+                    "description": "Quadrant stop kit",
+                    "models": "MH50, TO20, TE20, TEA20, TO30, TO35, TE35, MF35, 40, 50, 65",
+                    "source": "SRC-038",
+                    "page": 305,
+                    "confidence": "listed"
+                  }
                 ]
               },
               {
@@ -1687,27 +2495,60 @@
             "name": "Lower link, LH",
             "kind": "component",
             "sources": [
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
-            "status": "partially-verified"
+            "status": "partially-verified",
+            "replacementReferences": [
+              {
+                "number": "191114V91",
+                "description": "Lower lift arm, left",
+                "models": "35 (SN 207753 to 219470, US serials), 35XE, TO35 (Eff. SN 165750), MF50, MH50, 135 UK, 202, 204",
+                "source": "SRC-038",
+                "page": 311,
+                "confidence": "possible"
+              }
+            ]
           },
           {
             "id": "lower-link-rh",
             "name": "Lower link, RH",
             "kind": "component",
             "sources": [
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
-            "status": "partially-verified"
+            "status": "partially-verified",
+            "replacementReferences": [
+              {
+                "number": "191115V91",
+                "description": "Lower lift arm, right",
+                "models": "35 (SN 207753 to 219470, US serials), 35XE, TO35 (Eff. SN 165750), MF50, MH50, 135 UK, 202, 204",
+                "source": "SRC-038",
+                "page": 311,
+                "confidence": "possible"
+              }
+            ]
           },
           {
             "id": "lift-rod-lh",
             "name": "Lift rod, LH (fixed)",
             "kind": "component",
             "sources": [
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
-            "status": "partially-verified"
+            "status": "partially-verified",
+            "replacementReferences": [
+              {
+                "number": "182554V92",
+                "description": "Lift rod, left, Cat 1",
+                "models": "202, 204, 2135, 135, 150, 35, 35X, MF50, MH50, TO35",
+                "source": "SRC-038",
+                "page": 313,
+                "confidence": "listed"
+              }
+            ]
           },
           {
             "id": "lift-rod-rh",
@@ -1723,25 +2564,92 @@
             "name": "Levelling box (crank handle)",
             "kind": "component",
             "sources": [
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
             "status": "partially-verified",
-            "notes": "The manual describes a levelling lever on the right-hand lift rod (SRC-035 L.5)."
+            "notes": "The manual describes a levelling lever on the right-hand lift rod (SRC-035 L.5).",
+            "replacementReferences": [
+              {
+                "number": "182642V93",
+                "description": "Levelling box hand crank, right",
+                "models": "TE20, TEA20, TO20, TO30, TO35, MF35, 40, 50, 202, 204",
+                "source": "SRC-038",
+                "page": 312,
+                "confidence": "listed"
+              },
+              {
+                "number": "181345V2",
+                "description": "Levelling box gear",
+                "models": "Cat 1 and 2 assemblies",
+                "source": "SRC-038",
+                "page": 313,
+                "confidence": "possible"
+              }
+            ]
           },
           {
             "id": "top-link",
             "name": "Top link",
             "kind": "component",
-            "removable": true
+            "removable": true,
+            "replacementReferences": [
+              {
+                "number": "1870075V91",
+                "description": "Adjustable top link, Cat 1 and 2",
+                "models": "135 UK (prior to SN 439191), 35, 35X (FE)",
+                "source": "SRC-038",
+                "page": 311,
+                "confidence": "listed"
+              },
+              {
+                "number": "184891V91",
+                "description": "Top link centre tube",
+                "models": "135 UK, 35, 35X, TE20, TEA20, TO20, TO30 and others",
+                "source": "SRC-038",
+                "page": 311,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "check-chains",
             "name": "Check chains / stabilisers",
             "kind": "component",
             "sources": [
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
-            "status": "partially-verified"
+            "status": "partially-verified",
+            "replacementReferences": [
+              {
+                "number": "181985V1",
+                "description": "Stabiliser lower stay",
+                "models": "35, 35X, TO35 (prior to SN 182870), 135 UK, 202, MF50, MH50",
+                "source": "SRC-038",
+                "page": 314,
+                "confidence": "listed"
+              },
+              {
+                "number": "181986V1",
+                "description": "Stabiliser upper stay",
+                "models": "35, 35X, TO35 (prior to SN 182870), 135 UK, 202, MF50, MH50",
+                "source": "SRC-038",
+                "page": 314,
+                "confidence": "listed"
+              },
+              {
+                "number": "79024570V",
+                "description": "Stabiliser kit, Cat 1 (2 arms, 2 brackets and pins)",
+                "models": "TE20, TEA20, TO20, TO30, TO35, 35, 40 Utility, 50 Utility",
+                "source": "SRC-038",
+                "page": 314,
+                "confidence": "possible"
+              }
+            ]
           },
           {
             "id": "linkage-pins",
@@ -1761,7 +2669,36 @@
             "id": "drawbar",
             "name": "Drawbar",
             "kind": "component",
-            "removable": true
+            "removable": true,
+            "replacementReferences": [
+              {
+                "number": "184611V1",
+                "description": "Swinging drawbar",
+                "models": "20, 30, 35, TO35, 65, 3165, 50, 135 and others",
+                "source": "SRC-038",
+                "page": 310,
+                "confidence": "listed"
+              },
+              {
+                "number": "180485V1",
+                "description": "Three-point drawbar, Cat 2",
+                "models": "35, 35X, TO30, TO20, TE20, TEA20, TO35, MF50, MH50 and others",
+                "source": "SRC-038",
+                "page": 310,
+                "confidence": "listed"
+              },
+              {
+                "number": "79026403V",
+                "description": "Swinging drawbar kit (drawbar, bracket, clevis pin)",
+                "models": "TE20, TEA20, TO20, TO30, TO35, TE35, 35, 50",
+                "source": "SRC-038",
+                "page": 310,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           }
         ]
       },
@@ -1773,7 +2710,20 @@
           {
             "id": "front-axle-beam",
             "name": "Front axle centre beam",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "183219V91",
+                "description": "Front axle beam",
+                "models": "TO20, TE20, TEA20, TO30, TO35, 35, 135, 235",
+                "source": "SRC-038",
+                "page": 279,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "front-axle-extensions",
@@ -1784,7 +2734,20 @@
           {
             "id": "front-axle-pivot-pin",
             "name": "Axle pivot pin and bush",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "182850V1",
+                "description": "Front axle pivot",
+                "models": "TO35, FE35, 35, 135, 230, 235, 2135, 20",
+                "source": "SRC-038",
+                "page": 279,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "radius-rods",
@@ -1799,7 +2762,28 @@
             "id": "stub-axle",
             "name": "Stub axle / spindle",
             "kind": "component",
-            "quantity": 2
+            "quantity": 2,
+            "replacementReferences": [
+              {
+                "number": "180349V92",
+                "description": "Spindle, left, 11 in upright",
+                "models": "TO35, 35",
+                "source": "SRC-038",
+                "page": 267,
+                "confidence": "listed"
+              },
+              {
+                "number": "180346V92",
+                "description": "Spindle, right, 11 in upright",
+                "models": "TO35, 35",
+                "source": "SRC-038",
+                "page": 267,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "kingpin-bushes",
@@ -1810,22 +2794,138 @@
             "id": "front-hub",
             "name": "Front hub and bearings",
             "kind": "component",
-            "quantity": 2
+            "quantity": 2,
+            "replacementReferences": [
+              {
+                "number": "180338V92",
+                "description": "Front wheel hub",
+                "models": "TO30, TO20, TE20, TEA20, TO35, MF35, MF50, MH50, 65, FE35, 135 UK",
+                "source": "SRC-038",
+                "page": 337,
+                "confidence": "listed"
+              },
+              {
+                "number": "191142V1",
+                "description": "Front hub cap",
+                "models": "35, 35X, 130 French, 135 UK, TO35 and others",
+                "source": "SRC-038",
+                "page": 337,
+                "confidence": "listed"
+              },
+              {
+                "number": "897363V1",
+                "description": "Front hub seal",
+                "models": "35, 35X, 130 French, 135, 235, 245",
+                "source": "SRC-038",
+                "page": 337,
+                "confidence": "listed"
+              },
+              {
+                "number": "79024599V",
+                "description": "Wheel bearing kit, one wheel (2 cones, 2 cups, 1 seal)",
+                "models": "TE20, TEA20, TO20, TO30, TE35, TO35, MF 35, 40, 50, 65",
+                "source": "SRC-038",
+                "page": 337,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "steering-box",
             "name": "Steering box",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "1861704V1",
+                "description": "Rocker shaft, secondary (manual steering)",
+                "models": "135 UK, 240S Turkey, 35, 35X FE",
+                "source": "SRC-038",
+                "page": 272,
+                "confidence": "listed"
+              },
+              {
+                "number": "1850017V1",
+                "description": "Rocker shaft, primary (manual steering)",
+                "models": "135 UK, 240, 240S Turkey, 35, 35X FE",
+                "source": "SRC-038",
+                "page": 272,
+                "confidence": "listed"
+              },
+              {
+                "number": "79028716V",
+                "description": "Steering shaft bearing kit (2 bearings, 2 cups)",
+                "models": "35, 135, 2135, 20, 202, 203, 204, 205",
+                "source": "SRC-038",
+                "page": 271,
+                "confidence": "possible"
+              },
+              {
+                "number": "180557V1",
+                "description": "Pitman gear, left",
+                "models": "TO35, 35, 135, 2135, 35 Turf and Utility",
+                "source": "SRC-038",
+                "page": 272,
+                "confidence": "possible"
+              },
+              {
+                "number": "180558V1",
+                "description": "Pitman gear, right",
+                "models": "TO35, 35, 135, 2135, 35 Turf and Utility",
+                "source": "SRC-038",
+                "page": 272,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "steering-column",
             "name": "Steering column",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "1850003V92",
+                "description": "Inner steering column assembly",
+                "models": "135 UK (prior to SN 400001), 35, 35X (FE)",
+                "source": "SRC-038",
+                "page": 272,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "steering-wheel",
             "name": "Steering wheel",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "79024602V",
+                "description": "Steering wheel, black ribbed, 17-5/8 in, keyed hub, 11/16 in shaft",
+                "models": "TE20, TO20, TO30, TE35, 35, 40, 50, 65 and others",
+                "source": "SRC-038",
+                "page": 265,
+                "confidence": "listed"
+              },
+              {
+                "number": "1870806V92",
+                "description": "Steering wheel nut, chrome, 13/16 in NF",
+                "models": "TE20, TO20, TO30, TE35, 35, 40, 50 and others",
+                "source": "SRC-038",
+                "page": 265,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "drag-links",
@@ -1839,7 +2939,20 @@
           {
             "id": "steering-arms",
             "name": "Steering arms",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "180350M1",
+                "description": "Steering arm",
+                "models": "TO20, TE20, TO30, TEA20, TO35, 35, 135 UK, 240S Turkey, 240",
+                "source": "SRC-038",
+                "page": 272,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           }
         ]
       },
@@ -1898,12 +3011,46 @@
           {
             "id": "battery-cables",
             "name": "Battery cables",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "181572V91",
+                "description": "Battery cable, 15-1/2 in",
+                "models": "35 (prior to SN 216684 Deluxe and 220038 Special, US serials), TO35 Deluxe, 85, 88, Super 90",
+                "source": "SRC-038",
+                "page": 252,
+                "confidence": "possible"
+              },
+              {
+                "number": "180099V1",
+                "description": "Battery to solenoid cable",
+                "models": "35, MF 50, MH 50",
+                "source": "SRC-038",
+                "page": 252,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "starter-switch",
             "name": "Starter switch",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "883928V91",
+                "description": "Starter switch",
+                "models": "FE35 Diesel 23C (also A3-152)",
+                "source": "SRC-038",
+                "page": 241,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "heater-plugs",
@@ -1927,9 +3074,20 @@
             "status": "partially-verified",
             "sources": [
               "SRC-022",
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
-            "notes": "CAV Thermostart fitted to the inlet manifold, or Ki-gass equipment (SRC-035 B.41). Which one is fitted to the owner's tractor is unknown."
+            "notes": "CAV Thermostart fitted to the inlet manifold, or Ki-gass equipment (SRC-035 B.41). Which one is fitted to the owner's tractor is unknown.",
+            "replacementReferences": [
+              {
+                "number": "893501V91",
+                "description": "Intake heater",
+                "models": "35 Diesel, 50 MF and MH, 65, 85, 88, Super 90, 130 French, 135 UK and others",
+                "source": "SRC-038",
+                "page": 257,
+                "confidence": "listed"
+              }
+            ]
           },
           {
             "id": "wiring-harness",
@@ -1939,27 +3097,132 @@
           {
             "id": "headlamps",
             "name": "Headlamps",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "79028720V",
+                "description": "Headlamp, 5-3/4 in sealed beam, 6 volt",
+                "models": "MH50, TO20, TE20, TEA20, TO30, TO35, 35, 40, 50 and others (US sealed-beam pattern)",
+                "source": "SRC-038",
+                "page": 253,
+                "confidence": "possible"
+              },
+              {
+                "number": "79028721V",
+                "description": "Headlamp, 5-3/4 in sealed beam, 12 volt",
+                "models": "same row",
+                "source": "SRC-038",
+                "page": 253,
+                "confidence": "possible"
+              },
+              {
+                "number": "1750676V1",
+                "description": "Headlamp wing, LH",
+                "models": "TE20, TO20, TO30, 20, 30, 35, 40, 50, 65, 85, 88, Super 90",
+                "source": "SRC-038",
+                "page": 50,
+                "confidence": "possible"
+              },
+              {
+                "number": "1750675V1",
+                "description": "Headlamp wing, RH",
+                "models": "same row",
+                "source": "SRC-038",
+                "page": 50,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "rear-lamp",
             "name": "Rear / plough lamp",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "231495V91",
+                "description": "Rear work light assembly",
+                "models": "TO35",
+                "source": "SRC-038",
+                "page": 255,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "ammeter",
             "name": "Ammeter",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "1073455V91",
+                "description": "Ammeter",
+                "models": "35, 35X, 35 Diesel, TO35 and others",
+                "source": "SRC-038",
+                "page": 67,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "temp-gauge",
             "name": "Water temperature gauge",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "881396V91",
+                "description": "Water temperature gauge",
+                "models": "35, 35X \"for 87 mm VO/LL engine\"",
+                "source": "SRC-038",
+                "page": 67,
+                "confidence": "possible"
+              },
+              {
+                "number": "30V3485587",
+                "description": "Water temperature gauge",
+                "models": "35 Diesel row",
+                "source": "SRC-038",
+                "page": 67,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "oil-pressure-gauge",
             "name": "Oil pressure gauge",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "1853097V91",
+                "description": "Oil pressure gauge",
+                "models": "35, 35X; TO35 Standard Motors Diesel",
+                "source": "SRC-038",
+                "page": 67,
+                "confidence": "listed"
+              },
+              {
+                "number": "506902V92",
+                "description": "Oil pressure gauge",
+                "models": "35 Diesel row (also 35, 50, 65 and others)",
+                "source": "SRC-038",
+                "page": 67,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "tractormeter",
@@ -1968,9 +3231,36 @@
             "status": "variant-dependent",
             "sources": [
               "SRC-010",
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
-            "notes": "Listed as a De Luxe feature (SRC-010). Fitment depends on the De Luxe package, which is not yet a separate variant axis. Fitted on the De Luxe (dual clutch) version (SRC-035 B.1)."
+            "notes": "Listed as a De Luxe feature (SRC-010). Fitment depends on the De Luxe package, which is not yet a separate variant axis. Fitted on the De Luxe (dual clutch) version (SRC-035 B.1).",
+            "replacementReferences": [
+              {
+                "number": "1850092V93",
+                "description": "Tachometer and hour meter",
+                "models": "35, 35X: 23C Diesel, 87 mm petrol and VO (prior to SN 307657)",
+                "source": "SRC-038",
+                "page": 67,
+                "confidence": "listed"
+              },
+              {
+                "number": "827855V1",
+                "description": "Tachometer cable",
+                "models": "35, 35X (FE), TO 35",
+                "source": "SRC-038",
+                "page": 71,
+                "confidence": "listed"
+              },
+              {
+                "number": "890420V91",
+                "description": "Tachometer cable",
+                "models": "135 UK, 35, 35X (FE)",
+                "source": "SRC-038",
+                "page": 71,
+                "confidence": "possible"
+              }
+            ]
           },
           {
             "id": "horn",
@@ -1988,23 +3278,131 @@
           {
             "id": "bonnet",
             "name": "Bonnet",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "826870V1",
+                "description": "Hood catch rod",
+                "models": "35, 35X",
+                "source": "SRC-038",
+                "page": 55,
+                "confidence": "listed"
+              },
+              {
+                "number": "180718M1",
+                "description": "Bonnet pivot bolt",
+                "models": "202, 35, 35X, TO20, TO30, TO35",
+                "source": "SRC-038",
+                "page": 55,
+                "confidence": "listed"
+              },
+              {
+                "number": "79024491V",
+                "description": "Decal set, 35 hood",
+                "models": "35",
+                "source": "SRC-038",
+                "page": 48,
+                "confidence": "possible"
+              },
+              {
+                "number": "79024503V",
+                "description": "Decal set, 35 complete",
+                "models": "35",
+                "source": "SRC-038",
+                "page": 48,
+                "confidence": "possible"
+              },
+              {
+                "number": "79024559V",
+                "description": "Decal set, 35 Deluxe Diesel hood",
+                "models": "35 Deluxe Diesel",
+                "source": "SRC-038",
+                "page": 48,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "side-panels",
             "name": "Side panels",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "826815V91",
+                "description": "Side panel, RH",
+                "models": "35, 35X with 23C and 87 mm engine",
+                "source": "SRC-038",
+                "page": 56,
+                "confidence": "listed"
+              },
+              {
+                "number": "826816V91",
+                "description": "Side panel, LH",
+                "models": "35, 35X with 23C and 87 mm engine",
+                "source": "SRC-038",
+                "page": 56,
+                "confidence": "listed"
+              },
+              {
+                "number": "826817V92",
+                "description": "Panel",
+                "models": "35, 35X",
+                "source": "SRC-038",
+                "page": 56,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "grille",
             "name": "Grille",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "826812V91",
+                "description": "Front grille",
+                "models": "35, 35X (the row \"35: 180657V91\" is the US grille)",
+                "source": "SRC-038",
+                "page": 58,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "front-badge",
             "name": "Front badge / emblem",
             "kind": "component",
-            "notes": "Ferguson vs Massey Ferguson branding changed during 1958 (SRC-002). Variant."
+            "notes": "Ferguson vs Massey Ferguson branding changed during 1958 (SRC-002). Variant.",
+            "replacementReferences": [
+              {
+                "number": "187990V1",
+                "description": "Front emblem",
+                "models": "MF35, MF 35 Utility and Turf",
+                "source": "SRC-038",
+                "page": 50,
+                "confidence": "listed"
+              },
+              {
+                "number": "79024624V",
+                "description": "\"Ferguson 35\" side emblems, red background, 3 pegs",
+                "models": "TO35, Ferguson 35",
+                "source": "SRC-038",
+                "page": 50,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "dashboard",
@@ -2024,7 +3422,20 @@
           {
             "id": "mudguards",
             "name": "Rear mudguards (fenders)",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "526904V91",
+                "description": "Fender skin, less bracket (LH or RH)",
+                "models": "TO20, TO30, TO35, TE20, 35, 40, 50, 65 and others",
+                "source": "SRC-038",
+                "page": 56,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "seat",
@@ -2033,14 +3444,62 @@
             "status": "variant-dependent",
             "sources": [
               "SRC-010",
-              "SRC-035"
+              "SRC-035",
+              "SRC-038"
             ],
-            "notes": "De Luxe version has a cushion seat (SRC-035 B.1)."
+            "notes": "De Luxe version has a cushion seat (SRC-035 B.1).",
+            "replacementReferences": [
+              {
+                "number": "825577V91",
+                "description": "Seat pan",
+                "models": "TE20, TO20, TEA20, TO30, TO35, TE35, 35, 40, 50, MH50",
+                "source": "SRC-038",
+                "page": 63,
+                "confidence": "listed"
+              },
+              {
+                "number": "181313V93",
+                "description": "Seat pan (De Luxe seat)",
+                "models": "TE20, TEA20, TO20, TO30, TO35, 35, 35X, 50 and others",
+                "source": "SRC-038",
+                "page": 63,
+                "confidence": "possible"
+              },
+              {
+                "number": "30093V91",
+                "description": "Seat cushion assembly, grey with red trim",
+                "models": "same row",
+                "source": "SRC-038",
+                "page": 63,
+                "confidence": "possible"
+              }
+            ]
           },
           {
             "id": "seat-support",
             "name": "Seat support / spring",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "825608V1",
+                "description": "Seat spring",
+                "models": "TE20, TO20, TEA20, TO30, TO35, TE35, 35, 40, 50, MH50",
+                "source": "SRC-038",
+                "page": 63,
+                "confidence": "listed"
+              },
+              {
+                "number": "79024779V",
+                "description": "Seat spring repair kit",
+                "models": "same row",
+                "source": "SRC-038",
+                "page": 63,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "footplates",
@@ -2052,7 +3511,20 @@
             "name": "Front weights (optional)",
             "kind": "component",
             "removable": true,
-            "status": "unverified"
+            "status": "unverified",
+            "replacementReferences": [
+              {
+                "number": "79024818V",
+                "description": "Front wheel weight, serviceable",
+                "models": "MH 50; MF50, TE20, TEA20, TO20, TO30, TE35, TO35, 40, 50 and others",
+                "source": "SRC-038",
+                "page": 336,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           }
         ]
       },
@@ -2065,7 +3537,20 @@
             "id": "front-wheel",
             "name": "Front wheel (disc and rim)",
             "kind": "component",
-            "quantity": 2
+            "quantity": 2,
+            "replacementReferences": [
+              {
+                "number": "195638V91",
+                "description": "Front wheel, 4.5 x 16 in, 6 bolt",
+                "models": "MH 50; MF TE20, TEA20, TO20, TO30, TE 35, TO35, MF35, 40, 50 and others",
+                "source": "SRC-038",
+                "page": 334,
+                "confidence": "listed"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "rear-wheel-centre",
@@ -2077,7 +3562,20 @@
             "id": "rear-rim",
             "name": "Rear rim",
             "kind": "component",
-            "quantity": 2
+            "quantity": 2,
+            "replacementReferences": [
+              {
+                "number": "79024704V",
+                "description": "Rear rim, 12 x 24 in, 6 loops",
+                "models": "35, 50, 65, 135, 150, 165 and others",
+                "source": "SRC-038",
+                "page": 335,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "rear-rim-clamps",
@@ -2087,12 +3585,54 @@
           {
             "id": "front-wheel-nuts",
             "name": "Front wheel nuts",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "181328V1",
+                "description": "Lug bolt, 1/2 in-20 x 1-3/4 in, serrated shoulder",
+                "models": "MH 50; MF TE20, TEA20, TO20, TO30, TO35, MF35, 40, 50 and others",
+                "source": "SRC-038",
+                "page": 337,
+                "confidence": "possible"
+              },
+              {
+                "number": "195490V1",
+                "description": "Lug nut, 1/2 in NF hex",
+                "models": "TO20, TO30, TO35, TE20, TEA20, 35, 35X and others",
+                "source": "SRC-038",
+                "page": 337,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "rear-wheel-nuts",
             "name": "Rear wheel nuts",
-            "kind": "component"
+            "kind": "component",
+            "replacementReferences": [
+              {
+                "number": "185400V2",
+                "description": "Lug bolt, 9/16 in x 2 in NF",
+                "models": "35, 50, 135, 150, 230, 235, 240, 245, 250, TO30, TO35 and others",
+                "source": "SRC-038",
+                "page": 337,
+                "confidence": "possible"
+              },
+              {
+                "number": "180004V1",
+                "description": "Lug nut",
+                "models": "same row",
+                "source": "SRC-038",
+                "page": 337,
+                "confidence": "possible"
+              }
+            ],
+            "sources": [
+              "SRC-038"
+            ]
           },
           {
             "id": "front-tyre",

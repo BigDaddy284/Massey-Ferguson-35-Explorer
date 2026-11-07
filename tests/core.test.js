@@ -93,6 +93,30 @@ test('search finds by name, partial, misspelling, synonym and supplier number', 
   assert.deepEqual(core.search(docs, '', 5), []);
 });
 
+test('AGCO Heritage replacement references: searchable, sourced, never the OEM number', () => {
+  const docs = core.buildSearchIndex(index, null, technical);
+  const top = (q) => core.search(docs, q, 5).map((r) => r.doc.id);
+  assert.ok(top('830972V92').includes('piston'), '23C piston kit number finds the piston');
+  assert.ok(top('1884123V1').includes('inlet-valve'), '23C inlet valve number');
+  assert.ok(top('883402V92').includes('hyd-relief-valve'), 'hydraulic relief valve number');
+  const byId = Object.fromEntries(sources.map((s) => [s.id, s]));
+  let count = 0;
+  for (const id of index.order) {
+    const n = index.byId[id].node;
+    for (const r of n.replacementReferences || []) {
+      count++;
+      assert.ok(byId[r.source] && byId[r.source].accessed, `${id}: ${r.number} cites an accessed source`);
+      assert.ok((n.sources || []).includes(r.source), `${id}: node cites ${r.source}`);
+      assert.notEqual(n.oemPartNumber, r.number, `${id}: replacement reference is not the OEM number`);
+      assert.ok(['listed', 'possible'].includes(r.confidence), `${id}: confidence recorded`);
+    }
+  }
+  assert.ok(count >= 140, `expected the Heritage references to be attached, got ${count}`);
+  assert.equal(index.byId['piston'].node.oemPartNumber, undefined, 'the piston still has no verified OEM number');
+  const cov = core.coverage(index);
+  assert.ok(cov.engine.replacement >= 10 && cov.hydraulics.replacement >= 8, 'coverage counts nodes with replacement refs');
+});
+
 test('workshop-manual torques are searchable; withheld rows are not', () => {
   const docs = core.buildSearchIndex(index, null, technical);
   assert.ok(core.search(docs, 'connecting rod bolts torque', 10).some((r) => r.doc.kind === 'technical' && r.doc.sectionId === 'torques'));
