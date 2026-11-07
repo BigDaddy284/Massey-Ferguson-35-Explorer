@@ -559,6 +559,24 @@
         "Perkins engine letter is N here; SRC-003 says P",
         "Oil pressure 40–60 lb/sq in here; earlier notes quoted 60 lb/sq in as the relief figure only"
       ]
+    },
+    {
+      "id": "SRC-036",
+      "name": "SlideShare upload titled 'Massey Ferguson MF 35 X tractors service parts catalogue manual (part number 819045)'",
+      "url": "https://www.slideshare.net/slideshow/massey-ferguson-mf-35-x-tractors-service-parts-catalogue-manual-part-number-819045-240590930/240590930",
+      "type": "aggregator",
+      "reliability": "aggregator",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Suggested by the owner. An anonymous upload of about 20 preview slides, ending with a prompt to 'Get COMPLETE MANUAL' elsewhere. It is not an AGCO publication page and shows no AGCO publication number other than the title. Read only through a text extract of the preview; the full book is not shown.",
+      "extracted": [
+        "Preview covers only engine sections: cylinder block, cylinder head, crankshaft, cylinder head cover, air induction and timing gear. No clutch, gearbox, PTO, hydraulic or linkage pages are visible.",
+        "Visible numbers include liner 31358308, inlet valve 31431261, head cover 37188519, camshaft 31415241 and timing case 37161481, with engine-number breaks such as 1935853/1935854 and 19B7093–19F1998.",
+        "The 31xxxxxx/37xxxxxx numbers look like Perkins-style numbers, so these pages probably cover the Perkins 3-cylinder engine of the MF35X / later MF35 rather than the Standard 23C diesel. Not confirmed: the engine type is not stated in the visible text."
+      ],
+      "conflicts": [
+        "Title quotes 819045 (no M4 suffix) and 'MF 35 X'. The visible pages appear to be Perkins engine pages, so none of their numbers can be applied to the 23C engine. Not used to set any oemPartNumber."
+      ]
     }
   ]
 }
