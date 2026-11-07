@@ -577,6 +577,26 @@
       "conflicts": [
         "Title quotes 819045 (no M4 suffix) and 'MF 35 X'. The visible pages appear to be Perkins engine pages, so none of their numbers can be applied to the 23C engine. Not used to set any oemPartNumber."
       ]
+    },
+    {
+      "id": "SRC-037",
+      "name": "AGCO: Massey Ferguson (Agricultural Equipment) Technical Publication Catalog 79017810B (27 Mar 2006)",
+      "url": "https://www.amcpartstool.com/catalogs/agco/Publications%20Catalog%20-%20MF%20Agricultural.pdf",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Suggested by the owner. AGCO dealer ordering guide listing publication numbers by model. Read through a text extract; the column layout (operator / repair / time schedule / parts / microfiche) could not be matched with certainty, so numbers are recorded in the order printed. No prices, no serial ranges. It is a catalogue of publications, not a publication with part data.",
+      "extracted": [
+        "FE 35 (4 cyl. Dsl.): 690274M2, 819146M4, 819045M4, 653116M91 (microfiche Red 22). Reading across the column order these are the operator manual, repair manual, parts book and microfiche.",
+        "FE 35 (3 cyl. Dsl.): 819146M4, 819045M4, 653116M91. The same parts book 819045M4 and repair manual 819146M4 serve both FE35 engines.",
+        "35 Dsl. (U.S.): 690454M4, 1448811M91, 651093M93, 653110M91. 35 Gas.: 690495M3, 1448811M91, 651093M93, 653118M91. So 1448811M91 is the US-built 35 repair manual and 651093M93 its parts book, which are not the Coventry FE35 publications.",
+        "TO 35 Gas (Ferguson): 690241M4, 693063M4, 653115M91; TO 35 Dsl.: 690348M2, 693063M4, 653115M91.",
+        "Publications are ordered through AGCO dealers as regular parts orders."
+      ],
+      "conflicts": [
+        "SRC-015 pairs the FE-35 4-cyl diesel with service manual 1448811M1 plus supplement 690560M1. This catalogue lists 1448811M91 against the US-built 35 and 819146M4 against the FE 35, so 819146M4 is the better candidate for the Coventry diesel repair manual. Unconfirmed until a copy is seen."
+      ]
     }
   ]
 }
