@@ -7,33 +7,516 @@
       "title": "Engine: Standard 23C diesel",
       "relatedNode": "engine",
       "rows": [
-        { "label": "Type", "value": "4-cylinder in-line, 4-stroke diesel, liquid cooled", "status": "partially-verified", "sources": ["SRC-005", "SRC-006"] },
-        { "label": "Maker", "value": "Standard Motor Company, Coventry", "status": "partially-verified", "sources": ["SRC-007", "SRC-009"] },
-        { "label": "Bore", "value": "84.137 mm (3 5/16 in)", "status": "partially-verified", "sources": ["SRC-006", "SRC-007", "SRC-008"] },
-        { "label": "Stroke", "value": "101.6 mm (4.0 in)", "status": "unverified", "sources": ["SRC-006"] },
-        { "label": "Swept volume", "value": "c. 2,260 cc (137.9 cu in); quoted as 2,258–2,260 cc", "status": "partially-verified", "sources": ["SRC-005", "SRC-006", "SRC-007"] },
-        { "label": "Compression ratio", "value": "20:1", "status": "partially-verified", "sources": ["SRC-005", "SRC-006"] },
-        { "label": "Firing order", "value": "1-3-4-2", "status": "partially-verified", "sources": ["SRC-005", "SRC-006"] },
-        { "label": "Combustion system", "value": "Chamber developed by Freeman Sanders; injection type not yet established", "status": "unverified", "sources": ["SRC-009"] },
-        { "label": "Cylinder liners", "value": "Conflicting sources: dry slip-fit liner vs wet-liner family", "status": "unverified", "sources": ["SRC-007", "SRC-008", "SRC-018"] },
-        { "label": "Camshaft drive", "value": "Timing chain (62 pitches) with tensioner", "status": "partially-verified", "sources": ["SRC-008"] },
-        { "label": "Rated power", "value": "Quoted as 34 hp, 35.9 belt hp and 37 hp; rating basis not resolved", "status": "unverified", "sources": ["SRC-005", "SRC-006", "SRC-011"] },
-        { "label": "Injection pump", "value": "CAV DPA distributor type (code 3240011)", "status": "unverified", "sources": ["SRC-006"] },
-        { "label": "Injector opening pressure", "value": "130 atm", "status": "unverified", "sources": ["SRC-006"] },
-        { "label": "Valve clearance (cold)", "value": "Inlet 0.305 mm (0.012 in), exhaust 0.203 mm (0.008 in)", "status": "unverified", "sources": ["SRC-006"] },
-        { "label": "Torque settings", "value": "Withheld: the only source found contains an implausible figure", "status": "unverified", "sources": ["SRC-006"], "display": false }
+        {
+          "label": "Type",
+          "value": "4-cylinder in-line, 4-stroke diesel, liquid cooled, indirect injection",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-005"
+          ]
+        },
+        {
+          "label": "Maker",
+          "value": "Standard Motor Company, Coventry",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-007",
+            "SRC-009"
+          ]
+        },
+        {
+          "label": "Bore",
+          "value": "84.137 mm (3 5/16 in)",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-006"
+          ]
+        },
+        {
+          "label": "Stroke",
+          "value": "101.6 mm (4 in)",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-006"
+          ]
+        },
+        {
+          "label": "Swept volume",
+          "value": "2,259 cc (137.89 cu in)",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Compression ratio",
+          "value": "20:1",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Firing order",
+          "value": "1-3-4-2",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Combustion system",
+          "value": "Indirect injection with Ricardo Comet pre-combustion chambers (separate insert in the head)",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Cylinder liners",
+          "value": "Removable flanged sleeves, withdrawn upwards with the pistons; graded F/G/H, standard size only (no rebore). Wet or dry not stated by the manual; other sources conflict",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-035",
+            "SRC-007",
+            "SRC-008",
+            "SRC-018"
+          ]
+        },
+        {
+          "label": "Camshaft drive",
+          "value": "Timing chain with tensioner",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-008"
+          ]
+        },
+        {
+          "label": "Power (bare engine)",
+          "value": "37.25 bhp; 35.9 belt hp; 34 hp at the PTO; 31.5 drawbar hp",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Maximum torque",
+          "value": "100 lb ft at 1,600 rpm",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Injection pump",
+          "value": "CAV DPA distributor pump with integral variable-speed governor. Codes 3240011/12/13/15 timed 19° BTDC; 3242643/3242645 (light-load advance) timed 13° BTDC",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Injectors",
+          "value": "CAV Pintaux; nozzle type changes at engine numbers SJ 86046E and SJ 125725E. Working pressure 130 atm (new setting 135 atm)",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Valve clearance (cold)",
+          "value": "Inlet 0.305 mm (0.012 in), exhaust 0.203 mm (0.008 in)",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-006"
+          ]
+        },
+        {
+          "label": "Valve timing",
+          "value": "IO 10½° BTDC, IC 37½° ABDC, EO 45½° BBDC, EC 10½° ATDC (checked at 0.015 in clearance)",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Oil pressure",
+          "value": "40–60 lb/sq in (2.8–4.2 kg/sq cm); rotor pump at engine speed",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Fuel lift pump",
+          "value": "AC type YD, driven by an eccentric at the rear of the camshaft; 4–7 lb/sq in",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Air cleaner",
+          "value": "AC oil-bath type",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Cold-start equipment",
+          "value": "CAV Thermostart in the inlet manifold, or Ki-gass equipment",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        }
       ]
+    },
+    {
+      "id": "torques",
+      "title": "Tightening torques: 23C engine",
+      "relatedNode": "engine",
+      "rows": [
+        {
+          "label": "Cylinder head to block",
+          "value": "100–105 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Connecting rod bolts",
+          "value": "65–70 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Flywheel",
+          "value": "90–100 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Main bearing housing to block, centre",
+          "value": "39–42 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Main bearing housing to block, front",
+          "value": "18–20 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Main bearing housing, upper to lower",
+          "value": "25–30 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Rear bearing housing and cover",
+          "value": "18–20 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Camshaft chain wheel to centre",
+          "value": "18–20 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Clutch to flywheel, single",
+          "value": "26–28 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Clutch to flywheel, dual",
+          "value": "22–24 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Manifolds to head",
+          "value": "22–24 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Injectors",
+          "value": "12–14 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Injector clamp",
+          "value": "18–20 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Injection pump mounting",
+          "value": "22–24 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Rocker shaft oil feed",
+          "value": "16–18 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Rocker pedestal",
+          "value": "22–24 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Rocker shaft to pedestal",
+          "value": "8–10 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Rocker cover",
+          "value": "3–5 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Oil filter to block",
+          "value": "26–28 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Oil pump",
+          "value": "16–18 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Sump bolts and setscrews",
+          "value": "16–18 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Sump nuts",
+          "value": "14–16 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Timing cover",
+          "value": "18–20 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Timing chain tensioner",
+          "value": "8–10 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Water pump",
+          "value": "22–24 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Water pump to block",
+          "value": "26–28 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Thermostat housing",
+          "value": "18–20 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Fan pulley to hub",
+          "value": "18–20 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Starter motor to block",
+          "value": "37–40 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Dynamo mounting",
+          "value": "26–28 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Exhaust pipe",
+          "value": "22–24 lb ft",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        }
+      ],
+      "explainer": "Figures are lb ft as printed in the workshop manual (SRC-035 B.29–B.30). Multiply by 1.356 for Nm. Earlier figures from a supplier website (SRC-006) mixed up units and have been replaced."
     },
     {
       "id": "transmission",
       "title": "Clutch and gearbox",
       "relatedNode": "transmission",
       "rows": [
-        { "label": "Clutch", "value": "Single-stage (Standard model) or dual-stage (De Luxe model)", "status": "variant-dependent", "sources": ["SRC-001", "SRC-003", "SRC-010"] },
-        { "label": "Dual-stage action", "value": "Half pedal stops the wheels but keeps PTO and hydraulic pump turning; full pedal stops both", "status": "partially-verified", "sources": ["SRC-001", "SRC-010"] },
-        { "label": "Gearbox", "value": "6 forward, 2 reverse, unsynchronised (3 speeds × high/low range)", "status": "partially-verified", "sources": ["SRC-004", "SRC-010", "SRC-027"] },
-        { "label": "Controls", "value": "Left lever 1–3 and reverse; right lever high / low / neutral 'start' position", "status": "partially-verified", "sources": ["SRC-010"] },
-        { "label": "Road speeds and ratios", "value": null, "status": "unverified", "sources": [] }
+        {
+          "label": "Clutch options",
+          "value": "Single dry disc 10 in (254 mm) on the diesel, or dual clutch: 11 in (279.4 mm) transmission disc and 9 in (228.6 mm) PTO/hydraulic pump disc with 2 Belleville springs",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-003",
+            "SRC-010"
+          ]
+        },
+        {
+          "label": "Dual-stage action",
+          "value": "First stage releases the gearbox drive only; the pump and PTO keep running. Second stage releases both",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-001",
+            "SRC-010"
+          ]
+        },
+        {
+          "label": "Clutch pedal free movement",
+          "value": "Single clutch 3/4 in (19 mm); dual clutch 3/8 in (9.5 mm)",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Gearbox",
+          "value": "6 forward, 2 reverse (3 speeds and reverse × high/low range)",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-004",
+            "SRC-010"
+          ]
+        },
+        {
+          "label": "Controls",
+          "value": "Left lever 1–3 and reverse; right lever high / low / neutral 'start' position",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-010"
+          ]
+        },
+        {
+          "label": "Overall reduction, low range",
+          "value": "1st 205.5:1, 2nd 137:1, 3rd 74.7:1, reverse 153.8:1",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Overall reduction, high range",
+          "value": "4th 51.4:1, 5th 34.2:1, 6th 18.7:1, reverse 38.5:1",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Road speeds at 2,000 rpm",
+          "value": "1.28, 1.91, 3.51, 5.10, 7.65 and 14.00 mph (1st–6th); reverse 1.71 / 6.8 mph",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Transmission oil",
+          "value": "6.6 Imp gal (30.28 litres)",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        }
       ]
     },
     {
@@ -41,33 +524,136 @@
       "title": "Power take-off",
       "relatedNode": "pto",
       "rows": [
-        { "label": "Speed", "value": "540 rpm", "status": "partially-verified", "sources": ["SRC-004", "SRC-027"] },
-        { "label": "Drive", "value": "Transmission-driven with single clutch; live with dual-stage clutch", "status": "variant-dependent", "sources": ["SRC-004", "SRC-010"] },
-        { "label": "Shaft size and splines", "value": null, "status": "unverified", "sources": [] }
+        {
+          "label": "Speed",
+          "value": "540 rpm at 1,500 engine rpm (720 rpm at 2,000)",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-004",
+            "SRC-027"
+          ]
+        },
+        {
+          "label": "Ground-speed setting",
+          "value": "About 1 shaft revolution per 20 in (508 mm) of rear-wheel travel",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Drive",
+          "value": "Through the clutch with a single clutch (stops with the pedal); live via the second clutch stage with a dual clutch",
+          "status": "variant-dependent",
+          "sources": [
+            "SRC-035",
+            "SRC-004",
+            "SRC-010"
+          ]
+        },
+        {
+          "label": "Shaft size and splines",
+          "value": "6 splines, major diameter 1.371–1.373 in (34.8 mm), minor 1.098–1.108 in",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        }
       ],
-      "explainer": "Power path: engine → flywheel → clutch → gearbox input → PTO drive shaft through the gearbox → PTO engagement coupler → rear PTO output shaft. With a single-stage clutch, pressing the pedal stops the PTO along with the wheels. With a dual-stage clutch, the first half of pedal travel releases only the gearbox drive, so the PTO keeps turning (live PTO). The full pedal releases both."
+      "explainer": "Power path: engine → flywheel → clutch. With a single clutch, the gearbox and the PTO/pump drive both run off the one disc, so pressing the pedal stops the PTO with the wheels. With the dual clutch, the rear (secondary) disc drives a tubular shaft around the gearbox input shaft. That is geared to a solid shaft running through the hollow countershaft to the hydraulic pump and the PTO. The first half of pedal travel releases only the gearbox disc, so the PTO and hydraulics keep turning (live PTO). Full travel releases both. A lever selects engine-proportional speed (540 rpm at 1,500 engine rpm) or ground speed. (SRC-035 I.1, J.4, M.3)"
     },
     {
       "id": "hydraulics",
       "title": "Hydraulic lift",
       "relatedNode": "hydraulics",
       "rows": [
-        { "label": "System", "value": "Ferguson System with draft control and position control (twin-lever quadrant)", "status": "partially-verified", "sources": ["SRC-009", "SRC-010", "SRC-023"] },
-        { "label": "Pump", "value": "Camshaft-driven piston pump with cam blocks and valve chamber(s); later pattern from serial 65685", "status": "partially-verified", "sources": ["SRC-012", "SRC-013", "SRC-014"] },
-        { "label": "Pump drive", "value": "Driven with the PTO drive line, so it stops with the clutch on single-clutch tractors", "status": "partially-verified", "sources": ["SRC-001", "SRC-010"] },
-        { "label": "Lift ram", "value": "Single-acting ram in the lift cover; 3 in piston from serial 65685", "status": "partially-verified", "sources": ["SRC-012"] },
-        { "label": "Relief valve pressure", "value": null, "status": "unverified", "sources": [] },
-        { "label": "Oil capacity", "value": null, "status": "unverified", "sources": [] }
+        {
+          "label": "System",
+          "value": "Ferguson System with draft control and position control (twin-lever quadrant)",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-009",
+            "SRC-010",
+            "SRC-023"
+          ]
+        },
+        {
+          "label": "Pump",
+          "value": "Four-cylinder, constant-running piston pump in the sump between gearbox and final drive. Two piston yokes ride on cam blocks over eccentrics on the pump drive shaft; two opposed valve chambers",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-012"
+          ]
+        },
+        {
+          "label": "Pump drive",
+          "value": "From the PTO drive line, so it stops with the clutch on single-clutch tractors and keeps running on the dual clutch's first stage",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-001",
+            "SRC-010"
+          ]
+        },
+        {
+          "label": "Lift ram",
+          "value": "Single-acting ram in the lift cover; 3 in piston from serial 65685",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-035",
+            "SRC-012"
+          ]
+        },
+        {
+          "label": "Relief valve pressure",
+          "value": "2,500 lb/sq in nominal (175.9 kg/sq cm), in the pump outlet gallery. No check valve",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Oil",
+          "value": "Drained together with the transmission and rear axle oil through two drain plugs (SRC-035 M.3). A separate hydraulic capacity is not given; transmission fill is 6.6 Imp gal",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-035"
+          ]
+        }
       ],
-      "explainer": "Lifting: the PTO drive line turns the pump camshaft. The pump pistons send oil through the control valve to the ram cylinder under the lift cover. The ram pushes the rockshaft round, and the lift arms pull up the lift rods and lower links. Draft control: when the soil pulls harder on the implement, the top link pushes on the main control spring, and that moves the control valve. The implement then lifts slightly, and it drops again when the load eases. Position control: the lever sets a height and the valve holds the lift arms there. (Summary to be checked against the service manual.)"
+      "explainer": "Lifting: the pump runs whenever its drive line is turning. Oil goes up a vertical pipe to the closed end of the ram cylinder under the lift cover. The piston is pushed rearwards and rocks the ram arm on the lift shaft. The lift arms on each end of the shaft pull up the lift rods, which raise the lower links. To lower, oil is let out and the weight on the links pushes the piston back (SRC-035 L.5). Draft control: the top link presses on the internal control spring, which moves the control valve so the implement lifts slightly under heavy load. Position control holds the arms at the height set by the lever. (The draft and position summary is still to be checked against the manual's control section.)"
     },
     {
       "id": "linkage",
       "title": "Three-point linkage",
       "relatedNode": "linkage",
       "rows": [
-        { "label": "Category", "value": "Category I", "status": "partially-verified", "sources": ["SRC-004"] },
-        { "label": "Levelling", "value": "Right-hand lift rod with levelling box", "status": "unverified", "sources": [] }
+        {
+          "label": "Category",
+          "value": "Category I",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-004"
+          ]
+        },
+        {
+          "label": "Levelling",
+          "value": "Right-hand lift rod adjustable for length by a levelling lever",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Mountings",
+          "value": "Lower links pivot on forward ball mountings at the base of the rear axle casing; implement on rear ball ends; check chains limit sway",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        }
       ]
     },
     {
@@ -75,10 +661,51 @@
       "title": "Electrical",
       "relatedNode": "electrical",
       "rows": [
-        { "label": "Equipment make", "value": "Lucas", "status": "partially-verified", "sources": ["SRC-003"] },
-        { "label": "System voltage", "value": "12 V starter on the diesel; dynamo listings include both 6 V and 12 V", "status": "unverified", "sources": ["SRC-005", "SRC-006"] },
-        { "label": "Starter motor", "value": "Lucas M45G, 11-tooth pinion", "status": "unverified", "sources": ["SRC-006"] },
-        { "label": "Cold-start aids", "value": "Most UK tractors without per-cylinder heater plugs; cold-climate tractors had them", "status": "variant-dependent", "sources": ["SRC-009", "SRC-020", "SRC-022"] }
+        {
+          "label": "Equipment make",
+          "value": "Lucas",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-003"
+          ]
+        },
+        {
+          "label": "System voltage",
+          "value": "12 V from two 6 V batteries in series, 38 Ah (10-hour rate) / 43 Ah (20-hour rate)",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-005"
+          ]
+        },
+        {
+          "label": "Dynamo",
+          "value": "Lucas C39P2, 2-pole, 2-brush, shunt wound, compensated voltage control",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Starter motor",
+          "value": "Lucas M45G, 11-tooth pinion on a 113-tooth flywheel ring",
+          "status": "verified",
+          "sources": [
+            "SRC-035",
+            "SRC-006"
+          ]
+        },
+        {
+          "label": "Cold-start aids",
+          "value": "CAV Thermostart or Ki-gass (manual). Cold-climate tractors had per-cylinder heater plugs (other sources)",
+          "status": "variant-dependent",
+          "sources": [
+            "SRC-035",
+            "SRC-009",
+            "SRC-020",
+            "SRC-022"
+          ]
+        }
       ]
     },
     {
@@ -86,44 +713,267 @@
       "title": "General",
       "relatedNode": "mf35",
       "rows": [
-        { "label": "Built", "value": "Banner Lane, Coventry, England", "status": "partially-verified", "sources": ["SRC-001", "SRC-004"] },
-        { "label": "Brakes", "value": "Shoe brakes on the differential shafts, independent pedals", "status": "partially-verified", "sources": ["SRC-004"] },
-        { "label": "Weight", "value": "1,402 kg (3,093 lb), basis not stated", "status": "unverified", "sources": ["SRC-004"] },
-        { "label": "Capacities (fuel, oil, coolant, transmission)", "value": null, "status": "unverified", "sources": [] },
-        { "label": "Dimensions and tyre sizes", "value": null, "status": "unverified", "sources": [] }
+        {
+          "label": "Built",
+          "value": "Banner Lane, Coventry, England",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-001",
+            "SRC-004"
+          ]
+        },
+        {
+          "label": "Brakes",
+          "value": "Shoe brakes on the differential shafts, independent pedals",
+          "status": "partially-verified",
+          "sources": [
+            "SRC-004"
+          ]
+        },
+        {
+          "label": "Weight (with fuel, oil and water)",
+          "value": "Basic 3,158 lb (1,432 kg); De Luxe 3,198 lb (1,451 kg)",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "De Luxe equipment",
+          "value": "Dual clutch, live PTO, Tractormeter and cushion seat",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Capacities",
+          "value": "Fuel 7½ Imp gal (34 l); cooling 15 pints (8.5 l); engine sump 12 pints (6.8 l); transmission 6.6 Imp gal (30.28 l); air cleaner ¾ pint; steering 1.8 pints",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Dimensions",
+          "value": "Wheelbase 72 in (1,830 mm); length 117 in (2,972 mm); width 64 in (1,630 mm); height 54 in (1,372 mm); track front 48 in, rear 52 in",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Tyres (as supplied)",
+          "value": "Front 4 × 19 at 26 psi; rear 10 × 28 at 12 psi",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        },
+        {
+          "label": "Turning circle",
+          "value": "17 ft 6 in with independent brakes; 19 ft 3 in without",
+          "status": "verified",
+          "sources": [
+            "SRC-035"
+          ]
+        }
       ]
     }
   ],
   "identification": {
     "steps": [
-      { "title": "Find the serial plate", "text": "On the dashboard / instrument console. Its exact position varies by model. Note the full letter prefix and the number.", "sources": ["SRC-002", "SRC-003"] },
-      { "title": "Read the prefix letters", "text": "1st letter is the chassis, 2nd is the fuel and 3rd is the clutch. For example, a D in second place means Standard diesel, and an M in third place means dual-stage clutch.", "sources": ["SRC-003"] },
-      { "title": "Check the engine number", "text": "Standard engines have no plate. On the diesel, the number is stamped into the block just above the dynamo on the right-hand side. A 3-cylinder engine is a later Perkins replacement.", "sources": ["SRC-003", "SRC-002"] },
-      { "title": "Check casting dates", "text": "UK castings carry day/month/year codes. The centre housing code is on the right-hand side, forward of the round port.", "sources": ["SRC-003"] },
-      { "title": "If the plate is missing", "text": "The tractor serial was recorded only on the plate. Use casting dates and the engine number. Friends of Ferguson Heritage hold records of UK-built 35s.", "sources": ["SRC-024"] },
-      { "title": "Test the clutch", "text": "Engine running, gear in neutral, PTO engaged. Press the clutch slowly to about half travel. If the PTO or hydraulics keep working, it is the dual-stage clutch (live PTO).", "sources": ["SRC-001", "SRC-010"] }
+      {
+        "title": "Find the serial plate",
+        "text": "On the dashboard / instrument console. Its exact position varies by model. Note the full letter prefix and the number.",
+        "sources": [
+          "SRC-002",
+          "SRC-003"
+        ]
+      },
+      {
+        "title": "Read the prefix letters",
+        "text": "1st letter is the chassis, 2nd is the fuel and 3rd is the clutch. For example, a D in second place means Standard diesel, and an M in third place means dual-stage clutch.",
+        "sources": [
+          "SRC-035",
+          "SRC-003"
+        ]
+      },
+      {
+        "title": "Check the engine number",
+        "text": "Standard engines have no plate. On the diesel, the number is stamped into the block just above the dynamo on the right-hand side. 23C engine numbers run in the form SJ 86045E; the injector type changes at SJ 86046E and SJ 125725E. A 3-cylinder engine is a later Perkins replacement.",
+        "sources": [
+          "SRC-003",
+          "SRC-002",
+          "SRC-035"
+        ]
+      },
+      {
+        "title": "Check casting dates",
+        "text": "UK castings carry day/month/year codes. The centre housing code is on the right-hand side, forward of the round port.",
+        "sources": [
+          "SRC-003"
+        ]
+      },
+      {
+        "title": "If the plate is missing",
+        "text": "The tractor serial was recorded only on the plate. Use casting dates and the engine number. Friends of Ferguson Heritage hold records of UK-built 35s.",
+        "sources": [
+          "SRC-024"
+        ]
+      },
+      {
+        "title": "Test the clutch",
+        "text": "Engine running, gear in neutral, PTO engaged. Press the clutch slowly to about half travel. If the PTO or hydraulics keep working, it is the dual-stage clutch (live PTO).",
+        "sources": [
+          "SRC-001",
+          "SRC-010"
+        ]
+      }
     ],
     "prefixLetters": [
-      { "position": 1, "letter": "S", "meaning": "Standard chassis / wide front", "axis": "chassis", "option": "standard" },
-      { "position": 1, "letter": "C", "meaning": "High clearance / wide front", "axis": "chassis", "option": null },
-      { "position": 1, "letter": "R", "meaning": "Row crop, twin front wheels", "axis": "chassis", "option": null },
-      { "position": 1, "letter": "T", "meaning": "Row crop, single front wheel", "axis": "chassis", "option": null },
-      { "position": 1, "letter": "J", "meaning": "Industrial / multi-purpose", "axis": "chassis", "option": "industrial" },
-      { "position": 1, "letter": "V", "meaning": "Vineyard", "axis": "chassis", "option": "vineyard" },
-      { "position": 1, "letter": "U", "meaning": "Utility / turf", "axis": "chassis", "option": null },
-      { "position": 2, "letter": "D", "meaning": "Standard diesel", "axis": "engine", "option": "std-23c-diesel" },
-      { "position": 2, "letter": "G", "meaning": "Petrol (gasoline)", "axis": "engine", "option": "std-petrol" },
-      { "position": 2, "letter": "H", "meaning": "High-altitude petrol", "axis": "engine", "option": "std-petrol" },
-      { "position": 2, "letter": "K", "meaning": "Vaporising oil (TVO)", "axis": "engine", "option": "std-tvo" },
-      { "position": 2, "letter": "L", "meaning": "Lamp oil", "axis": "engine", "option": null },
-      { "position": 2, "letter": "P", "meaning": "Perkins diesel", "axis": "engine", "option": "perkins-3-152" },
-      { "position": 2, "letter": "B", "meaning": "LP gas", "axis": "engine", "option": null },
-      { "position": 3, "letter": "M", "meaning": "Dual-stage clutch", "axis": "clutch", "option": "dual-stage" },
-      { "position": 3, "letter": "F", "meaning": "Single-stage clutch", "axis": "clutch", "option": "single-stage" },
-      { "position": 3, "letter": "W", "meaning": "Multi-Power (MF35X, not 1958)", "axis": "clutch", "option": null }
+      {
+        "position": 1,
+        "letter": "S",
+        "meaning": "Standard chassis / wide front",
+        "axis": "chassis",
+        "option": "standard",
+        "inManual": true
+      },
+      {
+        "position": 1,
+        "letter": "C",
+        "meaning": "High clearance / wide front (supplier list only; not in the FE-35 manual)",
+        "axis": "chassis",
+        "option": null,
+        "inManual": false
+      },
+      {
+        "position": 1,
+        "letter": "R",
+        "meaning": "Row crop, twin front wheels (supplier list only; not in the FE-35 manual)",
+        "axis": "chassis",
+        "option": null,
+        "inManual": false
+      },
+      {
+        "position": 1,
+        "letter": "T",
+        "meaning": "Row crop, single front wheel (supplier list only; not in the FE-35 manual)",
+        "axis": "chassis",
+        "option": null,
+        "inManual": false
+      },
+      {
+        "position": 1,
+        "letter": "J",
+        "meaning": "Industrial / multi-purpose",
+        "axis": "chassis",
+        "option": "industrial",
+        "inManual": true
+      },
+      {
+        "position": 1,
+        "letter": "V",
+        "meaning": "Vineyard",
+        "axis": "chassis",
+        "option": "vineyard",
+        "inManual": true
+      },
+      {
+        "position": 1,
+        "letter": "U",
+        "meaning": "Utility / turf (supplier list only; not in the FE-35 manual)",
+        "axis": "chassis",
+        "option": null,
+        "inManual": false
+      },
+      {
+        "position": 2,
+        "letter": "D",
+        "meaning": "Diesel (Standard 23C)",
+        "axis": "engine",
+        "option": "std-23c-diesel",
+        "inManual": true
+      },
+      {
+        "position": 2,
+        "letter": "G",
+        "meaning": "Petrol (gasoline)",
+        "axis": "engine",
+        "option": "std-petrol",
+        "inManual": true
+      },
+      {
+        "position": 2,
+        "letter": "H",
+        "meaning": "High-altitude petrol",
+        "axis": "engine",
+        "option": "std-petrol",
+        "inManual": true
+      },
+      {
+        "position": 2,
+        "letter": "K",
+        "meaning": "Vaporising oil (TVO)",
+        "axis": "engine",
+        "option": "std-tvo",
+        "inManual": true
+      },
+      {
+        "position": 2,
+        "letter": "L",
+        "meaning": "Lamp oil",
+        "axis": "engine",
+        "option": null,
+        "inManual": true
+      },
+      {
+        "position": 2,
+        "letter": "N",
+        "meaning": "Perkins 3-A-152 diesel (1959 on, not 1958)",
+        "axis": "engine",
+        "option": "perkins-3-152",
+        "inManual": true
+      },
+      {
+        "position": 2,
+        "letter": "B",
+        "meaning": "LP gas (supplier list only; not in the FE-35 manual)",
+        "axis": "engine",
+        "option": null,
+        "inManual": false
+      },
+      {
+        "position": 3,
+        "letter": "M",
+        "meaning": "Dual-stage clutch",
+        "axis": "clutch",
+        "option": "dual-stage",
+        "inManual": true
+      },
+      {
+        "position": 3,
+        "letter": "F",
+        "meaning": "Single-stage clutch",
+        "axis": "clutch",
+        "option": "single-stage",
+        "inManual": true
+      },
+      {
+        "position": 3,
+        "letter": "W",
+        "meaning": "Multi-Power (MF35X, not 1958) (supplier list only; not in the FE-35 manual)",
+        "axis": "clutch",
+        "option": null,
+        "inManual": false
+      }
     ],
-    "prefixSources": ["SRC-003"],
-    "prefixStatus": "unverified",
-    "prefixNote": "Letter meanings come from one supplier source, which says some letters apply only to UK-built tractors and some only to early MF tractors. They have not yet been checked against a known 1958 UK plate."
+    "prefixSources": [
+      "SRC-035",
+      "SRC-003"
+    ],
+    "prefixStatus": "partially-verified",
+    "prefixNote": "The workshop manual (SRC-035 B.1) confirms the FE-35 codes: chassis S, V, J; engine G, H, D, N, K, L; clutch F (single) or M (dual). Other letters come only from a supplier list and may apply to other markets. The Perkins letter is N, not P as that list says. Not yet checked against a known 1958 plate."
   }
 }

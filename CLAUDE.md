@@ -81,18 +81,21 @@ These are enforced by the validator where possible.
 - Verification statuses are exactly `verified`, `partially-verified`, `unverified` and
   `variant-dependent`. An omitted status means `unverified`.
 - `verified` requires at least one **accessed `primary`** source (AGCO parts book, service manual
-  or operator book). None has been obtained yet, so nothing is verified.
+  or operator book). The only one read so far is the FE-35/MF35 workshop service manual scan
+  (SRC-035). Technical figures it states are `verified`. Hierarchy components stay at most
+  `partially-verified` until their part number and quantity are checked in parts book 819045M4.
 - A status other than `unverified` must cite sources.
 - OEM numbers quoted by suppliers or forums go in `supplierClaimedOem`, never in `oemPartNumber`,
   until checked against parts book 819045M4 (SRC-032).
 - Never present missing data as confirmed in the UI. Show "not yet documented" instead.
 - The Perkins 3.152/A3.152 is **not** 1958 equipment (introduced 1959, c. serial 165596).
-- Do not assume live PTO. It depends on the dual-stage clutch, which is unknown for the owner's
-  tractor.
+- Live PTO depends on the dual-stage clutch. The owner reports dual-clutch behaviour
+  (`clutchStatus: owner-reported`), but the serial prefix (M) has not been seen, so label it as reported.
 - Do not apply US-built MF35 serial breaks to Coventry serials.
 - Do not reproduce copyrighted AGCO diagrams or text. Diagrams and 3D assets must be original.
-- Torque values from SRC-006 are suspect (main 40 Nm < con-rod 95 Nm). Don't display them until
-  checked against the service manual.
+- Torques come from the workshop manual (SRC-035 B.29–B.30) in lb ft. SRC-006's "Nm" figures mix
+  units and must not be used.
+- The FE-35 manual's engine code for the Perkins 3-A-152 is **N**, not P (SRC-035 B.1).
 
 ## Conventions
 

@@ -55,7 +55,7 @@ test("owner-reported dual clutch: live PTO, dual-clutch parts fitted, single-clu
 test('parts with no appliesTo are not variant dependent', () => {
   const r = core.resolveConfiguration(config);
   assert.equal(core.displayStatus(index, 'lift-piston', r), 'partially-verified');
-  assert.equal(core.displayStatus(index, 'camshaft', r), 'unverified');
+  assert.equal(core.displayStatus(index, 'core-plugs', r), 'unverified');
 });
 
 test('serial decoding: 1958 dual-clutch diesel', () => {
@@ -75,7 +75,7 @@ test('serial decoding: year boundaries and warnings', () => {
   assert.equal(y59.year, 1959);
   assert.equal(y59.axisValues.clutch, 'single-stage');
   assert.ok(y59.warnings.some((w) => w.includes('1959')));
-  assert.ok(core.decodeSerial('SPM 200000', config, technical).warnings.some((w) => w.includes('23C')));
+  assert.ok(core.decodeSerial('SNM 200000', config, technical).warnings.some((w) => w.includes('23C')));
   assert.ok(core.decodeSerial('hello', config, technical).warnings.length > 0);
 });
 
@@ -93,9 +93,21 @@ test('search finds by name, partial, misspelling, synonym and supplier number', 
   assert.deepEqual(core.search(docs, '', 5), []);
 });
 
-test('withheld technical rows are not searchable', () => {
+test('workshop-manual torques are searchable; withheld rows are not', () => {
   const docs = core.buildSearchIndex(index, null, technical);
-  assert.equal(core.search(docs, 'torque settings', 10).filter((r) => r.doc.kind === 'technical' && r.doc.title.startsWith('Torque')).length, 0);
+  assert.ok(core.search(docs, 'connecting rod bolts torque', 10).some((r) => r.doc.kind === 'technical' && r.doc.sectionId === 'torques'));
+  const withheld = { ...technical, sections: [{ id: 'x', title: 'X', rows: [{ label: 'Secret figure', value: '1', status: 'unverified', sources: [], display: false }] }] };
+  const docs2 = core.buildSearchIndex(index, null, withheld);
+  assert.equal(core.search(docs2, 'secret figure', 10).length, 0);
+});
+
+test('workshop manual corrections: Perkins letter is N, P is no longer decoded', () => {
+  assert.equal(core.decodeSerial('SNM 170000', config, technical).axisValues.engine, 'perkins-3-152');
+  assert.ok(core.decodeSerial('SPM 170000', config, technical).warnings.some((w) => w.includes('"P"')));
+  const verifiedRows = technical.sections.flatMap((s) => s.rows).filter((r) => r.status === 'verified');
+  assert.ok(verifiedRows.length > 0);
+  const primary = new Set(sources.filter((s) => s.reliability === 'primary' && s.accessed).map((s) => s.id));
+  for (const r of verifiedRows) assert.ok(r.sources.some((s) => primary.has(s)), r.label);
 });
 
 test('technical rows cite known sources', () => {

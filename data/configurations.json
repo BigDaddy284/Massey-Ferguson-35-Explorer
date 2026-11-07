@@ -9,14 +9,16 @@
         {
           "id": "std-23c-diesel",
           "label": "Standard 23C 4-cyl diesel",
-          "status": "partially-verified",
+          "status": "verified",
           "sources": [
+            "SRC-035",
             "SRC-002",
             "SRC-003",
             "SRC-005",
             "SRC-006",
             "SRC-009"
-          ]
+          ],
+          "serialPrefixLetter": "D"
         },
         {
           "id": "std-petrol",
@@ -43,10 +45,12 @@
           "sources": [
             "SRC-001",
             "SRC-002",
-            "SRC-009"
+            "SRC-009",
+            "SRC-035"
           ],
           "outOfScope": true,
-          "note": "Introduced 1959 (from serial c.165596 per SRC-002). Not original 1958 equipment; only relevant if the engine has been replaced."
+          "note": "Introduced 1959 (from serial c.165596 per SRC-002). Not original 1958 equipment; only relevant if the engine has been replaced.",
+          "serialPrefixLetter": "N"
         }
       ]
     },
@@ -57,8 +61,9 @@
         {
           "id": "single-stage",
           "label": "Single-stage clutch (Standard model)",
-          "status": "partially-verified",
+          "status": "verified",
           "sources": [
+            "SRC-035",
             "SRC-003",
             "SRC-004",
             "SRC-010"
@@ -68,8 +73,9 @@
         {
           "id": "dual-stage",
           "label": "Dual-stage clutch (De Luxe model)",
-          "status": "partially-verified",
+          "status": "verified",
           "sources": [
+            "SRC-035",
             "SRC-001",
             "SRC-003",
             "SRC-010",
@@ -88,8 +94,9 @@
           "id": "transmission-pto",
           "label": "Transmission-driven PTO (stops when clutch is depressed)",
           "whenClutch": "single-stage",
-          "status": "partially-verified",
+          "status": "verified",
           "sources": [
+            "SRC-035",
             "SRC-004",
             "SRC-010"
           ]
@@ -98,8 +105,9 @@
           "id": "live-pto",
           "label": "Live PTO via second clutch stage",
           "whenClutch": "dual-stage",
-          "status": "partially-verified",
+          "status": "verified",
           "sources": [
+            "SRC-035",
             "SRC-001",
             "SRC-004",
             "SRC-010"
@@ -115,8 +123,9 @@
           "id": "standard",
           "label": "Standard / wide front (S)",
           "serialPrefixLetter": "S",
-          "status": "partially-verified",
+          "status": "verified",
           "sources": [
+            "SRC-035",
             "SRC-003"
           ]
         },
@@ -126,6 +135,7 @@
           "serialPrefixLetter": "V",
           "status": "unverified",
           "sources": [
+            "SRC-035",
             "SRC-003"
           ],
           "outOfScope": true
@@ -136,6 +146,7 @@
           "serialPrefixLetter": "J",
           "status": "unverified",
           "sources": [
+            "SRC-035",
             "SRC-003",
             "SRC-009"
           ],
@@ -149,11 +160,11 @@
       "options": [
         {
           "id": "12v",
-          "label": "12 V (Lucas C39P/2 dynamo)",
-          "status": "unverified",
+          "label": "12 V (2 × 6 V batteries, Lucas C39P2 dynamo)",
+          "status": "verified",
           "sources": [
-            "SRC-005",
-            "SRC-006"
+            "SRC-035",
+            "SRC-005"
           ]
         },
         {
@@ -165,7 +176,7 @@
           ]
         }
       ],
-      "note": "SRC-005 gives a 12 V starter for the diesel. SRC-006 lists both dynamos without saying which applies to the diesel. Treat 12 V as the working assumption until confirmed."
+      "note": "The workshop manual (SRC-035 B.42) gives 12 V from two 6 V batteries for the diesel. The 6 V option is kept only for a tractor that has been converted or for petrol models."
     },
     {
       "id": "coldStart",
