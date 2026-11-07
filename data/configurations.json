@@ -1,0 +1,113 @@
+{
+  "$comment": "Configuration and compatibility rules. Variant axes describe ways a 1958 Coventry-built MF35 can differ. Components declare applicability with an 'appliesTo' expression over these axes (see docs/research/03-configuration-rules.md). Changing the owner's tractor profile here must never require code changes.",
+  "schemaVersion": 1,
+  "variantAxes": [
+    {
+      "id": "engine",
+      "label": "Engine",
+      "options": [
+        { "id": "std-23c-diesel", "label": "Standard 23C 4-cyl diesel", "status": "partially-verified", "sources": ["SRC-002", "SRC-003", "SRC-005", "SRC-006", "SRC-009"] },
+        { "id": "std-petrol", "label": "Standard 87 mm 4-cyl petrol", "status": "partially-verified", "sources": ["SRC-003"], "outOfScope": true },
+        { "id": "std-tvo", "label": "Standard 4-cyl TVO", "status": "partially-verified", "sources": ["SRC-011"], "outOfScope": true },
+        { "id": "perkins-3-152", "label": "Perkins 3.152 3-cyl diesel", "status": "partially-verified", "sources": ["SRC-001", "SRC-002", "SRC-009"], "outOfScope": true, "note": "Introduced 1959 (from serial c.165596 per SRC-002). Not original 1958 equipment; only relevant if the engine has been replaced." }
+      ]
+    },
+    {
+      "id": "clutch",
+      "label": "Clutch",
+      "options": [
+        { "id": "single-stage", "label": "Single-stage clutch (Standard model)", "status": "partially-verified", "sources": ["SRC-003", "SRC-004", "SRC-010"], "serialPrefixLetter": "F" },
+        { "id": "dual-stage", "label": "Dual-stage clutch (De Luxe model)", "status": "partially-verified", "sources": ["SRC-001", "SRC-003", "SRC-010", "SRC-011"], "serialPrefixLetter": "M" }
+      ]
+    },
+    {
+      "id": "pto",
+      "label": "PTO drive",
+      "derivedFrom": "clutch",
+      "options": [
+        { "id": "transmission-pto", "label": "Transmission-driven PTO (stops when clutch is depressed)", "whenClutch": "single-stage", "status": "partially-verified", "sources": ["SRC-004", "SRC-010"] },
+        { "id": "live-pto", "label": "Live PTO via second clutch stage", "whenClutch": "dual-stage", "status": "partially-verified", "sources": ["SRC-001", "SRC-004", "SRC-010"] }
+      ]
+    },
+    {
+      "id": "chassis",
+      "label": "Chassis",
+      "options": [
+        { "id": "standard", "label": "Standard / wide front (S)", "serialPrefixLetter": "S", "status": "partially-verified", "sources": ["SRC-003"] },
+        { "id": "vineyard", "label": "Vineyard (V)", "serialPrefixLetter": "V", "status": "unverified", "sources": ["SRC-003"], "outOfScope": true },
+        { "id": "industrial", "label": "Industrial / multi-purpose (J)", "serialPrefixLetter": "J", "status": "unverified", "sources": ["SRC-003", "SRC-009"], "outOfScope": true }
+      ]
+    },
+    {
+      "id": "electrics",
+      "label": "Charging system voltage",
+      "options": [
+        { "id": "12v", "label": "12 V (Lucas C39P/2 dynamo)", "status": "unverified", "sources": ["SRC-005", "SRC-006"] },
+        { "id": "6v", "label": "6 V (Lucas C45X dynamo)", "status": "unverified", "sources": ["SRC-006"] }
+      ],
+      "note": "SRC-005 gives a 12 V starter for the diesel. SRC-006 lists both dynamos without saying which applies to the diesel. Treat 12 V as the working assumption until confirmed."
+    },
+    {
+      "id": "coldStart",
+      "label": "Cold-start equipment",
+      "options": [
+        { "id": "standard-uk", "label": "Standard UK specification", "status": "unverified", "sources": ["SRC-009"] },
+        { "id": "cold-climate", "label": "Cold-climate (heater plug in each cylinder, coolant heater)", "status": "unverified", "sources": ["SRC-009", "SRC-020", "SRC-022"] }
+      ]
+    },
+    {
+      "id": "diffLock",
+      "label": "Differential lock",
+      "options": [
+        { "id": "fitted", "label": "Fitted", "status": "unverified", "sources": ["SRC-010"] },
+        { "id": "not-fitted", "label": "Not fitted", "status": "unverified", "sources": [] }
+      ],
+      "note": "SRC-010 says a differential lock was 'added' but gives no date or serial. Do not show as standard on a 1958 tractor until confirmed."
+    }
+  ],
+  "serialBreaks": [
+    { "id": "SB-001", "serial": 65685, "scope": "Coventry", "description": "Hydraulic pump pistons and valve chamber change; lift ram changes from 2.5 in to 3 in ring set", "sources": ["SRC-012"], "status": "partially-verified", "appliesToTarget": "All 1958 tractors (79553 onward) are after this break" },
+    { "id": "SB-002", "serial": 165596, "scope": "Coventry", "description": "Perkins 3.152 diesel introduced", "sources": ["SRC-002"], "status": "partially-verified", "appliesToTarget": "After the 1958 range; a 1958 tractor should have the 23C unless re-engined" }
+  ],
+  "productionYears": [
+    { "year": 1956, "firstSerial": 1001 },
+    { "year": 1957, "firstSerial": 9226 },
+    { "year": 1958, "firstSerial": 79553 },
+    { "year": 1959, "firstSerial": 125068 },
+    { "year": 1960, "firstSerial": 171471 },
+    { "year": 1961, "firstSerial": 220614 },
+    { "year": 1962, "firstSerial": 267528 },
+    { "year": 1963, "firstSerial": 307231 },
+    { "year": 1964, "firstSerial": 352255 }
+  ],
+  "productionYearsSources": ["SRC-002", "SRC-003", "SRC-004", "SRC-006"],
+  "ownerTractor": {
+    "$comment": "The owner's tractor profile. null = not yet known. Update from physical inspection; the app derives compatibility from this.",
+    "model": "MF35",
+    "builtAt": "Coventry (assumed)",
+    "yearBelieved": 1958,
+    "serialNumber": null,
+    "serialPrefix": null,
+    "engineNumber": null,
+    "engine": "std-23c-diesel",
+    "engineStatus": "provisional",
+    "clutch": null,
+    "pto": null,
+    "chassis": "standard",
+    "chassisStatus": "assumed",
+    "electrics": null,
+    "coldStart": null,
+    "diffLock": null,
+    "confirmedEquipment": ["diesel engine", "rear hydraulic lift", "rear three-point linkage", "rear PTO shaft"]
+  },
+  "defaultTarget": {
+    "$comment": "What the 3D model and catalogue render when the owner's value is null. Every component that depends on a null axis must be shown as variant-dependent.",
+    "engine": "std-23c-diesel",
+    "clutch": "dual-stage",
+    "pto": "live-pto",
+    "chassis": "standard",
+    "electrics": "12v",
+    "coldStart": "standard-uk",
+    "diffLock": "not-fitted"
+  }
+}

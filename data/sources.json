@@ -1,0 +1,480 @@
+{
+  "$comment": "Research source register. Every factual claim in data/*.json must cite one or more ids from this file. reliability: primary (factory/AGCO publication), secondary-reference (published book or curated reference site), supplier (parts vendor listing), community (forum post), aggregator (spec site with unknown provenance). accessed=false means the source is known to exist but has not yet been read by this project.",
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "SRC-001",
+      "name": "Wikipedia: Massey Ferguson 35",
+      "url": "https://en.wikipedia.org/wiki/Massey_Ferguson_35",
+      "type": "secondary-reference",
+      "reliability": "secondary-reference",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Main article; most claims cite Thorne (2014), see SRC-025",
+      "extracted": [
+        "First FE35 (serial 1001) built 27 Aug 1956 at Banner Lane, Coventry; UK launch 1 Oct 1956",
+        "Colour: grey/gold at launch; standard MF red and grey from December 1957",
+        "Rebadged MF35 in 1957 after 73,655 units (UK)",
+        "Perkins diesel introduced in 1959 after MF bought Perkins",
+        "De Luxe models had a dual clutch that disengages the rear wheels while keeping PTO and hydraulic pump engaged",
+        "MF35X launched 8 Nov 1962; UK production ended 1964 (succeeded by MF135)"
+      ],
+      "conflicts": ["Rebadge 'after 73,655 units' vs SRC-002 year table giving 1958 start at 79553"]
+    },
+    {
+      "id": "SRC-002",
+      "name": "Anglo Agriparts: Massey Ferguson 35, FE35, 35X Serial Numbers",
+      "url": "https://anglo-agriparts.com/hq-news/massey-ferguson-35-serial-ferguson",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Coventry serial-by-year table and model identification table",
+      "extracted": [
+        "Year-start serials: 1956 1001; 1957 9226; 1958 79553; 1959 125068; 1960 171471; 1961 220614; 1962 267528; 1963 307231; 1964 352255; final 388382",
+        "Engine listed for 1957-1959: Standard 23C diesel",
+        "Perkins 3.152 'from serial no. 165596'",
+        "Serial number location: dashboard (MF35); instrument panel (MF35X)"
+      ],
+      "conflicts": ["Identification table says FE35 'up to serial No 74655' for 1956-57, inconsistent with its own year table"]
+    },
+    {
+      "id": "SRC-003",
+      "name": "Anglo Agriparts: Ferguson FE35 Serial Numbers",
+      "url": "https://www.anglo-agriparts.com/tractor-serial-numbers/ferguson-fe35-serial-numbers",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Prefix letter table; plate and engine-number locations; casting date codes",
+      "extracted": [
+        "Same FE35 year-start serials as SRC-002 (final FE35 220613)",
+        "Prefix letters: chassis S=standard/wide front, C=high clearance, R=row crop twin front, T=row crop single front, J=industrial, V=vineyard, U=utility/turf; fuel G=gasoline, H=high-altitude gasoline, D=Standard diesel, K=TVO, L=lamp oil, P=Perkins diesel, B=LPG; clutch M=dual-stage, F=single-stage, W=Multi-Power",
+        "Page states some prefixes apply only to UK-built tractors and others only to early MF tractors",
+        "Serial plate at varying positions on the instrument console depending on model",
+        "Standard Motor engines have no plate; diesel engine data stamped into block just above the generator, right-hand side",
+        "UK casting date codes are day/month/year; FE35 codes on right side of differential/hydraulic housing forward of the round port",
+        "Diesels use the Standard 23C with Lucas electrical components"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-004",
+      "name": "TractorData: Ferguson FE-35",
+      "url": "https://tractordata.com/farm-tractors/006/0/4/6042-ferguson-fe-35.html",
+      "type": "aggregator",
+      "reliability": "aggregator",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Overview page",
+      "extracted": [
+        "6-speed unsynchronised gear transmission",
+        "Rear PTO 540 rpm: transmission-driven (special) or live (deluxe)",
+        "Differential shoe brakes; manual steering; weight 3093 lb / 1402 kg"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-005",
+      "name": "TractorData: Ferguson FE-35 engine",
+      "url": "https://www.tractordata.com/farm-tractors/006/0/4/6042-ferguson-fe-35-engine.html",
+      "type": "aggregator",
+      "reliability": "aggregator",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Engine page, diesel column",
+      "extracted": [
+        "Standard 23C diesel: 4 cylinders, 137.89 cu in / 2.3 L, compression 20:1, firing order 1-3-4-2, liquid cooled, 12 V starter, 34 hp"
+      ],
+      "conflicts": ["34 hp vs 35.9 belt hp (SRC-006) vs 37 hp (SRC-011): rating basis not stated"]
+    },
+    {
+      "id": "SRC-006",
+      "name": "Agriline (South Africa): Standard 23C engine data",
+      "url": "https://agriline.co.za/tractorparts/fe35/standard23c.php",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Engine data page",
+      "extracted": [
+        "Bore 84.137 mm, stroke 101.6 mm, 2259 cc, compression 20:1, 35.9 belt hp, firing order 1-3-4-2",
+        "Main journal 69.901 mm; big-end journal 58.712 mm; gudgeon pin OD 28.579 mm; piston dia 84.010 mm",
+        "Valve clearance cold: inlet 0.305 mm, exhaust 0.203 mm; seat angle 45 deg",
+        "Starter Lucas M45G (11-tooth pinion); injection pump CAV DPA 3240011; injector break pressure 130 atm",
+        "Dynamo Lucas C45X (6 V) or Lucas C39P/2 (12 V)",
+        "Torques: head 110 Nm, main 40 Nm, con-rod 95 Nm, flywheel 135 Nm"
+      ],
+      "conflicts": ["Main-bearing torque (40 Nm) lower than con-rod torque (95 Nm) is implausible and may be transposed; torque values are NOT to be displayed as confirmed until checked against the service manual (SRC-030/SRC-031)"]
+    },
+    {
+      "id": "SRC-007",
+      "name": "Wikipedia: Standard wet liner inline-four engine",
+      "url": "https://en.wikipedia.org/wiki/Standard_wet_liner_inline-four_engine",
+      "type": "secondary-reference",
+      "reliability": "secondary-reference",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Diesel section",
+      "extracted": [
+        "23C followed the 20C in 1956; bore 84.14 mm (3 5/16 in); 2,260 cc",
+        "MF stopped using Standard engines in favour of Perkins in 1959",
+        "After Leyland took over Standard-Triumph (1961) the engine became the Leyland OE.138"
+      ],
+      "conflicts": ["Article family title is 'wet liner' but SRC-008 lists 23C as dry liner; 23C sentence is uncited"]
+    },
+    {
+      "id": "SRC-008",
+      "name": "Walt's Tractors: FE-35, TO-35 with 23C Standard Diesel",
+      "url": "https://waltstractors.com/acatalog/TO-35_Standard_Diesel-1-1.html",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "23C engine parts listing (37 items)",
+      "extracted": [
+        "3.3125 in bore, dry liner",
+        "Pistons offered with 4-ring or 5-ring sets",
+        "Rod and main bearings in std, .010, .020, .030, .040 undersize; separate thrust washers",
+        "Timing chain 62 pitches, chain tensioner, camshaft sprocket, crankshaft sprocket",
+        "Inner and outer valve springs; valve guides separate",
+        "Oil filter cartridge listed as replacing 826137M91, fits 20C and 23C"
+      ],
+      "conflicts": ["Numeric cross-references (e.g. 191298, 391342) are of unknown origin and are NOT treated as OEM numbers"]
+    },
+    {
+      "id": "SRC-009",
+      "name": "Ferguson Club: Coldridge Collection articles",
+      "url": "https://www.fergusonclub.com/category/coldridge/page/2/",
+      "type": "secondary-reference",
+      "reliability": "secondary-reference",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Collection articles page 2",
+      "extracted": [
+        "23C combustion chamber developed by Freeman Sanders",
+        "Most 35s with the 23C did not have heater plugs in each cylinder; cold-climate option existed",
+        "23C described as a poor starter; MF evaluated Perkins P3 and F3 conversions c.1958",
+        "MF adopted Perkins A3.152 in production MF35 in 1959"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-010",
+      "name": "Southern Star: Massey Ferguson 35 had big boots to fill",
+      "url": "https://www.southernstar.ie/farming/massey-ferguson-35-had-big-boots-to-fill-4245927",
+      "type": "secondary-reference",
+      "reliability": "secondary-reference",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Newspaper heritage feature",
+      "extracted": [
+        "Sold as 'standard' or 'deluxe'; deluxe added cushioned seat, dual-stage clutch and dash tractormeter",
+        "6 forward / 2 reverse gearbox split over high and low ratios; left lever gears 1-3 and reverse; right lever high/low and neutral 'start' position; gear pattern cast into housing",
+        "Dual clutch: half depressed disengages transmission but keeps PTO and hydraulics; fully depressed disengages both",
+        "Twin-lever control governing draft and implement height",
+        "Differential lock fitted (date not given)"
+      ],
+      "conflicts": ["Differential lock introduction date not stated; may not apply to all 1958 tractors"]
+    },
+    {
+      "id": "SRC-011",
+      "name": "tractordata.co.uk: Massey Ferguson MF 35 4 Cylinder Diesel 1958",
+      "url": "https://tractordata.co.uk/massey_ferguson/pages/massey_ferguson_35_2",
+      "type": "aggregator",
+      "reliability": "aggregator",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Model page",
+      "extracted": [
+        "Diesel rated 37 hp (same as petrol); TVO 30 hp",
+        "Dual clutch, live PTO and hydraulics listed as Deluxe-only"
+      ],
+      "conflicts": ["Claims hydraulics Deluxe-only; owner's tractor has hydraulics regardless, and other sources do not restrict hydraulics to Deluxe"]
+    },
+    {
+      "id": "SRC-012",
+      "name": "Agriline Products (UK): Ferguson FE35 4cyl hydraulic parts",
+      "url": "https://agrilineproducts.com/ferguson/ferguson/fe35-4cyl/hydraulics",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Hydraulics category listing",
+      "extracted": [
+        "Hydraulic pump OEM refs 184472M93, 184473M1, 184473M93 (10 spline)",
+        "Pump piston 23.1 mm, '2 required', from serial 65685; valve chamber assembly from serial 65685",
+        "Ram piston ring set 3 in from serial 65685; 2.5 in ring set up to serial 65684",
+        "Draft control spring, plunger, plunger seat, rocker, nut, locking knob listed as separate parts",
+        "Cross-shaft (rockshaft) bushes 60.2 x 50.8 x 35.8 mm, 4 per tractor; lift arms 37 splines",
+        "Relief valve 2300/2800 psi listed (application not stated)"
+      ],
+      "conflicts": ["Pump piston count: '2 required' here vs pump description in community sources; needs parts-book confirmation"]
+    },
+    {
+      "id": "SRC-013",
+      "name": "Sparex S.40843 hydraulic pump repair kit (via masseytractorparts.com)",
+      "url": "https://masseytractorparts.com/products/hydraulic-pump-repair-kit-s-40843",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Product page",
+      "extracted": [
+        "Kit: 2 x valve chamber assembly, 2 x piston, 2 x cam block (front/rear), 4 x piston rings, O-ring kit",
+        "Stated OEM equivalent 1810858M91; fitment list includes MF35 and TO35 without serial ranges"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-014",
+      "name": "TractorByNet: MF 35 Hydraulic Pump thread",
+      "url": "https://www.tractorbynet.com/forums/threads/mf-35-hydraulic-pump.384305",
+      "type": "community",
+      "reliability": "community",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Reply describing pump versions",
+      "extracted": [
+        "Three pump versions used on MF35; 184473M92 with strainer and ringless pistons before serial 230456 (gas) / 231715 (diesel)",
+        "Replacement piston 190799M1, rings 892604M1; valve chamber 184471M1 common to all three",
+        "Front and rear camshaft blocks 180924M1 / 180925M1 fit inside the pistons and contact the camshaft"
+      ],
+      "conflicts": ["Serial breaks may refer to US-built MF35 numbering; do not apply to Coventry serials without confirmation"]
+    },
+    {
+      "id": "SRC-015",
+      "name": "Ferguson Enthusiasts of North America: Operator, Service and Parts Manuals list (R. Sybrandy, 5 Oct 2010)",
+      "url": "https://fergusonenthusiasts.org/_files/ugd/4511f6_50d823ab264e4350924b51124ac62686.pdf",
+      "type": "secondary-reference",
+      "reliability": "secondary-reference",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Publication number table",
+      "extracted": [
+        "FE-35 4-cyl diesel: operator NLA, service NLA (use 1448811M1 plus 690560M1 Standard diesel supplement), parts 819045M4",
+        "Service manual 1448811M1 lacks the early dual-stage clutch information"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-016",
+      "name": "FarmingParts: MF 35/35X Genuine Parts Manual 819045M4",
+      "url": "https://farmingparts.com/products/35-35x-parts-manual-819045m4",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Product page",
+      "extracted": ["Genuine AGCO parts manual 819045M4 covering MF35 and MF35X, available new (c. GBP 136)"],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-017",
+      "name": "masseytractorparts.com: FE35 petrol/TVO/23C diesel Operators Instruction Book 819046M1",
+      "url": "https://masseytractorparts.com/en-fj/products/fe35-tractor-with-petrol-tvo-or-23c-diesel-operators-instruction-book-819046m1",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Product page",
+      "extracted": [
+        "Operator's instruction book 819046M1 covers FE35 with petrol, TVO or 23C diesel",
+        "Separate 23C Engine Operators Manual 819050M1 referenced"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-018",
+      "name": "Anglo Agriparts: Engine Overhaul Kit A67254 (23C)",
+      "url": "https://www.anglo-agriparts.com/engine-overhaul-rebuild-ferguson-fe35-23c-engine-finished-liner-a67254",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Product page",
+      "extracted": [
+        "OEM ref 3933139M91; 4 pistons, 4 ring sets, 4 pre-finished slip-fit liners, top and lower gasket sets, front and rear crank seals",
+        "Price GBP 318.30 ex VAT / 381.96 inc VAT; out of stock on 2026-11-07"
+      ],
+      "conflicts": ["Page body says 'in stock now' while stock indicator says out of stock"]
+    },
+    {
+      "id": "SRC-019",
+      "name": "Anglo Agriparts: Ferguson FE35 engine components category",
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/engine-components",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Category listing, 41 products",
+      "extracted": [
+        "Supplier category tree: brake, clutch, cooling, electrical, engine, front axle & steering, fuel & air intake, hydraulics, linkage, PTO & transmission, rear wheel & axle, tinwork",
+        "23C items include rear crank seal 4.0 x 5.12 x 0.56 in, piston & pin 84.05 bore 5-ring, finished liner, oil pump rotor assembly"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-020",
+      "name": "Reliable Aftermarket Parts: 829162M1 glow plug for FE35/TO35 23C",
+      "url": "https://www.reliableaftermarketparts.co.uk/products/829162m1-glow-plug-fits-massey-ferguson-fe35-to35",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Product page",
+      "extracted": ["Glow/heater plug 829162M1 for Standard 23C; TO35 fitment from engine serial 188852"],
+      "conflicts": ["SRC-009 says most 35s with the 23C lacked per-cylinder heater plugs; fitment is variant dependent"]
+    },
+    {
+      "id": "SRC-021",
+      "name": "TractorByNet: TO 35 Diesel (Standard 23C) thread",
+      "url": "https://tractorbynet.com/forums/threads/to-35-diesel-standard-23c.347091/",
+      "type": "community",
+      "reliability": "community",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Thread posts 2-10",
+      "extracted": [
+        "TO35 and FE35 share the UK-built Standard 23C",
+        "Report that a UK head bolt had different thread form from an export engine; thread standard must not be assumed"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-022",
+      "name": "TractorByNet: Cold starting a TO35 with Standard diesel",
+      "url": "https://www.tractorbynet.com/forums/goto/post?id=6479161",
+      "type": "community",
+      "reliability": "community",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Posts 25-30",
+      "extracted": ["Canadian-spec tractors reported with glow plugs per cylinder and bottom-hose immersion heater; intake manifold has a boss for a factory heater"],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-023",
+      "name": "fergy.com.au: Positioner",
+      "url": "https://www.fergy.com.au/positioncontrol.htm",
+      "type": "community",
+      "reliability": "community",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Positioner kit article",
+      "extracted": ["Position control was a feature of the FE35/FE65, later copied as an add-on for TE20 tractors"],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-024",
+      "name": "Ferguson Enthusiasts: Serial number, model and year of diesel Ferguson",
+      "url": "https://www.fergusonenthusiasts.org/post/serial-number-model-and-year-of-diesel-ferguson",
+      "type": "community",
+      "reliability": "community",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Q&A post",
+      "extracted": [
+        "Tractor serial number was recorded only on the serial tag; castings carry date codes",
+        "Friends of Ferguson Heritage maintain records for UK-built 35s"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-025",
+      "name": "Michael Thorne, Massey Ferguson 35 & 65 Models in Detail (Herridge & Sons, 2014)",
+      "url": null,
+      "type": "book",
+      "reliability": "secondary-reference",
+      "accessed": false,
+      "dateResearched": null,
+      "reference": "Cited by SRC-001; not yet consulted directly",
+      "extracted": [],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-026",
+      "name": "Histoparts: Ferguson 35 parts categories",
+      "url": "https://histoparts.com/en/tractor-parts-by-brand/ferguson-35/engine-parts-23c-4-cylinder?page=3",
+      "type": "supplier",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Category navigation",
+      "extracted": ["Distinct category for '23C 4 cylinder' engine parts separate from 3-cylinder and petrol engines (NL supplier, not UK)"],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-027",
+      "name": "manytractors.com: Ferguson FE-35 specs",
+      "url": "https://www.manytractors.com/farm-tractor/ferguson-fe-35-3611/specs",
+      "type": "aggregator",
+      "reliability": "aggregator",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Spec page",
+      "extracted": ["6 forward, 2 reverse unsynchronised; rear PTO 540 rpm"],
+      "conflicts": ["Mixes petrol bore/stroke (87 x 92 mm) with diesel displacement and compression; do not use for engine data"]
+    },
+    {
+      "id": "SRC-030",
+      "name": "AGCO/MF Service Manual 1448811M1 (Ferguson 35 / MF35)",
+      "url": null,
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": false,
+      "dateResearched": null,
+      "reference": "Identified via SRC-015; copy not yet obtained",
+      "extracted": [],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-031",
+      "name": "AGCO/MF Service Manual supplement 690560M1 (Standard Motors 4-cylinder diesel)",
+      "url": null,
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": false,
+      "dateResearched": null,
+      "reference": "Identified via SRC-015; copy not yet obtained",
+      "extracted": [],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-032",
+      "name": "AGCO/MF Parts Book 819045M4 (FE35 / MF35 / MF35X)",
+      "url": "https://farmingparts.com/products/35-35x-parts-manual-819045m4",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": false,
+      "dateResearched": null,
+      "reference": "Identified via SRC-015 and SRC-016; copy not yet obtained. Required to verify OEM part numbers and quantities.",
+      "extracted": [],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-033",
+      "name": "Ferguson FE35 Operator's Instruction Book 819046M1",
+      "url": "https://masseytractorparts.com/en-fj/products/fe35-tractor-with-petrol-tvo-or-23c-diesel-operators-instruction-book-819046m1",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": false,
+      "dateResearched": null,
+      "reference": "Identified via SRC-017; copy not yet obtained",
+      "extracted": [],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-034",
+      "name": "Standard 23C Engine Operator's Manual 819050M1",
+      "url": null,
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": false,
+      "dateResearched": null,
+      "reference": "Referenced on SRC-017; copy not yet obtained",
+      "extracted": [],
+      "conflicts": []
+    }
+  ]
+}
