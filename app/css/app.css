@@ -235,6 +235,22 @@ svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; 
 }
 .viewport-label strong { color: var(--blue-strong); }
 .schematic { position: absolute; inset: 0; width: 100%; height: 100%; }
+.viewer3d { position: absolute; inset: 0; touch-action: none; }
+.viewer3d canvas { display: block; outline: none; cursor: grab; }
+.viewer3d canvas:active { cursor: grabbing; }
+.viewer-tip {
+  position: absolute; z-index: 3; pointer-events: none; font-size: 12px; font-weight: 600; color: var(--white);
+  background: rgba(23, 32, 46, .88); border-radius: 5px; padding: 3px 8px; white-space: nowrap;
+}
+.viewport-note {
+  position: absolute; left: 14px; top: 46px; z-index: 2; font-size: 12.5px; color: var(--graphite);
+  background: #fff8e8; border: 1px solid #f0d9ad; border-radius: 6px; padding: 4px 10px;
+}
+.viewport-help {
+  position: absolute; right: 12px; bottom: 10px; z-index: 2; font-size: 11.5px; color: var(--text-muted);
+  background: rgba(255, 255, 255, .75); border-radius: 5px; padding: 2px 8px; pointer-events: none;
+}
+.viewport-3d .viewport-label { max-width: calc(100% - 28px); }
 .schematic .sys { cursor: pointer; }
 .schematic .sys rect, .schematic .sys path.shape, .schematic .sys circle.shape {
   fill: #f7f9fb; stroke: var(--grey); stroke-width: 1.5; transition: fill .12s, stroke .12s;
@@ -260,6 +276,7 @@ svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; 
 }
 .tool:hover:not(:disabled) { border-color: var(--blue-light); color: var(--blue-strong); }
 .tool:disabled { cursor: not-allowed; opacity: .55; }
+.tool[aria-pressed="true"], .tool[aria-pressed="true"]:hover:not(:disabled) { background: var(--blue); border-color: var(--blue); color: var(--white); }
 .toolbar .note { font-size: 12px; color: var(--text-muted); }
 .toolbar input[type="range"] { width: 120px; accent-color: var(--blue); }
 
@@ -426,6 +443,7 @@ dl.fields dd { margin: 0; font-size: 13px; }
   dl.fields { grid-template-columns: 1fr; gap: 0 0; }
   dl.fields dt { margin-top: 6px; }
   .toolbar .group { border-right: 0; padding-right: 0; }
+  .viewport-help { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
