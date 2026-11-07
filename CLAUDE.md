@@ -23,8 +23,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 2 (application foundation) built; Phase 3
-(3D model) is next.**
+research, build, test and verify before moving on. Current status: **Phase 3 (3D model) built; Phase 4 (exploded views) is next.**
 
 ## Commands
 
@@ -65,8 +64,17 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   `#/identification`, `#/tractor`, `#/research/<SRC-id>`), and the views are string-rendered. "My Tractor"
   entries are saved in `localStorage` (`mf35.owner.v1`) as overrides on `ownerTractor`. They only
   last per browser. Permanent facts go into `data/configurations.json`.
-- The anatomy workspace is currently an SVG *schematic* systems map (clearly labelled). Phase 3
-  replaces it with the Three.js model. Disabled toolbar buttons mark Phase 3/4 controls.
+- `app/js/model.js`: the original procedural model (`window.MF35Model.build(THREE)`). Every mesh sits
+  in a group named with a hierarchy id. Variant parts (both clutches, cold-climate items, diff lock)
+  are all built; the viewer hides the ones not fitted. Proportions come from SRC-035 B.1; see
+  `docs/model/README.md` for what is measured and what is approximate.
+- `app/js/viewer.js`: Three.js scene, OrbitControls, picking, highlight, hide, isolate, X-ray
+  (casing list in model.js), auto see-through for parts blocking the selection, camera presets.
+  The anatomy view moves one persistent viewer element into each re-render (no WebGL re-creation).
+  Without WebGL it falls back to the SVG schematic. The explode slider stays disabled until Phase 4.
+- `app/vendor/three/`: Three.js r147 (MIT), the last release with a classic `three.min.js` and
+  `examples/js/OrbitControls.js`. Don't upgrade without replacing those with a non-module build.
+- `window.MF35Explorer.viewer()` is a read-only handle for browser tests.
 
 How the pieces connect: the app resolves the active configuration as `ownerTractor`, falling
 back to `defaultTarget` for each null axis. It filters the hierarchy by `appliesTo`. A node is shown as *variant dependent* only if it
@@ -107,5 +115,6 @@ These are enforced by the validator where possible.
 - UI theme is blue / silver / black / grey (the owner's choice, which overrides the spec's "MF red accent").
   CSS tokens are in `app/css/app.css` `:root`. The tractor model itself keeps its red/grey livery.
 - Missing values render as "Not yet documented". Supplier numbers render as "unverified" claims.
-- 3D plan (Phase 3): an original procedural Three.js model, one mesh/group per hierarchy id.
-  No suitable licensable separable MF35 model exists (see `docs/research/05-…`).
+- 3D model: original procedural Three.js geometry, one group per hierarchy id (a test checks every
+  id in model.js exists in hierarchy.json). No suitable licensable separable MF35 model exists
+  (see `docs/research/05-…`). Coordinates: metres, x forward (rear axle at 0), y up, z right.

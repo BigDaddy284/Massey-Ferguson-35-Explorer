@@ -121,3 +121,23 @@ test('coverage counts every non-root node', () => {
   assert.equal(total, index.order.length - 1);
   assert.equal(Object.values(cov).reduce((a, c) => a + c.verified, 0), 0, 'nothing is verified yet');
 });
+
+test('coverage counts parts represented in 3D', () => {
+  const cov = core.coverage(index, ['lift-piston', 'hyd-pump', 'not-a-real-id']);
+  assert.equal(cov.hydraulics.model, 2);
+  assert.equal(cov.engine.model, 0);
+});
+
+test('every hierarchy id used by the 3D model exists', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'app', 'js', 'model.js'), 'utf8');
+  const ids = new Set();
+  for (const m of src.matchAll(/(?:add|rod|bar|tube|helix|hexNut|part)\(\s*'([a-z0-9-]+)'/g)) ids.add(m[1]);
+  for (const m of src.matchAll(/\?\s*'([a-z0-9]+-[a-z0-9-]+)'\s*:\s*'([a-z0-9]+-[a-z0-9-]+)'/g)) { ids.add(m[1]); ids.add(m[2]); }
+  for (const m of src.matchAll(/\['([a-z0-9-]+)',\s*-?0\.\d+\]/g)) ids.add(m[1]);
+  ['inlet-valve', 'exhaust-valve', 'inlet-valve-guide', 'exhaust-valve-guide'].forEach((id) => ids.add(id));
+  const casings = src.match(/var CASINGS = \[([\s\S]*?)\];/)[1].match(/'([a-z0-9-]+)'/g).map((s) => s.slice(1, -1));
+  casings.forEach((id) => ids.add(id));
+  assert.ok(ids.size > 150, `found ${ids.size} ids`);
+  const missingIds = [...ids].filter((id) => !index.byId[id]);
+  assert.deepEqual(missingIds, []);
+});

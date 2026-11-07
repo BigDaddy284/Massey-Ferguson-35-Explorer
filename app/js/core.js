@@ -311,16 +311,20 @@
 
   /* ---------- Coverage ---------- */
 
-  function coverage(index) {
+  // modelledIds (optional): hierarchy ids that have their own 3D object.
+  function coverage(index, modelledIds) {
+    var inModel = {};
+    (modelledIds || []).forEach(function (id) { inModel[id] = true; });
     var bySystem = {};
     index.order.forEach(function (id) {
       var e = index.byId[id];
       if (e.depth === 0) return;
       var sys = e.path[1];
-      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0 };
+      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, model: 0 };
       c.total++;
       c[statusOf(e.node)]++;
       if (e.node.oemPartNumber) c.oem++;
+      if (inModel[id]) c.model++;
     });
     return bySystem;
   }
