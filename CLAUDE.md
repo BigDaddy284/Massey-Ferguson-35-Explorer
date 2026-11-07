@@ -98,7 +98,7 @@ These are enforced by the validator where possible.
 - Never present missing data as confirmed in the UI. Show "not yet documented" instead.
 - The Perkins 3.152/A3.152 is **not** 1958 equipment (introduced 1959, c. serial 165596).
 - Live PTO depends on the dual-stage clutch. The owner reports dual-clutch behaviour
-  (`clutchStatus: owner-reported`), but the serial prefix (M) has not been seen, so label it as reported.
+  and reports the clutch letter M on the serial plate (`clutchStatus: plate-letter-reported`). The full prefix and number are still unknown, so it stays labelled as owner-reported.
 - Do not apply US-built MF35 serial breaks to Coventry serials.
 - Do not reproduce copyrighted AGCO diagrams or text. Diagrams and 3D assets must be original.
 - Torques come from the workshop manual (SRC-035 B.29–B.30) in lb ft. SRC-006's "Nm" figures mix
