@@ -291,7 +291,7 @@
     "engineNumber": null,
     "engine": "std-23c-diesel",
     "engineStatus": "provisional",
-    "clutch": null,
+    "clutch": "dual-stage",
     "pto": null,
     "chassis": "standard",
     "chassisStatus": "assumed",
@@ -310,8 +310,15 @@
         "by": "owner",
         "observation": "Hydraulic lift raised with the engine running while the operator stood beside the tractor (not seated).",
         "inference": "Consistent with both single- and dual-stage clutch (clutch engaged, gearbox in neutral, pump turning). Does not settle the clutch axis."
+      },
+      {
+        "date": "2026-11-07",
+        "by": "owner",
+        "observation": "Owner reports the tractor can be slowed with the clutch while attached equipment keeps working.",
+        "inference": "Matches dual-stage clutch behaviour (half pedal disengages the gearbox, PTO and hydraulics stay driven; SRC-001, SRC-010). Clutch recorded as dual-stage, so PTO is live. Not yet confirmed by the serial prefix letter (M)."
       }
-    ]
+    ],
+    "clutchStatus": "owner-reported"
   },
   "defaultTarget": {
     "$comment": "What the 3D model and catalogue render when the owner's value is null. Every component that depends on a null axis must be shown as variant-dependent.",

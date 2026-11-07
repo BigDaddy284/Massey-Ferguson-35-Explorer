@@ -159,7 +159,7 @@ the lever sets a lift-arm height and the valve holds it there.
 | Engine | Diesel; Standard 23C provisional | Provisional |
 | Hydraulic lift, 3-point linkage, rear PTO | Fitted | Owner confirmed |
 | Serial number / prefix | Unknown (tractor not accessible) | — |
-| Clutch / PTO type | **Unknown.** Decides live vs transmission PTO | — |
+| Clutch / PTO type | **Dual-stage clutch, live PTO.** Owner reports (2026-11-07) that the tractor can be slowed with the clutch while attached equipment keeps working | Owner-reported; serial prefix (M) not yet seen |
 | Electrics, cold start, diff lock, seat | Unknown | — |
 
 ## 10. Open questions (priority order)

@@ -11,6 +11,8 @@ const config = read('configurations.json');
 const technical = read('technical.json');
 const sources = read('sources.json').sources;
 const index = core.indexHierarchy(read('hierarchy.json').root);
+// A copy of the config with the clutch unknown, to test behaviour before the owner reports it.
+const unknownClutch = { ...config, ownerTractor: { ...config.ownerTractor, clutch: null, pto: null } };
 
 test('hierarchy index has unique ids, parents and paths', () => {
   assert.equal(index.rootId, 'mf35');
@@ -20,7 +22,7 @@ test('hierarchy index has unique ids, parents and paths', () => {
 });
 
 test('unknown owner clutch falls back to default and is not confirmed', () => {
-  const r = core.resolveConfiguration(config);
+  const r = core.resolveConfiguration(unknownClutch);
   assert.equal(r.values.clutch, config.defaultTarget.clutch);
   assert.equal(r.confirmed.clutch, false);
   assert.equal(r.confirmed.engine, false, 'engine is provisional in the data file');
@@ -32,12 +34,22 @@ test('PTO is derived from the clutch', () => {
 });
 
 test('clutch-dependent parts are variant dependent until the clutch is confirmed', () => {
-  const unknown = core.resolveConfiguration(config);
+  const unknown = core.resolveConfiguration(unknownClutch);
   assert.equal(core.displayStatus(index, 'clutch-dual-pto-plate', unknown), 'variant-dependent');
   const single = core.resolveConfiguration(config, { clutch: 'single-stage' });
   assert.equal(core.applicability(index, 'clutch-dual-pto-plate', single).applies, false);
   assert.equal(core.applicability(index, 'clutch-single-plate', single).applies, true);
   assert.equal(core.applicability(index, 'clutch-single-plate', single).variant, false);
+});
+
+test("owner-reported dual clutch: live PTO, dual-clutch parts fitted, single-clutch parts not", () => {
+  const r = core.resolveConfiguration(config);
+  assert.equal(r.values.clutch, 'dual-stage');
+  assert.equal(r.confirmed.clutch, true);
+  assert.equal(r.values.pto, 'live-pto');
+  assert.equal(core.applicability(index, 'clutch-dual-pto-plate', r).applies, true);
+  assert.equal(core.applicability(index, 'clutch-dual-pto-plate', r).variant, false);
+  assert.equal(core.applicability(index, 'clutch-single-plate', r).applies, false);
 });
 
 test('parts with no appliesTo are not variant dependent', () => {

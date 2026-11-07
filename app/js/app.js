@@ -129,6 +129,7 @@
       var val = optionLabel(axis, r.values[axis]);
       var suffix = r.confirmed[axis] ? '' : (r.owner[axis] ? ' (provisional)' : ' (unknown: showing default)');
       if (axis === 'engine' && r.owner.engineStatus === 'provisional' && !state.overrides.engine) suffix = ' (provisional)';
+      if ((axis === 'clutch' || axis === 'pto') && r.owner.clutchStatus === 'owner-reported' && !state.overrides.clutch) suffix = ' (owner-reported)';
       return '<span class="config-chip ' + cls + '"><span class="dot"></span><strong>' + pair[1] + ':</strong> ' + esc(val) + esc(suffix) + '</span>';
     }).join('');
     var serial = r.owner.serialNumber ? esc((r.owner.serialPrefix ? r.owner.serialPrefix + ' ' : '') + r.owner.serialNumber) : 'not entered';
