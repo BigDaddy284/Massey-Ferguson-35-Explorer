@@ -11,6 +11,10 @@ JavaScript/TypeScript.
 
 ## Governing documents (read the relevant section before starting a phase)
 
+The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` and imported here, so it loads in every session:
+
+@docs/spec/PRODUCT_SPEC.md
+
 - `docs/spec/PRODUCT_SPEC.md`: the owner's product specification (diesel-specific). **Takes
   precedence** where it differs from DESIGN.md.
 - `docs/spec/DESIGN.md`: the earlier, broader design spec (also covers petrol/TVO). It is used for
