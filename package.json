@@ -1,11 +1,13 @@
 {
   "name": "mf35-explorer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Interactive 3D anatomy and parts catalogue for the 1958 Massey Ferguson 35 diesel (Standard 23C)",
-  "type": "module",
   "engines": { "node": ">=18" },
   "scripts": {
-    "validate": "node scripts/validate-data.mjs"
+    "validate": "node scripts/validate-data.mjs",
+    "build": "node scripts/validate-data.mjs && node scripts/build-data.mjs",
+    "test": "node --test tests/*.test.js",
+    "serve": "python3 -m http.server 8035 --directory app"
   }
 }

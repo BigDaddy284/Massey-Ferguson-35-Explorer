@@ -19,7 +19,9 @@
         "De Luxe models had a dual clutch that disengages the rear wheels while keeping PTO and hydraulic pump engaged",
         "MF35X launched 8 Nov 1962; UK production ended 1964 (succeeded by MF135)"
       ],
-      "conflicts": ["Rebadge 'after 73,655 units' vs SRC-002 year table giving 1958 start at 79553"]
+      "conflicts": [
+        "Rebadge 'after 73,655 units' vs SRC-002 year table giving 1958 start at 79553"
+      ]
     },
     {
       "id": "SRC-002",
@@ -36,7 +38,9 @@
         "Perkins 3.152 'from serial no. 165596'",
         "Serial number location: dashboard (MF35); instrument panel (MF35X)"
       ],
-      "conflicts": ["Identification table says FE35 'up to serial No 74655' for 1956-57, inconsistent with its own year table"]
+      "conflicts": [
+        "Identification table says FE35 'up to serial No 74655' for 1956-57, inconsistent with its own year table"
+      ]
     },
     {
       "id": "SRC-003",
@@ -56,7 +60,9 @@
         "UK casting date codes are day/month/year; FE35 codes on right side of differential/hydraulic housing forward of the round port",
         "Diesels use the Standard 23C with Lucas electrical components"
       ],
-      "conflicts": []
+      "conflicts": [
+        "Lists P = Perkins diesel. The FE-35 workshop manual (SRC-035 B.1) gives N for the 3-A-152 diesel. Letters C, R, T, U, B and W are not in the manual's FE-35 code list."
+      ]
     },
     {
       "id": "SRC-004",
@@ -86,7 +92,9 @@
       "extracted": [
         "Standard 23C diesel: 4 cylinders, 137.89 cu in / 2.3 L, compression 20:1, firing order 1-3-4-2, liquid cooled, 12 V starter, 34 hp"
       ],
-      "conflicts": ["34 hp vs 35.9 belt hp (SRC-006) vs 37 hp (SRC-011): rating basis not stated"]
+      "conflicts": [
+        "34 hp vs 35.9 belt hp (SRC-006) vs 37 hp (SRC-011): rating basis not stated"
+      ]
     },
     {
       "id": "SRC-006",
@@ -105,7 +113,9 @@
         "Dynamo Lucas C45X (6 V) or Lucas C39P/2 (12 V)",
         "Torques: head 110 Nm, main 40 Nm, con-rod 95 Nm, flywheel 135 Nm"
       ],
-      "conflicts": ["Main-bearing torque (40 Nm) lower than con-rod torque (95 Nm) is implausible and may be transposed; torque values are NOT to be displayed as confirmed until checked against the service manual (SRC-030/SRC-031)"]
+      "conflicts": [
+        "Torques: SRC-006's 'Nm' figures are not consistent with the workshop manual (SRC-035 B.29–B.30, lb ft). Main 40 matches the centre bearing housing figure (39–42 lb ft), so the unit is wrong; con-rod 95 Nm and flywheel 135 Nm match the manual's 70 and 100 lb ft upper limits; head 110 Nm does not match 100–105 lb ft (136–142 Nm). Use SRC-035 figures."
+      ]
     },
     {
       "id": "SRC-007",
@@ -121,7 +131,9 @@
         "MF stopped using Standard engines in favour of Perkins in 1959",
         "After Leyland took over Standard-Triumph (1961) the engine became the Leyland OE.138"
       ],
-      "conflicts": ["Article family title is 'wet liner' but SRC-008 lists 23C as dry liner; 23C sentence is uncited"]
+      "conflicts": [
+        "Article family title is 'wet liner' but SRC-008 lists 23C as dry liner; 23C sentence is uncited"
+      ]
     },
     {
       "id": "SRC-008",
@@ -140,7 +152,9 @@
         "Inner and outer valve springs; valve guides separate",
         "Oil filter cartridge listed as replacing 826137M91, fits 20C and 23C"
       ],
-      "conflicts": ["Numeric cross-references (e.g. 191298, 391342) are of unknown origin and are NOT treated as OEM numbers"]
+      "conflicts": [
+        "Numeric cross-references (e.g. 191298, 391342) are of unknown origin and are NOT treated as OEM numbers"
+      ]
     },
     {
       "id": "SRC-009",
@@ -175,7 +189,9 @@
         "Twin-lever control governing draft and implement height",
         "Differential lock fitted (date not given)"
       ],
-      "conflicts": ["Differential lock introduction date not stated; may not apply to all 1958 tractors"]
+      "conflicts": [
+        "Differential lock introduction date not stated; may not apply to all 1958 tractors"
+      ]
     },
     {
       "id": "SRC-011",
@@ -190,7 +206,9 @@
         "Diesel rated 37 hp (same as petrol); TVO 30 hp",
         "Dual clutch, live PTO and hydraulics listed as Deluxe-only"
       ],
-      "conflicts": ["Claims hydraulics Deluxe-only; owner's tractor has hydraulics regardless, and other sources do not restrict hydraulics to Deluxe"]
+      "conflicts": [
+        "Claims hydraulics Deluxe-only; owner's tractor has hydraulics regardless, and other sources do not restrict hydraulics to Deluxe"
+      ]
     },
     {
       "id": "SRC-012",
@@ -209,7 +227,9 @@
         "Cross-shaft (rockshaft) bushes 60.2 x 50.8 x 35.8 mm, 4 per tractor; lift arms 37 splines",
         "Relief valve 2300/2800 psi listed (application not stated)"
       ],
-      "conflicts": ["Pump piston count: '2 required' here vs pump description in community sources; needs parts-book confirmation"]
+      "conflicts": [
+        "Pump piston count: '2 required' here vs pump description in community sources; needs parts-book confirmation"
+      ]
     },
     {
       "id": "SRC-013",
@@ -240,7 +260,9 @@
         "Replacement piston 190799M1, rings 892604M1; valve chamber 184471M1 common to all three",
         "Front and rear camshaft blocks 180924M1 / 180925M1 fit inside the pistons and contact the camshaft"
       ],
-      "conflicts": ["Serial breaks may refer to US-built MF35 numbering; do not apply to Coventry serials without confirmation"]
+      "conflicts": [
+        "Serial breaks may refer to US-built MF35 numbering; do not apply to Coventry serials without confirmation"
+      ]
     },
     {
       "id": "SRC-015",
@@ -266,7 +288,9 @@
       "accessed": true,
       "dateResearched": "2026-11-07",
       "reference": "Product page",
-      "extracted": ["Genuine AGCO parts manual 819045M4 covering MF35 and MF35X, available new (c. GBP 136)"],
+      "extracted": [
+        "Genuine AGCO parts manual 819045M4 covering MF35 and MF35X, available new (c. GBP 136)"
+      ],
       "conflicts": []
     },
     {
@@ -297,7 +321,9 @@
         "OEM ref 3933139M91; 4 pistons, 4 ring sets, 4 pre-finished slip-fit liners, top and lower gasket sets, front and rear crank seals",
         "Price GBP 318.30 ex VAT / 381.96 inc VAT; out of stock on 2026-11-07"
       ],
-      "conflicts": ["Page body says 'in stock now' while stock indicator says out of stock"]
+      "conflicts": [
+        "Page body says 'in stock now' while stock indicator says out of stock"
+      ]
     },
     {
       "id": "SRC-019",
@@ -323,8 +349,12 @@
       "accessed": true,
       "dateResearched": "2026-11-07",
       "reference": "Product page",
-      "extracted": ["Glow/heater plug 829162M1 for Standard 23C; TO35 fitment from engine serial 188852"],
-      "conflicts": ["SRC-009 says most 35s with the 23C lacked per-cylinder heater plugs; fitment is variant dependent"]
+      "extracted": [
+        "Glow/heater plug 829162M1 for Standard 23C; TO35 fitment from engine serial 188852"
+      ],
+      "conflicts": [
+        "SRC-009 says most 35s with the 23C lacked per-cylinder heater plugs; fitment is variant dependent"
+      ]
     },
     {
       "id": "SRC-021",
@@ -350,7 +380,9 @@
       "accessed": true,
       "dateResearched": "2026-11-07",
       "reference": "Posts 25-30",
-      "extracted": ["Canadian-spec tractors reported with glow plugs per cylinder and bottom-hose immersion heater; intake manifold has a boss for a factory heater"],
+      "extracted": [
+        "Canadian-spec tractors reported with glow plugs per cylinder and bottom-hose immersion heater; intake manifold has a boss for a factory heater"
+      ],
       "conflicts": []
     },
     {
@@ -362,7 +394,9 @@
       "accessed": true,
       "dateResearched": "2026-11-07",
       "reference": "Positioner kit article",
-      "extracted": ["Position control was a feature of the FE35/FE65, later copied as an add-on for TE20 tractors"],
+      "extracted": [
+        "Position control was a feature of the FE35/FE65, later copied as an add-on for TE20 tractors"
+      ],
       "conflicts": []
     },
     {
@@ -401,7 +435,9 @@
       "accessed": true,
       "dateResearched": "2026-11-07",
       "reference": "Category navigation",
-      "extracted": ["Distinct category for '23C 4 cylinder' engine parts separate from 3-cylinder and petrol engines (NL supplier, not UK)"],
+      "extracted": [
+        "Distinct category for '23C 4 cylinder' engine parts separate from 3-cylinder and petrol engines (NL supplier, not UK)"
+      ],
       "conflicts": []
     },
     {
@@ -413,8 +449,12 @@
       "accessed": true,
       "dateResearched": "2026-11-07",
       "reference": "Spec page",
-      "extracted": ["6 forward, 2 reverse unsynchronised; rear PTO 540 rpm"],
-      "conflicts": ["Mixes petrol bore/stroke (87 x 92 mm) with diesel displacement and compression; do not use for engine data"]
+      "extracted": [
+        "6 forward, 2 reverse unsynchronised; rear PTO 540 rpm"
+      ],
+      "conflicts": [
+        "Mixes petrol bore/stroke (87 x 92 mm) with diesel displacement and compression; do not use for engine data"
+      ]
     },
     {
       "id": "SRC-030",
@@ -475,6 +515,50 @@
       "reference": "Referenced on SRC-017; copy not yet obtained",
       "extracted": [],
       "conflicts": []
+    },
+    {
+      "id": "SRC-035",
+      "name": "Massey-Ferguson 35 Tractor Workshop Service Manual (FE-35, Sections A–U), scanned copy",
+      "url": "http://www.nrgsurveys.co.uk/downloads/mf35.pdf",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "383-page scan. Page references below give the manual's own section/page number (e.g. B.29) followed by the printed page number. Publication number is not visible on the scan, so it is not yet matched to SRC-030 (1448811M1). Clutch page I.4 is marked 'Second issue'; injector data runs to engine SJ 125725E, so the copy was revised c.1959.",
+      "extracted": [
+        "B.1 (p5): tractor codes. Chassis S standard, V vineyard, J industrial. Engines G petrol, H high-altitude petrol, D diesel (23C), N diesel (3-A-152), K vaporising oil, L lamp oil. Other variations F single clutch, M dual clutch",
+        "B.1 (p5): 'The De Luxe version of the Tractor is fitted with Dual Clutch, live P.T.O., Tractormeter, and cushion seat'",
+        "B.1 (p5): wheelbase 72 in (1830 mm); normal track front 48 in, rear 52 in; track adjustment front 48–80 in, rear 48–76 in; turning circle 17 ft 6 in with independent brakes, 19 ft 3 in without; ground clearance 12 5/8 in under centre, 21 in under axle; length 117 in (2972 mm); width 64 in (1630 mm) at normal track; height 54 in (1372 mm)",
+        "B.1 (p5): tyres front 4 x 19 at 26 lb/sq in, rear 10 x 28 at 12 lb/sq in",
+        "B.1 (p5): weight with fuel, oil and water, diesel 23C: basic 3158 lb (1432 kg), De Luxe 3198 lb (1451 kg)",
+        "B.1 (p5): fill-up: engine sump 12 pints (6.8 l); transmission 6.6 Imp gal (30.28 l); air cleaner 3/4 pint (0.43 l); steering 1.8 pints (0.946 l); belt pulley 1 1/2 pints (0.852 l)",
+        "B.2 (p6): 23C cooling system 15 pints (8.5 l); 23C fuel tank 7 1/2 Imp gal (34 l)",
+        "B.2 (p6): 23C performance: brake hp (bare engine) 37.25, belt hp (bare engine) 35.9, drawbar hp 31.5, hp available at PTO 34",
+        "B.29 (p33): 23C: 4 cylinders, bore 3 5/16 in (84.137 mm), stroke 4 in (101.6 mm), 137.89 cu in (2259 cc), compression 20:1, firing order 1-3-4-2, equivalent crankshaft torque 100 lb ft at 1600 rpm",
+        "B.29–B.30 (p33–34): 23C tightening torques in lb ft (with kg m). Values transcribed in data/technical.json section 'torques'",
+        "B.30 (p34): crankshaft bearings available in undersizes .010, .020, .030 and .040 in",
+        "B.32–B.33 (p36–37): cylinder liners (called sleeves) have a top flange in a recess in the upper block and a spigot in the lower block; stand-out above block .001–.004 in; pistons and sleeves graded F, G, H; replacements standard size only, no reboring or oversizes. Pistons by Automotive Engineering or Wellworthy (alternatives)",
+        "B.37 (p41): working valve tip clearances (cold) inlet .012 in (.305 mm), exhaust .008 in (.203 mm); valve lift .330 in",
+        "B.38 (p42): valve seat angle 45 deg; valve springs inner and outer (free length 1.6 / 1.7 in); valve timing with .015 in checking clearance: EO 45 1/2 deg BBDC, EC 10 1/2 deg ATDC, IO 10 1/2 deg BTDC, IC 37 1/2 deg ABDC; exhaust valve seat inserts; Ricardo pre-combustion chamber fitted in the combustion head",
+        "B.39 (p43): oil pump runs at engine speed, rotor type, approx. 3.95 gal/min at 50 lb/sq in at 2000 rpm; oil pressure 40–60 lb/sq in",
+        "B.41 (p45): injectors CAV nozzle holder BKB40S697 with nozzle BDN12SP6169 up to engine SJ 86045E; heat-shield type BKB40S697K with BDN12SP6169A or BDN12SP6262 from SJ 86046E to SJ 125724E; BKB40S697K with BDN12SP6290 from SJ 125725E; working pressure 130 ats, initial setting new 135 ats; Pintaux nozzles",
+        "B.41 (p45): injection pump DPA 3240011, 3240012, 3240013, 3240015 timed 19 deg BTDC; DPA 3242643 and 3242645 (light load advance) timed 13 deg BTDC; flywheel timing hole locates engine at 16 deg BTDC",
+        "B.41 (p45): governor variable speed mechanical, integral with injection pump; fuel lift pump AC type YD driven off eccentric at rear of camshaft, 4–7 lb/sq in; cold starting CAV Thermostart in inlet manifold or Ki-gass; air cleaner AC oil bath; starter M45G, 113-tooth flywheel ring, 11-tooth pinion",
+        "B.42 (p46): batteries 2 x 6 V in series, 38 Ah (10 h) / 43 Ah (20 h); dynamo C39P2",
+        "C (p85): 'The 23C Diesel engine is of the indirect injection type, with Ricardo Comet combustion chambers'",
+        "I.1 (p233): two clutches offered; dual clutch has two friction discs in tandem, one for the gearbox, one for the hydraulic pump and PTO. Diesel single clutch 10 in (254 mm) dry disc; same transmission case and pedal for both",
+        "I.4 (p236): single clutch (diesel) 12 green thrust springs, pedal free movement 3/4 in (19 mm). Dual clutch: transmission disc 11 in (279.4 mm), PTO/hydraulic pump disc 9 in (228.6 mm), 2 Belleville thrust springs, pedal free movement 3/8 in (9.5 mm), adjusting screw clearance .088–.092 in",
+        "J.4 (p258): six forward, two reverse speeds; oil capacity 6.6 Imp gal. Overall reductions low 1st 205.5, 2nd 137, 3rd 74.7, rev 153.8; high 4th 51.4, 5th 34.2, 6th 18.7, rev 38.5 (:1). Road speeds at 1500 / 2000 rpm tabulated",
+        "J.4 (p258): on dual-clutch tractors the pump and PTO drive is taken from the rear secondary disc by a tubular shaft around the main input shaft, geared to a solid shaft through the hollow countershaft",
+        "L.5–L.6 (p307–308): four-cylinder, constant-running, positive-displacement pump in the sump between transmission and final drive; two piston yokes on cam blocks over eccentrics on the pump drive shaft; two opposed valve chambers each with inlet and outlet valves; no check valve; relief valve in pump outlet gallery opens at nominal 2,500 lb/sq in (175.9 kg/sq cm). Pump body floats on bronze bushes, located by dowel pins through the centre housing walls",
+        "L.5 (p307): lift linkage: lift shaft with splined lift arms, lift rods to the lower links, right-hand rod adjustable by a levelling lever, forward ball mountings at the base of the rear axle casing, internal control spring, check chains, top link connection",
+        "M.3 (p339): PTO shaft 6 splines, major dia 1.371–1.373 in (34.82–34.87 mm), minor dia 1.098–1.108 in; 540 rpm at 1500 engine rpm, 720 at 2000; ground-speed setting gives 1 rev per about 20 in (508 mm) of rear wheel travel"
+      ],
+      "conflicts": [
+        "Liner type: the manual describes removable flanged sleeves but does not say wet or dry; SRC-008/SRC-018 say dry, SRC-007 groups the 23C with wet-liner engines",
+        "Perkins engine letter is N here; SRC-003 says P",
+        "Oil pressure 40–60 lb/sq in here; earlier notes quoted 60 lb/sq in as the relief figure only"
+      ]
     }
   ]
 }

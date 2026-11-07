@@ -73,6 +73,19 @@ const counts = { total: 0, byStatus: {} };
   for (const c of node.children ?? []) walk(c, [...path, node.id]);
 })(tree, []);
 
+const technical = load('technical.json');
+for (const sec of technical.sections) {
+  if (sec.relatedNode && !ids.has(sec.relatedNode)) err(`technical ${sec.id}: unknown relatedNode ${sec.relatedNode}`);
+  for (const row of sec.rows) {
+    const where = `technical ${sec.id} / ${row.label}`;
+    if (!STATUSES.has(row.status)) err(`${where}: bad status ${row.status}`);
+    for (const s of row.sources) if (!sourceById.has(s)) err(`${where}: unknown source ${s}`);
+    if (row.status !== 'unverified' && !row.sources.length) err(`${where}: status '${row.status}' needs sources`);
+    if (row.status === 'verified' && !row.sources.some((s) => sourceById.get(s)?.reliability === 'primary' && sourceById.get(s)?.accessed)) err(`${where}: 'verified' requires an accessed primary source`);
+  }
+}
+for (const st of technical.identification.steps) for (const s of st.sources) if (!sourceById.has(s)) err(`identification step: unknown source ${s}`);
+
 if (errors.length) {
   console.error(`Data validation FAILED with ${errors.length} error(s):`);
   for (const e of errors) console.error('  - ' + e);

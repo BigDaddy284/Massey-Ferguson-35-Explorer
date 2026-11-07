@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MF35 Explorer</title>
+  <meta name="description" content="Interactive anatomy and parts catalogue for the 1958 Massey Ferguson 35 diesel (Standard 23C).">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="app-header">
+    <div class="brand">
+      <button class="icon-btn only-mobile" id="toggle-tree" aria-label="Show assemblies" aria-controls="tree-panel" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <a href="#/anatomy" class="logo" aria-label="MF35 Explorer home">
+        <svg viewBox="0 0 40 40" class="logo-mark" aria-hidden="true">
+          <circle cx="12" cy="27" r="9"/><circle cx="12" cy="27" r="3.5"/>
+          <circle cx="32" cy="31" r="5"/><path d="M12 18 L18 8 H28 L33 26"/>
+        </svg>
+        <span class="logo-text"><strong>MF35</strong> Explorer</span>
+      </a>
+    </div>
+    <nav class="main-nav" aria-label="Main">
+      <a href="#/anatomy" data-view="anatomy">Tractor Anatomy</a>
+      <a href="#/catalogue" data-view="catalogue">Parts Catalogue</a>
+      <a href="#/exploded" data-view="exploded">Exploded Views</a>
+      <a href="#/technical" data-view="technical">Technical Information</a>
+      <a href="#/identification" data-view="identification">Identification</a>
+      <a href="#/tractor" data-view="tractor">My Tractor</a>
+      <a href="#/research" data-view="research">Research Status</a>
+    </nav>
+    <div class="search" role="search">
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="global-search" type="search" placeholder="Search parts, numbers, terms…" autocomplete="off"
+             aria-label="Search the whole catalogue" aria-controls="search-results" aria-expanded="false">
+      <kbd class="search-kbd" aria-hidden="true">/</kbd>
+      <div id="search-results" class="search-results" role="listbox" hidden></div>
+    </div>
+  </header>
+
+  <div class="config-banner" id="config-banner" role="status"></div>
+
+  <main id="main" class="layout" data-view="anatomy">
+    <aside class="panel tree-panel" id="tree-panel" aria-label="Assemblies">
+      <div class="panel-head">
+        <h2>Assemblies</h2>
+        <div class="panel-tools">
+          <button class="text-btn" id="tree-expand">Expand all</button>
+          <button class="text-btn" id="tree-collapse">Collapse</button>
+        </div>
+      </div>
+      <input id="tree-filter" class="tree-filter" type="search" placeholder="Filter assemblies" aria-label="Filter the assembly tree">
+      <div class="tree" id="tree" role="tree" aria-label="Tractor assembly hierarchy"></div>
+    </aside>
+
+    <section class="workspace" id="workspace" aria-live="polite"></section>
+
+    <aside class="panel info-panel" id="info-panel" aria-label="Component information">
+      <div id="info"></div>
+    </aside>
+  </main>
+
+  <footer class="bottom-bar">
+    <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+    <div class="bottom-tools">
+      <span class="selected-id" id="selected-id"></span>
+      <button class="icon-btn only-mobile" id="toggle-info" aria-label="Show component information" aria-controls="info-panel" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+      </button>
+    </div>
+  </footer>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <noscript><p class="noscript">MF35 Explorer needs JavaScript enabled.</p></noscript>
+  <script src="data/mf35-data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

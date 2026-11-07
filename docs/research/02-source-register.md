@@ -53,6 +53,7 @@ accessed primary source.
 | SRC-032 | Parts book 819045M4 | primary | **Not yet obtained.** Highest priority |
 | SRC-033 | Operator book 819046M1 | primary | **Not yet obtained** |
 | SRC-034 | 23C engine operator manual 819050M1 | primary | **Not yet obtained** |
+| SRC-035 | MF35 Workshop Service Manual (FE-35), scanned copy at nrgsurveys.co.uk | primary | **Read 2026-11-07.** Specs, torques, clutch, gearbox, PTO, hydraulics. Publication number not visible; may be SRC-030 |
 
 ## Sources tried but not readable from this environment
 

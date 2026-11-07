@@ -11,18 +11,62 @@
         "name": "Engine: Standard 23C diesel",
         "kind": "system",
         "status": "partially-verified",
-        "appliesTo": { "engine": ["std-23c-diesel"] },
-        "sources": ["SRC-002", "SRC-005", "SRC-006", "SRC-007"],
+        "appliesTo": {
+          "engine": [
+            "std-23c-diesel"
+          ]
+        },
+        "sources": [
+          "SRC-002",
+          "SRC-005",
+          "SRC-006",
+          "SRC-007",
+          "SRC-035"
+        ],
         "children": [
           {
             "id": "engine-block-assy",
             "name": "Cylinder block assembly",
             "kind": "assembly",
             "children": [
-              { "id": "engine-block", "name": "Cylinder block", "kind": "component", "status": "partially-verified", "sources": ["SRC-006"] },
-              { "id": "cylinder-liner", "name": "Cylinder liner", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-008", "SRC-018", "SRC-019"], "notes": "Dry slip-fit liner per SRC-008/SRC-018; SRC-007 groups the 23C with wet-liner engines. Liner type is a recorded conflict." },
-              { "id": "core-plugs", "name": "Core (frost) plugs", "kind": "component" },
-              { "id": "block-studs-dowels", "name": "Block studs and dowels", "kind": "component" }
+              {
+                "id": "engine-block",
+                "name": "Cylinder block",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006"
+                ]
+              },
+              {
+                "id": "cylinder-liner",
+                "name": "Cylinder liner",
+                "kind": "component",
+                "quantity": 4,
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-018",
+                  "SRC-019",
+                  "SRC-035"
+                ],
+                "notes": "Removable flanged sleeves: top flange sits in a recess in the upper block, spigot in the lower block; withdrawn upwards with the pistons (SRC-035 B.32–B.33). The manual does not say wet or dry: SRC-008/SRC-018 say dry, SRC-007 groups the 23C with wet-liner engines. Recorded conflict.",
+                "specifications": {
+                  "Bore (graded F/G/H)": "3.3130–3.3145 in (84.150–84.188 mm)",
+                  "Stand-out above block": ".001–.004 in",
+                  "Oversizes": "None; standard size only"
+                }
+              },
+              {
+                "id": "core-plugs",
+                "name": "Core (frost) plugs",
+                "kind": "component"
+              },
+              {
+                "id": "block-studs-dowels",
+                "name": "Block studs and dowels",
+                "kind": "component"
+              }
             ]
           },
           {
@@ -30,27 +74,188 @@
             "name": "Cylinder head assembly",
             "kind": "assembly",
             "children": [
-              { "id": "cylinder-head", "name": "Cylinder head", "kind": "component", "status": "partially-verified", "sources": ["SRC-006"] },
-              { "id": "head-gasket", "name": "Cylinder head gasket", "kind": "component", "status": "partially-verified", "sources": ["SRC-008", "SRC-019"], "notes": "Copper gasket per SRC-019 top set." },
-              { "id": "head-studs-nuts", "name": "Head studs / bolts and nuts", "kind": "component", "notes": "Thread form must not be assumed; see SRC-021." },
-              { "id": "combustion-chamber-insert", "name": "Combustion chamber (Freeman Sanders design)", "kind": "component", "status": "unverified", "sources": ["SRC-009"], "notes": "Whether this is a separate insert/cell or machined into head or piston is not yet established." },
+              {
+                "id": "cylinder-head",
+                "name": "Cylinder head",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006"
+                ]
+              },
+              {
+                "id": "head-gasket",
+                "name": "Cylinder head gasket",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-019"
+                ],
+                "notes": "Copper gasket per SRC-019 top set."
+              },
+              {
+                "id": "head-studs-nuts",
+                "name": "Head studs / bolts and nuts",
+                "kind": "component",
+                "notes": "Thread form must not be assumed; see SRC-021. Torque per SRC-035 B.29.",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Torque": "100–105 lb ft"
+                }
+              },
+              {
+                "id": "combustion-chamber-insert",
+                "name": "Ricardo Comet pre-combustion chamber",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-009",
+                  "SRC-035"
+                ],
+                "notes": "Separate insert fitted in the cylinder head (SRC-035 B.38, C section: indirect injection with Ricardo Comet chambers).",
+                "specifications": {
+                  "Flange diameter": "1.4075–1.4085 in (35.75–35.78 mm)"
+                },
+                "quantity": 4
+              },
               {
                 "id": "valvetrain",
                 "name": "Valve train",
                 "kind": "subassembly",
                 "children": [
-                  { "id": "inlet-valve", "name": "Inlet valve", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-008", "SRC-019"] },
-                  { "id": "exhaust-valve", "name": "Exhaust valve", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-008", "SRC-019"] },
-                  { "id": "inlet-valve-guide", "name": "Inlet valve guide", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-008"] },
-                  { "id": "exhaust-valve-guide", "name": "Exhaust valve guide", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-008", "SRC-019"] },
-                  { "id": "valve-spring-inner", "name": "Valve spring, inner", "kind": "component", "quantity": 8, "status": "partially-verified", "sources": ["SRC-008", "SRC-019"] },
-                  { "id": "valve-spring-outer", "name": "Valve spring, outer", "kind": "component", "quantity": 8, "status": "partially-verified", "sources": ["SRC-008"] },
-                  { "id": "valve-cap-collets", "name": "Valve spring caps and collets", "kind": "component" },
-                  { "id": "rocker-shaft", "name": "Rocker shaft", "kind": "component" },
-                  { "id": "rocker-arm", "name": "Rocker arm", "kind": "component", "quantity": 8 },
-                  { "id": "pushrod", "name": "Pushrod", "kind": "component", "quantity": 8 },
-                  { "id": "tappet", "name": "Tappet (cam follower)", "kind": "component", "quantity": 8 },
-                  { "id": "rocker-cover", "name": "Rocker cover and gasket", "kind": "component", "status": "partially-verified", "sources": ["SRC-008", "SRC-019"] }
+                  {
+                    "id": "inlet-valve",
+                    "name": "Inlet valve",
+                    "kind": "component",
+                    "quantity": 4,
+                    "status": "partially-verified",
+                    "sources": [
+                      "SRC-008",
+                      "SRC-019",
+                      "SRC-035"
+                    ],
+                    "specifications": {
+                      "Clearance (cold)": "0.012 in (0.305 mm)",
+                      "Seat angle": "45°"
+                    }
+                  },
+                  {
+                    "id": "exhaust-valve",
+                    "name": "Exhaust valve",
+                    "kind": "component",
+                    "quantity": 4,
+                    "status": "partially-verified",
+                    "sources": [
+                      "SRC-008",
+                      "SRC-019",
+                      "SRC-035"
+                    ],
+                    "specifications": {
+                      "Clearance (cold)": "0.008 in (0.203 mm)",
+                      "Seat angle": "45°"
+                    }
+                  },
+                  {
+                    "id": "inlet-valve-guide",
+                    "name": "Inlet valve guide",
+                    "kind": "component",
+                    "quantity": 4,
+                    "status": "partially-verified",
+                    "sources": [
+                      "SRC-008"
+                    ]
+                  },
+                  {
+                    "id": "exhaust-valve-guide",
+                    "name": "Exhaust valve guide",
+                    "kind": "component",
+                    "quantity": 4,
+                    "status": "partially-verified",
+                    "sources": [
+                      "SRC-008",
+                      "SRC-019"
+                    ]
+                  },
+                  {
+                    "id": "valve-spring-inner",
+                    "name": "Valve spring, inner",
+                    "kind": "component",
+                    "quantity": 8,
+                    "status": "partially-verified",
+                    "sources": [
+                      "SRC-008",
+                      "SRC-019",
+                      "SRC-035"
+                    ],
+                    "specifications": {
+                      "Free length": "1.6 in (40.64 mm)",
+                      "Helix": "Left hand"
+                    }
+                  },
+                  {
+                    "id": "valve-spring-outer",
+                    "name": "Valve spring, outer",
+                    "kind": "component",
+                    "quantity": 8,
+                    "status": "partially-verified",
+                    "sources": [
+                      "SRC-008",
+                      "SRC-035"
+                    ],
+                    "specifications": {
+                      "Free length": "1.7 in (43.18 mm)",
+                      "Helix": "Right hand"
+                    }
+                  },
+                  {
+                    "id": "valve-cap-collets",
+                    "name": "Valve spring caps and collets",
+                    "kind": "component"
+                  },
+                  {
+                    "id": "rocker-shaft",
+                    "name": "Rocker shaft",
+                    "kind": "component",
+                    "sources": [
+                      "SRC-035"
+                    ],
+                    "status": "partially-verified",
+                    "specifications": {
+                      "Torque, shaft to pedestal": "8–10 lb ft"
+                    }
+                  },
+                  {
+                    "id": "rocker-arm",
+                    "name": "Rocker arm",
+                    "kind": "component",
+                    "quantity": 8
+                  },
+                  {
+                    "id": "pushrod",
+                    "name": "Pushrod",
+                    "kind": "component",
+                    "quantity": 8
+                  },
+                  {
+                    "id": "tappet",
+                    "name": "Tappet (cam follower)",
+                    "kind": "component",
+                    "quantity": 8
+                  },
+                  {
+                    "id": "rocker-cover",
+                    "name": "Rocker cover and gasket",
+                    "kind": "component",
+                    "status": "partially-verified",
+                    "sources": [
+                      "SRC-008",
+                      "SRC-019"
+                    ]
+                  }
                 ]
               }
             ]
@@ -60,19 +265,143 @@
             "name": "Crankshaft, pistons and connecting rods",
             "kind": "assembly",
             "children": [
-              { "id": "crankshaft", "name": "Crankshaft", "kind": "component", "status": "partially-verified", "sources": ["SRC-006"] },
-              { "id": "main-bearings", "name": "Main bearing shells", "kind": "component", "status": "partially-verified", "sources": ["SRC-008", "SRC-019"], "notes": "Std and .010-.040 undersizes listed by SRC-008." },
-              { "id": "thrust-washers", "name": "Crankshaft thrust washers", "kind": "component", "status": "partially-verified", "sources": ["SRC-008"] },
-              { "id": "piston", "name": "Piston", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-006", "SRC-008", "SRC-019"], "notes": "4-ring and 5-ring versions exist (SRC-008): variant/supersession to resolve." },
-              { "id": "piston-rings", "name": "Piston ring set", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-008"] },
-              { "id": "gudgeon-pin", "name": "Gudgeon pin and circlips", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-006"] },
-              { "id": "conrod", "name": "Connecting rod", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-008"] },
-              { "id": "small-end-bush", "name": "Small-end bush", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-006", "SRC-008"] },
-              { "id": "big-end-bearings", "name": "Big-end bearing shells", "kind": "component", "status": "partially-verified", "sources": ["SRC-008", "SRC-019"] },
-              { "id": "conrod-bolts", "name": "Connecting rod bolts/nuts", "kind": "component" },
-              { "id": "front-crank-seal", "name": "Crankshaft front oil seal", "kind": "component", "status": "partially-verified", "sources": ["SRC-008", "SRC-019"] },
-              { "id": "rear-crank-seal", "name": "Crankshaft rear oil seal", "kind": "component", "status": "partially-verified", "sources": ["SRC-008", "SRC-019"], "notes": "4.0 x 5.12 x 0.56 in per SRC-019." },
-              { "id": "crank-pulley", "name": "Crankshaft pulley", "kind": "component" }
+              {
+                "id": "crankshaft",
+                "name": "Crankshaft",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006"
+                ]
+              },
+              {
+                "id": "main-bearings",
+                "name": "Main bearing shells",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-019",
+                  "SRC-035"
+                ],
+                "notes": "Std and .010-.040 undersizes listed by SRC-008.",
+                "specifications": {
+                  "Undersizes": ".010, .020, .030, .040 in",
+                  "Housing torque (centre)": "39–42 lb ft"
+                }
+              },
+              {
+                "id": "thrust-washers",
+                "name": "Crankshaft thrust washers",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008"
+                ]
+              },
+              {
+                "id": "piston",
+                "name": "Piston",
+                "kind": "component",
+                "quantity": 4,
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006",
+                  "SRC-008",
+                  "SRC-019",
+                  "SRC-035"
+                ],
+                "notes": "4-ring and 5-ring versions exist (SRC-008): variant/supersession to resolve. Made by Automotive Engineering or Wellworthy (alternatives); graded F/G/H to match the liners; standard size only (SRC-035 B.33)."
+              },
+              {
+                "id": "piston-rings",
+                "name": "Piston ring set",
+                "kind": "component",
+                "quantity": 4,
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008"
+                ]
+              },
+              {
+                "id": "gudgeon-pin",
+                "name": "Gudgeon pin and circlips",
+                "kind": "component",
+                "quantity": 4,
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006"
+                ]
+              },
+              {
+                "id": "conrod",
+                "name": "Connecting rod",
+                "kind": "component",
+                "quantity": 4,
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008"
+                ]
+              },
+              {
+                "id": "small-end-bush",
+                "name": "Small-end bush",
+                "kind": "component",
+                "quantity": 4,
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006",
+                  "SRC-008"
+                ]
+              },
+              {
+                "id": "big-end-bearings",
+                "name": "Big-end bearing shells",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-019"
+                ]
+              },
+              {
+                "id": "conrod-bolts",
+                "name": "Connecting rod bolts/nuts",
+                "kind": "component",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Torque": "65–70 lb ft"
+                }
+              },
+              {
+                "id": "front-crank-seal",
+                "name": "Crankshaft front oil seal",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-019"
+                ]
+              },
+              {
+                "id": "rear-crank-seal",
+                "name": "Crankshaft rear oil seal",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-019"
+                ],
+                "notes": "4.0 x 5.12 x 0.56 in per SRC-019."
+              },
+              {
+                "id": "crank-pulley",
+                "name": "Crankshaft pulley",
+                "kind": "component"
+              }
             ]
           },
           {
@@ -81,14 +410,81 @@
             "kind": "assembly",
             "notes": "SRC-008 lists a 62-pitch timing chain, tensioner and sprockets: camshaft appears chain-driven, not gear-driven as assumed in the product spec. Injection pump drive arrangement still to be established.",
             "children": [
-              { "id": "camshaft", "name": "Camshaft", "kind": "component" },
-              { "id": "camshaft-bearings", "name": "Camshaft bearings", "kind": "component" },
-              { "id": "timing-chain", "name": "Timing chain (62 pitches)", "kind": "component", "status": "partially-verified", "sources": ["SRC-008"] },
-              { "id": "timing-chain-tensioner", "name": "Timing chain tensioner", "kind": "component", "status": "partially-verified", "sources": ["SRC-008"] },
-              { "id": "cam-sprocket", "name": "Camshaft sprocket", "kind": "component", "status": "partially-verified", "sources": ["SRC-008"] },
-              { "id": "crank-sprocket", "name": "Crankshaft sprocket", "kind": "component", "status": "partially-verified", "sources": ["SRC-008"] },
-              { "id": "injection-pump-drive", "name": "Injection pump drive", "kind": "component", "status": "unverified" },
-              { "id": "timing-cover", "name": "Timing cover and gasket", "kind": "component", "status": "partially-verified", "sources": ["SRC-019"] }
+              {
+                "id": "camshaft",
+                "name": "Camshaft",
+                "kind": "component",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "notes": "Chain-driven (SRC-035, SRC-008). Its rear eccentric drives the fuel lift pump."
+              },
+              {
+                "id": "camshaft-bearings",
+                "name": "Camshaft bearings",
+                "kind": "component"
+              },
+              {
+                "id": "timing-chain",
+                "name": "Timing chain (62 pitches)",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-035"
+                ]
+              },
+              {
+                "id": "timing-chain-tensioner",
+                "name": "Timing chain tensioner",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-035"
+                ],
+                "specifications": {
+                  "Torque": "8–10 lb ft"
+                }
+              },
+              {
+                "id": "cam-sprocket",
+                "name": "Camshaft sprocket",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008"
+                ]
+              },
+              {
+                "id": "crank-sprocket",
+                "name": "Crankshaft sprocket",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008"
+                ]
+              },
+              {
+                "id": "injection-pump-drive",
+                "name": "Injection pump drive",
+                "kind": "component",
+                "status": "unverified"
+              },
+              {
+                "id": "timing-cover",
+                "name": "Timing cover and gasket",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-019",
+                  "SRC-035"
+                ],
+                "specifications": {
+                  "Torque": "18–20 lb ft"
+                }
+              }
             ]
           },
           {
@@ -96,13 +492,69 @@
             "name": "Lubrication system",
             "kind": "assembly",
             "children": [
-              { "id": "sump", "name": "Sump (oil pan) and gasket", "kind": "component", "status": "partially-verified", "sources": ["SRC-008"] },
-              { "id": "oil-pump", "name": "Oil pump (rotor type)", "kind": "component", "status": "partially-verified", "sources": ["SRC-018", "SRC-019"] },
-              { "id": "oil-filter", "name": "Oil filter and element", "kind": "component", "status": "partially-verified", "sources": ["SRC-008", "SRC-019"] },
-              { "id": "oil-pipes", "name": "Oil pipes", "kind": "component" },
-              { "id": "dipstick", "name": "Dipstick", "kind": "component" },
-              { "id": "engine-breather", "name": "Breather", "kind": "component" },
-              { "id": "oil-pressure-relief", "name": "Oil pressure relief valve", "kind": "component" }
+              {
+                "id": "sump",
+                "name": "Sump (oil pan) and gasket",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-035"
+                ],
+                "specifications": {
+                  "Capacity": "12 pints (6.8 l)"
+                }
+              },
+              {
+                "id": "oil-pump",
+                "name": "Oil pump (rotor type)",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-018",
+                  "SRC-019",
+                  "SRC-035"
+                ],
+                "specifications": {
+                  "Type": "Rotor, runs at engine speed",
+                  "Output": "approx. 3.95 gal/min at 50 psi, 2,000 rpm",
+                  "Oil pressure": "40–60 lb/sq in"
+                }
+              },
+              {
+                "id": "oil-filter",
+                "name": "Oil filter and element",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-008",
+                  "SRC-019",
+                  "SRC-035"
+                ],
+                "specifications": {
+                  "Torque to block": "26–28 lb ft"
+                }
+              },
+              {
+                "id": "oil-pipes",
+                "name": "Oil pipes",
+                "kind": "component"
+              },
+              {
+                "id": "dipstick",
+                "name": "Dipstick",
+                "kind": "component"
+              },
+              {
+                "id": "engine-breather",
+                "name": "Breather",
+                "kind": "component"
+              },
+              {
+                "id": "oil-pressure-relief",
+                "name": "Oil pressure relief valve",
+                "kind": "component"
+              }
             ]
           },
           {
@@ -110,9 +562,39 @@
             "name": "Flywheel",
             "kind": "assembly",
             "children": [
-              { "id": "flywheel", "name": "Flywheel", "kind": "component", "status": "partially-verified", "sources": ["SRC-006"] },
-              { "id": "ring-gear", "name": "Starter ring gear", "kind": "component" },
-              { "id": "flywheel-bolts", "name": "Flywheel bolts", "kind": "component" }
+              {
+                "id": "flywheel",
+                "name": "Flywheel",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006"
+                ]
+              },
+              {
+                "id": "ring-gear",
+                "name": "Starter ring gear",
+                "kind": "component",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Teeth": "113"
+                }
+              },
+              {
+                "id": "flywheel-bolts",
+                "name": "Flywheel bolts",
+                "kind": "component",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Torque": "90–100 lb ft"
+                }
+              }
             ]
           },
           {
@@ -120,42 +602,215 @@
             "name": "Manifolds and exhaust",
             "kind": "assembly",
             "children": [
-              { "id": "inlet-manifold", "name": "Inlet manifold", "kind": "component", "notes": "Boss for factory heater reported (SRC-022)." },
-              { "id": "exhaust-manifold", "name": "Exhaust manifold", "kind": "component" },
-              { "id": "exhaust-elbow", "name": "Exhaust elbow (2-hole) and gasket", "kind": "component", "status": "partially-verified", "sources": ["SRC-019"] },
-              { "id": "silencer", "name": "Silencer (vertical)", "kind": "component", "status": "partially-verified", "sources": ["SRC-019"] }
+              {
+                "id": "inlet-manifold",
+                "name": "Inlet manifold",
+                "kind": "component",
+                "notes": "Boss for factory heater reported (SRC-022)."
+              },
+              {
+                "id": "exhaust-manifold",
+                "name": "Exhaust manifold",
+                "kind": "component"
+              },
+              {
+                "id": "exhaust-elbow",
+                "name": "Exhaust elbow (2-hole) and gasket",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-019"
+                ]
+              },
+              {
+                "id": "silencer",
+                "name": "Silencer (vertical)",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-019"
+                ]
+              }
             ]
           }
-        ]
+        ],
+        "specifications": {
+          "Bore × stroke": "3 5/16 × 4 in (84.137 × 101.6 mm)",
+          "Displacement": "2,259 cc",
+          "Compression ratio": "20:1",
+          "Firing order": "1-3-4-2"
+        }
       },
       {
         "id": "fuel",
         "name": "Diesel fuel system",
         "kind": "system",
         "children": [
-          { "id": "fuel-tank-assy", "name": "Fuel tank, cap and tap", "kind": "assembly", "children": [
-            { "id": "fuel-tank", "name": "Fuel tank", "kind": "component" },
-            { "id": "fuel-cap", "name": "Fuel tank cap", "kind": "component" },
-            { "id": "fuel-tap", "name": "Fuel tap", "kind": "component" }
-          ]},
-          { "id": "fuel-low-pressure", "name": "Low-pressure fuel circuit", "kind": "assembly", "children": [
-            { "id": "sediment-bowl", "name": "Sediment bowl", "kind": "component" },
-            { "id": "fuel-lift-pump", "name": "Fuel lift pump", "kind": "component", "status": "partially-verified", "sources": ["SRC-019"], "notes": "SRC-019 lists two different 'Fuel Pump' items for 23C; identity to confirm." },
-            { "id": "fuel-filters", "name": "Fuel filter(s)", "kind": "component" },
-            { "id": "fuel-pipes-lp", "name": "Fuel pipes and unions", "kind": "component" }
-          ]},
-          { "id": "fuel-injection", "name": "Injection equipment", "kind": "assembly", "children": [
-            { "id": "injection-pump", "name": "CAV DPA distributor injection pump", "kind": "component", "status": "partially-verified", "sources": ["SRC-006"], "notes": "Pump code DPA 3240011 per SRC-006." },
-            { "id": "injector-pipes", "name": "High-pressure injector pipes", "kind": "component", "quantity": 4 },
-            { "id": "injector", "name": "Injector", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-006"], "notes": "Break pressure 130 atm per SRC-006." },
-            { "id": "injector-nozzle", "name": "Injector nozzle", "kind": "component", "quantity": 4 },
-            { "id": "injector-seals", "name": "Injector seals/washers", "kind": "component" },
-            { "id": "fuel-leak-off", "name": "Fuel return (leak-off) pipes", "kind": "component" }
-          ]},
-          { "id": "air-intake", "name": "Air intake", "kind": "assembly", "children": [
-            { "id": "air-cleaner", "name": "Oil-bath air cleaner", "kind": "component", "status": "unverified" },
-            { "id": "air-intake-pipe", "name": "Intake pipe and pre-cleaner", "kind": "component" }
-          ]}
+          {
+            "id": "fuel-tank-assy",
+            "name": "Fuel tank, cap and tap",
+            "kind": "assembly",
+            "children": [
+              {
+                "id": "fuel-tank",
+                "name": "Fuel tank",
+                "kind": "component",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Capacity": "7½ Imp gal (34 l)"
+                }
+              },
+              {
+                "id": "fuel-cap",
+                "name": "Fuel tank cap",
+                "kind": "component"
+              },
+              {
+                "id": "fuel-tap",
+                "name": "Fuel tap",
+                "kind": "component"
+              }
+            ]
+          },
+          {
+            "id": "fuel-low-pressure",
+            "name": "Low-pressure fuel circuit",
+            "kind": "assembly",
+            "children": [
+              {
+                "id": "sediment-bowl",
+                "name": "Sediment bowl",
+                "kind": "component"
+              },
+              {
+                "id": "fuel-lift-pump",
+                "name": "Fuel lift pump",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-019",
+                  "SRC-035"
+                ],
+                "notes": "SRC-019 lists two different 'Fuel Pump' items for 23C; identity to confirm.",
+                "specifications": {
+                  "Type": "AC type YD",
+                  "Drive": "Eccentric at rear of camshaft",
+                  "Delivery pressure": "4–7 lb/sq in"
+                }
+              },
+              {
+                "id": "fuel-filters",
+                "name": "Fuel filter(s)",
+                "kind": "component"
+              },
+              {
+                "id": "fuel-pipes-lp",
+                "name": "Fuel pipes and unions",
+                "kind": "component"
+              }
+            ]
+          },
+          {
+            "id": "fuel-injection",
+            "name": "Injection equipment",
+            "kind": "assembly",
+            "children": [
+              {
+                "id": "injection-pump",
+                "name": "CAV DPA distributor injection pump",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006",
+                  "SRC-035"
+                ],
+                "notes": "CAV DPA distributor pump with integral variable-speed mechanical governor. Pump code decides timing (SRC-035 B.41).",
+                "specifications": {
+                  "Codes, 19° BTDC": "DPA 3240011, 3240012, 3240013, 3240015",
+                  "Codes, 13° BTDC": "DPA 3242643, 3242645 (light-load advance)",
+                  "Mounting torque": "22–24 lb ft"
+                }
+              },
+              {
+                "id": "injector-pipes",
+                "name": "High-pressure injector pipes",
+                "kind": "component",
+                "quantity": 4
+              },
+              {
+                "id": "injector",
+                "name": "Injector",
+                "kind": "component",
+                "quantity": 4,
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-006",
+                  "SRC-035"
+                ],
+                "notes": "CAV nozzle holder; type depends on engine number, not tractor serial (SRC-035 B.41).",
+                "specifications": {
+                  "Up to SJ 86045E": "BKB40S697",
+                  "SJ 86046E on (heat shield)": "BKB40S697K",
+                  "Pressure": "130 atm working, 135 atm new",
+                  "Torque": "12–14 lb ft"
+                }
+              },
+              {
+                "id": "injector-nozzle",
+                "name": "Injector nozzle",
+                "kind": "component",
+                "quantity": 4,
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Type": "CAV Pintaux",
+                  "Up to SJ 86045E": "BDN12SP6169",
+                  "SJ 86046E–SJ 125724E": "BDN12SP6169A or BDN12SP6262",
+                  "SJ 125725E on": "BDN12SP6290"
+                }
+              },
+              {
+                "id": "injector-seals",
+                "name": "Injector seals/washers",
+                "kind": "component"
+              },
+              {
+                "id": "fuel-leak-off",
+                "name": "Fuel return (leak-off) pipes",
+                "kind": "component"
+              }
+            ]
+          },
+          {
+            "id": "air-intake",
+            "name": "Air intake",
+            "kind": "assembly",
+            "children": [
+              {
+                "id": "air-cleaner",
+                "name": "Oil-bath air cleaner",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-035"
+                ],
+                "specifications": {
+                  "Type": "AC oil bath",
+                  "Oil": "¾ pint (0.43 l)"
+                }
+              },
+              {
+                "id": "air-intake-pipe",
+                "name": "Intake pipe and pre-cleaner",
+                "kind": "component"
+              }
+            ]
+          }
         ]
       },
       {
@@ -163,16 +818,84 @@
         "name": "Cooling system",
         "kind": "system",
         "children": [
-          { "id": "radiator", "name": "Radiator", "kind": "component" },
-          { "id": "radiator-cap", "name": "Radiator cap", "kind": "component" },
-          { "id": "top-hose", "name": "Top hose", "kind": "component" },
-          { "id": "bottom-hose", "name": "Bottom hose", "kind": "component" },
-          { "id": "water-pump", "name": "Water pump", "kind": "component", "status": "partially-verified", "sources": ["SRC-018"] },
-          { "id": "water-pump-pulley", "name": "Water pump pulley", "kind": "component" },
-          { "id": "fan", "name": "Fan", "kind": "component" },
-          { "id": "fan-belt", "name": "Fan belt", "kind": "component" },
-          { "id": "thermostat", "name": "Thermostat and housing", "kind": "component", "status": "partially-verified", "sources": ["SRC-018"] },
-          { "id": "coolant-heater", "name": "Coolant immersion heater", "kind": "component", "appliesTo": { "coldStart": ["cold-climate"] }, "status": "variant-dependent", "sources": ["SRC-022"] }
+          {
+            "id": "radiator",
+            "name": "Radiator",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified",
+            "specifications": {
+              "Cooling system capacity": "15 pints (8.5 l)"
+            }
+          },
+          {
+            "id": "radiator-cap",
+            "name": "Radiator cap",
+            "kind": "component"
+          },
+          {
+            "id": "top-hose",
+            "name": "Top hose",
+            "kind": "component"
+          },
+          {
+            "id": "bottom-hose",
+            "name": "Bottom hose",
+            "kind": "component"
+          },
+          {
+            "id": "water-pump",
+            "name": "Water pump",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-018",
+              "SRC-035"
+            ],
+            "specifications": {
+              "Torque": "22–24 lb ft (pump), 26–28 lb ft (pump to block)"
+            }
+          },
+          {
+            "id": "water-pump-pulley",
+            "name": "Water pump pulley",
+            "kind": "component"
+          },
+          {
+            "id": "fan",
+            "name": "Fan",
+            "kind": "component"
+          },
+          {
+            "id": "fan-belt",
+            "name": "Fan belt",
+            "kind": "component"
+          },
+          {
+            "id": "thermostat",
+            "name": "Thermostat and housing",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-018"
+            ]
+          },
+          {
+            "id": "coolant-heater",
+            "name": "Coolant immersion heater",
+            "kind": "component",
+            "appliesTo": {
+              "coldStart": [
+                "cold-climate"
+              ]
+            },
+            "status": "variant-dependent",
+            "sources": [
+              "SRC-022"
+            ]
+          }
         ]
       },
       {
@@ -180,21 +903,129 @@
         "name": "Clutch",
         "kind": "system",
         "status": "variant-dependent",
-        "sources": ["SRC-001", "SRC-003", "SRC-010"],
+        "sources": [
+          "SRC-001",
+          "SRC-003",
+          "SRC-010",
+          "SRC-035"
+        ],
         "children": [
-          { "id": "clutch-housing", "name": "Clutch (bell) housing", "kind": "component" },
-          { "id": "clutch-single", "name": "Single-stage clutch assembly", "kind": "subassembly", "appliesTo": { "clutch": ["single-stage"] }, "status": "variant-dependent", "sources": ["SRC-003", "SRC-010"], "children": [
-            { "id": "clutch-single-plate", "name": "Driven plate", "kind": "component" },
-            { "id": "clutch-single-cover", "name": "Pressure plate / cover", "kind": "component" }
-          ]},
-          { "id": "clutch-dual", "name": "Dual-stage clutch assembly", "kind": "subassembly", "appliesTo": { "clutch": ["dual-stage"] }, "status": "variant-dependent", "sources": ["SRC-001", "SRC-003", "SRC-010"], "notes": "Early dual-stage clutch not covered by service manual 1448811M1 (SRC-015).", "children": [
-            { "id": "clutch-dual-transmission-plate", "name": "Transmission driven plate", "kind": "component" },
-            { "id": "clutch-dual-pto-plate", "name": "PTO driven plate", "kind": "component" },
-            { "id": "clutch-dual-cover", "name": "Dual clutch cover and pressure plates", "kind": "component" }
-          ]},
-          { "id": "release-bearing", "name": "Release bearing and carrier", "kind": "component" },
-          { "id": "release-fork", "name": "Release fork and cross-shaft", "kind": "component" },
-          { "id": "clutch-pedal", "name": "Clutch pedal and linkage", "kind": "component" }
+          {
+            "id": "clutch-housing",
+            "name": "Clutch (bell) housing",
+            "kind": "component"
+          },
+          {
+            "id": "clutch-single",
+            "name": "Single-stage clutch assembly",
+            "kind": "subassembly",
+            "appliesTo": {
+              "clutch": [
+                "single-stage"
+              ]
+            },
+            "status": "variant-dependent",
+            "sources": [
+              "SRC-003",
+              "SRC-010",
+              "SRC-035"
+            ],
+            "children": [
+              {
+                "id": "clutch-single-plate",
+                "name": "Driven plate",
+                "kind": "component",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Diameter": "10 in (254 mm)"
+                }
+              },
+              {
+                "id": "clutch-single-cover",
+                "name": "Pressure plate / cover",
+                "kind": "component"
+              }
+            ],
+            "specifications": {
+              "Disc": "10 in (254 mm) dry",
+              "Thrust springs": "12, green",
+              "Pedal free movement": "3/4 in (19 mm)",
+              "Torque to flywheel": "26–28 lb ft"
+            }
+          },
+          {
+            "id": "clutch-dual",
+            "name": "Dual-stage clutch assembly",
+            "kind": "subassembly",
+            "appliesTo": {
+              "clutch": [
+                "dual-stage"
+              ]
+            },
+            "status": "variant-dependent",
+            "sources": [
+              "SRC-001",
+              "SRC-003",
+              "SRC-010",
+              "SRC-035"
+            ],
+            "notes": "Two discs in tandem: front for the gearbox, rear for the hydraulic pump and PTO. SRC-035 covers the Belleville-spring dual clutch; SRC-015 says an earlier dual clutch is not in manual 1448811M1, so which design a 1958 tractor has is still to check.",
+            "children": [
+              {
+                "id": "clutch-dual-transmission-plate",
+                "name": "Transmission driven plate",
+                "kind": "component",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Diameter": "11 in (279.4 mm)"
+                }
+              },
+              {
+                "id": "clutch-dual-pto-plate",
+                "name": "PTO driven plate",
+                "kind": "component",
+                "sources": [
+                  "SRC-035"
+                ],
+                "status": "partially-verified",
+                "specifications": {
+                  "Diameter": "9 in (228.6 mm)"
+                }
+              },
+              {
+                "id": "clutch-dual-cover",
+                "name": "Dual clutch cover and pressure plates",
+                "kind": "component"
+              }
+            ],
+            "specifications": {
+              "Thrust springs": "2 Belleville",
+              "Pedal free movement": "3/8 in (9.5 mm)",
+              "Adjusting screw clearance": ".088–.092 in",
+              "Torque to flywheel": "22–24 lb ft"
+            }
+          },
+          {
+            "id": "release-bearing",
+            "name": "Release bearing and carrier",
+            "kind": "component"
+          },
+          {
+            "id": "release-fork",
+            "name": "Release fork and cross-shaft",
+            "kind": "component"
+          },
+          {
+            "id": "clutch-pedal",
+            "name": "Clutch pedal and linkage",
+            "kind": "component"
+          }
         ]
       },
       {
@@ -202,51 +1033,233 @@
         "name": "Gearbox",
         "kind": "system",
         "status": "partially-verified",
-        "sources": ["SRC-004", "SRC-010", "SRC-027"],
-        "notes": "6 forward / 2 reverse, unsynchronised, 3-speed main box with high/low range. Internal layout to be established from SRC-030/SRC-032.",
+        "sources": [
+          "SRC-004",
+          "SRC-010",
+          "SRC-027",
+          "SRC-035"
+        ],
+        "notes": "6 forward / 2 reverse, 3-speed main box with high/low range. Same transmission case for single- and dual-clutch tractors (SRC-035 I.1).",
         "children": [
-          { "id": "gearbox-casing", "name": "Gearbox casing (gear pattern cast in)", "kind": "component", "status": "partially-verified", "sources": ["SRC-010"] },
-          { "id": "input-shaft", "name": "Input (primary) shaft", "kind": "component" },
-          { "id": "main-shaft", "name": "Main shaft", "kind": "component" },
-          { "id": "countershaft", "name": "Countershaft (layshaft)", "kind": "component" },
-          { "id": "gearbox-gears", "name": "Gear set", "kind": "component" },
-          { "id": "range-gears", "name": "High/low range gears", "kind": "component" },
-          { "id": "selector-forks", "name": "Selector forks and rails", "kind": "component" },
-          { "id": "gear-lever-main", "name": "Main gear lever (1-3, R)", "kind": "component", "status": "partially-verified", "sources": ["SRC-010"] },
-          { "id": "gear-lever-range", "name": "Range lever (high / low / start)", "kind": "component", "status": "partially-verified", "sources": ["SRC-010"] },
-          { "id": "gearbox-bearings", "name": "Gearbox bearings and bushes", "kind": "component" },
-          { "id": "gearbox-top-cover", "name": "Gearbox top cover and gasket", "kind": "component" }
-        ]
+          {
+            "id": "gearbox-casing",
+            "name": "Gearbox casing (gear pattern cast in)",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-010"
+            ]
+          },
+          {
+            "id": "input-shaft",
+            "name": "Input (primary) shaft",
+            "kind": "component"
+          },
+          {
+            "id": "main-shaft",
+            "name": "Main shaft",
+            "kind": "component"
+          },
+          {
+            "id": "countershaft",
+            "name": "Countershaft (layshaft)",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified",
+            "notes": "Hollow on dual-clutch tractors: the pump/PTO drive shaft runs through it (SRC-035 J.4)."
+          },
+          {
+            "id": "gearbox-gears",
+            "name": "Gear set",
+            "kind": "component"
+          },
+          {
+            "id": "range-gears",
+            "name": "High/low range gears",
+            "kind": "component"
+          },
+          {
+            "id": "selector-forks",
+            "name": "Selector forks and rails",
+            "kind": "component"
+          },
+          {
+            "id": "gear-lever-main",
+            "name": "Main gear lever (1-3, R)",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-010"
+            ]
+          },
+          {
+            "id": "gear-lever-range",
+            "name": "Range lever (high / low / start)",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-010"
+            ]
+          },
+          {
+            "id": "gearbox-bearings",
+            "name": "Gearbox bearings and bushes",
+            "kind": "component"
+          },
+          {
+            "id": "gearbox-top-cover",
+            "name": "Gearbox top cover and gasket",
+            "kind": "component"
+          }
+        ],
+        "specifications": {
+          "Overall reduction, low": "205.5 / 137 / 74.7 :1, rev 153.8:1",
+          "Overall reduction, high": "51.4 / 34.2 / 18.7 :1, rev 38.5:1",
+          "Oil": "6.6 Imp gal (30.28 l)"
+        }
       },
       {
         "id": "rear-axle",
         "name": "Rear axle, differential and brakes",
         "kind": "system",
         "children": [
-          { "id": "centre-housing", "name": "Centre (differential/hydraulic) housing", "kind": "component", "status": "partially-verified", "sources": ["SRC-003"], "notes": "Casting date code on RH side forward of round port (SRC-003)." },
-          { "id": "differential", "name": "Differential", "kind": "assembly", "children": [
-            { "id": "crown-wheel", "name": "Crown wheel", "kind": "component" },
-            { "id": "pinion", "name": "Drive pinion", "kind": "component" },
-            { "id": "diff-cage", "name": "Differential cage", "kind": "component" },
-            { "id": "diff-gears", "name": "Differential side and planet gears", "kind": "component" },
-            { "id": "diff-bearings", "name": "Differential bearings", "kind": "component" },
-            { "id": "diff-lock", "name": "Differential lock", "kind": "component", "appliesTo": { "diffLock": ["fitted"] }, "status": "variant-dependent", "sources": ["SRC-010"] }
-          ]},
-          { "id": "axle-trumpet-lh", "name": "Axle housing (trumpet), LH", "kind": "component" },
-          { "id": "axle-trumpet-rh", "name": "Axle housing (trumpet), RH", "kind": "component" },
-          { "id": "half-shaft", "name": "Half shaft", "kind": "component", "quantity": 2 },
-          { "id": "rear-hub", "name": "Rear hub", "kind": "component", "quantity": 2 },
-          { "id": "wheel-studs-rear", "name": "Rear wheel studs", "kind": "component" },
-          { "id": "axle-seals", "name": "Axle oil seals", "kind": "component" },
-          { "id": "brakes", "name": "Brakes (shoe type)", "kind": "assembly", "status": "partially-verified", "sources": ["SRC-004"], "children": [
-            { "id": "brake-drum", "name": "Brake drum", "kind": "component", "quantity": 2 },
-            { "id": "brake-shoes", "name": "Brake shoes and linings", "kind": "component" },
-            { "id": "brake-springs", "name": "Brake shoe springs", "kind": "component" },
-            { "id": "brake-cam", "name": "Brake cam/expander and adjuster", "kind": "component" },
-            { "id": "brake-pedals", "name": "Brake pedals (independent L/R)", "kind": "component" },
-            { "id": "brake-linkage", "name": "Brake rods and linkage", "kind": "component" },
-            { "id": "parking-brake", "name": "Parking brake latch", "kind": "component" }
-          ]}
+          {
+            "id": "centre-housing",
+            "name": "Centre (differential/hydraulic) housing",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-003"
+            ],
+            "notes": "Casting date code on RH side forward of round port (SRC-003)."
+          },
+          {
+            "id": "differential",
+            "name": "Differential",
+            "kind": "assembly",
+            "children": [
+              {
+                "id": "crown-wheel",
+                "name": "Crown wheel",
+                "kind": "component"
+              },
+              {
+                "id": "pinion",
+                "name": "Drive pinion",
+                "kind": "component"
+              },
+              {
+                "id": "diff-cage",
+                "name": "Differential cage",
+                "kind": "component"
+              },
+              {
+                "id": "diff-gears",
+                "name": "Differential side and planet gears",
+                "kind": "component"
+              },
+              {
+                "id": "diff-bearings",
+                "name": "Differential bearings",
+                "kind": "component"
+              },
+              {
+                "id": "diff-lock",
+                "name": "Differential lock",
+                "kind": "component",
+                "appliesTo": {
+                  "diffLock": [
+                    "fitted"
+                  ]
+                },
+                "status": "variant-dependent",
+                "sources": [
+                  "SRC-010"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "axle-trumpet-lh",
+            "name": "Axle housing (trumpet), LH",
+            "kind": "component"
+          },
+          {
+            "id": "axle-trumpet-rh",
+            "name": "Axle housing (trumpet), RH",
+            "kind": "component"
+          },
+          {
+            "id": "half-shaft",
+            "name": "Half shaft",
+            "kind": "component",
+            "quantity": 2
+          },
+          {
+            "id": "rear-hub",
+            "name": "Rear hub",
+            "kind": "component",
+            "quantity": 2
+          },
+          {
+            "id": "wheel-studs-rear",
+            "name": "Rear wheel studs",
+            "kind": "component"
+          },
+          {
+            "id": "axle-seals",
+            "name": "Axle oil seals",
+            "kind": "component"
+          },
+          {
+            "id": "brakes",
+            "name": "Brakes (shoe type)",
+            "kind": "assembly",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-004"
+            ],
+            "children": [
+              {
+                "id": "brake-drum",
+                "name": "Brake drum",
+                "kind": "component",
+                "quantity": 2
+              },
+              {
+                "id": "brake-shoes",
+                "name": "Brake shoes and linings",
+                "kind": "component"
+              },
+              {
+                "id": "brake-springs",
+                "name": "Brake shoe springs",
+                "kind": "component"
+              },
+              {
+                "id": "brake-cam",
+                "name": "Brake cam/expander and adjuster",
+                "kind": "component"
+              },
+              {
+                "id": "brake-pedals",
+                "name": "Brake pedals (independent L/R)",
+                "kind": "component"
+              },
+              {
+                "id": "brake-linkage",
+                "name": "Brake rods and linkage",
+                "kind": "component"
+              },
+              {
+                "id": "parking-brake",
+                "name": "Parking brake latch",
+                "kind": "component"
+              }
+            ]
+          }
         ]
       },
       {
@@ -254,17 +1267,69 @@
         "name": "PTO system",
         "kind": "system",
         "status": "partially-verified",
-        "sources": ["SRC-004", "SRC-010", "SRC-027"],
-        "notes": "Confirmed fitted on owner's tractor. 540 rpm. Drive is live (dual clutch) or transmission (single clutch): variant dependent.",
+        "sources": [
+          "SRC-004",
+          "SRC-010",
+          "SRC-027",
+          "SRC-035"
+        ],
+        "notes": "Confirmed fitted on the owner's tractor. 540 rpm at 1,500 engine rpm. Live with the dual clutch, through the single clutch otherwise.",
         "children": [
-          { "id": "pto-drive-shaft", "name": "PTO drive shaft (through gearbox)", "kind": "component" },
-          { "id": "pto-gears", "name": "PTO gears", "kind": "component" },
-          { "id": "pto-engagement", "name": "PTO engagement lever and coupler", "kind": "component" },
-          { "id": "pto-output-shaft", "name": "PTO output shaft (rear)", "kind": "component" },
-          { "id": "pto-housing", "name": "PTO housing / bearing retainer", "kind": "component" },
-          { "id": "pto-bearings", "name": "PTO bearings", "kind": "component" },
-          { "id": "pto-seals", "name": "PTO oil seals", "kind": "component" },
-          { "id": "pto-guard", "name": "PTO shield / cap", "kind": "component" }
+          {
+            "id": "pto-drive-shaft",
+            "name": "PTO drive shaft (through gearbox)",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified",
+            "notes": "Dual clutch: tubular shaft from the rear disc around the gearbox input shaft, geared to a solid shaft through the hollow countershaft (SRC-035 J.4)."
+          },
+          {
+            "id": "pto-gears",
+            "name": "PTO gears",
+            "kind": "component"
+          },
+          {
+            "id": "pto-engagement",
+            "name": "PTO engagement lever and coupler",
+            "kind": "component"
+          },
+          {
+            "id": "pto-output-shaft",
+            "name": "PTO output shaft (rear)",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified",
+            "specifications": {
+              "Splines": "6",
+              "Major diameter": "1.371–1.373 in (34.8 mm)",
+              "Minor diameter": "1.098–1.108 in",
+              "Speed": "540 rpm at 1,500 engine rpm"
+            }
+          },
+          {
+            "id": "pto-housing",
+            "name": "PTO housing / bearing retainer",
+            "kind": "component"
+          },
+          {
+            "id": "pto-bearings",
+            "name": "PTO bearings",
+            "kind": "component"
+          },
+          {
+            "id": "pto-seals",
+            "name": "PTO oil seals",
+            "kind": "component"
+          },
+          {
+            "id": "pto-guard",
+            "name": "PTO shield / cap",
+            "kind": "component"
+          }
         ]
       },
       {
@@ -272,44 +1337,339 @@
         "name": "Hydraulic lift system",
         "kind": "system",
         "status": "partially-verified",
-        "sources": ["SRC-001", "SRC-010", "SRC-012", "SRC-013", "SRC-014", "SRC-023"],
+        "sources": [
+          "SRC-001",
+          "SRC-010",
+          "SRC-012",
+          "SRC-013",
+          "SRC-014",
+          "SRC-023"
+        ],
         "notes": "Confirmed fitted on owner's tractor. Pump is driven with the PTO drive line, so it runs with the second clutch stage engaged on dual-clutch tractors (SRC-001, SRC-010). Draft control and position control both present (SRC-009, SRC-023).",
         "children": [
-          { "id": "hyd-pump", "name": "Hydraulic pump", "kind": "assembly", "status": "partially-verified", "sources": ["SRC-012", "SRC-014"], "supplierClaimedOem": ["184472M93", "184473M1", "184473M93", "184473M92"], "children": [
-            { "id": "hyd-pump-camshaft", "name": "Pump camshaft", "kind": "component", "status": "partially-verified", "sources": ["SRC-014"] },
-            { "id": "hyd-pump-camshaft-bearing", "name": "Pump camshaft bearing", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"], "notes": "5/8 in ID x 13/16 in OD x 1/2 in (SRC-012)." },
-            { "id": "hyd-pump-cam-blocks", "name": "Cam blocks, front and rear", "kind": "component", "status": "partially-verified", "sources": ["SRC-013", "SRC-014"], "supplierClaimedOem": ["180924M1", "180925M1"] },
-            { "id": "hyd-pump-pistons", "name": "Pump pistons", "kind": "component", "status": "partially-verified", "sources": ["SRC-012", "SRC-013"], "notes": "23.1 mm; supplier kits supply 2. Total count fitted to confirm from parts book.", "supplierClaimedOem": ["190799M1"] },
-            { "id": "hyd-pump-piston-rings", "name": "Pump piston rings", "kind": "component", "status": "partially-verified", "sources": ["SRC-013", "SRC-014"], "supplierClaimedOem": ["892604M1"] },
-            { "id": "hyd-valve-chamber", "name": "Valve chamber assembly", "kind": "component", "status": "partially-verified", "sources": ["SRC-012", "SRC-013", "SRC-014"], "supplierClaimedOem": ["184471M1"] },
-            { "id": "hyd-control-valve", "name": "Control valve", "kind": "component" },
-            { "id": "hyd-relief-valve", "name": "Relief / safety valve", "kind": "component", "status": "unverified", "sources": ["SRC-012"] },
-            { "id": "hyd-strainer", "name": "Pump strainer / filter", "kind": "component", "status": "partially-verified", "sources": ["SRC-012", "SRC-014"] }
-          ]},
-          { "id": "lift-cover", "name": "Lift cover assembly", "kind": "assembly", "children": [
-            { "id": "lift-cover-casting", "name": "Lift (top) cover", "kind": "component" },
-            { "id": "lift-cover-gasket", "name": "Lift cover gasket", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "lift-cylinder", "name": "Lift (ram) cylinder", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "lift-piston", "name": "Lift (ram) piston, 3 in", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"], "notes": "3 in ring set from serial 65685, so applies to all 1958 tractors (SB-001)." },
-            { "id": "lift-piston-rings", "name": "Lift piston rings / seals", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "connecting-rod-ram", "name": "Ram connecting rod", "kind": "component" },
-            { "id": "rockshaft", "name": "Rockshaft (cross shaft)", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "rockshaft-bushes", "name": "Rockshaft bushes", "kind": "component", "quantity": 4, "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "rockshaft-seals", "name": "Rockshaft O-rings / seals", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "lift-arm-lh", "name": "Lift arm, LH", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "lift-arm-rh", "name": "Lift arm, RH", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] }
-          ]},
-          { "id": "hyd-controls", "name": "Control mechanism", "kind": "assembly", "children": [
-            { "id": "quadrant", "name": "Control quadrant (twin lever)", "kind": "component", "status": "partially-verified", "sources": ["SRC-010", "SRC-012"] },
-            { "id": "draft-lever", "name": "Draft control lever", "kind": "component", "status": "partially-verified", "sources": ["SRC-010"] },
-            { "id": "position-lever", "name": "Position control lever", "kind": "component", "status": "partially-verified", "sources": ["SRC-010", "SRC-023"] },
-            { "id": "draft-control-spring", "name": "Draft control (main control) spring", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "draft-control-plunger", "name": "Draft control plunger and seat", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "draft-control-rocker", "name": "Draft control rocker", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "top-link-bracket", "name": "Top link bracket (rocker)", "kind": "component", "status": "partially-verified", "sources": ["SRC-012"] },
-            { "id": "position-control-cam", "name": "Position control cam and linkage", "kind": "component", "status": "unverified", "sources": ["SRC-023"] },
-            { "id": "internal-control-linkage", "name": "Internal control linkage", "kind": "component" }
-          ]}
+          {
+            "id": "hyd-pump",
+            "name": "Hydraulic pump",
+            "kind": "assembly",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-012",
+              "SRC-014",
+              "SRC-035"
+            ],
+            "supplierClaimedOem": [
+              "184472M93",
+              "184473M1",
+              "184473M93",
+              "184473M92"
+            ],
+            "children": [
+              {
+                "id": "hyd-pump-camshaft",
+                "name": "Pump drive shaft (eccentrics)",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-014",
+                  "SRC-035"
+                ],
+                "notes": "The manual calls it the pump drive shaft, with eccentrics carrying the cam blocks."
+              },
+              {
+                "id": "hyd-pump-camshaft-bearing",
+                "name": "Pump camshaft bearing",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012"
+                ],
+                "notes": "5/8 in ID x 13/16 in OD x 1/2 in (SRC-012)."
+              },
+              {
+                "id": "hyd-pump-cam-blocks",
+                "name": "Cam blocks, front and rear",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-013",
+                  "SRC-014",
+                  "SRC-035"
+                ],
+                "supplierClaimedOem": [
+                  "180924M1",
+                  "180925M1"
+                ]
+              },
+              {
+                "id": "hyd-pump-pistons",
+                "name": "Pump pistons",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-013",
+                  "SRC-035"
+                ],
+                "notes": "23.1 mm (SRC-012). Four cylinders (SRC-035 L.5), worked by two piston yokes; supplier kits supply 2.",
+                "supplierClaimedOem": [
+                  "190799M1"
+                ],
+                "quantity": 4
+              },
+              {
+                "id": "hyd-pump-piston-rings",
+                "name": "Pump piston rings",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-013",
+                  "SRC-014"
+                ],
+                "supplierClaimedOem": [
+                  "892604M1"
+                ]
+              },
+              {
+                "id": "hyd-valve-chamber",
+                "name": "Valve chamber assembly",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-013",
+                  "SRC-014",
+                  "SRC-035"
+                ],
+                "supplierClaimedOem": [
+                  "184471M1"
+                ],
+                "notes": "Two opposed valve chambers, each with inlet and outlet valves (SRC-035 L.6).",
+                "quantity": 2
+              },
+              {
+                "id": "hyd-control-valve",
+                "name": "Control valve",
+                "kind": "component"
+              },
+              {
+                "id": "hyd-relief-valve",
+                "name": "Relief / safety valve",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-035"
+                ],
+                "specifications": {
+                  "Opens at": "2,500 lb/sq in nominal (175.9 kg/sq cm)",
+                  "Location": "Pump outlet gallery"
+                }
+              },
+              {
+                "id": "hyd-strainer",
+                "name": "Pump strainer / filter",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-014"
+                ]
+              }
+            ],
+            "notes": "Four-cylinder, constant-running, positive-displacement pump in the sump between gearbox and final drive. Body floats on bronze bushes, held by dowel pins through the centre housing (SRC-035 L.5)."
+          },
+          {
+            "id": "lift-cover",
+            "name": "Lift cover assembly",
+            "kind": "assembly",
+            "children": [
+              {
+                "id": "lift-cover-casting",
+                "name": "Lift (top) cover",
+                "kind": "component"
+              },
+              {
+                "id": "lift-cover-gasket",
+                "name": "Lift cover gasket",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012"
+                ]
+              },
+              {
+                "id": "lift-cylinder",
+                "name": "Lift (ram) cylinder",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-035"
+                ]
+              },
+              {
+                "id": "lift-piston",
+                "name": "Lift (ram) piston, 3 in",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-035"
+                ],
+                "notes": "3 in ring set from serial 65685, so applies to all 1958 tractors (SB-001)."
+              },
+              {
+                "id": "lift-piston-rings",
+                "name": "Lift piston rings / seals",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012"
+                ]
+              },
+              {
+                "id": "connecting-rod-ram",
+                "name": "Ram connecting rod",
+                "kind": "component"
+              },
+              {
+                "id": "rockshaft",
+                "name": "Rockshaft (cross shaft)",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-035"
+                ]
+              },
+              {
+                "id": "rockshaft-bushes",
+                "name": "Rockshaft bushes",
+                "kind": "component",
+                "quantity": 4,
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012"
+                ]
+              },
+              {
+                "id": "rockshaft-seals",
+                "name": "Rockshaft O-rings / seals",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012"
+                ]
+              },
+              {
+                "id": "lift-arm-lh",
+                "name": "Lift arm, LH",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-035"
+                ]
+              },
+              {
+                "id": "lift-arm-rh",
+                "name": "Lift arm, RH",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-035"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hyd-controls",
+            "name": "Control mechanism",
+            "kind": "assembly",
+            "children": [
+              {
+                "id": "quadrant",
+                "name": "Control quadrant (twin lever)",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-010",
+                  "SRC-012"
+                ]
+              },
+              {
+                "id": "draft-lever",
+                "name": "Draft control lever",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-010"
+                ]
+              },
+              {
+                "id": "position-lever",
+                "name": "Position control lever",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-010",
+                  "SRC-023"
+                ]
+              },
+              {
+                "id": "draft-control-spring",
+                "name": "Draft control (main control) spring",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012",
+                  "SRC-035"
+                ]
+              },
+              {
+                "id": "draft-control-plunger",
+                "name": "Draft control plunger and seat",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012"
+                ]
+              },
+              {
+                "id": "draft-control-rocker",
+                "name": "Draft control rocker",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012"
+                ]
+              },
+              {
+                "id": "top-link-bracket",
+                "name": "Top link bracket (rocker)",
+                "kind": "component",
+                "status": "partially-verified",
+                "sources": [
+                  "SRC-012"
+                ]
+              },
+              {
+                "id": "position-control-cam",
+                "name": "Position control cam and linkage",
+                "kind": "component",
+                "status": "unverified",
+                "sources": [
+                  "SRC-023"
+                ]
+              },
+              {
+                "id": "internal-control-linkage",
+                "name": "Internal control linkage",
+                "kind": "component"
+              }
+            ]
+          }
         ]
       },
       {
@@ -317,19 +1677,92 @@
         "name": "Three-point linkage",
         "kind": "system",
         "status": "partially-verified",
-        "sources": ["SRC-004"],
+        "sources": [
+          "SRC-004"
+        ],
         "notes": "Category I (SRC-004). Confirmed fitted on owner's tractor. Top link and implement-side pins are removable implement-related items and must be flagged as such.",
         "children": [
-          { "id": "lower-link-lh", "name": "Lower link, LH", "kind": "component" },
-          { "id": "lower-link-rh", "name": "Lower link, RH", "kind": "component" },
-          { "id": "lift-rod-lh", "name": "Lift rod, LH (fixed)", "kind": "component" },
-          { "id": "lift-rod-rh", "name": "Lift rod, RH with levelling box", "kind": "component" },
-          { "id": "levelling-box", "name": "Levelling box (crank handle)", "kind": "component" },
-          { "id": "top-link", "name": "Top link", "kind": "component", "removable": true },
-          { "id": "check-chains", "name": "Check chains / stabilisers", "kind": "component" },
-          { "id": "linkage-pins", "name": "Linkage pins and linch pins", "kind": "component" },
-          { "id": "ball-ends", "name": "Lower link ball ends", "kind": "component" },
-          { "id": "drawbar", "name": "Drawbar", "kind": "component", "removable": true }
+          {
+            "id": "lower-link-lh",
+            "name": "Lower link, LH",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified"
+          },
+          {
+            "id": "lower-link-rh",
+            "name": "Lower link, RH",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified"
+          },
+          {
+            "id": "lift-rod-lh",
+            "name": "Lift rod, LH (fixed)",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified"
+          },
+          {
+            "id": "lift-rod-rh",
+            "name": "Lift rod, RH with levelling box",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified"
+          },
+          {
+            "id": "levelling-box",
+            "name": "Levelling box (crank handle)",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified",
+            "notes": "The manual describes a levelling lever on the right-hand lift rod (SRC-035 L.5)."
+          },
+          {
+            "id": "top-link",
+            "name": "Top link",
+            "kind": "component",
+            "removable": true
+          },
+          {
+            "id": "check-chains",
+            "name": "Check chains / stabilisers",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified"
+          },
+          {
+            "id": "linkage-pins",
+            "name": "Linkage pins and linch pins",
+            "kind": "component"
+          },
+          {
+            "id": "ball-ends",
+            "name": "Lower link ball ends",
+            "kind": "component",
+            "sources": [
+              "SRC-035"
+            ],
+            "status": "partially-verified"
+          },
+          {
+            "id": "drawbar",
+            "name": "Drawbar",
+            "kind": "component",
+            "removable": true
+          }
         ]
       },
       {
@@ -337,18 +1770,77 @@
         "name": "Front axle and steering",
         "kind": "system",
         "children": [
-          { "id": "front-axle-beam", "name": "Front axle centre beam", "kind": "component" },
-          { "id": "front-axle-extensions", "name": "Adjustable axle extensions", "kind": "component", "status": "unverified" },
-          { "id": "front-axle-pivot-pin", "name": "Axle pivot pin and bush", "kind": "component" },
-          { "id": "radius-rods", "name": "Radius rods", "kind": "component", "status": "unverified", "sources": ["SRC-021"] },
-          { "id": "stub-axle", "name": "Stub axle / spindle", "kind": "component", "quantity": 2 },
-          { "id": "kingpin-bushes", "name": "Kingpin bushes", "kind": "component" },
-          { "id": "front-hub", "name": "Front hub and bearings", "kind": "component", "quantity": 2 },
-          { "id": "steering-box", "name": "Steering box", "kind": "component" },
-          { "id": "steering-column", "name": "Steering column", "kind": "component" },
-          { "id": "steering-wheel", "name": "Steering wheel", "kind": "component" },
-          { "id": "drag-links", "name": "Drag links / track rods", "kind": "component", "status": "unverified", "sources": ["SRC-021"] },
-          { "id": "steering-arms", "name": "Steering arms", "kind": "component" }
+          {
+            "id": "front-axle-beam",
+            "name": "Front axle centre beam",
+            "kind": "component"
+          },
+          {
+            "id": "front-axle-extensions",
+            "name": "Adjustable axle extensions",
+            "kind": "component",
+            "status": "unverified"
+          },
+          {
+            "id": "front-axle-pivot-pin",
+            "name": "Axle pivot pin and bush",
+            "kind": "component"
+          },
+          {
+            "id": "radius-rods",
+            "name": "Radius rods",
+            "kind": "component",
+            "status": "unverified",
+            "sources": [
+              "SRC-021"
+            ]
+          },
+          {
+            "id": "stub-axle",
+            "name": "Stub axle / spindle",
+            "kind": "component",
+            "quantity": 2
+          },
+          {
+            "id": "kingpin-bushes",
+            "name": "Kingpin bushes",
+            "kind": "component"
+          },
+          {
+            "id": "front-hub",
+            "name": "Front hub and bearings",
+            "kind": "component",
+            "quantity": 2
+          },
+          {
+            "id": "steering-box",
+            "name": "Steering box",
+            "kind": "component"
+          },
+          {
+            "id": "steering-column",
+            "name": "Steering column",
+            "kind": "component"
+          },
+          {
+            "id": "steering-wheel",
+            "name": "Steering wheel",
+            "kind": "component"
+          },
+          {
+            "id": "drag-links",
+            "name": "Drag links / track rods",
+            "kind": "component",
+            "status": "unverified",
+            "sources": [
+              "SRC-021"
+            ]
+          },
+          {
+            "id": "steering-arms",
+            "name": "Steering arms",
+            "kind": "component"
+          }
         ]
       },
       {
@@ -357,22 +1849,135 @@
         "kind": "system",
         "notes": "Lucas equipment (SRC-003). Voltage is a variant axis.",
         "children": [
-          { "id": "starter-motor", "name": "Starter motor (Lucas M45G)", "kind": "component", "status": "partially-verified", "sources": ["SRC-006"] },
-          { "id": "dynamo", "name": "Dynamo", "kind": "component", "status": "variant-dependent", "sources": ["SRC-006"] },
-          { "id": "regulator", "name": "Control box (voltage regulator)", "kind": "component" },
-          { "id": "battery", "name": "Battery / batteries", "kind": "component", "status": "variant-dependent", "sources": ["SRC-005", "SRC-006"], "notes": "Battery arrangement depends on system voltage (electrics axis)." },
-          { "id": "battery-cables", "name": "Battery cables", "kind": "component" },
-          { "id": "starter-switch", "name": "Starter switch", "kind": "component" },
-          { "id": "heater-plugs", "name": "Heater (glow) plugs", "kind": "component", "appliesTo": { "coldStart": ["cold-climate"] }, "status": "variant-dependent", "sources": ["SRC-009", "SRC-020"] },
-          { "id": "intake-heater", "name": "Intake manifold heater", "kind": "component", "status": "unverified", "sources": ["SRC-022"] },
-          { "id": "wiring-harness", "name": "Wiring harness and terminals", "kind": "component" },
-          { "id": "headlamps", "name": "Headlamps", "kind": "component" },
-          { "id": "rear-lamp", "name": "Rear / plough lamp", "kind": "component" },
-          { "id": "ammeter", "name": "Ammeter", "kind": "component" },
-          { "id": "temp-gauge", "name": "Water temperature gauge", "kind": "component" },
-          { "id": "oil-pressure-gauge", "name": "Oil pressure gauge", "kind": "component" },
-          { "id": "tractormeter", "name": "Tractormeter", "kind": "component", "status": "variant-dependent", "sources": ["SRC-010"], "notes": "Listed as a De Luxe feature (SRC-010). Fitment depends on the De Luxe package, which is not yet a separate variant axis." },
-          { "id": "horn", "name": "Horn", "kind": "component", "status": "unverified" }
+          {
+            "id": "starter-motor",
+            "name": "Starter motor (Lucas M45G)",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-006",
+              "SRC-035"
+            ],
+            "specifications": {
+              "Type": "Lucas M45G",
+              "Pinion / ring teeth": "11 / 113",
+              "Torque to block": "37–40 lb ft"
+            }
+          },
+          {
+            "id": "dynamo",
+            "name": "Dynamo",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-006",
+              "SRC-035"
+            ],
+            "specifications": {
+              "Type": "Lucas C39P2"
+            }
+          },
+          {
+            "id": "regulator",
+            "name": "Control box (voltage regulator)",
+            "kind": "component"
+          },
+          {
+            "id": "battery",
+            "name": "Battery / batteries",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-005",
+              "SRC-006",
+              "SRC-035"
+            ],
+            "notes": "Two 6 V batteries in series (12 V), 38/43 Ah (SRC-035 B.42).",
+            "quantity": 2
+          },
+          {
+            "id": "battery-cables",
+            "name": "Battery cables",
+            "kind": "component"
+          },
+          {
+            "id": "starter-switch",
+            "name": "Starter switch",
+            "kind": "component"
+          },
+          {
+            "id": "heater-plugs",
+            "name": "Heater (glow) plugs",
+            "kind": "component",
+            "appliesTo": {
+              "coldStart": [
+                "cold-climate"
+              ]
+            },
+            "status": "variant-dependent",
+            "sources": [
+              "SRC-009",
+              "SRC-020"
+            ]
+          },
+          {
+            "id": "intake-heater",
+            "name": "Cold-start aid (Thermostart / Ki-gass)",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-022",
+              "SRC-035"
+            ],
+            "notes": "CAV Thermostart fitted to the inlet manifold, or Ki-gass equipment (SRC-035 B.41). Which one is fitted to the owner's tractor is unknown."
+          },
+          {
+            "id": "wiring-harness",
+            "name": "Wiring harness and terminals",
+            "kind": "component"
+          },
+          {
+            "id": "headlamps",
+            "name": "Headlamps",
+            "kind": "component"
+          },
+          {
+            "id": "rear-lamp",
+            "name": "Rear / plough lamp",
+            "kind": "component"
+          },
+          {
+            "id": "ammeter",
+            "name": "Ammeter",
+            "kind": "component"
+          },
+          {
+            "id": "temp-gauge",
+            "name": "Water temperature gauge",
+            "kind": "component"
+          },
+          {
+            "id": "oil-pressure-gauge",
+            "name": "Oil pressure gauge",
+            "kind": "component"
+          },
+          {
+            "id": "tractormeter",
+            "name": "Tractormeter",
+            "kind": "component",
+            "status": "variant-dependent",
+            "sources": [
+              "SRC-010",
+              "SRC-035"
+            ],
+            "notes": "Listed as a De Luxe feature (SRC-010). Fitment depends on the De Luxe package, which is not yet a separate variant axis. Fitted on the De Luxe (dual clutch) version (SRC-035 B.1)."
+          },
+          {
+            "id": "horn",
+            "name": "Horn",
+            "kind": "component",
+            "status": "unverified"
+          }
         ]
       },
       {
@@ -380,17 +1985,75 @@
         "name": "Bodywork and operator area",
         "kind": "system",
         "children": [
-          { "id": "bonnet", "name": "Bonnet", "kind": "component" },
-          { "id": "side-panels", "name": "Side panels", "kind": "component" },
-          { "id": "grille", "name": "Grille", "kind": "component" },
-          { "id": "front-badge", "name": "Front badge / emblem", "kind": "component", "notes": "Ferguson vs Massey Ferguson branding changed during 1958 (SRC-002). Variant." },
-          { "id": "dashboard", "name": "Dashboard / instrument panel", "kind": "component" },
-          { "id": "serial-plate", "name": "Tractor serial number plate", "kind": "component", "status": "partially-verified", "sources": ["SRC-002", "SRC-003"] },
-          { "id": "mudguards", "name": "Rear mudguards (fenders)", "kind": "component" },
-          { "id": "seat", "name": "Seat (pan or cushioned De Luxe)", "kind": "component", "status": "variant-dependent", "sources": ["SRC-010"] },
-          { "id": "seat-support", "name": "Seat support / spring", "kind": "component" },
-          { "id": "footplates", "name": "Footplates / steps", "kind": "component" },
-          { "id": "front-weights", "name": "Front weights (optional)", "kind": "component", "removable": true, "status": "unverified" }
+          {
+            "id": "bonnet",
+            "name": "Bonnet",
+            "kind": "component"
+          },
+          {
+            "id": "side-panels",
+            "name": "Side panels",
+            "kind": "component"
+          },
+          {
+            "id": "grille",
+            "name": "Grille",
+            "kind": "component"
+          },
+          {
+            "id": "front-badge",
+            "name": "Front badge / emblem",
+            "kind": "component",
+            "notes": "Ferguson vs Massey Ferguson branding changed during 1958 (SRC-002). Variant."
+          },
+          {
+            "id": "dashboard",
+            "name": "Dashboard / instrument panel",
+            "kind": "component"
+          },
+          {
+            "id": "serial-plate",
+            "name": "Tractor serial number plate",
+            "kind": "component",
+            "status": "partially-verified",
+            "sources": [
+              "SRC-002",
+              "SRC-003"
+            ]
+          },
+          {
+            "id": "mudguards",
+            "name": "Rear mudguards (fenders)",
+            "kind": "component"
+          },
+          {
+            "id": "seat",
+            "name": "Seat (pan or cushioned De Luxe)",
+            "kind": "component",
+            "status": "variant-dependent",
+            "sources": [
+              "SRC-010",
+              "SRC-035"
+            ],
+            "notes": "De Luxe version has a cushion seat (SRC-035 B.1)."
+          },
+          {
+            "id": "seat-support",
+            "name": "Seat support / spring",
+            "kind": "component"
+          },
+          {
+            "id": "footplates",
+            "name": "Footplates / steps",
+            "kind": "component"
+          },
+          {
+            "id": "front-weights",
+            "name": "Front weights (optional)",
+            "kind": "component",
+            "removable": true,
+            "status": "unverified"
+          }
         ]
       },
       {
@@ -398,15 +2061,74 @@
         "name": "Wheels and tyres",
         "kind": "system",
         "children": [
-          { "id": "front-wheel", "name": "Front wheel (disc and rim)", "kind": "component", "quantity": 2 },
-          { "id": "rear-wheel-centre", "name": "Rear wheel centre (disc)", "kind": "component", "quantity": 2 },
-          { "id": "rear-rim", "name": "Rear rim", "kind": "component", "quantity": 2 },
-          { "id": "rear-rim-clamps", "name": "Rim clamps / bolts", "kind": "component" },
-          { "id": "front-wheel-nuts", "name": "Front wheel nuts", "kind": "component" },
-          { "id": "rear-wheel-nuts", "name": "Rear wheel nuts", "kind": "component" },
-          { "id": "front-tyre", "name": "Front tyre", "kind": "component", "quantity": 2, "status": "unverified" },
-          { "id": "rear-tyre", "name": "Rear tyre", "kind": "component", "quantity": 2, "status": "unverified" },
-          { "id": "tyre-valves", "name": "Tyre valves", "kind": "component" }
+          {
+            "id": "front-wheel",
+            "name": "Front wheel (disc and rim)",
+            "kind": "component",
+            "quantity": 2
+          },
+          {
+            "id": "rear-wheel-centre",
+            "name": "Rear wheel centre (disc)",
+            "kind": "component",
+            "quantity": 2
+          },
+          {
+            "id": "rear-rim",
+            "name": "Rear rim",
+            "kind": "component",
+            "quantity": 2
+          },
+          {
+            "id": "rear-rim-clamps",
+            "name": "Rim clamps / bolts",
+            "kind": "component"
+          },
+          {
+            "id": "front-wheel-nuts",
+            "name": "Front wheel nuts",
+            "kind": "component"
+          },
+          {
+            "id": "rear-wheel-nuts",
+            "name": "Rear wheel nuts",
+            "kind": "component"
+          },
+          {
+            "id": "front-tyre",
+            "name": "Front tyre",
+            "kind": "component",
+            "quantity": 2,
+            "status": "partially-verified",
+            "sources": [
+              "SRC-035"
+            ],
+            "notes": "Size as supplied; the owner's tyres may differ.",
+            "specifications": {
+              "Size": "4 × 19",
+              "Pressure": "26 psi"
+            }
+          },
+          {
+            "id": "rear-tyre",
+            "name": "Rear tyre",
+            "kind": "component",
+            "quantity": 2,
+            "status": "partially-verified",
+            "sources": [
+              "SRC-035"
+            ],
+            "notes": "Size as supplied; the owner's tyres may differ.",
+            "specifications": {
+              "Size": "10 × 28",
+              "Pressure": "12 psi"
+            }
+          },
+          {
+            "id": "tyre-valves",
+            "name": "Tyre valves",
+            "kind": "component"
+          }
         ]
       }
     ]

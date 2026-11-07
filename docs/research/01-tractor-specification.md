@@ -8,10 +8,35 @@ Phase 1 deliverable. Researched 2026-11-07. Every figure cites a source id from
 **PV** partially verified (two or more independent secondary/supplier sources agree, or one good secondary source) ·
 **U** unverified (single weak source, or inferred) · **VD** variant dependent.
 
-> No primary factory publication has been read yet. Nothing in this document is
-> marked **V**. The parts book (819045M4) and the service manual set
-> (1448811M1 + 690560M1) are the documents needed to raise statuses. See
+> **Update 2026-11-07:** the FE-35/MF35 Workshop Service Manual (scan, SRC-035) has been read.
+> See §0 below for what it verified and corrected. The tables in §1–§8 are the original
+> Phase 1 findings; where §0 differs, §0 wins. The parts book (819045M4) is still needed for
+> part numbers and quantities. See
 > [05-documentation-and-modelling-resources.md](05-documentation-and-modelling-resources.md).
+
+## 0. Workshop manual check (SRC-035)
+
+Page references are the manual's own (section.page). Full figures are in
+[`data/technical.json`](../../data/technical.json).
+
+| Item | Manual says | Effect |
+|---|---|---|
+| Serial codes (B.1) | Chassis S/V/J; engine G, H, D (23C), N (3-A-152), K, L; clutch F single, M dual | **V.** Perkins letter is **N**, not P (SRC-003 wrong). Other supplier letters not in the manual |
+| De Luxe (B.1) | Dual clutch, live PTO, Tractormeter, cushion seat | **V** |
+| 23C data (B.29) | 3 5/16 × 4 in, 137.89 cu in (2,259 cc), 20:1, 1-3-4-2, 37.25 bhp, 35.9 belt hp, 100 lb ft at 1,600 rpm | **V** |
+| Performance (B.2) | 34 hp at PTO, 31.5 drawbar hp | **V.** Resolves the "34 / 35.9 / 37 hp" question: they are different ratings |
+| Combustion (C, B.38) | Indirect injection, Ricardo Comet pre-combustion chamber insert in the head | **V** |
+| Liners (B.32–33) | Removable flanged sleeves, graded F/G/H, standard size only, stand-out .001–.004 in | Wet/dry **still not stated**; conflict stays open |
+| Torques (B.29–30) | Head 100–105, con-rod 65–70, flywheel 90–100, centre main housing 39–42 lb ft, and others | **V.** SRC-006 mixed lb ft and Nm |
+| Valves (B.37–38) | Inlet .012 in, exhaust .008 in cold; timing IO 10½° BTDC, IC 37½° ABDC, EO 45½° BBDC, EC 10½° ATDC | **V** |
+| Fuel (B.41) | DPA 3240011/12/13/15 at 19° BTDC, 3242643/45 at 13°; Pintaux nozzles change at engines SJ 86046E and SJ 125725E; 130 atm; AC YD lift pump; Thermostart or Ki-gass; AC oil-bath air cleaner | **V** |
+| Electrics (B.42) | 12 V from 2 × 6 V batteries; dynamo C39P2; starter M45G | **V** (12 V settled for the diesel) |
+| Clutch (I.1, I.4) | Diesel single 10 in, 12 springs, ¾ in pedal free play; dual 11 in + 9 in, 2 Belleville springs, ⅜ in free play | **V** |
+| Gearbox (J.4) | 6F/2R; overall reductions 205.5 … 18.7:1; road speeds 1.28–14.0 mph at 2,000 rpm; 6.6 gal oil | **V** |
+| PTO (M.3) | 6-spline 1⅜ in shaft; 540 rpm at 1,500 engine rpm; ground-speed option | **V** |
+| Hydraulics (L.5–6) | Four-cylinder pump, two yokes, two opposed valve chambers, relief 2,500 psi, no check valve | **V.** Supplier 2,300/2,800 psi valves are not the stated original |
+| Dimensions, weight, capacities (B.1–2) | Wheelbase 72 in; 3,158 lb basic / 3,198 lb De Luxe; fuel 7½ gal; cooling 15 pints; sump 12 pints | **V** |
+
 
 ---
 
@@ -53,7 +78,7 @@ use them to date a tractor.
 | Injector break pressure | 130 atm | U | SRC-006 |
 | Valve clearance (cold) | Inlet 0.305 mm (0.012 in), exhaust 0.203 mm (0.008 in) | U | SRC-006 |
 | Journal sizes | Main 69.901 mm, big end 58.712 mm, gudgeon pin 28.579 mm | U | SRC-006 |
-| Torque figures | Head 110, main 40, con-rod 95, flywheel 135 Nm per SRC-006. **Do not display.** Main < con-rod is implausible and suggests a transcription error | U | SRC-006 |
+| Torque figures | Superseded: see §0. SRC-006's figures mixed lb ft and Nm | V | SRC-035 |
 | Starting reputation | Poor cold starter; MF trialled Perkins conversions c.1958 | PV | SRC-009, SRC-021, SRC-022 |
 | Cold-start aids | Most UK 23C 35s **lacked** per-cylinder heater plugs. Cold-climate tractors had them, plus a coolant heater. Intake manifold has a heater boss | VD | SRC-009, SRC-020, SRC-022 |
 | Engine number | No plate. Stamped into the block **just above the generator, right-hand side** | PV | SRC-003 |
@@ -141,7 +166,7 @@ the lever sets a lift-arm height and the valve holds it there.
    prefix and number. 79553–125067 dates the tractor to 1958.
 2. **Prefix letters** (SRC-003, letter table, not yet confirmed against a UK plate):
    - 1st letter, chassis: S standard, C high clearance, R/T row crop, J industrial, V vineyard, U utility/turf
-   - 2nd letter, fuel: D Standard diesel, G petrol, K TVO, L lamp oil, P Perkins diesel, B LPG, H high-altitude petrol
+   - 2nd letter, fuel: D Standard diesel, G petrol, K TVO, L lamp oil, N Perkins 3-A-152 diesel (SRC-035; SRC-003 says P), B LPG, H high-altitude petrol
    - 3rd letter, clutch: M dual-stage, F single-stage, W Multi-Power (MF35X only, not 1958)
 3. **Engine number:** stamped on the block above the dynamo, right-hand side (SRC-003).
    A 4-cylinder engine with that stamping is consistent with the 23C. A 3-cylinder engine
@@ -159,7 +184,7 @@ the lever sets a lift-arm height and the valve holds it there.
 | Engine | Diesel; Standard 23C provisional | Provisional |
 | Hydraulic lift, 3-point linkage, rear PTO | Fitted | Owner confirmed |
 | Serial number / prefix | Unknown (tractor not accessible) | — |
-| Clutch / PTO type | **Unknown.** Decides live vs transmission PTO | — |
+| Clutch / PTO type | **Dual-stage clutch, live PTO.** Owner reports (2026-11-07) that the tractor can be slowed with the clutch while attached equipment keeps working | Owner-reported; serial prefix (M) not yet seen |
 | Electrics, cold start, diff lock, seat | Unknown | — |
 
 ## 10. Open questions (priority order)

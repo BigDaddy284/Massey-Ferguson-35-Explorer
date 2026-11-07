@@ -23,17 +23,23 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 1 complete; Phase 2
-(application foundation) is next.**
+research, build, test and verify before moving on. Current status: **Phase 2 (application foundation) built; Phase 3
+(3D model) is next.**
 
 ## Commands
 
 ```bash
-npm run validate        # or: node scripts/validate-data.mjs
+npm run validate        # check data/*.json (sources, statuses, ids, appliesTo)
+npm run build           # validate, then regenerate app/data/mf35-data.js from data/*.json
+npm test                # node:test suite for app/js/core.js (tests/*.test.js)
+node --test tests/core.test.js   # single test file
+npm run serve           # optional: http://localhost:8035 (python3); the app also works opened directly
 ```
 
-There is no build, bundler or test framework yet. The validator has no dependencies (Node ≥ 18).
-Run it after any edit to `data/*.json`. It exits 1 and lists every error.
+No dependencies, no bundler (Node >= 18). **After any edit to `data/*.json`, run `npm run build`.**
+The app reads only the generated `app/data/mf35-data.js`, which is committed. Open
+`app/index.html` directly in a browser. It must keep working from `file://`, so use classic
+`<script>` tags only: no ES modules and no `fetch()` of local files.
 
 ## Architecture
 
@@ -50,9 +56,22 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   diagram references. `appliesTo: {axis: [options]}` restricts a node to configurations (keys
   ANDed, values ORed).
 
+- `data/technical.json`: Technical Information rows (value + status + sources; `display:false`
+  rows are withheld) and the Identification guide (steps, serial prefix letter table).
+- `app/js/core.js`: pure logic, loaded in the browser as `window.MF35Core` and through `require` in tests.
+  It covers hierarchy indexing, configuration resolution, applicability, serial decoding, fuzzy search
+  and coverage. Put anything testable here.
+- `app/js/app.js`: DOM/UI only. It uses hash routing (`#/anatomy/<id>`, `#/catalogue`, `#/technical/<section>`,
+  `#/identification`, `#/tractor`, `#/research/<SRC-id>`), and the views are string-rendered. "My Tractor"
+  entries are saved in `localStorage` (`mf35.owner.v1`) as overrides on `ownerTractor`. They only
+  last per browser. Permanent facts go into `data/configurations.json`.
+- The anatomy workspace is currently an SVG *schematic* systems map (clearly labelled). Phase 3
+  replaces it with the Three.js model. Disabled toolbar buttons mark Phase 3/4 controls.
+
 How the pieces connect: the app resolves the active configuration as `ownerTractor`, falling
-back to `defaultTarget` for each null axis. It filters the hierarchy by `appliesTo`. Any node
-that depends on an axis the owner hasn't confirmed is shown as *variant dependent*. The rules
+back to `defaultTarget` for each null axis. It filters the hierarchy by `appliesTo`. A node is shown as *variant dependent* only if it
+depends on an unconfirmed axis **and** excludes some in-scope option of that axis. Engine parts list
+only the 23C, the sole in-scope engine, so they don't all become variant dependent. The rules
 are in `docs/research/03-configuration-rules.md`.
 
 ## Non-negotiable accuracy rules
@@ -62,18 +81,21 @@ These are enforced by the validator where possible.
 - Verification statuses are exactly `verified`, `partially-verified`, `unverified` and
   `variant-dependent`. An omitted status means `unverified`.
 - `verified` requires at least one **accessed `primary`** source (AGCO parts book, service manual
-  or operator book). None has been obtained yet, so nothing is verified.
+  or operator book). The only one read so far is the FE-35/MF35 workshop service manual scan
+  (SRC-035). Technical figures it states are `verified`. Hierarchy components stay at most
+  `partially-verified` until their part number and quantity are checked in parts book 819045M4.
 - A status other than `unverified` must cite sources.
 - OEM numbers quoted by suppliers or forums go in `supplierClaimedOem`, never in `oemPartNumber`,
   until checked against parts book 819045M4 (SRC-032).
 - Never present missing data as confirmed in the UI. Show "not yet documented" instead.
 - The Perkins 3.152/A3.152 is **not** 1958 equipment (introduced 1959, c. serial 165596).
-- Do not assume live PTO. It depends on the dual-stage clutch, which is unknown for the owner's
-  tractor.
+- Live PTO depends on the dual-stage clutch. The owner reports dual-clutch behaviour
+  (`clutchStatus: owner-reported`), but the serial prefix (M) has not been seen, so label it as reported.
 - Do not apply US-built MF35 serial breaks to Coventry serials.
 - Do not reproduce copyrighted AGCO diagrams or text. Diagrams and 3D assets must be original.
-- Torque values from SRC-006 are suspect (main 40 Nm < con-rod 95 Nm). Don't display them until
-  checked against the service manual.
+- Torques come from the workshop manual (SRC-035 B.29–B.30) in lb ft. SRC-006's "Nm" figures mix
+  units and must not be used.
+- The FE-35 manual's engine code for the Perkins 3-A-152 is **N**, not P (SRC-035 B.1).
 
 ## Conventions
 
@@ -82,5 +104,8 @@ These are enforced by the validator where possible.
   `dateResearched`), cite it from the data, then validate.
 - Record conflicting information rather than silently picking one value.
 - UK English in user-facing text (tyre, colour, catalogue).
+- UI theme is blue / silver / black / grey (the owner's choice, which overrides the spec's "MF red accent").
+  CSS tokens are in `app/css/app.css` `:root`. The tractor model itself keeps its red/grey livery.
+- Missing values render as "Not yet documented". Supplier numbers render as "unverified" claims.
 - 3D plan (Phase 3): an original procedural Three.js model, one mesh/group per hierarchy id.
   No suitable licensable separable MF35 model exists (see `docs/research/05-…`).

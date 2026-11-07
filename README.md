@@ -3,8 +3,13 @@
 An interactive digital anatomy and parts catalogue for a **1958 Massey Ferguson 35 diesel**
 (Standard 23C engine), built to run locally in a web browser.
 
-**Status:** Phase 1 (historical research and component identification) complete. The
-application itself starts in Phase 2.
+**Status:** Phase 2 (application foundation) built. The 3D model comes in Phase 3; until then the
+anatomy view shows a labelled schematic systems map.
+
+## Open the app
+
+Open `app/index.html` in any modern browser. It needs no server or install. Alternatively, run
+`npm run serve` and visit http://localhost:8035.
 
 ## Phase 1 deliverables
 
@@ -19,10 +24,11 @@ application itself starts in Phase 2.
 Specifications: [docs/spec/PRODUCT_SPEC.md](docs/spec/PRODUCT_SPEC.md) (governing) and
 [docs/spec/DESIGN.md](docs/spec/DESIGN.md).
 
-## Validate the data
+## Development
 
 ```bash
-npm run validate
+npm run build   # validate data/*.json and regenerate app/data/mf35-data.js
+npm test        # core logic tests
 ```
 
 ## Accuracy policy
