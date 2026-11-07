@@ -42,6 +42,115 @@
     'cylinder-liner', 'lift-cylinder', 'clutch-dual-cover', 'clutch-single-cover', 'pto-guard', 'air-cleaner', 'mudguards',
     'footplates', 'seat', 'steering-box', 'flywheel', 'clutch-dual-transmission-plate', 'clutch-dual-pto-plate', 'clutch-single-plate'];
 
+  // Exploded-view directions: how far (metres, at full explosion) each group moves away from
+  // its parent assembly. 'mirror' flips z for the left-hand side so pairs open outwards.
+  // Groups not listed move radially away from their parent's centre (see viewer.js).
+  // These are presentation choices for a clear layout, not dismantling instructions.
+  var EXPLODE = {
+    // whole tractor
+    bodywork: [0, 0.95, 0],
+    fuel: [0.05, 0.55, 0],
+    cooling: [0.85, 0.2, 0],
+    engine: [0.35, 0.22, 0],
+    clutch: [0.12, 0.05, 0],
+    transmission: [0, 0, 0],
+    'rear-axle': [-0.12, 0, 0],
+    pto: [-0.2, -0.3, 0],
+    hydraulics: [-0.35, 0.6, 0],
+    linkage: [-0.8, 0.1, 0],
+    'front-axle': [0.55, -0.05, 0],
+    electrical: [0.05, 0.35, 0.5],
+    wheels: [0, 0, 0.85, 'mirror'],
+    // engine
+    'engine-block-assy': [0, 0, 0],
+    'cylinder-head-assy': [0, 0.32, 0],
+    valvetrain: [0, 0.22, 0],
+    'crank-assy': [0, -0.32, 0],
+    'lubrication-assy': [0, -0.55, 0],
+    'timing-assy': [0.32, 0, 0],
+    'flywheel-assy': [-0.3, 0, 0],
+    manifolds: [0, 0.05, 0.38],
+    // hydraulics
+    'hyd-pump': [0, -0.15, 0],
+    'lift-cover': [0, 0.12, 0],
+    'hyd-controls': [0, 0.3, 0.35],
+    'lift-cover-gasket': [0, 0.16, 0],
+    'lift-cylinder': [0.34, -0.2, 0],
+    'lift-piston-rings': [0.18, -0.2, 0],
+    'lift-piston': [0.07, -0.2, 0],
+    'connecting-rod-ram': [-0.08, -0.2, 0],
+    rockshaft: [-0.18, 0.05, 0],
+    'rockshaft-bushes': [-0.18, 0.05, 0.1, 'mirror'],
+    'rockshaft-seals': [-0.18, 0.05, 0.2, 'mirror'],
+    'lift-arm-lh': [-0.3, 0, -0.32],
+    'lift-arm-rh': [-0.3, 0, 0.32],
+    quadrant: [0, 0.05, 0.12],
+    'draft-lever': [0, 0.05, 0.24],
+    'position-lever': [0, 0.05, 0.36],
+    'draft-control-spring': [-0.3, 0, 0],
+    'draft-control-plunger': [-0.16, 0, 0],
+    'draft-control-rocker': [-0.02, -0.12, 0],
+    'top-link-bracket': [-0.45, 0.05, 0],
+    'position-control-cam': [0.02, -0.06, 0.12],
+    'internal-control-linkage': [0.16, -0.1, 0],
+    // rear axle
+    differential: [0, -0.05, 0],
+    brakes: [0.25, 0, 0],
+    // bodywork
+    bonnet: [0, 0.35, 0],
+    'side-panels': [0, 0.15, 0.3, 'mirror'],
+    grille: [0.3, 0.05, 0],
+    'front-badge': [0.45, 0.1, 0],
+    dashboard: [0, 0.3, 0],
+    'serial-plate': [0, 0.42, 0.15],
+    mudguards: [-0.05, 0.1, 0.35, 'mirror'],
+    seat: [-0.2, 0.4, 0],
+    'seat-support': [-0.12, 0.18, 0],
+    footplates: [0, -0.08, 0.3, 'mirror'],
+    // wheels: each layer slides outwards off its hub
+    'front-wheel-nuts': [0.1, 0, 0.1, 'mirror'],
+    'front-wheel': [0.1, 0, 0.25, 'mirror'],
+    'front-tyre': [0.1, 0, 0.45, 'mirror'],
+    'rear-wheel-nuts': [-0.1, 0, 0.1, 'mirror'],
+    'rear-wheel-centre': [-0.1, 0, 0.22, 'mirror'],
+    'rear-rim-clamps': [-0.1, 0, 0.34, 'mirror'],
+    'rear-rim': [-0.1, 0, 0.46, 'mirror'],
+    'rear-tyre': [-0.1, 0, 0.7, 'mirror'],
+    'tyre-valves': [0, 0.08, 0.8, 'mirror'],
+    // clutch
+    'clutch-dual': [0.3, 0, 0],
+    'clutch-single': [0.3, 0, 0],
+    'release-bearing': [0.08, 0, 0],
+    'release-fork': [0, -0.18, 0],
+    'clutch-pedal': [0, 0, -0.2],
+    // casings that enclose their assembly move clear of it
+    'clutch-housing': [-0.32, 0, 0],
+    'gearbox-top-cover': [0, 0.3, 0],
+    'gearbox-casing': [0, -0.05, -0.35],
+    'centre-housing': [0.1, 0, 0],
+    'lift-cover-casting': [0, 0.3, 0],
+    'timing-cover': [0.22, 0, 0],
+    'rocker-cover': [0, 0.2, 0]
+  };
+
+  // Axis along which parts that share their assembly's centre slide out (default: upwards).
+  var EXPLODE_AXIS = {
+    'hyd-pump': [1, 0, 0],
+    clutch: [1, 0, 0],
+    'clutch-dual': [1, 0, 0],
+    'clutch-single': [1, 0, 0],
+    'flywheel-assy': [-1, 0, 0],
+    transmission: [0, 1, 0],
+    differential: [0, 0, 1],
+    'rear-axle': [0, 0, 1],
+    pto: [-1, 0, 0],
+    'crank-assy': [0, -1, 0],
+    'timing-assy': [1, 0, 0],
+    'fuel-injection': [0, 0, -1],
+    cooling: [1, 0, 0],
+    wheels: [0, 0, 1]
+  };
+
   function build(THREE) {
     var V = function (x, y, z) { return new THREE.Vector3(x, y, z); };
     var rootGroup = new THREE.Group();
@@ -661,8 +770,8 @@
     // Front weights: removable, not fitted in the default model
     add('front-weights', rbox(0.06, 0.18, 0.40, 0.02), M.greyDark, V(2.14, 0.66, 0));
 
-    return { root: rootGroup, parts: parts, casings: CASINGS.slice(), dims: DIM, removableHidden: ['front-weights'] };
+    return { root: rootGroup, parts: parts, casings: CASINGS.slice(), dims: DIM, removableHidden: ['front-weights'], explode: EXPLODE, explodeAxis: EXPLODE_AXIS };
   }
 
-  return { build: build, DIM: DIM, CASINGS: CASINGS };
+  return { build: build, DIM: DIM, CASINGS: CASINGS, EXPLODE: EXPLODE };
 });

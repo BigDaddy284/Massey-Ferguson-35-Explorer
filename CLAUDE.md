@@ -23,7 +23,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 3 (3D model) built; Phase 4 (exploded views) is next.**
+research, build, test and verify before moving on. Current status: **Phase 4 (exploded views) built; Phase 5 (component catalogue) is next.**
 
 ## Commands
 
@@ -71,7 +71,14 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
 - `app/js/viewer.js`: Three.js scene, OrbitControls, picking, highlight, hide, isolate, X-ray
   (casing list in model.js), auto see-through for parts blocking the selection, camera presets.
   The anatomy view moves one persistent viewer element into each re-render (no WebGL re-creation).
-  Without WebGL it falls back to the SVG schematic. The explode slider stays disabled until Phase 4.
+  Without WebGL it falls back to the SVG schematic.
+- Exploded views (Phase 4, viewer.js): `setExplode({scope, depth, t})` moves meshes from their
+  stored home positions. Directions come from `EXPLODE` hints in model.js (metres at full explode,
+  relative to the parent; `'mirror'` flips z for the LH side), otherwise radially from the parent's
+  centre. Children sharing the parent's centre stack along `EXPLODE_AXIS`. LH/RH halves of a part
+  split apart. Exploding one assembly ghosts the rest. Numbered callouts with leader lines and the
+  exploded parts list use `explodeRefs()`. `#/exploded/<id>` opens an assembly exploded. The layout is
+  a presentation choice, not a dismantling procedure.
 - `app/vendor/three/`: Three.js r147 (MIT), the last release with a classic `three.min.js` and
   `examples/js/OrbitControls.js`. Don't upgrade without replacing those with a non-module build.
 - `window.MF35Explorer.viewer()` is a read-only handle for browser tests.

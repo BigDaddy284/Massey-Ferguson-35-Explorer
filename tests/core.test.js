@@ -141,3 +141,16 @@ test('every hierarchy id used by the 3D model exists', () => {
   const missingIds = [...ids].filter((id) => !index.byId[id]);
   assert.deepEqual(missingIds, []);
 });
+
+test('exploded-view directions and stacking axes name real hierarchy ids', () => {
+  const THREE = require('../app/vendor/three/three.min.js');
+  const model = require('../app/js/model.js');
+  const built = model.build(THREE);
+  const keys = [...Object.keys(model.EXPLODE), ...Object.keys(built.explodeAxis)];
+  assert.ok(keys.length > 40, `found ${keys.length} entries`);
+  assert.deepEqual(keys.filter((id) => !index.byId[id]), []);
+  for (const [id, v] of Object.entries(model.EXPLODE)) {
+    assert.ok(v.slice(0, 3).every((n) => typeof n === 'number' && Math.abs(n) <= 1.5), id);
+    assert.ok(v.length === 3 || (v.length === 4 && v[3] === 'mirror'), id);
+  }
+});
