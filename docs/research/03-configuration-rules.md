@@ -27,7 +27,10 @@ Correcting the engine or clutch must be a data edit, never a code change.
    `appliesTo: { axis: [options] }` means it fits only when the active value is in the list.
    Keys are ANDed together; values within one key are ORed.
 2. **Unknown owner values.** If the owner's value for an axis the component depends on is
-   `null`, show the component as **variant dependent**, not as fitted. The 3D model may draw
+   `null`, **and** the component excludes at least one in-scope option of that axis, show it as
+   **variant dependent**, not as fitted. (Engine parts list only `std-23c-diesel`, the only in-scope
+   engine, so a provisional engine does not make every engine part variant dependent. The UI flags
+   the engine as provisional in the banner instead.) The 3D model may draw
    the `defaultTarget` variant, but it must be labelled as such.
 3. **Default target** (for drawing only): 23C, dual-stage clutch, live PTO, standard
    chassis, 12 V, UK cold start, no diff lock. Dual-stage is the default because it is the
