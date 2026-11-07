@@ -29,6 +29,29 @@ parts book (819045M4) or the tractor itself is available:
 - Internal gear layout of the gearbox, PTO gears and differential (simplified cylinders).
 - The forward extension of the sump carrying the front axle.
 
+## Appearance pass (after Phase 4)
+
+Shapes the owner's photograph and period views of the FE35 were used for, by eye:
+
+- Bonnet lofted through cross-sections (rounded crown, slight taper and nose dip), separate
+  louvred side panels, open cast-shield grille with a bar mesh and the triple-triangle badge,
+  lamp pods either side.
+- Clamshell mudguards: crowned sheet over the wheel, flat inner skirt, rolled outer edge, bracket
+  to the axle housing. Dished pressed-steel rear wheel centres with six nuts and six rim clamps;
+  six-bolt front wheels with hub caps; three-rib front tyres and bar-lug rear tyres.
+- Dash cowl with a sloping instrument panel: chrome-bezelled ammeter, water temperature, oil
+  pressure and tractormeter, key switch, serial plate. Three-spoke ribbed steering wheel.
+- De Luxe cushion seat on a sprung pan with the coil spring; chequer-plate footplates and steps.
+- Castings: centre housing with its top flange and nuts, flanged tapering axle housings with
+  brake flanges, water-jacket side plates and port bosses on the engine, alloy rocker cover with
+  filler cap, sump drain plug, DPA pump with outlet unions, starter with solenoid.
+- Air cleaner moved to the left-hand side with its stack and pre-cleaner bowl beside the dash;
+  exhaust stack with the silencer on the right (owner photo).
+- Surface grain for cast iron, paint and rubber is generated in code (no texture files). The
+  viewer builds a studio environment map in code for reflections.
+
+None of this changes any measured dimension above. It is appearance, not evidence.
+
 ## How it is used
 
 - One group per hierarchy id. A part fitted in several places (four pistons, eight valves) is one

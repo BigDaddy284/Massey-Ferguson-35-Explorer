@@ -47,8 +47,37 @@
     var camera = new THREE.PerspectiveCamera(32, 1, 0.03, 60);
     this.camera = camera;
 
-    scene.add(new THREE.HemisphereLight(0xf4f7fb, 0x7f858c, 0.85));
-    var key = new THREE.DirectionalLight(0xffffff, 0.95);
+    // Studio environment generated in code (a few soft light panels in a neutral room), so
+    // metal and paint pick up reflections. Pre-filtered once and shared by every material.
+    (function () {
+      try {
+        var env = new THREE.Scene();
+        env.background = new THREE.Color(0x9aa0a8);
+        var roomMat = new THREE.MeshStandardMaterial({ color: 0x8c9299, side: THREE.BackSide, roughness: 1, metalness: 0 });
+        var room = new THREE.Mesh(new THREE.BoxGeometry(20, 12, 20), roomMat);
+        room.position.y = 5;
+        env.add(room);
+        var panel = function (w, h, pos, look, intensity, color) {
+          var m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: color || 0xffffff }));
+          m.material.color.multiplyScalar(intensity);
+          m.position.copy(pos); m.lookAt(look || new THREE.Vector3(0, 1, 0));
+          env.add(m);
+        };
+        panel(8, 4, new THREE.Vector3(0, 10, 0), new THREE.Vector3(0, 0, 0), 6);          // overhead softbox
+        panel(5, 3, new THREE.Vector3(6, 5, 7), null, 4, 0xfff4e6);                      // warm key
+        panel(5, 3, new THREE.Vector3(-7, 4, -5), null, 2.5, 0xe6f0ff);                  // cool fill
+        panel(3, 6, new THREE.Vector3(-3, 3, 8), null, 2);                               // side strip
+        panel(14, 14, new THREE.Vector3(0, -0.5, 0), new THREE.Vector3(0, 1, 0), 0.6, 0xb8bcc2); // floor bounce
+        var pmrem = new THREE.PMREMGenerator(renderer);
+        var envTex = pmrem.fromScene(env, 0.04).texture;
+        scene.environment = envTex;
+        pmrem.dispose();
+      } catch (e) { /* environment is cosmetic; carry on without it */ }
+    })();
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    scene.add(new THREE.HemisphereLight(0xf4f7fb, 0x7f858c, 0.55));
+    var key = new THREE.DirectionalLight(0xffffff, 0.9);
     key.position.set(2.5, 5, 3.5);
     key.castShadow = true;
     key.shadow.mapSize.set(2048, 2048);
@@ -91,6 +120,7 @@
       while (p && !pid) { pid = p.userData && p.userData.partId; p = p.parent; }
       o.userData.partId = pid;
       o.material = o.material.clone();
+      if (o.material.isMeshStandardMaterial) o.material.envMapIntensity = 0.7;
       o.userData.base = { opacity: o.material.opacity, transparent: o.material.transparent, emissive: o.material.emissive.getHex() };
       o.userData.casing = !!casings[pid];
       self.meshes.push(o);
