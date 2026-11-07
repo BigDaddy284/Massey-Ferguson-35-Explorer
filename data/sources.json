@@ -597,6 +597,23 @@
       "conflicts": [
         "SRC-015 pairs the FE-35 4-cyl diesel with service manual 1448811M1 plus supplement 690560M1. This catalogue lists 1448811M91 against the US-built 35 and 819146M4 against the FE 35, so 819146M4 is the better candidate for the Coventry diesel repair manual. Unconfirmed until a copy is seen."
       ]
+    },
+    {
+      "id": "SRC-038",
+      "name": "AGCO: 2008 AGCO Heritage Parts and Merchandise Catalog (Massey-Harris, Ferguson, Massey Ferguson, 1940–96 tractors)",
+      "url": "http://gptractorparts.co.za/downloads/mfheritage.pdf",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Supplied by the owner as a text extract of the PDF (the site blocks downloads). Copyright 2008 AGCO Corporation; a dealer catalogue of genuine parts still supplied for classic tractors, US-oriented, listed by section (filters, electrical, engine, intake and exhaust, clutch, hydraulics, sheet metal and emblems, tyres). The text extract has its columns scrambled, so part numbers cannot be paired with descriptions or model lists from it alone. The PDF itself (or page images) is needed before any number is attached to a component.",
+      "extracted": [
+        "Publications table repeats SRC-037: FE 35 (4 cyl. Diesel) operator manual 690274M2, repair manual 819146M4, parts book 819045M4.",
+        "The catalogue carries 35 / 35X / TO35 entries with 23C-specific lines in the engine section (liners, pistons and rings, bearings, gaskets), plus 35 entries in clutch, hydraulics (pump and lift parts by serial break, e.g. 35 Eff. SN 232850), intake and exhaust, electrical (23C diesel starter/dynamo items), filters, sheet metal (35 hood sets, Deluxe Diesel hood set) and emblems.",
+        "Line 'Standard Motor Diesel - 23C 836117V91' appears in the liners section; the pairing of that number with a 23C liner is plausible but unconfirmed because of the column scramble.",
+        "Numbers are current AGCO supply numbers (many with V91/M91 suffixes), i.e. the part as supplied in 2008, which may supersede the number printed in parts book 819045M4. They belong in replacement references, not in oemPartNumber."
+      ],
+      "conflicts": []
     }
   ]
 }
