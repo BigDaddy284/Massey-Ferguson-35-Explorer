@@ -13,6 +13,7 @@
     "serve": "python3 -m http.server 8035 --directory app",
     "diagrams": "node scripts/build-diagrams.mjs",
     "report": "node scripts/completeness-report.mjs",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "check-model": "node scripts/check-model.mjs"
   }
 }

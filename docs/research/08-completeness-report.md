@@ -109,7 +109,7 @@ Assemblies without their own diagram (16): `valvetrain`, `lubrication-assy`, `fl
 
 ## 3D placement
 
-Model outline: 3.07 m long, 1.67 m wide, 1.78 m high (workshop manual B.1: 117 × 64 × 54 in = 2.97 × 1.63 × 1.37 m; the model's height includes the exhaust stack and steering wheel). Front wheel centre at x = 1.829 m against a 72 in (1.829 m) wheelbase.
+Model outline: 3.09 m long, 1.67 m wide, 1.78 m high (workshop manual B.1: 117 × 64 × 54 in = 2.97 × 1.63 × 1.37 m; the model's height includes the exhaust stack and steering wheel). Front wheel centre at x = 1.829 m against a 72 in (1.829 m) wheelbase.
 
 Each modelled part's centre was checked against the region its system occupies on the real tractor. No part sits outside its system's region. Shapes and internal positions remain approximate as listed in `docs/model/README.md`.
 
