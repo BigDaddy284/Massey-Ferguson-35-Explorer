@@ -19,13 +19,15 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   precedence** where it differs from DESIGN.md.
 - `docs/spec/DESIGN.md`: the earlier, broader design spec (also covers petrol/TVO). It is used for
   layout and UX intent.
+- `docs/research/09-parts-book-819045.md`: how the AGCO 819045 parts book was read, its 23C page map and the
+  rules that decided which row is a component's original number.
 - `docs/research/06-agco-heritage-2008.md`: current AGCO supply numbers for 35/23C parts from the
   2008 Heritage catalogue (SRC-038), stored on nodes as `replacementReferences`.
 - `docs/research/01–05`: Phase 1 findings. They override the spec's *assumed* scope lists where
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 8 (completeness and QA) built: 521 part numbers with quantities read from the Ferguson TO35 parts book (SRC-041) are stored on 180 nodes as `partsBookReferences`; the completeness report (`npm run report` → `docs/research/08-completeness-report.md`, and the Research Status page) lists what is still missing. Phase 9 (final polish) is next. Original FE35 numbers still await parts book 819045M4; nothing is `verified`.**
+research, build, test and verify before moving on. Current status: **Phase 8 (completeness and QA) built and the AGCO MF35/35X parts book 819045 (SRC-032, the owner's copy) read: 716 rows from it are stored on 213 nodes as `partsBookReferences` with `book:'MF35'`; 132 components carry their original part number and quantity from a `primary` row and are `verified`, the rest keep every candidate row where the book splits by serial or engine number. The 521 TO35 numbers are flagged by whether they also appear in 819045 (301 do). The completeness report (`npm run report` → `docs/research/08-completeness-report.md`, and the Research Status page) lists what is still missing. Phase 9 (final polish) is next.**
 
 ## Commands
 
@@ -61,14 +63,24 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   explanations; they never change `status`) and `related` (hierarchy ids shown as "Connected parts"
   chips). `specifications` holds measured values only, each node citing the source it came from.
 
-- `partsBookReferences` (Phase 8) on hierarchy nodes: `{number, description, qty, source:'SRC-041', page, pdfPage,
-  book:'TO35', confidence, note?, heritage?}` read from the page images of the Ferguson TO35 parts book (US-built
-  TO35; its Standard Motors Diesel is the 23C). `confidence` is `listed` for rows on the engine pages (common to the
-  FE35) and `possible` for chassis, electrical and installation rows (the Coventry number may differ). `heritage`
-  marks a number whose base digits also appear in the node's 2008 AGCO `replacementReferences`. They never go in
-  `oemPartNumber`; statuses stay at most `partially-verified`. The validator checks the primary accessed source, the
-  page, the grade and that the node cites SRC-041. The generator that produced them is kept outside the repo; edit
-  the JSON directly for corrections.
+- `partsBookReferences` on hierarchy nodes come from two books, told apart by `book`:
+  - `book:'TO35'` (Phase 8): `{number, description, qty, source:'SRC-041', page, pdfPage, confidence, note?, heritage?,
+    inBook819045}` read from the page images of the Ferguson TO35 parts book (US-built TO35; its Standard Motors Diesel is
+    the 23C). `confidence` is `listed` for engine pages and `possible` for chassis/electrical rows. `heritage` marks a
+    number whose base digits also appear in the node's 2008 AGCO `replacementReferences`; `inBook819045` says whether the
+    number appears anywhere in 819045 (false usually means 819045 lists a later supersession number).
+  - `book:'MF35'`: `{number, description, qty, source:'SRC-032', page, item?, letters?, condition?, bookNote?, note?,
+    primary?}` read from the owner's text copy of the AGCO MF35/35X parts book 819045 (kept in the private project
+    library, never in the repo). `condition` carries the book's serial or engine-number footnote verbatim. Exactly one
+    row per node may be `primary`: it sets `oemPartNumber` and `quantity`, and the node becomes `verified` (unless it is
+    `variant-dependent`). A row was made primary only when it names the 23C (or no engine) and any serial condition
+    covers the whole 1958 Coventry range 79553–125067; (J)/(N) "to service 829420M91" rows were preferred over the later
+    (K)/(P) rows. Splits inside 1958 (e.g. 111443/111444, 107892/107893, 117267/117268) or on the 23C engine number
+    (SJ…E, except the first few thousand engines) leave `oemPartNumber` null, every candidate listed, and a
+    `partsBookNote` on the node saying why. `docs/research/09-parts-book-819045.md` records the method and the page map.
+  The validator checks the book, the source per book, the number pattern, the page, one primary = `oemPartNumber`,
+  and that every `verified` component has a primary. The mapping was produced by scripts kept outside the repo; edit the
+  JSON directly for corrections.
 - `scripts/completeness-report.mjs` (`npm run report`): writes `docs/research/08-completeness-report.md` (spec §16):
   totals and per-system coverage, fasteners, parts not in 3D, parts with no number, assemblies without diagrams,
   one-way related links, variant axis use, supplier grades, a 3D placement audit against the manual's layout, and
@@ -77,18 +89,18 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   rows are withheld) and the Identification guide (steps, serial prefix letter table).
 - `data/suppliers.json` (Phase 7): `suppliers` (UK suppliers, each citing a `supplier`-grade source) and
   `references` (`{node, supplier, title, supplierPartNumber, oemQuoted[], url, price{exVat,incVat,currency},
-  stock, checked, match, fits, notes, source}`). `match` is `agco-ref` (a quoted OEM number equals one of the
-  node's `replacementReferences` / `oemPartNumber` once the M/V suffix letter is normalised, e.g. 827707M5 =
-  827707V5), `book-ref` (Phase 8: a quoted number equals one of the node's `partsBookReferences` and no AGCO
-  number matches), `listed-fit` (listed by the supplier for the FE35, fit is the supplier's claim) or `check-fit`
-  (listed, but with a known reason to check; see `notes`). Nothing is graded exact until the parts book is read.
+  stock, checked, match, fits, notes, source}`). `match` is `exact` (a quoted OEM number equals the node's
+  `oemPartNumber` from 819045 once the M/V suffix letter is normalised, e.g. 827707M5 = 827707V5), `agco-ref`
+  (equals one of the node's 2008 `replacementReferences`), `book-ref` (equals another `partsBookReferences`
+  number: a TO35 number or a non-primary 819045 row), `listed-fit` (listed by the supplier for the FE35, fit is
+  the supplier's claim) or `check-fit` (listed, but with a known reason to check; see `notes`).
   The validator enforces node/supplier existence, https URLs, the checked date, the grade list, and that
-  `agco-ref` / `book-ref` are used exactly when a quoted number matches. Prices and stock are as seen on `checked`.
+  `exact` / `agco-ref` / `book-ref` are used exactly when a quoted number matches. Prices and stock are as seen on `checked`.
 - `app/js/core.js`: pure logic, loaded in the browser as `window.MF35Core` and through `require` in tests.
   It covers hierarchy indexing, configuration resolution, applicability, serial decoding, fuzzy search
   and coverage. Put anything testable here.
 - Purchase options (Phase 7): the record panel's "Purchase options (UK)" section lists the node's references
-  sorted agco-ref → book-ref → listed-fit → check-fit (`core.MATCH_ORDER`) with price, stock, quoted OEM numbers (matched number highlighted),
+  sorted exact → agco-ref → book-ref → listed-fit → check-fit (`core.MATCH_ORDER`) with price, stock, quoted OEM numbers (matched number highlighted),
   fitment, notes and the checked date; the catalogue has a "UK suppliers" column; Research Status has a
   "With UK purchase references" stat, a "UK refs" column and a "UK suppliers checked" table. Search covers
   supplier part numbers and quoted OEM numbers. `core.supplierRefsByNode`, `core.normaliseNumber`,
@@ -138,14 +150,15 @@ These are enforced by the validator where possible.
 - Verification statuses are exactly `verified`, `partially-verified`, `unverified` and
   `variant-dependent`. An omitted status means `unverified`.
 - `verified` requires at least one **accessed `primary`** source (AGCO parts book, service manual
-  or operator book). The only one read so far is the FE-35/MF35 workshop service manual scan
-  (SRC-035). Technical figures it states are `verified`. Hierarchy components stay at most
-  `partially-verified` until their part number and quantity are checked in parts book 819045M4.
+  or operator book). Two have been read: the FE-35/MF35 workshop service manual scan (SRC-035), whose
+  technical figures are `verified`, and the AGCO MF35/35X parts book 819045 (SRC-032). A hierarchy
+  component is `verified` only when its `oemPartNumber` and `quantity` come from a `primary` 819045 row
+  that applies to the whole 1958 Coventry serial range; otherwise it stays at most `partially-verified`.
 - A status other than `unverified` must cite sources.
-- OEM numbers quoted by suppliers or forums go in `supplierClaimedOem`, never in `oemPartNumber`,
-  until checked against parts book 819045M4 (SRC-032).
+- OEM numbers quoted by suppliers or forums go in `supplierClaimedOem`, never in `oemPartNumber`.
+  `oemPartNumber` is set only from a `primary` 819045 row (SRC-032).
 - Supplier listings never set `oemPartNumber`. A supplier's quoted OEM number lives in `suppliers.json`
-  `oemQuoted`; the UI shows it as the supplier's quote, highlighted only when it equals an AGCO number.
+  `oemQuoted`; the UI shows it as the supplier's quote, highlighted only when it equals the original or an AGCO number.
 - Numbers from the 2008 AGCO Heritage catalogue (SRC-038) go in `replacementReferences`
   (`{number, description, models, source, page, confidence}`), never in `oemPartNumber`: they are
   the numbers AGCO supplied the part under in 2008 and may supersede the 1958 number. `confidence`

@@ -1,4 +1,4 @@
-# 08 – Completeness report (Phase 8)
+# 08 – Completeness report (Phase 8, updated after reading parts book 819045)
 
 Generated 2026-11-08 by `npm run report` (`scripts/completeness-report.mjs`) from `data/*.json`, `app/js/model.js` and `app/data/mf35-diagrams.js`. Spec §16 asks for this breakdown; the application never claims to hold every component, and this report says what is still missing.
 
@@ -8,48 +8,49 @@ Generated 2026-11-08 by `npm run report` (`scripts/completeness-report.mjs`) fro
 |---|---|
 | Items identified (systems, assemblies, components) | 255 |
 | Components | 222 |
-| Verified | 0 (nothing is verified until FE35 parts book 819045M4 is read) |
-| Partially verified | 155 (61%) |
+| Verified | 131 (51%) (original number and quantity read from parts book 819045) |
+| Partially verified | 94 (37%) |
 | Variant dependent | 8 |
-| Unverified | 92 (36%) |
-| Confirmed original (FE35) part numbers | 0 |
-| With TO35 parts-book numbers (SRC-041) | 180 (71%) – 521 numbers, 270 on 23C engine pages, 37 also in the 2008 AGCO catalogue |
+| Unverified | 22 (9%) |
+| Original part numbers from parts book 819045 (SRC-032) | 132 – 716 819045 rows stored on 213 items, 132 of them primary, 123 carrying a serial or engine-number condition |
+| With parts-book numbers (either book) | 222 (87%) |
+| TO35 parts-book numbers (SRC-041) | 521 numbers, 270 on 23C engine pages, 37 also in the 2008 AGCO catalogue, 301 also found in 819045 |
 | With 2008 AGCO replacement references (SRC-038) | 90 (35%) |
 | With description and function | 255 (100%) |
 | In drawn exploded diagrams | 166 (65%) (17 diagrams) |
 | Represented in 3D | 216 (85%) |
 | With UK purchase references | 149 (58%) (235 references, 2 suppliers) |
-| Fastener and small-part records (studs, bolts, nuts, pins, seals, gaskets, bushes, bearings, springs…) | 50, of which 42 carry parts-book numbers |
+| Fastener and small-part records (studs, bolts, nuts, pins, seals, gaskets, bushes, bearings, springs…) | 50, of which 50 carry parts-book numbers |
 
 ## By system
 
-| System | Items | Partial | Variant | Unverified | Parts book | AGCO 2008 | Described | Diagram | 3D | UK refs |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Engine: Standard 23C diesel | 69 | 64 | 0 | 5 | 61 | 11 | 69 | 64 | 55 | 30 |
-| Diesel fuel system | 20 | 13 | 0 | 7 | 15 | 7 | 20 | 6 | 15 | 9 |
-| Cooling system | 11 | 9 | 1 | 1 | 9 | 4 | 11 | 9 | 10 | 8 |
-| Clutch | 12 | 5 | 3 | 4 | 10 | 4 | 12 | 7 | 9 | 9 |
-| Gearbox | 12 | 6 | 0 | 6 | 10 | 4 | 12 | 11 | 11 | 6 |
-| Rear axle, differential and brakes | 24 | 7 | 1 | 16 | 21 | 9 | 24 | 19 | 20 | 16 |
-| PTO system | 9 | 4 | 0 | 5 | 8 | 3 | 9 | 8 | 8 | 2 |
-| Hydraulic lift system | 33 | 27 | 0 | 6 | 28 | 12 | 33 | 20 | 30 | 22 |
-| Three-point linkage | 11 | 8 | 0 | 3 | 7 | 7 | 11 | 10 | 10 | 9 |
-| Front axle and steering | 13 | 0 | 0 | 13 | 0 | 8 | 13 | 12 | 12 | 7 |
-| Electrical system | 19 | 9 | 2 | 8 | 10 | 9 | 19 | 0 | 16 | 16 |
-| Bodywork and operator area | 12 | 1 | 1 | 10 | 1 | 8 | 12 | 0 | 11 | 10 |
-| Wheels and tyres | 10 | 2 | 0 | 8 | 0 | 4 | 10 | 0 | 9 | 5 |
+| System | Items | Verified | Partial | Variant | Unverified | Original no. | Parts book | AGCO 2008 | Described | Diagram | 3D | UK refs |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Engine: Standard 23C diesel | 69 | 38 | 26 | 0 | 5 | 38 | 62 | 11 | 69 | 64 | 55 | 30 |
+| Diesel fuel system | 20 | 5 | 10 | 0 | 5 | 5 | 15 | 7 | 20 | 6 | 15 | 9 |
+| Cooling system | 11 | 9 | 0 | 1 | 1 | 9 | 9 | 4 | 11 | 9 | 10 | 8 |
+| Clutch | 12 | 7 | 2 | 3 | 0 | 7 | 10 | 4 | 12 | 7 | 9 | 9 |
+| Gearbox | 12 | 5 | 7 | 0 | 0 | 5 | 11 | 4 | 12 | 11 | 11 | 6 |
+| Rear axle, differential and brakes | 24 | 11 | 9 | 1 | 3 | 11 | 22 | 9 | 24 | 19 | 20 | 16 |
+| PTO system | 9 | 4 | 5 | 0 | 0 | 4 | 8 | 3 | 9 | 8 | 8 | 2 |
+| Hydraulic lift system | 33 | 25 | 6 | 0 | 2 | 25 | 30 | 12 | 33 | 20 | 30 | 22 |
+| Three-point linkage | 11 | 6 | 5 | 0 | 0 | 6 | 9 | 7 | 11 | 10 | 10 | 9 |
+| Front axle and steering | 13 | 6 | 6 | 0 | 1 | 6 | 12 | 8 | 13 | 12 | 12 | 7 |
+| Electrical system | 19 | 11 | 4 | 2 | 2 | 12 | 18 | 9 | 19 | 0 | 16 | 16 |
+| Bodywork and operator area | 12 | 2 | 8 | 1 | 1 | 2 | 10 | 8 | 12 | 0 | 11 | 10 |
+| Wheels and tyres | 10 | 2 | 6 | 0 | 2 | 2 | 6 | 4 | 10 | 0 | 9 | 5 |
 
 ## Missing components and fasteners
 
-The hierarchy was compared with the TO35 parts book tables that were read (36 pages). Components the book lists that the hierarchy lacked were added in Phase 8: sump strainer, throttle lever, throttle rods and bellcrank, fuel shut-off control, heater plug resistor, heater plug warning light and brake backing plate. Individual fasteners are recorded as rows inside the component they belong to (for example the nine long and eight short cylinder head bolts under *Head studs / bolts and nuts*), not yet as separate records; the spec's goal of one record per documented nut, bolt and fitting remains open until the FE35 parts book is available.
+The hierarchy was compared with the TO35 parts book tables that were read (36 pages). Components the book lists that the hierarchy lacked were added in Phase 8: sump strainer, throttle lever, throttle rods and bellcrank, fuel shut-off control, heater plug resistor, heater plug warning light and brake backing plate. Individual fasteners are recorded as rows inside the component they belong to (for example the nine long and eight short cylinder head bolts under *Head studs / bolts and nuts*), not yet as separate records; the spec's goal of one record per documented nut, bolt and fitting remains open; the 819045 fastener rows (studs, bolts, washers) are now attached to their parent components as references.
 
-Components without any part-number reference yet (22): `silencer`, `coolant-heater`, `hyd-pump-piston-rings`, `hyd-strainer`, `lift-rod-rh`, `ball-ends`, `front-axle-extensions`, `radius-rods`, `kingpin-bushes`, `drag-links`, `starter-motor`, `dynamo`, `regulator`, `battery`, `horn`, `serial-plate`, `footplates`, `rear-wheel-centre`, `rear-rim-clamps`, `front-tyre`, `rear-tyre`, `tyre-valves`.
+Components without any part-number reference yet (6): `coolant-heater`, `ball-ends`, `serial-plate`, `front-tyre`, `rear-tyre`, `tyre-valves`.
 
 Components with no UK purchase reference (81): see the catalogue's "UK suppliers" column. Items without a description or function: none.
 
 ## Part numbers and quantities
 
-No original FE35 number is confirmed (0). 521 numbers with quantities were read from the Ferguson TO35 parts book page images and stored as `partsBookReferences`. Rows from the Standard Motors Diesel engine sections are graded `listed` (270); chassis, electrical and installation rows are graded `possible` because the TO35 was US-built. 37 of them share their base number with a 2008 AGCO Heritage listing for the 35, which corroborates them (for example brake drum 827707M1 → 827707V5, timing chain 826094M1 → 826094V1, bottom hose 826988M1 → 826988V1). Where the book gives several numbers for one part (bore grades, weight grades, serial breaks) every number is kept with its condition. Quantities on the component records themselves (`quantity`) were left as they were; the per-reference `qty` carries the book's figure.
+132 components carry their original part number and quantity read from the AGCO MF35 / 35X parts book 819045 (SRC-032, the owner's copy); they are the only records marked verified. A number was taken as the 1958 original only when its row names the 23C (or no engine) and any serial condition covers the whole 1958 Coventry range 79553-125067; the earlier (J)/(N) service-engine rows were preferred over the later (K)/(P) rows. 81 components have 819045 rows but no settled number because the book splits them inside 1958 or on the 23C engine number, or lists several alternatives: `core-plugs`, `block-studs-dowels`, `head-gasket`, `head-studs-nuts`, `combustion-chamber-insert`, `valve-spring-inner`, `valve-spring-outer`, `valve-cap-collets`, `rocker-arm`, `thrust-washers`, `gudgeon-pin`, `conrod`, `camshaft-bearings`, `injection-pump-drive`, `oil-strainer`, `oil-pipes`, `dipstick`, `oil-pressure-relief`, `flywheel`, `throttle-linkage`, `stop-control`, `fuel-tap`, `fuel-lift-pump`, `fuel-pipes-lp`, `injector-pipes`, `injector`, `injector-nozzle`, `injector-seals`, `fuel-leak-off`, `air-cleaner`, `air-intake-pipe`, `clutch-housing`, `release-fork`, `countershaft`, `gearbox-gears`, `range-gears`, `selector-forks`, `gearbox-bearings`, `gearbox-top-cover`, `diff-gears`, `diff-lock`, `wheel-studs-rear`, `axle-seals`, `brake-backing-plate`, `brake-springs`, `brake-pedals`, `brake-linkage`, `parking-brake`, `pto-drive-shaft`, `pto-gears`, `pto-bearings`, `pto-guard`, `hyd-pump-cam-blocks`, `hyd-control-valve`, `internal-control-linkage`, `lift-rod-rh`, `check-chains`, `linkage-pins`, `front-axle-extensions`, `front-axle-pivot-pin`, `stub-axle`, `kingpin-bushes`, `front-hub`, `steering-box`, `battery-cables`, `headlamps`, `rear-lamp`, `tractormeter`, `horn`, `bonnet`, `side-panels`, `front-badge`, `dashboard`, `seat`, `seat-support`, `footplates`, `front-weights`, `rear-wheel-centre`, `rear-rim-clamps`, `front-wheel-nuts`, `rear-wheel-nuts`. 9 components have no 819045 row at all: `coolant-heater`, `rear-hub`, `lift-cover-gasket`, `ball-ends`, `temp-gauge`, `serial-plate`, `front-tyre`, `rear-tyre`, `tyre-valves`. 521 numbers with quantities were read earlier from the Ferguson TO35 parts book page images and stored as `partsBookReferences`. Rows from the Standard Motors Diesel engine sections are graded `listed` (270); chassis, electrical and installation rows are graded `possible` because the TO35 was US-built. 37 of them share their base number with a 2008 AGCO Heritage listing for the 35, which corroborates them (for example brake drum 827707M1 → 827707V5, timing chain 826094M1 → 826094V1, bottom hose 826988M1 → 826988V1). Where the book gives several numbers for one part (bore grades, weight grades, serial breaks) every number is kept with its condition. 301 of the TO35 numbers also appear in 819045 (flagged `inBook819045`); the rest are mostly superseded by later numbers in 819045 (cylinder block 827483M91 → 1884088M91, exhaust valve 826169M1 → 1884124M1, conrod bolt 826081M1 → 1884110M1). Quantities on verified records come from the 819045 row (per tractor where the book lists per-bank or per-rod figures, with a note).
 
 ## Model relationships
 
@@ -71,12 +72,12 @@ The configuration rules are in `03-configuration-rules.md`. Only the clutch, col
 
 ## Supplier links
 
-| Supplier | References | Matches AGCO no. | Matches TO35 book | Listed for FE35 | Check fit | Last checked |
-|---|---|---|---|---|---|---|
-| Anglo Agriparts | 117 | 1 | 2 | 108 | 6 | 2026-11-08 |
-| Agriline Products | 118 | 3 | 5 | 102 | 8 | 2026-11-08 |
+| Supplier | References | Exact (819045) | Matches AGCO no. | Matches a book no. | Listed for FE35 | Check fit | Last checked |
+|---|---|---|---|---|---|---|---|
+| Anglo Agriparts | 117 | 2 | 1 | 1 | 107 | 6 | 2026-11-08 |
+| Agriline Products | 118 | 6 | 2 | 5 | 97 | 8 | 2026-11-08 |
 
-Links were live when captured (SRC-039, SRC-040). This container cannot open the supplier sites directly for a bulk re-check, so broken-link detection remains a manual task: open the Research Status page and spot-check. Seven references were upgraded to `book-ref` in Phase 8 because the number the supplier quotes equals a TO35 parts-book number (lift arm 180910M1, top hose 827496M1, brake shoe set 830480M92, PTO cap 180313M1, hydraulic pump camshaft bearing 1000251M1, control spring seat 182581M1).
+Links were live when captured (SRC-039, SRC-040). This container cannot open the supplier sites directly for a bulk re-check, so broken-link detection remains a manual task: open the Research Status page and spot-check. A reference is `exact` when the supplier quotes the original 819045 number (lift arms 180910M1, top and bottom hoses 827496M1 / 826988M1, clutch pedal 1861169M1, brake shoes 1810348M91, hydraulic pump camshaft bearing 1000251M1, levelling box 182642M94); `book-ref` now means a match with a TO35 number or a non-primary 819045 row.
 
 ## Diagrams
 
@@ -116,7 +117,7 @@ Components not represented in 3D (7): `oil-strainer`, `throttle-lever`, `throttl
 
 ## Unresolved items
 
-- FE35 parts book 819045M4 (SRC-032): needed to confirm every number, quantity and status; the owner has ordered a PDF copy.
+- Owner's 23C engine number (stamped on the block above the dynamo): decides the lift pump (SJ37180E), injectors (SJ86046E), dipstick (SJ93988E), oil filter (SJ102045E) and gasket-set rows that 819045 splits by engine number.
 - Owner's serial number and prefix letters: still unknown, so the clutch and PTO axes stay owner-reported.
 - AGCO Parts Books site (parts.agcocorp.com): reachable, but its parts-book search reported "currently unavailable" on 2026-11-08; retry.
 - UK FE35 electrical equipment (Lucas) is not covered by the TO35 book, which lists Delco-Remy equipment.

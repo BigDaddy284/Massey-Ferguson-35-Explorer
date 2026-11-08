@@ -50,7 +50,7 @@ accessed primary source.
 | SRC-027 | manytractors.com: FE-35 | aggregator | Gear count only; engine data unreliable |
 | SRC-030 | Service manual 1448811M1 | primary | **Not yet obtained** |
 | SRC-031 | Diesel supplement 690560M1 | primary | **Not yet obtained** |
-| SRC-032 | Parts book 819045M4 | primary | **Not yet obtained.** Highest priority |
+| SRC-032 | Parts book 819045 (MF35 / 35X) | primary | **Read 2026-11-08** from the owner's purchased copy (text extract, kept in the private project library, not in the repo). Original part numbers and quantities for 132 components; see `09-parts-book-819045.md` |
 | SRC-033 | Operator book 819046M1 | primary | **Not yet obtained** |
 | SRC-034 | 23C engine operator manual 819050M1 | primary | **Not yet obtained** |
 | SRC-035 | MF35 Workshop Service Manual (FE-35), scanned copy at nrgsurveys.co.uk | primary | **Read 2026-11-07.** Specs, torques, clutch, gearbox, PTO, hydraulics. Publication number not visible; may be SRC-030 |

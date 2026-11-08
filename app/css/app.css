@@ -217,6 +217,8 @@ svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; 
 /* Phase 7: UK purchase references */
 .badge.supplier { color: var(--blue-strong); background: #e8f0fb; border-color: #c5d6f0; font-weight: 600; vertical-align: middle; margin-left: 4px; }
 .badge.book { color: #4a3a8a; background: #eeeaf9; border-color: #d4cbf0; font-weight: 500; }
+.badge.mf35 { color: #0f5e3a; background: #e4f5ec; border-color: #b9e2cc; font-weight: 500; }
+.badge.match-exact { color: #0f5e3a; background: #e4f5ec; border-color: #b9e2cc; font-weight: 600; }
 .badge.match-book-ref { color: #4a3a8a; background: #eeeaf9; border-color: #d4cbf0; font-weight: 600; }
 .badge.match-agco-ref { color: var(--st-verified); background: #e7f4ec; border-color: #c4e3cf; font-weight: 600; }
 .badge.match-listed-fit { color: var(--blue-strong); background: #e8f0fb; border-color: #c5d6f0; font-weight: 500; }

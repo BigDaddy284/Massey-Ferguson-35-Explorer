@@ -52,13 +52,16 @@ const ids = new Set();
 const relatedRefs = [];
 const nodeNumbers = new Map();
 const nodeBookNumbers = new Map();
+const nodeOem = new Map();
+const BOOKS = new Set(['TO35', 'MF35']);
 const counts = { total: 0, byStatus: {} };
 (function walk(node, path) {
   const where = [...path, node.id].join(' > ');
   if (!ID_RE.test(node.id)) err(`${where}: id must be kebab-case`);
   if (ids.has(node.id)) err(`${where}: duplicate id ${node.id}`);
   ids.add(node.id);
-  nodeNumbers.set(node.id, (node.replacementReferences ?? []).map((r) => r.number).concat(node.oemPartNumber ? [node.oemPartNumber] : []));
+  nodeNumbers.set(node.id, (node.replacementReferences ?? []).map((r) => r.number));
+  nodeOem.set(node.id, node.oemPartNumber ?? null);
   nodeBookNumbers.set(node.id, (node.partsBookReferences ?? []).map((r) => r.number));
   if (!KINDS.has(node.kind)) err(`${where}: bad kind ${node.kind}`);
   const status = node.status ?? 'unverified';
@@ -93,11 +96,18 @@ const counts = { total: 0, byStatus: {} };
     if (!r.source || !sourceById.has(r.source)) err(`${w}: unknown source ${r.source}`);
     else if (!sourceById.get(r.source).accessed) err(`${w}: source ${r.source} has not been accessed`);
     if (r.confidence && !['listed', 'possible'].includes(r.confidence)) err(`${w}: bad confidence ${r.confidence}`);
-    if (node.oemPartNumber && node.oemPartNumber === r.number) err(`${w}: duplicates oemPartNumber (a replacement reference is not the original number)`);
+    if (node.oemPartNumber && r.number === node.oemPartNumber && !(node.partsBookReferences ?? []).some((b) => b.primary)) err(`${w}: duplicates oemPartNumber without a primary parts-book reference`);
   }
+  const primaries = (node.partsBookReferences ?? []).filter((r) => r.primary);
+  if (primaries.length > 1) err(`${where}: only one parts-book reference may be primary`);
+  if (primaries.length === 1 && (primaries[0].book !== 'MF35' || node.oemPartNumber !== primaries[0].number)) err(`${where}: the primary reference must be the 819045 row that gives oemPartNumber`);
+  if (node.oemPartNumber && primaries.length !== 1) err(`${where}: oemPartNumber must come from a primary 819045 parts-book reference`);
+  if (status === 'verified' && node.kind === 'component' && !node.oemPartNumber) err(`${where}: a verified component needs its original part number from the 819045 parts book`);
+  if ('partsBookNote' in node && (typeof node.partsBookNote !== 'string' || !node.partsBookNote.trim())) err(`${where}: partsBookNote must be a non-empty string`);
   for (const [i, r] of (node.partsBookReferences ?? []).entries()) {
     const w = `${where}: partsBookReferences[${i}]`;
-    if (!r.number || !/^[0-9]{2,7}(M[0-9]{1,2}|X[0-9]{0,2})$/.test(r.number)) err(`${w}: bad number ${r.number}`);
+    const numRe = r.book === 'MF35' ? /^[0-9A-Z][0-9A-Z\/.]{2,14}$/ : /^[0-9]{2,7}(M[0-9]{1,2}|X[0-9]{0,2})$/;
+    if (!r.number || !numRe.test(r.number)) err(`${w}: bad number ${r.number}`);
     if (!r.description) err(`${w}: needs a description`);
     if (!r.source || !sourceById.has(r.source)) err(`${w}: unknown source ${r.source}`);
     else {
@@ -106,10 +116,12 @@ const counts = { total: 0, byStatus: {} };
       if (src.reliability !== 'primary') err(`${w}: a parts-book reference must cite a primary source`);
     }
     if (!Number.isInteger(r.page) || r.page < 1) err(`${w}: page must be the printed page number`);
-    if (r.book !== 'TO35') err(`${w}: book must be 'TO35' (the only parts book read so far)`);
+    if (!BOOKS.has(r.book)) err(`${w}: book must be one of ${[...BOOKS].join(', ')}`);
+    if (r.book === 'MF35' && r.source !== 'SRC-032') err(`${w}: 819045 references cite SRC-032`);
+    if (r.book === 'TO35' && r.source !== 'SRC-041') err(`${w}: TO35 references cite SRC-041`);
+    if (r.book === 'TO35' && typeof r.inBook819045 !== 'boolean') err(`${w}: TO35 references record whether the number also appears in 819045 (inBook819045)`);
     if (!['listed', 'possible'].includes(r.confidence)) err(`${w}: bad confidence ${r.confidence}`);
     if (r.qty !== null && r.qty !== undefined && (!Number.isInteger(r.qty) || r.qty < 1)) err(`${w}: qty must be null or a positive integer`);
-    if (node.oemPartNumber && node.oemPartNumber === r.number) err(`${w}: duplicates oemPartNumber (a TO35 number is not the FE35 original until 819045M4 is read)`);
     if (!(node.sources ?? []).includes(r.source)) err(`${w}: node must list ${r.source} in sources`);
   }
   for (const [axis, opts] of Object.entries(node.appliesTo ?? {})) {
@@ -119,6 +131,7 @@ const counts = { total: 0, byStatus: {} };
   if (node.kind !== 'tractor') {
     counts.total++;
     if ((node.partsBookReferences ?? []).length) counts.partsBook = (counts.partsBook ?? 0) + 1;
+    if (node.oemPartNumber) counts.oem = (counts.oem ?? 0) + 1;
     counts.byStatus[status] = (counts.byStatus[status] ?? 0) + 1;
   }
   for (const c of node.children ?? []) walk(c, [...path, node.id]);
@@ -139,7 +152,7 @@ for (const sec of technical.sections) {
 for (const st of technical.identification.steps) for (const s of st.sources) if (!sourceById.has(s)) err(`identification step: unknown source ${s}`);
 
 const sup = load('suppliers.json');
-const MATCHES = new Set(['agco-ref', 'book-ref', 'listed-fit', 'check-fit']);
+const MATCHES = new Set(['exact', 'agco-ref', 'book-ref', 'listed-fit', 'check-fit']);
 const normNumber = (x) => String(x).toUpperCase().replace(/[^0-9A-Z]/g, '').replace(/^(\d+)[MV](\d*)$/, '$1X$2');
 const supplierIds = new Set();
 for (const s of sup.suppliers) {
@@ -161,14 +174,18 @@ for (const [i, r] of sup.references.entries()) {
   if (!sourceById.has(r.source) || !sourceById.get(r.source).accessed) err(`${where}: must cite an accessed source`);
   if (!Array.isArray(r.oemQuoted)) err(`${where}: oemQuoted must be an array`);
   if (r.price !== null && (typeof r.price !== 'object' || typeof r.price.exVat !== 'number' || r.price.currency !== 'GBP')) err(`${where}: price must be null or {exVat:number, incVat, currency:'GBP'}`);
+  const oem = nodeOem.get(r.node);
+  const exactHit = !!oem && (r.oemQuoted ?? []).some((q) => normNumber(q) === normNumber(oem));
+  if (r.match === 'exact' && !exactHit) err(`${where}: 'exact' needs a quoted OEM number equal to the node's original (819045) number`);
+  if (r.match !== 'exact' && exactHit) err(`${where}: quoted number equals the original part number, grade it 'exact'`);
   const nums = (nodeNumbers.get(r.node) ?? []).map(normNumber);
-  const hit = (r.oemQuoted ?? []).some((q) => nums.includes(normNumber(q)));
+  const hit = !exactHit && (r.oemQuoted ?? []).some((q) => nums.includes(normNumber(q)));
   if (r.match === 'agco-ref' && !hit) err(`${where}: 'agco-ref' needs a quoted OEM number matching the node's AGCO/OEM numbers`);
-  if (r.match !== 'agco-ref' && hit) err(`${where}: quoted number matches the node's AGCO number, grade it 'agco-ref'`);
+  if (r.match !== 'agco-ref' && hit && r.match !== 'exact') err(`${where}: quoted number matches the node's AGCO number, grade it 'agco-ref'`);
   const bookNums = (nodeBookNumbers.get(r.node) ?? []).map(normNumber);
-  const bookHit = !hit && (r.oemQuoted ?? []).some((q) => bookNums.includes(normNumber(q)));
+  const bookHit = !hit && !exactHit && (r.oemQuoted ?? []).some((q) => bookNums.includes(normNumber(q)));
   if (r.match === 'book-ref' && !bookHit) err(`${where}: 'book-ref' needs a quoted OEM number matching the node's parts-book numbers`);
-  if (r.match !== 'book-ref' && r.match !== 'agco-ref' && bookHit) err(`${where}: quoted number matches the node's TO35 parts-book number, grade it 'book-ref'`);
+  if (r.match !== 'book-ref' && r.match !== 'agco-ref' && r.match !== 'exact' && bookHit) err(`${where}: quoted number matches one of the node's parts-book numbers, grade it 'book-ref'`);
   supCounts.total++;
   supCounts.byMatch[r.match] = (supCounts.byMatch[r.match] ?? 0) + 1;
 }
@@ -179,5 +196,5 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(`OK: ${sources.length} sources, ${axes.size} variant axes, ${counts.total} hierarchy nodes`);
-console.log('   by status:', JSON.stringify(counts.byStatus), `· ${counts.partsBook ?? 0} nodes with TO35 parts-book references`);
+console.log('   by status:', JSON.stringify(counts.byStatus), `· ${counts.partsBook ?? 0} nodes with parts-book references · ${counts.oem ?? 0} original numbers from 819045`);
 console.log(`   suppliers: ${sup.suppliers.length}, references: ${supCounts.total}`, JSON.stringify(supCounts.byMatch));

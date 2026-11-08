@@ -361,8 +361,8 @@
     return String(x).toUpperCase().replace(/[^0-9A-Z]/g, '').replace(/^(\d+)[MV](\d*)$/, '$1X$2');
   }
 
-  var MATCH_LABELS = { 'agco-ref': 'Matches AGCO number', 'book-ref': 'Matches TO35 parts book', 'listed-fit': 'Listed for the FE35', 'check-fit': 'Check fit' };
-  var MATCH_ORDER = { 'agco-ref': 0, 'book-ref': 1, 'listed-fit': 2, 'check-fit': 3 };
+  var MATCH_LABELS = { 'exact': 'Exact match (819045)', 'agco-ref': 'Matches AGCO number', 'book-ref': 'Matches a parts-book number', 'listed-fit': 'Listed for the FE35', 'check-fit': 'Check fit' };
+  var MATCH_ORDER = { 'exact': 0, 'agco-ref': 1, 'book-ref': 2, 'listed-fit': 3, 'check-fit': 4 };
 
   function coverage(index, modelledIds, diagrams, suppliers) {
     var supByNode = supplierRefsByNode(suppliers);

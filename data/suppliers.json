@@ -1,5 +1,5 @@
 {
-  "$comment": "Phase 7 UK supplier references. Not a shop: these point at legitimate UK suppliers whose FE35 listings were read on the date in `checked`. `match` grades: `agco-ref` = the supplier quotes an OEM number equal to one of the node's replacementReferences (or oemPartNumber) once the M/V suffix letter is normalised; `book-ref` = the supplier quotes an OEM number equal to one of the node's partsBookReferences (TO35 parts book, SRC-041) once the M/V suffix is normalised, and no AGCO 2008 number matches; `listed-fit` = listed by the supplier for the FE35 / 23C, fit claimed by the supplier only; `check-fit` = listed for the FE35 but with a known reason to check before ordering (see notes). Nothing is graded exact until parts book 819045M4 is read. Prices in GBP as shown on the date checked; stock as shown on the listing page.",
+  "$comment": "Phase 7 UK supplier references. Not a shop: these point at legitimate UK suppliers whose FE35 listings were read on the date in `checked`. `match` grades: `exact` = the supplier quotes an OEM number equal to the node's original part number read from the AGCO 819045 parts book (M/V suffix letter normalised); `agco-ref` = equal to one of the node's 2008 AGCO replacementReferences; `book-ref` = equal to one of the node's other partsBookReferences (TO35 book SRC-041, or a non-primary 819045 row such as an alternative or serial-dependent number) and nothing better matches; `listed-fit` = listed by the supplier for the FE35 / 23C, fit claimed by the supplier only; `check-fit` = listed for the FE35 but with a known reason to check before ordering (see notes). Prices in GBP as shown on the date checked; stock as shown on the listing page.",
   "schemaVersion": 1,
   "suppliers": [
     {
@@ -62,10 +62,11 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "listed-fit",
+      "match": "book-ref",
       "fits": "Ferguson FE35 (23C diesel), MF 702, MF 835",
       "source": "SRC-039",
-      "notes": "The head gasket is not sold separately; it comes in the top set."
+      "notes": "The head gasket is not sold separately; it comes in the top set.",
+      "matchedNumber": "827561M92"
     },
     {
       "node": "engine-block-assy",
@@ -1436,7 +1437,7 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "book-ref",
+      "match": "exact",
       "fits": "TE20 series, FE35, MF 35, 35X, 65, 135",
       "source": "SRC-039",
       "matchedNumber": "180910M1"
@@ -1457,7 +1458,7 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "book-ref",
+      "match": "exact",
       "fits": "TE20 series, FE35, MF 35, 35X, 65, 135",
       "source": "SRC-039",
       "matchedNumber": "180910M1"
@@ -2225,10 +2226,10 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "agco-ref",
+      "match": "exact",
       "fits": "FE35, 835 (23C)",
       "source": "SRC-040",
-      "matchedNumber": "826988V1",
+      "matchedNumber": "826988M1",
       "notes": "Kit of top and bottom hoses. Quotes 826988M1, the 2008 Heritage number for the lower hose."
     },
     {
@@ -2248,7 +2249,7 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "book-ref",
+      "match": "exact",
       "fits": "FE35, 835 (23C)",
       "source": "SRC-040",
       "notes": "Kit of top and bottom hoses.",
@@ -2456,9 +2457,10 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "listed-fit",
+      "match": "book-ref",
       "fits": "Agriline FE35 4-cylinder category",
-      "source": "SRC-040"
+      "source": "SRC-040",
+      "matchedNumber": "886719M1"
     },
     {
       "node": "release-fork",
@@ -2496,9 +2498,10 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "listed-fit",
+      "match": "exact",
       "fits": "Agriline FE35 4-cylinder category",
-      "source": "SRC-040"
+      "source": "SRC-040",
+      "matchedNumber": "1861169M1"
     },
     {
       "node": "gear-lever-main",
@@ -2697,11 +2700,11 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "book-ref",
+      "match": "exact",
       "fits": "TE20, MF35, 135, Dexta",
       "source": "SRC-040",
       "notes": "Quotes 830480M92; the 2008 Heritage number for the lined shoes is 830480V93 (a later revision of the same number).",
-      "matchedNumber": "830480M92"
+      "matchedNumber": "1810348M91"
     },
     {
       "node": "brake-shoes",
@@ -3266,7 +3269,7 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "book-ref",
+      "match": "exact",
       "fits": "Agriline FE35 4-cylinder category",
       "source": "SRC-040",
       "matchedNumber": "1000251M1"
@@ -3583,10 +3586,11 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "listed-fit",
+      "match": "exact",
       "fits": "Agriline FE35 4-cylinder category",
       "source": "SRC-040",
-      "notes": "Quotes 182642M94; the 2008 Heritage number for the hand crank is 182642V93 (a later revision of the same number)."
+      "notes": "Quotes 182642M94; the 2008 Heritage number for the hand crank is 182642V93 (a later revision of the same number).",
+      "matchedNumber": "182642M94"
     },
     {
       "node": "lift-rod-lh",
@@ -4011,9 +4015,10 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "listed-fit",
+      "match": "book-ref",
       "fits": "FE35, 835 (23C)",
-      "source": "SRC-040"
+      "source": "SRC-040",
+      "matchedNumber": "829487M91"
     },
     {
       "node": "headlamps",
@@ -4148,10 +4153,11 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "listed-fit",
+      "match": "book-ref",
       "fits": "FE35",
       "source": "SRC-040",
-      "notes": "The 2008 Heritage numbers for the 35 emblem are 187990V1 and 79024624V; 826686M1 is a different (Ferguson-era) number."
+      "notes": "The 2008 Heritage numbers for the 35 emblem are 187990V1 and 79024624V; 826686M1 is a different (Ferguson-era) number.",
+      "matchedNumber": "826686M1"
     },
     {
       "node": "dashboard",
