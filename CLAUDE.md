@@ -27,7 +27,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 9 (final polish) built: on-demand 3D rendering and a deferred model start, phone and tablet layouts (folding tractor banner, stacked tables, taller viewer), record quick links and folded reference lists, search "see all" into the catalogue, PTO and hydraulic power-flow diagrams and a glossary (`technical.json` `glossary`, searchable, validated). Phases 1–8 as before: 716 rows of the AGCO MF35/35X parts book 819045 (SRC-032) on 213 nodes, 135 original numbers, the completeness report (`npm run report`). The 3D model was then checked system by system against the workshop manual (SRC-035) and photographs of 1958 De Luxe tractors; corrections and the items left open are listed in `docs/model/README.md`.**
+research, build, test and verify before moving on. Current status: **Phase 9 (final polish) built: on-demand 3D rendering and a deferred model start, phone and tablet layouts (folding tractor banner, stacked tables, taller viewer), record quick links and folded reference lists, search "see all" into the catalogue, PTO and hydraulic power-flow diagrams and a glossary (`technical.json` `glossary`, searchable, validated). Phases 1–8 as before: 716 rows of the AGCO MF35/35X parts book 819045 (SRC-032) on 213 nodes, 135 original numbers, the completeness report (`npm run report`). The 3D model was then checked system by system against the workshop manual (SRC-035) and photographs of 1958 De Luxe tractors; corrections and the items left open are listed in `docs/model/README.md`. A detail pass then rebuilt both engine sides (manifolds, exhaust, dynamo, starter, injection pump and pipes, filters, covers, steering ball joints) from the manual figures, the owner's photos and Wikimedia Commons photographs (SRC-042), with `npm run check-model` guarding that nothing ends in mid-air, and a pinned part-name label in the viewer.**
 
 ## Commands
 
@@ -39,9 +39,11 @@ node --test tests/core.test.js   # single test file
 npm run serve           # optional: http://localhost:8035 (python3); the app also works opened directly
 npm run smoke           # Playwright check of every view at 1440/820/390 px: no page errors, no sideways scroll
 npm run diagrams        # regenerate app/data/mf35-diagrams.js from the 3D model (needs Playwright + Chromium)
+npm run check-model     # every rod, bar and pipe in model.js must end on another part (0 loose ends); run after model edits
 ```
 
-No dependencies, no bundler (Node >= 18). **After any edit to `data/*.json`, run `npm run build`.**
+No dependencies, no bundler (Node >= 18). `.github/workflows/pages.yml` publishes `app/` to GitHub Pages
+(https://bigdaddy284.github.io/Massey-Ferguson-35-Explorer/) on every push to `main`. **After any edit to `data/*.json`, run `npm run build`.**
 The app reads only the generated `app/data/mf35-data.js`, which is committed. Open
 `app/index.html` directly in a browser. It must keep working from `file://`, so use classic
 `<script>` tags only: no ES modules and no `fetch()` of local files.

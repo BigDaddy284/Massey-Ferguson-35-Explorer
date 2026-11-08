@@ -57,6 +57,44 @@ bonnet height (about 1.31 m, level with the lower rim of the steering wheel), st
 towards the front on the right, the air cleaner on the right at the rear of the engine, and solid
 dished wheel centres.
 
+## Detail pass (after Phase 9)
+
+The owner asked for the engine sides to look like the real tractor rather than blocks, with every
+rod and pipe connected to something. Three sets of pictures were used side by side: the workshop
+manual's engine views (SRC-035, figures 109 and 110), the owner's photographs of the right-hand
+engine side and the left front three-quarter, and fourteen photographs of FE35 / MF35 tractors from
+Wikimedia Commons (SRC-042, listed by file name in `data/sources.json`; the images themselves are
+not kept in the repository). What was rebuilt:
+
+- **Right-hand side**: inlet manifold as a log with four branches and port flanges, exhaust
+  manifold with four branches, flanges and nuts, the outlet flange and the elbow up to the stack,
+  the inlet-heater plug, the dynamo on a bracket with pivot bolt, adjusting strap and V-pulley, the
+  starter with its mounting flange, nuts and solenoid terminal, and hose clips on both hoses.
+- **Left-hand side**: the CAV DPA pump as flange, body, governor cover, hydraulic head, four
+  fanned outlets with unions and the advance device; the injector pipes as a bundle along the
+  block's top edge to each injector; injectors with cap nut, leak-off banjo, clamp plate and nuts;
+  the drive-housing cover and tractormeter cable; the lift pump with domed cover; the CAV filter
+  head with bleed screws and glass bowl; the fuel tap and sediment bowl; dipstick tube; the oil
+  filter; the tappet cover with nuts; sump flange and ribs; the clutch housing flange, ribs,
+  inspection cover and nuts; gearbox covers and plugs.
+- **Block and head**: upper block plus a wider crankcase skirt with the engine-number boss and
+  ribs; the Comet combustion-chamber plugs and the rear water-outlet boss on the head.
+- **Steering**: radius rods with a front eye and a rear ball in a capped socket, drag links with a
+  ball joint at each end and clamps, and the drop-arm ends meeting the drag links.
+- **Air cleaner**: raised to the real height behind the bonnet with oil cup, band, strap bracket
+  and clipped hoses to the inlet manifold.
+- **Loose ends**: the top link now carries its implement-end ball, the levelling box its crank
+  handle, and the headlamp brackets, mudguard stays and brake cross shaft were extended to meet
+  the parts they bolt to.
+
+`npm run check-model` (`scripts/check-model.mjs`) loads the model under Node, records both ends of
+every rod, bar and open tube, and reports any end farther than 12 mm from every other mesh. It
+runs clean (258 ends, 0 loose) and should be run after any model edit. The viewer also pins the
+selected part's name to it with a dot and leader, so a part stays identifiable while rotating.
+
+Still placed by judgement after this pass: the instrument panel's form, the horn, the kingpin
+angles, the drawbar type and the exact lift-shaft position.
+
 ## Approximate
 
 These are placed by judgement and the owner's photo, not measured, and should be checked when the

@@ -26,6 +26,12 @@
     var el = document.createElement('div');
     el.className = 'viewer3d';
     this.el = el;
+    // Name label pinned to the selected part (as on Robodienst's anatomy pages): placed every frame in the render loop.
+    var pin = document.createElement('div');
+    pin.className = 'viewer-pin';
+    pin.hidden = true;
+    el.appendChild(pin);
+    this.pin = pin;
     var tip = document.createElement('div');
     tip.className = 'viewer-tip';
     tip.hidden = true;
@@ -258,6 +264,7 @@
       if (!animating && !self._dirty) return;
       self._dirty = false;
       self._placeCallouts();
+      self._placePin();
       renderer.render(scene, camera);
       self.frames = (self.frames || 0) + 1;
     };
@@ -533,7 +540,7 @@
       m.userData.off.copy(tmp);
       m.position.copy(m.userData.home).add(tmp.applyQuaternion(m.userData.toLocal));
     });
-    this._calloutsDirty = true;
+    this._calloutsDirty = true; this._pinDirty = true;
   };
   // Move parts to the explosion amount t (0 assembled, 1 fully exploded) for the given scope and depth.
   Viewer.prototype.setExplode = function (opts, animate, onDone) {
@@ -577,7 +584,7 @@
     this.bounds = new THREE.Box3().setFromObject(this.model.root).union(this.homeBounds);
     this.applyVisuals();
     this._updateOccluders();
-    this._calloutsDirty = true;
+    this._calloutsDirty = true; this._pinDirty = true;
   };
   Viewer.prototype.isExploded = function () { return this.explode.t > 0.001 || !!(this.explode.tween && this.explode.tween.to > 0); };
   // Frame the exploded scope (or the whole tractor).
@@ -638,7 +645,27 @@
       c.dot.setAttribute('r', '2.5');
       svg.appendChild(c.line); svg.appendChild(c.dot);
     });
-    this._calloutsDirty = true;
+    this._calloutsDirty = true; this._pinDirty = true;
+  };
+  // The selection pin: a small dot on the part and its name beside it. Hidden for whole systems (too big to point at),
+  // while exploded callouts are showing, and when the part is off screen.
+  Viewer.prototype._placePin = function () {
+    var id = this.state.selected, pin = this.pin;
+    var node = id && this.index.byId[id];
+    var show = node && node.node && node.depth >= 2 && !(this.callouts.length && this.explode.t > 0.3) && this.isModelled(id);
+    if (!show) { if (!pin.hidden) pin.hidden = true; this._pinFor = null; return; }
+    if (this._pinFor !== id || this._pinDirty) {
+      this._pinFor = id; this._pinDirty = false;
+      var box = this._boxFor(id);
+      this._pinPos = box ? box.getCenter(new this.THREE.Vector3()) : null;
+      pin.setAttribute('data-label', this.nameOf(id));
+    }
+    if (!this._pinPos) { pin.hidden = true; return; }
+    var v = this._pinPos.clone().project(this.camera);
+    if (v.z > 1 || Math.abs(v.x) > 1 || Math.abs(v.y) > 1) { pin.hidden = true; return; }
+    var w = this.el.clientWidth, h = this.el.clientHeight;
+    pin.hidden = false;
+    pin.style.transform = 'translate(' + ((v.x + 1) / 2 * w).toFixed(1) + 'px,' + ((1 - v.y) / 2 * h).toFixed(1) + 'px)';
   };
   Viewer.prototype._placeCallouts = function () {
     var show = this.callouts.length && this.explode.t > 0.3;

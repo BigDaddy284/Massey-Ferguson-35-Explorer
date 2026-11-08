@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "description": "Interactive 3D anatomy and parts catalogue for the 1958 Massey Ferguson 35 diesel (Standard 23C)",
+  "license": "MIT",
   "engines": {
     "node": ">=18"
   },
@@ -13,6 +14,7 @@
     "serve": "python3 -m http.server 8035 --directory app",
     "diagrams": "node scripts/build-diagrams.mjs",
     "report": "node scripts/completeness-report.mjs",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "check-model": "node scripts/check-model.mjs"
   }
 }

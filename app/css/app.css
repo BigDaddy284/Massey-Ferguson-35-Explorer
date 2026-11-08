@@ -657,3 +657,16 @@ dl.glossary dd { margin: 2px 0 0; font-size: 13.5px; color: var(--graphite); }
   .filters select { flex: 1 1 45%; min-width: 0; }
 }
 .flow-svg text { stroke: none; paint-order: normal; }
+
+/* Selection pin in the 3D view (Phase 9 detail pass) */
+.viewer-pin {
+  position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; will-change: transform;
+  width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
+  background: var(--blue); border: 2px solid var(--white); box-shadow: 0 0 0 2px rgba(77, 143, 216, .4);
+  font: 600 12px/1.2 var(--font); color: var(--white); white-space: nowrap;
+}
+.viewer-pin::before { content: ""; position: absolute; left: 9px; top: 2px; width: 14px; height: 2px; background: var(--white); box-shadow: 0 0 0 1px rgba(23, 32, 46, .35); }
+.viewer-pin::after {
+  content: attr(data-label); position: absolute; left: 23px; top: -8px; padding: 3px 8px; border-radius: 5px;
+  background: rgba(23, 32, 46, .88); color: var(--white);
+}
