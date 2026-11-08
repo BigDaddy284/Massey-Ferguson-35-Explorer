@@ -8266,12 +8266,13 @@
                 "sources": [
                   "SRC-035",
                   "SRC-041",
-                  "SRC-032"
+                  "SRC-032",
+                  "SRC-043"
                 ],
                 "status": "verified",
-                "description": "Friction-held lever on the dashboard that sets the governed speed.",
-                "function": "Moves the governor control on the injection pump through the linkage.",
-                "location": "On the dashboard beside the steering column.",
+                "description": "Friction-held lever on the instrument panel that sets the governed engine speed and stays where it is left.",
+                "function": "Pulling the lever round the friction disc moves the governor control on the injection pump through the inner lever, cross shaft and rods, so the engine holds the set speed for PTO or belt work with the driver's feet free.",
+                "location": "On the instrument panel to the right of the tractormeter: the lever's ball-knob rod pivots on a round friction disc on a bearer bolted to the bulkhead behind the panel, and sweeps round in front of the panel face (819045 p139 figure L-4, items 1 to 15).",
                 "failure": "Loses its friction and drifts back to idle.",
                 "related": [
                   "throttle-linkage",
@@ -8451,12 +8452,13 @@
                 "sources": [
                   "SRC-035",
                   "SRC-041",
-                  "SRC-032"
+                  "SRC-032",
+                  "SRC-043"
                 ],
                 "status": "partially-verified",
                 "description": "Rods, a cross shaft and a bellcrank between the hand lever and the pump governor arm.",
                 "function": "Carries the lever movement to the injection pump.",
-                "location": "Down the left side of the engine.",
+                "location": "Inner lever and cross shaft behind the instrument panel, then rods and a bellcrank down the left side of the engine to the governor lever on the injection pump (819045 p139 figure L-4).",
                 "failure": "Worn pins and clevises add free play so the engine speed hunts or cannot reach full speed.",
                 "related": [
                   "throttle-lever",
