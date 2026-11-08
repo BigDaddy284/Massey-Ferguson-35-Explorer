@@ -752,9 +752,24 @@
     add('stop-control', rbox(0.05, 0.03, 0.04, 0.008), M.steel, V(1.56, 0.80, -0.27));
     tube('stop-control', [V(1.56, 0.80, -0.29), V(1.30, 0.86, -0.30), V(1.06, 0.96, -0.285), V(0.88, 1.0, -0.22), V(0.80, 1.0, -0.20)], 0.003, M.black);
     add('stop-control', cyl(0.012, 0.012, 0.02, 'x', 12), M.black, V(0.79, 1.0, -0.20));            // pull knob (position approximate)
-    // Hand throttle under the steering wheel (position approximate)
-    add('throttle-lever', cyl(0.018, 0.018, 0.03, 'z', 14), M.steelDark, V(0.70, 1.17, 0.03));
-    bar('throttle-lever', V(0.70, 1.17, 0.04), V(0.67, 1.19, 0.15), 0.012, 0.008, M.steelDark);
+    // Hand throttle on the instrument panel (819045 p139 figure L-4, items 1-15): the lever pivots on a friction disc
+    // and bearer bolted to the bulkhead, and its ball-knob rod sweeps round in front of the panel face to the right of
+    // the tractormeter. A short inner lever behind the panel works a cross shaft to the rods down the left of the engine.
+    (function () {
+      var n = V(Math.cos(0.35), Math.sin(0.35), 0), up = V(-Math.sin(0.35), Math.cos(0.35), 0);   // panel normal and in-plane up
+      var piv = V(0.822, 1.001, 0.20);                                                           // pivot in the panel plane
+      var face = piv.clone().addScaledVector(n, -0.016);
+      add('throttle-lever', cyl(0.03, 0.03, 0.01, 'x', 24), M.steelDark, face, [0, 0, 0.35]);                // friction disc 826997M1
+      add('throttle-lever', cyl(0.009, 0.009, 0.09, 'x', 12), M.steel, piv.clone().addScaledVector(n, -0.01), [0, 0, 0.35]);   // pivot pin and spring sleeve
+      var hub = piv.clone().addScaledVector(n, -0.04);
+      var knob = hub.clone().addScaledVector(up, 0.19).add(V(0, 0, 0.04));
+      rod('throttle-lever', hub, knob, 0.006, M.steelDark);                                                  // lever 826992M91
+      add('throttle-lever', sphere(0.014), M.black, knob);                                                   // ball knob
+      var inner = piv.clone().addScaledVector(n, 0.045);
+      add('throttle-lever', box(0.04, 0.03, 0.02), M.steelDark, inner, [0, 0, 0.35]);                       // bearer 826998M91 behind the panel
+      rod('throttle-linkage', inner.clone().add(V(0, 0, -0.01)), V(0.865, 1.075, 0.19), 0.004, M.steel);    // inner lever 827003M1 to the cross shaft
+      add('throttle-linkage', cyl(0.005, 0.005, 0.40, 'z', 10), M.steel, V(0.865, 1.075, -0.005));          // cross shaft 827016M1 behind the panel
+    })();
     CYLX.forEach(function (x, i) {
       // Pipes leave the head in a bundle, run forward along the top edge of the block and each turns up to its injector
       var a = -0.6 + (3 - i) * 0.4, o = V(1.385, 0.835 + Math.cos(a) * 0.052, -0.25 - Math.sin(a) * 0.052);

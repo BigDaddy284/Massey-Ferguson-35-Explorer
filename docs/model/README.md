@@ -117,6 +117,12 @@ behind the left of the instrument panel with its warning light on the panel face
 H-15, items 12-13); both are cold-climate variant parts and hide with the heater plugs. Sizes of the resistor,
 warning light and wheel brace are by eye from the figures.
 
+The hand throttle was then moved from under the steering wheel onto the instrument panel after the owner recalled it
+pivoting on a round boss there: the throttle controls figure (p139, L-4) shows the lever on a friction disc and bearer
+bolted to the bulkhead, with an inner lever and cross shaft to the rods down the left of the engine. The disc is placed
+to the right of the tractormeter; the side is inferred from the cross shaft in the figure and from photographs, not
+stated by the book.
+
 ## Approximate
 
 These are placed by judgement and the owner's photo, not measured, and should be checked when the
