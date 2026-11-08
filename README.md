@@ -3,14 +3,12 @@
 An interactive digital anatomy and parts catalogue for a **1958 Massey Ferguson 35 diesel**
 (Standard 23C engine), built to run locally in a web browser.
 
-**Status:** Phase 6 built. Seventeen original exploded line diagrams (engine, cylinder head, block,
-crankshaft, timing, injection, cooling, clutch, gearbox, differential, rear axle, hydraulic lift and
-pump, PTO, front axle, brakes, linkage) are generated from the 3D model, numbered to match the 3D
-exploded views, and linked both ways to the component records. They need no WebGL. Every one of the
-247 catalogued parts has a plain-English description, function, location, failure note and links to
-connected parts (Phase 5). The separable 3D model (Phase 3–4) can be rotated, selected, hidden,
-isolated, X-rayed and exploded. Original part numbers and quantities still wait for the AGCO parts
-book (819045M4). UK supplier references (Phase 7) come next.
+**Status:** Phase 7 built. Two UK suppliers (Anglo Agriparts, Agriline Products) have been read for their
+Ferguson FE35 ranges and 235 purchase references are attached to 149 parts, each graded by how well it is
+tied to this tractor: four quote an OEM number that equals the 2008 AGCO supply number, most are simply
+listed for the FE35, and a few carry a reason to check the fit first. Prices, stock and the date checked are
+shown. Nothing is graded an exact match until the parts book (819045M4) has been read. Phase 8
+(completeness and QA) comes next.
 
 ## Open the app
 

@@ -1,0 +1,4353 @@
+{
+  "$comment": "Phase 7 UK supplier references. Not a shop: these point at legitimate UK suppliers whose FE35 listings were read on the date in `checked`. `match` grades: `agco-ref` = the supplier quotes an OEM number equal to one of the node's replacementReferences (or oemPartNumber) once the M/V suffix letter is normalised; `listed-fit` = listed by the supplier for the FE35 / 23C, fit claimed by the supplier only; `check-fit` = listed for the FE35 but with a known reason to check before ordering (see notes). Nothing is graded exact until parts book 819045M4 is read. Prices in GBP as shown on the date checked; stock as shown on the listing page.",
+  "schemaVersion": 1,
+  "suppliers": [
+    {
+      "id": "anglo-agriparts",
+      "name": "Anglo Agriparts",
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35",
+      "country": "UK",
+      "type": "aftermarket",
+      "notes": "UK aftermarket supplier with a dedicated Ferguson FE35 section (196 products on 2026-11-08). Product pages quote OEM numbers with the M suffix. Prices in GBP; the listing shows ex and inc VAT.",
+      "source": "SRC-039"
+    },
+    {
+      "id": "agriline-products",
+      "name": "Agriline Products",
+      "url": "https://agrilineproducts.com/ferguson/ferguson/fe35-4cyl",
+      "country": "UK",
+      "type": "aftermarket",
+      "notes": "UK aftermarket supplier (+44 1527 579 111) with a Ferguson FE35 4-cylinder range split by system. The site states its parts are Agriline parts, not made by the original manufacturer unless stated. Some listings quote OEM numbers in the title.",
+      "source": "SRC-040"
+    }
+  ],
+  "references": [
+    {
+      "node": "cylinder-head-assy",
+      "supplier": "anglo-agriparts",
+      "title": "Gasket - Top Set - Copper Head Gasket",
+      "supplierPartNumber": "A65600",
+      "oemQuoted": [
+        "1810028M91",
+        "827561M92"
+      ],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/gasket-top-set-copper-head-gasket-a65600",
+      "price": {
+        "exVat": 22.99,
+        "incVat": 27.59,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "agco-ref",
+      "fits": "Ferguson FE35 (23C diesel), MF 702, MF 835",
+      "source": "SRC-039",
+      "matchedNumber": "1810028V91",
+      "notes": "Quotes 1810028M91, the number the 2008 Heritage catalogue gives for the 23C top gasket set. The copper side of the head gasket faces down (supplier note)."
+    },
+    {
+      "node": "head-gasket",
+      "supplier": "anglo-agriparts",
+      "title": "Gasket - Top Set - Copper Head Gasket (head gasket supplied within the set)",
+      "supplierPartNumber": "A65600",
+      "oemQuoted": [
+        "1810028M91",
+        "827561M92"
+      ],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/gasket-top-set-copper-head-gasket-a65600",
+      "price": {
+        "exVat": 22.99,
+        "incVat": 27.59,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Ferguson FE35 (23C diesel), MF 702, MF 835",
+      "source": "SRC-039",
+      "notes": "The head gasket is not sold separately; it comes in the top set."
+    },
+    {
+      "node": "engine-block-assy",
+      "supplier": "anglo-agriparts",
+      "title": "Gasket - Lower Set",
+      "supplierPartNumber": "A52097",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/gasket-lower-set-a52097",
+      "price": {
+        "exVat": 16.76,
+        "incVat": 20.11,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "cylinder-liner",
+      "supplier": "anglo-agriparts",
+      "title": "Liner - Finished",
+      "supplierPartNumber": "A46609",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/liner-finished-a46609",
+      "price": {
+        "exVat": 20.2,
+        "incVat": 24.24,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "cylinder-liner",
+      "supplier": "anglo-agriparts",
+      "title": "Piston, Rings & Finished Liner Kit",
+      "supplierPartNumber": "A65869",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/piston-rings-finished-liner-kit-a65869",
+      "price": {
+        "exVat": 46.58,
+        "incVat": 55.9,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "Sold per cylinder."
+    },
+    {
+      "node": "piston",
+      "supplier": "anglo-agriparts",
+      "title": "Piston & Pin - 84.05 Bore, 5 Ring",
+      "supplierPartNumber": "A59681",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-piston-fe35-835-702-23c-diesel-a59681",
+      "price": {
+        "exVat": 19.43,
+        "incVat": 23.32,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "FE35, 835, 702 (23C diesel)",
+      "source": "SRC-039",
+      "notes": "Listed as 84.05 mm; the 23C bore is 3 5/16 in (84.14 mm, SRC-035). Confirm the grade and liner before ordering."
+    },
+    {
+      "node": "piston-rings",
+      "supplier": "anglo-agriparts",
+      "title": "Piston Ring Set",
+      "supplierPartNumber": "A64065",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/piston-ring-set-a64065",
+      "price": {
+        "exVat": 6.95,
+        "incVat": 8.34,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "big-end-bearings",
+      "supplier": "anglo-agriparts",
+      "title": "Conrod Bearing Set - Standard",
+      "supplierPartNumber": "A50900",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/conrod-bearing-set-standard-a50900",
+      "price": {
+        "exVat": 4.81,
+        "incVat": 5.77,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "main-bearings",
+      "supplier": "anglo-agriparts",
+      "title": "Main Bearing - Standard",
+      "supplierPartNumber": "A52986",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/main-bearing-standard-a52986",
+      "price": {
+        "exVat": 4.62,
+        "incVat": 5.54,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "thrust-washers",
+      "supplier": "anglo-agriparts",
+      "title": "Thrust Washer Set Std.",
+      "supplierPartNumber": "A67304",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/thrust-washer-set-std-a67304",
+      "price": {
+        "exVat": 33.14,
+        "incVat": 39.77,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "small-end-bush",
+      "supplier": "anglo-agriparts",
+      "title": "Small End Bush - 23C Diesel",
+      "supplierPartNumber": "A65678",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/small-end-bushs--c-diesel-a65678",
+      "price": {
+        "exVat": 5.94,
+        "incVat": 7.13,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "23C diesel",
+      "source": "SRC-039"
+    },
+    {
+      "node": "front-crank-seal",
+      "supplier": "anglo-agriparts",
+      "title": "Crankshaft Front Oil Seal - UK Made",
+      "supplierPartNumber": "A52683",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/crankshaft-front-oil-seal-uk-made-a52683",
+      "price": {
+        "exVat": 2.48,
+        "incVat": 2.98,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "rear-crank-seal",
+      "supplier": "anglo-agriparts",
+      "title": "Crankshaft Rear Seal - 4.0\" x 5.12\" x 0.56\"",
+      "supplierPartNumber": "A44693",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/crankshaft-rear-seal-4-0-x-5-12-x-0-56-a44693",
+      "price": {
+        "exVat": 4.66,
+        "incVat": 5.59,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "inlet-valve",
+      "supplier": "anglo-agriparts",
+      "title": "Inlet Valves",
+      "supplierPartNumber": "A56097",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/inlet-valves--a56097",
+      "price": {
+        "exVat": 1.55,
+        "incVat": 1.86,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "exhaust-valve",
+      "supplier": "anglo-agriparts",
+      "title": "Exhaust Valves",
+      "supplierPartNumber": "A57241",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/exhaust-valves--a57241",
+      "price": {
+        "exVat": 4.93,
+        "incVat": 5.92,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "inlet-valve-guide",
+      "supplier": "anglo-agriparts",
+      "title": "Valve Guide Inlet",
+      "supplierPartNumber": "A55375",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/valve-guide-inlet-a55375",
+      "price": {
+        "exVat": 2.92,
+        "incVat": 3.5,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "exhaust-valve-guide",
+      "supplier": "anglo-agriparts",
+      "title": "Exhaust Valve Guides",
+      "supplierPartNumber": "A46517",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/exhaust-valve-guides--a46517",
+      "price": {
+        "exVat": 2.31,
+        "incVat": 2.77,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "valve-spring-inner",
+      "supplier": "anglo-agriparts",
+      "title": "Inner Valve Springs",
+      "supplierPartNumber": "A61542",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/inner-valve-springs--a61542",
+      "price": {
+        "exVat": 1.86,
+        "incVat": 2.23,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "valve-spring-outer",
+      "supplier": "anglo-agriparts",
+      "title": "Valve Springs - Outer",
+      "supplierPartNumber": "A46576",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/valve-springs---outer--a46576",
+      "price": {
+        "exVat": 2.75,
+        "incVat": 3.3,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "valve-cap-collets",
+      "supplier": "anglo-agriparts",
+      "title": "Valve Cotter - 2 Required Per Valve",
+      "supplierPartNumber": "A67361",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/valve-cotter-2-required-per-valve-a67361",
+      "price": {
+        "exVat": 0.91,
+        "incVat": 1.09,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "valvetrain",
+      "supplier": "anglo-agriparts",
+      "title": "Valve Train Kit - 23C engine",
+      "supplierPartNumber": "A67273",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-fe35-835-valve-train-kit-23c-engine-a67273",
+      "price": {
+        "exVat": 118.58,
+        "incVat": 142.3,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35, 835 (23C engine)",
+      "source": "SRC-039"
+    },
+    {
+      "node": "engine",
+      "supplier": "anglo-agriparts",
+      "title": "Engine Overhaul Kit - 23C engine, finished liners",
+      "supplierPartNumber": "A67254",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/engine-overhaul-rebuild-ferguson-fe35-23c-engine-finished-liner-a67254",
+      "price": {
+        "exVat": 318.3,
+        "incVat": 381.96,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 (23C engine)",
+      "source": "SRC-039"
+    },
+    {
+      "node": "timing-chain",
+      "supplier": "anglo-agriparts",
+      "title": "Timing Chain",
+      "supplierPartNumber": "A53879",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/timing-chain-a53879",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "timing-chain-tensioner",
+      "supplier": "anglo-agriparts",
+      "title": "Timing Chain Adjuster",
+      "supplierPartNumber": "A91096",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/timing-chain-adjuster-a91096",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "timing-cover",
+      "supplier": "anglo-agriparts",
+      "title": "Gasket - Timing Cover",
+      "supplierPartNumber": "A67489",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/gasket-timing-cover-a67489",
+      "price": {
+        "exVat": 2.56,
+        "incVat": 3.07,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "rocker-cover",
+      "supplier": "anglo-agriparts",
+      "title": "Gasket - Rocker Cover",
+      "supplierPartNumber": "A54373",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/gasket-rocker-cover-a54373",
+      "price": {
+        "exVat": 3.65,
+        "incVat": 4.38,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "oil-filter",
+      "supplier": "anglo-agriparts",
+      "title": "Oil Filter Element",
+      "supplierPartNumber": "A59352",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/oil-filter-element-a59352",
+      "price": {
+        "exVat": 2.4,
+        "incVat": 2.88,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "oil-pump",
+      "supplier": "anglo-agriparts",
+      "title": "Oil Pump Rotor Assembly",
+      "supplierPartNumber": "A55573",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/oil-pump-rotor-assembly-a55573",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "engine-breather",
+      "supplier": "anglo-agriparts",
+      "title": "Engine Breather Pipe to Air Filter Hose",
+      "supplierPartNumber": "A68860",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/engine-breather-pipe-to-air-filter-hose-a68860",
+      "price": {
+        "exVat": 0.61,
+        "incVat": 0.73,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "exhaust-elbow",
+      "supplier": "anglo-agriparts",
+      "title": "Elbow Exhaust - 175°, 2 Hole",
+      "supplierPartNumber": "A47484",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/elbow-exhaust-175-2-hole-a47484",
+      "price": {
+        "exVat": 11.39,
+        "incVat": 13.67,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "silencer",
+      "supplier": "anglo-agriparts",
+      "title": "Exhaust Silencer - Vertical Fitting",
+      "supplierPartNumber": "A47344",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-silencer-exhuast-35-135-148-152-235-240-245-250-550-tea20-ted20-tef2-teh20-a47344",
+      "price": {
+        "exVat": 32.35,
+        "incVat": 38.82,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "35, 135, 148, 152, 235–550, TE20 series",
+      "source": "SRC-039"
+    },
+    {
+      "node": "fuel-cap",
+      "supplier": "anglo-agriparts",
+      "title": "Fuel Tank Cap",
+      "supplierPartNumber": "A64030",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/fuel-tank-cap-a64030",
+      "price": {
+        "exVat": 3.99,
+        "incVat": 4.79,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "fuel-tap",
+      "supplier": "anglo-agriparts",
+      "title": "Fuel Tap",
+      "supplierPartNumber": "A60011",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/fuel-tap-a60011",
+      "price": {
+        "exVat": 6.09,
+        "incVat": 7.31,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "fuel-lift-pump",
+      "supplier": "anglo-agriparts",
+      "title": "Fuel Pump (lift pump)",
+      "supplierPartNumber": "A53692",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/fuel-pump-a53692",
+      "price": {
+        "exVat": 19.35,
+        "incVat": 23.22,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "fuel-filters",
+      "supplier": "anglo-agriparts",
+      "title": "Fuel Filter CAV 7111-44",
+      "supplierPartNumber": "A46107",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/fuel-filter-cav-7111-44-a46107",
+      "price": {
+        "exVat": 10,
+        "incVat": 12,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "fuel-filters",
+      "supplier": "anglo-agriparts",
+      "title": "Fuel Filter Housing (Glass Bottom) CAV Type",
+      "supplierPartNumber": "A53970",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/fuel-filter-housing-glass-bottom-cav-type-a53970",
+      "price": {
+        "exVat": 13.16,
+        "incVat": 15.79,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "sediment-bowl",
+      "supplier": "anglo-agriparts",
+      "title": "Rubber Glass Fuel Bowl Seal",
+      "supplierPartNumber": "A64221",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/rubber-glass-fuel-bowl-seal-a64221",
+      "price": {
+        "exVat": 2.62,
+        "incVat": 3.14,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "injector-nozzle",
+      "supplier": "anglo-agriparts",
+      "title": "Injector Nozzle",
+      "supplierPartNumber": "A65816",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/injector-nozzle-a65816",
+      "price": {
+        "exVat": 20.19,
+        "incVat": 24.23,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "fuel-leak-off",
+      "supplier": "anglo-agriparts",
+      "title": "Leak Off Rail",
+      "supplierPartNumber": "A67488",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/leak-off-rail-a67488",
+      "price": {
+        "exVat": 23.89,
+        "incVat": 28.67,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "air-cleaner",
+      "supplier": "anglo-agriparts",
+      "title": "Oil Bath Air Cleaner Assembly",
+      "supplierPartNumber": "A50703",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-fe35-35-135-148-230-231-240-250-253-263-a50703",
+      "price": {
+        "exVat": 36.3,
+        "incVat": 43.56,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35, 35, 135, 148, 230–263",
+      "source": "SRC-039"
+    },
+    {
+      "node": "air-intake-pipe",
+      "supplier": "anglo-agriparts",
+      "title": "Air Cleaner Hose - Air Cleaner to Manifold",
+      "supplierPartNumber": "A60957",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/air-cleaner-hose-air-cleaner-manifold-a60957",
+      "price": {
+        "exVat": 7.01,
+        "incVat": 8.41,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "radiator",
+      "supplier": "anglo-agriparts",
+      "title": "Radiator",
+      "supplierPartNumber": "A58020",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-35-fe35-radiator-a58020",
+      "price": {
+        "exVat": 227.19,
+        "incVat": 272.63,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "35, FE35",
+      "source": "SRC-039"
+    },
+    {
+      "node": "radiator-cap",
+      "supplier": "anglo-agriparts",
+      "title": "Radiator Cap - 7 lb (2.25\" diameter)",
+      "supplierPartNumber": "A46167",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/radiator-cap-7-lbs-2-25-diameter-a46167",
+      "price": {
+        "exVat": 4.39,
+        "incVat": 5.27,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "top-hose",
+      "supplier": "anglo-agriparts",
+      "title": "Top Hose",
+      "supplierPartNumber": "A56571",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/top-hose-a56571",
+      "price": {
+        "exVat": 0.31,
+        "incVat": 0.37,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "bottom-hose",
+      "supplier": "anglo-agriparts",
+      "title": "Bottom Hose",
+      "supplierPartNumber": "A50188",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/bottom-hose-a50188",
+      "price": {
+        "exVat": 2.42,
+        "incVat": 2.9,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "water-pump",
+      "supplier": "anglo-agriparts",
+      "title": "Water Pump - 85/87 mm petrol, 20C, 23C",
+      "supplierPartNumber": "A53611",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-35-135-fe35-tea20-ted20-tef20-teh20-85mm-87mm-20c-23c-a53611",
+      "price": {
+        "exVat": 25.2,
+        "incVat": 30.24,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "35, 135, FE35, TE20 series (85 mm, 87 mm, 20C, 23C engines)",
+      "source": "SRC-039"
+    },
+    {
+      "node": "fan",
+      "supplier": "anglo-agriparts",
+      "title": "Fan Blade - Trapezoid Bolt Pattern - 15 1/2\" diameter",
+      "supplierPartNumber": "A67420",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/fan-blade-trapezoid-bolt-pattern-15-1-2-blade-a67420",
+      "price": {
+        "exVat": 5.66,
+        "incVat": 6.79,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "fan-belt",
+      "supplier": "anglo-agriparts",
+      "title": "Fan Belt - V Wrapped 17 x 965 mm",
+      "supplierPartNumber": "A51965",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/fan-belt-v-wrapped-17-x-965mm-a51965",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "thermostat",
+      "supplier": "anglo-agriparts",
+      "title": "Thermostat - 82°C",
+      "supplierPartNumber": "A57607",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/thermostat-82-c-a57607",
+      "price": {
+        "exVat": 5.92,
+        "incVat": 7.1,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "clutch-single-cover",
+      "supplier": "anglo-agriparts",
+      "title": "Clutch Cover - Single - 9\"",
+      "supplierPartNumber": "A67169",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-clutch-cover-35-te20-tea20-ted20-a67169",
+      "price": {
+        "exVat": 66.36,
+        "incVat": 79.63,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "35, TE20, TEA20, TED20",
+      "source": "SRC-039",
+      "notes": "A 9 in cover is the TE20 size; the FE35 single clutch size is not yet confirmed from the parts book. Check before ordering."
+    },
+    {
+      "node": "clutch-single-plate",
+      "supplier": "anglo-agriparts",
+      "title": "Clutch Plate Main, 11\", 10 Spline",
+      "supplierPartNumber": "A44862",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-clutch-plate-fe35-35-35x-a44862",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35, 35, 35X",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "clutch-dual-transmission-plate",
+      "supplier": "anglo-agriparts",
+      "title": "Clutch Plate Main, 11\", 10 Spline",
+      "supplierPartNumber": "A44862",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-clutch-plate-fe35-35-35x-a44862",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35, 35, 35X",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "clutch-dual-pto-plate",
+      "supplier": "anglo-agriparts",
+      "title": "Clutch Plate PTO, 9\", 10 Spline",
+      "supplierPartNumber": "A62129",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/clutch-plate-pto-9-10-spline-a62129",
+      "price": {
+        "exVat": 23.14,
+        "incVat": 27.77,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "release-bearing",
+      "supplier": "anglo-agriparts",
+      "title": "Clutch Release Bearing",
+      "supplierPartNumber": "A50310",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/clutch-release-bearing-a50310",
+      "price": {
+        "exVat": 9.95,
+        "incVat": 11.94,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "release-bearing",
+      "supplier": "anglo-agriparts",
+      "title": "Clutch Release Bearing Carrier ID 53 mm",
+      "supplierPartNumber": "A45674",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/clutch-release-bearing-carrier-id-53mm-a45674",
+      "price": {
+        "exVat": 7.91,
+        "incVat": 9.49,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "Anglo also lists a 56 mm carrier (A59029). Measure the old carrier."
+    },
+    {
+      "node": "axle-seals",
+      "supplier": "anglo-agriparts",
+      "title": "Rear Axle Inner Oil Seal",
+      "supplierPartNumber": "A45812",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/rear-axle-inner-oil-seal-a45812",
+      "price": {
+        "exVat": 1.53,
+        "incVat": 1.84,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "axle-seals",
+      "supplier": "anglo-agriparts",
+      "title": "Rear Axle Outer Oil Seal",
+      "supplierPartNumber": "A42876",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/rear-axle-outer-oil-seal-a42876",
+      "price": {
+        "exVat": 3.02,
+        "incVat": 3.62,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "rear-hub",
+      "supplier": "anglo-agriparts",
+      "title": "Rear Axle Outer Bearing",
+      "supplierPartNumber": "A56525",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/rear-axle-outer-bearing-a56525",
+      "price": {
+        "exVat": 4.87,
+        "incVat": 5.84,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "brake-drum",
+      "supplier": "anglo-agriparts",
+      "title": "Brake Drum",
+      "supplierPartNumber": "A54995",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/brake-drum-a54995",
+      "price": {
+        "exVat": 64.83,
+        "incVat": 77.8,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "brake-shoes",
+      "supplier": "anglo-agriparts",
+      "title": "Brake Shoe",
+      "supplierPartNumber": "A45721",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/brake-shoe-a45721",
+      "price": {
+        "exVat": 24.48,
+        "incVat": 29.38,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "Price per shoe."
+    },
+    {
+      "node": "brake-shoes",
+      "supplier": "anglo-agriparts",
+      "title": "Brake Shoe - UK Made - Premium Quality",
+      "supplierPartNumber": "A90272",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/brake-shoe-uk-made-premium-quality-a90272",
+      "price": {
+        "exVat": 31.5,
+        "incVat": 37.8,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "brake-shoes",
+      "supplier": "anglo-agriparts",
+      "title": "Brake Lining Kit",
+      "supplierPartNumber": "A45538",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/brake-lining-kit-a45538",
+      "price": {
+        "exVat": 24.21,
+        "incVat": 29.05,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "brake-springs",
+      "supplier": "anglo-agriparts",
+      "title": "Brake Return Spring",
+      "supplierPartNumber": "A57321",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/brake-return-spring-a57321",
+      "price": {
+        "exVat": 1.57,
+        "incVat": 1.88,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "brake-cam",
+      "supplier": "anglo-agriparts",
+      "title": "Brake Adjuster",
+      "supplierPartNumber": "A56001",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/brake-adjuster-a56001",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "brake-linkage",
+      "supplier": "anglo-agriparts",
+      "title": "Brake Pedal Rod Clevis Pin",
+      "supplierPartNumber": "A66270",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/brake-pedal-rod-clevis-pin-a66270",
+      "price": {
+        "exVat": 1.05,
+        "incVat": 1.26,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "wheel-studs-rear",
+      "supplier": "anglo-agriparts",
+      "title": "Rear Wheel Bolts - 9/16\" UNF, 50 mm long",
+      "supplierPartNumber": "A47971",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/rear-wheel-bolts----unf-thread-mm-long--a47971",
+      "price": {
+        "exVat": 1.11,
+        "incVat": 1.33,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "rear-wheel-nuts",
+      "supplier": "anglo-agriparts",
+      "title": "Rear Wheel Nuts - 9/16\" UNF",
+      "supplierPartNumber": "A59157",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/rear-wheel-nuts----unf--a59157",
+      "price": {
+        "exVat": 0.7,
+        "incVat": 0.84,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "rear-rim-clamps",
+      "supplier": "anglo-agriparts",
+      "title": "Rim to Disc Bolt - 72 mm, 5/8\" UNF",
+      "supplierPartNumber": "A54686",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/rim-disc-bolt-72mm-length-5-8-unf-thread-a54686",
+      "price": {
+        "exVat": 1.7,
+        "incVat": 2.04,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "pto-seals",
+      "supplier": "anglo-agriparts",
+      "title": "PTO Outer Oil Seal",
+      "supplierPartNumber": "A49195",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/pto-outer-oil-seal-a49195",
+      "price": {
+        "exVat": 2.97,
+        "incVat": 3.56,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "hyd-pump",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Pump - MK1 Pump, 10 spline",
+      "supplierPartNumber": "A57146",
+      "oemQuoted": [
+        "184472M93",
+        "184473M93"
+      ],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-hydraulic-pump-mk1-35-65-765-865-a57146",
+      "price": {
+        "exVat": 223.86,
+        "incVat": 268.63,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35; MF 35, 65, 765, 865 (10-spline shaft)",
+      "source": "SRC-039",
+      "notes": "The supplier quotes 184472M93 / 184473M93 for the complete pump. The 2008 Heritage catalogue lists only repair kits for the 35 pump, so there is no AGCO number to match against yet."
+    },
+    {
+      "node": "hyd-pump",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Pump Repair Kit - Mark I, Ø25 mm",
+      "supplierPartNumber": "A56508",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-pump-repair-kit-mark-i-25mm-a56508",
+      "price": {
+        "exVat": 92.86,
+        "incVat": 111.43,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "hyd-strainer",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Filter - On Pump",
+      "supplierPartNumber": "A62743",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-filter-on-pump-a62743",
+      "price": {
+        "exVat": 3.72,
+        "incVat": 4.46,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "lift-cover",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Gasket Set",
+      "supplierPartNumber": "A68136",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-gasket-set-a68136",
+      "price": {
+        "exVat": 13.08,
+        "incVat": 15.7,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "lift-cylinder",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Cylinder - 9/16\" UNC Studs (3\" Bore)",
+      "supplierPartNumber": "A68037",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-cylinder-9-16-unc-studs-3-bore-a68037",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "lift-cylinder",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Lift Cylinder Overhaul Kit",
+      "supplierPartNumber": "A68261",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-lift-cylinder-overhaul-kit-a68261",
+      "price": {
+        "exVat": 54.03,
+        "incVat": 64.84,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "lift-piston-rings",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Cylinder Piston Cast Ring Set of 3 - 3\"",
+      "supplierPartNumber": "A56476",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-cylinder-piston-cast-ring-set-of-3-3-a56476",
+      "price": {
+        "exVat": 2.21,
+        "incVat": 2.65,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "rockshaft",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Lift Cross Shaft",
+      "supplierPartNumber": "A57882",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-lift-cross-shaft-a57882",
+      "price": {
+        "exVat": 52.52,
+        "incVat": 63.02,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "rockshaft-seals",
+      "supplier": "anglo-agriparts",
+      "title": "Lift Shaft O Rings 3/16\"",
+      "supplierPartNumber": "A50138",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/lift-shaft-o-rings---a50138",
+      "price": {
+        "exVat": 0.33,
+        "incVat": 0.4,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "lift-arm-lh",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Lift Arm LH/RH (37 spline, Ø50 mm shaft)",
+      "supplierPartNumber": "A67170",
+      "oemQuoted": [
+        "180910M1"
+      ],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-lift-arm-lh-rh-a67170",
+      "price": {
+        "exVat": 26.6,
+        "incVat": 31.92,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "TE20 series, FE35, MF 35, 35X, 65, 135",
+      "source": "SRC-039"
+    },
+    {
+      "node": "lift-arm-rh",
+      "supplier": "anglo-agriparts",
+      "title": "Hydraulic Lift Arm LH/RH (37 spline, Ø50 mm shaft)",
+      "supplierPartNumber": "A67170",
+      "oemQuoted": [
+        "180910M1"
+      ],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/hydraulic-lift-arm-lh-rh-a67170",
+      "price": {
+        "exVat": 26.6,
+        "incVat": 31.92,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "TE20 series, FE35, MF 35, 35X, 65, 135",
+      "source": "SRC-039"
+    },
+    {
+      "node": "draft-control-spring",
+      "supplier": "anglo-agriparts",
+      "title": "Draft Control Spring",
+      "supplierPartNumber": "A66724",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/draft-control-spring-a66724",
+      "price": {
+        "exVat": 17.22,
+        "incVat": 20.66,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "hyd-controls",
+      "supplier": "anglo-agriparts",
+      "title": "Draft Control Repair Kit (Early Type)",
+      "supplierPartNumber": "A68129",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/draft-control-repair-kit-early-type-a68129",
+      "price": {
+        "exVat": 89.86,
+        "incVat": 107.83,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "draft-control-rocker",
+      "supplier": "anglo-agriparts",
+      "title": "Rocker Link",
+      "supplierPartNumber": "A46797",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/rocker-link-a46797",
+      "price": {
+        "exVat": 12.95,
+        "incVat": 15.54,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "levelling-box",
+      "supplier": "anglo-agriparts",
+      "title": "Levelling Box Assembly",
+      "supplierPartNumber": "A67171",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/levelling-box-assembly-a67171",
+      "price": {
+        "exVat": 50.42,
+        "incVat": 60.5,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "top-link",
+      "supplier": "anglo-agriparts",
+      "title": "Top Link (Cat. 1/1) 575–725 mm",
+      "supplierPartNumber": "A42283",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/top-link-cat-1-1-575-725mm-a42283",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "check-chains",
+      "supplier": "anglo-agriparts",
+      "title": "Check Chain Assembly - Inner",
+      "supplierPartNumber": "A68677",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/check-chain-assembly-inner-a68677",
+      "price": {
+        "exVat": 6.2,
+        "incVat": 7.44,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "check-chains",
+      "supplier": "anglo-agriparts",
+      "title": "Check Chain Stabiliser",
+      "supplierPartNumber": "A67347",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/check-chain-stabiliser-a67347",
+      "price": {
+        "exVat": 18.6,
+        "incVat": 22.32,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "linkage-pins",
+      "supplier": "anglo-agriparts",
+      "title": "Lynch Pin Chain And Bracket",
+      "supplierPartNumber": "A67704",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/lynch-pin-chain-and-bracket-a67704",
+      "price": {
+        "exVat": 1.61,
+        "incVat": 1.93,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "drawbar",
+      "supplier": "anglo-agriparts",
+      "title": "Drawbar - With Clevis",
+      "supplierPartNumber": "A68683",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/drawbar-with-clevis-a68683",
+      "price": {
+        "exVat": 52,
+        "incVat": 62.4,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "drawbar",
+      "supplier": "anglo-agriparts",
+      "title": "Swinging Drawbar Assembly",
+      "supplierPartNumber": "A67701",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/swinging-drawbar-assembly-a67701",
+      "price": {
+        "exVat": 149,
+        "incVat": 178.8,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "front-axle-pivot-pin",
+      "supplier": "anglo-agriparts",
+      "title": "Axle Pivot Pin Bush (Axle Beam)",
+      "supplierPartNumber": "A63840",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/axle-pivot-pin-bush-axle-beam-a63840",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "stub-axle",
+      "supplier": "anglo-agriparts",
+      "title": "Front Spindle Repair Kit",
+      "supplierPartNumber": "A40229",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/front-spindle-repair-kit-a40229",
+      "price": {
+        "exVat": 6.42,
+        "incVat": 7.7,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "stub-axle",
+      "supplier": "anglo-agriparts",
+      "title": "Spindle King Pin - Left Hand",
+      "supplierPartNumber": "A48146",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/spindle-king-pin-left-hand-a48146",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock. RH is A58611."
+    },
+    {
+      "node": "front-hub",
+      "supplier": "anglo-agriparts",
+      "title": "Front Wheel Bearing Kit - seal 40 x 68 x 9.58 mm",
+      "supplierPartNumber": "A66106",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/front-wheel-bearing-kit-seal-size-40-x-68-x-9-58mm-a66106",
+      "price": {
+        "exVat": 14.07,
+        "incVat": 16.88,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "radius-rods",
+      "supplier": "anglo-agriparts",
+      "title": "Radius Rod Ball Housing & Foot Peg (Front Axle Rod)",
+      "supplierPartNumber": "A67910",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/radius-rod-ball-housing-foot-peg-front-axle-rod-a67910",
+      "price": {
+        "exVat": 38.42,
+        "incVat": 46.1,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "steering-box",
+      "supplier": "anglo-agriparts",
+      "title": "Steering Box Shaft Bushes",
+      "supplierPartNumber": "A57285",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/steering-box-shaft-bushs--a57285",
+      "price": {
+        "exVat": 1.49,
+        "incVat": 1.79,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "steering-box",
+      "supplier": "anglo-agriparts",
+      "title": "Steering Box Outer Seal",
+      "supplierPartNumber": "A58459",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/steering-box-outer-seal-a58459",
+      "price": {
+        "exVat": 0.85,
+        "incVat": 1.02,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "steering-wheel",
+      "supplier": "anglo-agriparts",
+      "title": "Steering Wheel",
+      "supplierPartNumber": "A59964",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-35-65-135-tea20-ted20-tef20-fe35-steering-wheel-a59964",
+      "price": {
+        "exVat": 24.86,
+        "incVat": 29.83,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "35, 65, 135, TE20 series, FE35",
+      "source": "SRC-039"
+    },
+    {
+      "node": "drag-links",
+      "supplier": "anglo-agriparts",
+      "title": "Steering Rod End (Front Axle End)",
+      "supplierPartNumber": "A49853",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/steering-rod-end-front-axle-end-a49853",
+      "price": {
+        "exVat": 8.63,
+        "incVat": 10.36,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "drag-links",
+      "supplier": "anglo-agriparts",
+      "title": "Steering Rod End (Steering Box End)",
+      "supplierPartNumber": "A42913",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/steering-rod-end-steering-box-end-a42913",
+      "price": {
+        "exVat": 7.65,
+        "incVat": 9.18,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "starter-motor",
+      "supplier": "anglo-agriparts",
+      "title": "Starter Motor - 12 V - 127 mm between bolt holes",
+      "supplierPartNumber": "A46111",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/starter-motor-ferguson-te20-tea20-ted20-teh20-fe35-35-a46111",
+      "price": {
+        "exVat": 88.35,
+        "incVat": 106.02,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "TE20 series, FE35, 35",
+      "source": "SRC-039",
+      "notes": "Anglo lists two starters for the FE35 (this and A57688). Match the mounting and the voltage of your tractor; the 1958 electrics axis is not yet confirmed."
+    },
+    {
+      "node": "starter-motor",
+      "supplier": "anglo-agriparts",
+      "title": "Starter Motor - 12 V - 2.0 kW - 11 spline",
+      "supplierPartNumber": "A57688",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/starter-motor-fordson-dexta-super-dexta-ferguson-tef20-fe35-massey-ferguson-30-35-a57688",
+      "price": {
+        "exVat": 162.86,
+        "incVat": 195.43,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "Dexta, TEF20, FE35, MF 30, 35",
+      "source": "SRC-039",
+      "notes": "See A46111. Check mounting and voltage."
+    },
+    {
+      "node": "dynamo",
+      "supplier": "anglo-agriparts",
+      "title": "Dynamo Brush Set",
+      "supplierPartNumber": "A68512",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/dynamo-brush-set-a68512",
+      "price": {
+        "exVat": 1.3,
+        "incVat": 1.56,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "regulator",
+      "supplier": "anglo-agriparts",
+      "title": "Control Box - 12 V Bullet Connection",
+      "supplierPartNumber": "A47754",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/control-box-12v-bullett-connection-a47754",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "starter-switch",
+      "supplier": "anglo-agriparts",
+      "title": "Switch Ignition & Heating - 3 Terminal - Heat + Neutral + Start",
+      "supplierPartNumber": "A60257",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/switch-ignition-heating-3-terminal-heat-neutral-start-a60257",
+      "price": {
+        "exVat": 8.55,
+        "incVat": 10.26,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "heater-plugs",
+      "supplier": "anglo-agriparts",
+      "title": "Heater Glow Plug",
+      "supplierPartNumber": "A67305",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/heater-glow-plug-a67305",
+      "price": {
+        "exVat": 13.48,
+        "incVat": 16.18,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "intake-heater",
+      "supplier": "anglo-agriparts",
+      "title": "Glow Plug - Inlet Manifold",
+      "supplierPartNumber": "A67458",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/glow-plug-inlet-manifold-a67458",
+      "price": {
+        "exVat": 8.61,
+        "incVat": 10.33,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "headlamps",
+      "supplier": "anglo-agriparts",
+      "title": "Headlight - Side Mounting - Left Hand",
+      "supplierPartNumber": "A42897",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-healight-35-65-te20-tea20-ted20-tef20-fe35-lh-a42897",
+      "price": {
+        "exVat": 9.79,
+        "incVat": 11.75,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "35, 65, TE20 series, FE35",
+      "source": "SRC-039",
+      "notes": "RH is A49009 at the same price."
+    },
+    {
+      "node": "rear-lamp",
+      "supplier": "anglo-agriparts",
+      "title": "Plough Lamp - Red",
+      "supplierPartNumber": "A47123",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-red-plough-lamp-a47123",
+      "price": {
+        "exVat": 12.16,
+        "incVat": 14.59,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "ammeter",
+      "supplier": "anglo-agriparts",
+      "title": "Ammeter - 41 mm hole (+30 to −30 A)",
+      "supplierPartNumber": "A59073",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-ammeter-135-148-165-175-178-35-65-tea20-tef20-teh20-a59073",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "135–178, 35, 65, TE20 series",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock."
+    },
+    {
+      "node": "temp-gauge",
+      "supplier": "anglo-agriparts",
+      "title": "Water Temperature Gauge - Capillary Type",
+      "supplierPartNumber": "A48744",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-temperature-gauge-35-65-135-148-165-168-175-178-185-188-a48744",
+      "price": {
+        "exVat": 11.71,
+        "incVat": 14.05,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "35, 65, 135–188",
+      "source": "SRC-039"
+    },
+    {
+      "node": "oil-pressure-gauge",
+      "supplier": "anglo-agriparts",
+      "title": "Oil Pressure Gauge",
+      "supplierPartNumber": "A49968",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-oil-gauge-fe35-35-65-135-148-165-168-175-178-185-188-tea20-tef20-teh20-a49968",
+      "price": {
+        "exVat": 9.56,
+        "incVat": 11.47,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35, 35, 65, 135–188, TE20 series",
+      "source": "SRC-039"
+    },
+    {
+      "node": "tractormeter",
+      "supplier": "anglo-agriparts",
+      "title": "Tachometer Drive Cable - 1200 mm, 5/8\" thread",
+      "supplierPartNumber": "A58837",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/tachometer-drive-cable-1200mm-thread-5-8-a58837",
+      "price": null,
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "No price shown while out of stock. Drive unit is A46464."
+    },
+    {
+      "node": "mudguards",
+      "supplier": "anglo-agriparts",
+      "title": "Fender Skin",
+      "supplierPartNumber": "A63518",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/massey-ferguson-fender-35-35x-65-ferguson-fe35-te20-tea20-ted20-tef20-a63518",
+      "price": {
+        "exVat": 23.02,
+        "incVat": null,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "35, 35X, 65, FE35, TE20 series",
+      "source": "SRC-039",
+      "notes": "Clearance price, ex VAT only shown."
+    },
+    {
+      "node": "seat-support",
+      "supplier": "anglo-agriparts",
+      "title": "Seat Hinge",
+      "supplierPartNumber": "A67599",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/seat-hinge-a67599",
+      "price": {
+        "exVat": 22.66,
+        "incVat": 27.19,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "bonnet",
+      "supplier": "anglo-agriparts",
+      "title": "Bonnet Clamping Pin",
+      "supplierPartNumber": "A65277",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/bonnet-clamping-pin-a65277",
+      "price": {
+        "exVat": 2.28,
+        "incVat": 2.74,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039"
+    },
+    {
+      "node": "front-wheel",
+      "supplier": "anglo-agriparts",
+      "title": "Front Wheel - 4.50 x 16\"",
+      "supplierPartNumber": "A49202",
+      "oemQuoted": [],
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35/view-all-products/front-wheel-4-50-x-16-a49202",
+      "price": {
+        "exVat": 43.29,
+        "incVat": 51.95,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "FE35 listing; the supplier does not state the engine",
+      "source": "SRC-039",
+      "notes": "The 1958 specification is a 4.00 x 19 front tyre (SRC-035 B.1); a 16 in wheel is a later size."
+    },
+    {
+      "node": "engine",
+      "supplier": "agriline-products",
+      "title": "Engine Overhaul Kit - Ferguson FE35 (23C)",
+      "supplierPartNumber": "7008",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/engine-overhaul-kit-ferguson-fe35-7008",
+      "price": {
+        "exVat": 299,
+        "incVat": 358.8,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 4-cylinder 23C",
+      "source": "SRC-040",
+      "notes": "Agriline-developed kit: 4 pistons, liners, ring sets, top and lower gasket sets, both crank seals, 8 valves with collets, inner and outer springs, 8 guides."
+    },
+    {
+      "node": "radiator",
+      "supplier": "agriline-products",
+      "title": "Radiator FE35 835 23C",
+      "supplierPartNumber": "5471",
+      "oemQuoted": [
+        "828108M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-radiator-fe35-835-23c-5471",
+      "price": {
+        "exVat": 154,
+        "incVat": 184.8,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35, 835 (23C)",
+      "source": "SRC-040"
+    },
+    {
+      "node": "radiator-cap",
+      "supplier": "agriline-products",
+      "title": "Radiator Cap",
+      "supplierPartNumber": "5183",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-radiator-cap-5183",
+      "price": {
+        "exVat": 4.15,
+        "incVat": 4.98,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "water-pump",
+      "supplier": "agriline-products",
+      "title": "Water Pump TE20 / FE35",
+      "supplierPartNumber": "5042",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-ferguson-te20-fe35-water-pump-5042",
+      "price": {
+        "exVat": 30.83,
+        "incVat": 37,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "TE20, FE35",
+      "source": "SRC-040"
+    },
+    {
+      "node": "fan",
+      "supplier": "agriline-products",
+      "title": "Fan Assembly",
+      "supplierPartNumber": "6100",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-fan-assembly-6100",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "bottom-hose",
+      "supplier": "agriline-products",
+      "title": "Water Hose Kit FE35 835 23C",
+      "supplierPartNumber": "106-KIT",
+      "oemQuoted": [
+        "826988M1",
+        "827496M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-water-hose-kit-fe35-835-23c-106-kit",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "agco-ref",
+      "fits": "FE35, 835 (23C)",
+      "source": "SRC-040",
+      "matchedNumber": "826988V1",
+      "notes": "Kit of top and bottom hoses. Quotes 826988M1, the 2008 Heritage number for the lower hose."
+    },
+    {
+      "node": "top-hose",
+      "supplier": "agriline-products",
+      "title": "Water Hose Kit FE35 835 23C",
+      "supplierPartNumber": "106-KIT",
+      "oemQuoted": [
+        "826988M1",
+        "827496M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-water-hose-kit-fe35-835-23c-106-kit",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35, 835 (23C)",
+      "source": "SRC-040",
+      "notes": "Kit of top and bottom hoses."
+    },
+    {
+      "node": "thermostat",
+      "supplier": "agriline-products",
+      "title": "Thermostat - 82°C",
+      "supplierPartNumber": "5174",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-thermostat-5174",
+      "price": {
+        "exVat": 6.2,
+        "incVat": 7.44,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "A 74°C thermostat (72222) is also offered."
+    },
+    {
+      "node": "fan-belt",
+      "supplier": "agriline-products",
+      "title": "Fan Belt - B38",
+      "supplierPartNumber": "5073",
+      "oemQuoted": [
+        "570038M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-fan-belt-b38-570038m1-5073",
+      "price": {
+        "exVat": 6.83,
+        "incVat": 8.2,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "clutch-dual",
+      "supplier": "agriline-products",
+      "title": "Dual Clutch Kit (from serial number 36227)",
+      "supplierPartNumber": "C0252",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-dual-clutch-kit-c0252",
+      "price": {
+        "exVat": 330,
+        "incVat": 396,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "FE35 from serial 36227",
+      "source": "SRC-040",
+      "notes": "A 1958 tractor (serial 79553 or later) falls in this range if the serial break quoted by the supplier is right. C0251 is the earlier type."
+    },
+    {
+      "node": "clutch-dual-cover",
+      "supplier": "agriline-products",
+      "title": "Dual Clutch Cover",
+      "supplierPartNumber": "C0241",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-dual-clutch-cover-c0241",
+      "price": {
+        "exVat": 295,
+        "incVat": 354,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "C0098 is an alternative dual cover (out of stock)."
+    },
+    {
+      "node": "clutch-dual-transmission-plate",
+      "supplier": "agriline-products",
+      "title": "Dual Clutch Main Drive Plate",
+      "supplierPartNumber": "C0074",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-dual-clutch-main-drive-plate-c0074",
+      "price": {
+        "exVat": 37.49,
+        "incVat": 44.99,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "clutch-dual-pto-plate",
+      "supplier": "agriline-products",
+      "title": "Dual Clutch PTO Plate",
+      "supplierPartNumber": "C0075",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-dual-clutch-pto-plate-c0075",
+      "price": {
+        "exVat": 37.49,
+        "incVat": 44.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "clutch-single-cover",
+      "supplier": "agriline-products",
+      "title": "Clutch Cover Single",
+      "supplierPartNumber": "C0099",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-clutch-cover-single-c0099",
+      "price": {
+        "exVat": 180,
+        "incVat": 216,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "clutch-single-plate",
+      "supplier": "agriline-products",
+      "title": "Clutch Plate",
+      "supplierPartNumber": "9021",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-clutch-plate-9021",
+      "price": {
+        "exVat": 39.16,
+        "incVat": 46.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "release-bearing",
+      "supplier": "agriline-products",
+      "title": "Release Bearing FE35",
+      "supplierPartNumber": "C0100",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-release-bearing-fe35-c0100",
+      "price": {
+        "exVat": 29.99,
+        "incVat": 35.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35",
+      "source": "SRC-040"
+    },
+    {
+      "node": "release-bearing",
+      "supplier": "agriline-products",
+      "title": "Clutch Release Bearing (single clutch models)",
+      "supplierPartNumber": "9330",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-clutch-release-bearing-9330",
+      "price": {
+        "exVat": 78,
+        "incVat": 93.6,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "Single-clutch models",
+      "source": "SRC-040",
+      "notes": "Only for the single-stage clutch."
+    },
+    {
+      "node": "release-fork",
+      "supplier": "agriline-products",
+      "title": "Clutch Fork",
+      "supplierPartNumber": "C0215",
+      "oemQuoted": [
+        "886719M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-clutch-fork-886719m1-c0215",
+      "price": {
+        "exVat": 29.99,
+        "incVat": 35.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "release-fork",
+      "supplier": "agriline-products",
+      "title": "Bush - Clutch and Brake Shafts",
+      "supplierPartNumber": "6238",
+      "oemQuoted": [
+        "184592M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-bush-clutch-and-brake-shafts-184592m1-6238",
+      "price": {
+        "exVat": 2.1,
+        "incVat": 2.52,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "clutch-pedal",
+      "supplier": "agriline-products",
+      "title": "Clutch Pedal With Hole",
+      "supplierPartNumber": "77568",
+      "oemQuoted": [
+        "1861169M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-clutch-pedal-with-hole-1861169m1-77568",
+      "price": {
+        "exVat": 34.16,
+        "incVat": 40.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "gear-lever-main",
+      "supplier": "agriline-products",
+      "title": "Main Gear Lever",
+      "supplierPartNumber": "5772",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-main-gear-lever-5772",
+      "price": {
+        "exVat": 17.5,
+        "incVat": 21,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "gear-lever-main",
+      "supplier": "agriline-products",
+      "title": "Gear Lever Boot",
+      "supplierPartNumber": "5190",
+      "oemQuoted": [
+        "180579M3"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-gear-lever-boot-180579m3-5190",
+      "price": {
+        "exVat": 2.63,
+        "incVat": 3.16,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "agco-ref",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "matchedNumber": "180579V3"
+    },
+    {
+      "node": "gear-lever-range",
+      "supplier": "agriline-products",
+      "title": "Gear Lever Hi / Low",
+      "supplierPartNumber": "5982",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-gear-lever-hi-low-5982",
+      "price": {
+        "exVat": 19.99,
+        "incVat": 23.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "selector-forks",
+      "supplier": "agriline-products",
+      "title": "Selector Fork",
+      "supplierPartNumber": "5752",
+      "oemQuoted": [
+        "897065M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-selector-fork-897065m1-5752",
+      "price": {
+        "exVat": 26.66,
+        "incVat": 31.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "selector-forks",
+      "supplier": "agriline-products",
+      "title": "Selector Rail - 1st/Reverse",
+      "supplierPartNumber": "5756",
+      "oemQuoted": [
+        "1678867M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-selector-rail-1st-reverse-1678867m1-5756",
+      "price": {
+        "exVat": 19.16,
+        "incVat": 22.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "selector-forks",
+      "supplier": "agriline-products",
+      "title": "Selector Rail - 2nd/3rd",
+      "supplierPartNumber": "5757",
+      "oemQuoted": [
+        "1678866M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-selector-rail-2nd-3rd-5757",
+      "price": {
+        "exVat": 15.83,
+        "incVat": 19,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "gearbox-bearings",
+      "supplier": "agriline-products",
+      "title": "Needle Roller (pack of 50)",
+      "supplierPartNumber": "5792",
+      "oemQuoted": [
+        "183039M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-needle-roller-pack-of-50-183039m1-5792",
+      "price": {
+        "exVat": 3.68,
+        "incVat": 4.42,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "countershaft",
+      "supplier": "agriline-products",
+      "title": "Gasket (Layshaft Bearing Housing)",
+      "supplierPartNumber": "50285",
+      "oemQuoted": [
+        "181237M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-gasket-layshaft-bearing-housing-181237m1-50285",
+      "price": {
+        "exVat": 2.1,
+        "incVat": 2.52,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "gearbox-casing",
+      "supplier": "agriline-products",
+      "title": "Gearbox Input Housing (6 speed, up to serial 121069)",
+      "supplierPartNumber": "5576",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-gearbox-input-housing-5576",
+      "price": {
+        "exVat": 72,
+        "incVat": 86.4,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "FE35 up to serial 121069",
+      "source": "SRC-040",
+      "notes": "The supplier's serial break (121069) falls inside the 1958 range, so the tractor serial decides."
+    },
+    {
+      "node": "brake-shoes",
+      "supplier": "agriline-products",
+      "title": "Brake Shoe TE20 MF35 135 Dexta",
+      "supplierPartNumber": "5143",
+      "oemQuoted": [
+        "1810348M91",
+        "1810517M1",
+        "1810517M91",
+        "1810517M92",
+        "3620602M91",
+        "830480M92"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-brake-shoe-te20-mf35-135-dexta-5143",
+      "price": {
+        "exVat": 19.99,
+        "incVat": 23.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "TE20, MF35, 135, Dexta",
+      "source": "SRC-040",
+      "notes": "Quotes 830480M92; the 2008 Heritage number for the lined shoes is 830480V93 (a later revision of the same number)."
+    },
+    {
+      "node": "brake-shoes",
+      "supplier": "agriline-products",
+      "title": "Brake Lining Kit",
+      "supplierPartNumber": "5140",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-brake-lining-kit-5140",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "brake-springs",
+      "supplier": "agriline-products",
+      "title": "Brake Shoe Spring",
+      "supplierPartNumber": "5779",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-brake-shoe-spring-5779",
+      "price": {
+        "exVat": 3.68,
+        "incVat": 4.42,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "brake-cam",
+      "supplier": "agriline-products",
+      "title": "Brake Adjuster",
+      "supplierPartNumber": "5223",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-brake-adjuster-5223",
+      "price": {
+        "exVat": 5.77,
+        "incVat": 6.92,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "brake-drum",
+      "supplier": "agriline-products",
+      "title": "Brake Drum",
+      "supplierPartNumber": "5666",
+      "oemQuoted": [
+        "181230M1",
+        "827707M3",
+        "827707M5"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-brake-drum-5666",
+      "price": {
+        "exVat": 62,
+        "incVat": 74.4,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "agco-ref",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "matchedNumber": "827707V5"
+    },
+    {
+      "node": "brake-pedals",
+      "supplier": "agriline-products",
+      "title": "Brake Pedal Left Hand",
+      "supplierPartNumber": "5657",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-brake-pedal-left-hand-5657",
+      "price": {
+        "exVat": 62,
+        "incVat": 74.4,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "RH pedal is 5658 (£85.00 ex VAT)."
+    },
+    {
+      "node": "brake-linkage",
+      "supplier": "agriline-products",
+      "title": "Bush - Brake Cross Shaft",
+      "supplierPartNumber": "6266",
+      "oemQuoted": [
+        "180801M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-bush-brake-cross-shaft-180801m1-6266",
+      "price": {
+        "exVat": 3.05,
+        "incVat": 3.66,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "half-shaft",
+      "supplier": "agriline-products",
+      "title": "Half Shaft Kit",
+      "supplierPartNumber": "5804",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-half-shaft-kit-5804",
+      "price": {
+        "exVat": 36.66,
+        "incVat": 43.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "half-shaft",
+      "supplier": "agriline-products",
+      "title": "Halfshaft Gasket",
+      "supplierPartNumber": "50034",
+      "oemQuoted": [
+        "181232M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-halfshaft-gasket-50034",
+      "price": {
+        "exVat": 3.1,
+        "incVat": 3.72,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "diff-bearings",
+      "supplier": "agriline-products",
+      "title": "Bearing - Diff / Rear Axle",
+      "supplierPartNumber": "5231",
+      "oemQuoted": [
+        "1850087M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-bearing-diff-rear-axle-1850087m91-5231",
+      "price": {
+        "exVat": 19.99,
+        "incVat": 23.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "diff-bearings",
+      "supplier": "agriline-products",
+      "title": "Differential Bearing R/H",
+      "supplierPartNumber": "92058",
+      "oemQuoted": [
+        "1850849M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-differential-bearing-r-h-1850849m91-92058",
+      "price": {
+        "exVat": 23.33,
+        "incVat": 28,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "axle-seals",
+      "supplier": "agriline-products",
+      "title": "Half Shaft Outer Seal - 70 x 92 x 14 mm",
+      "supplierPartNumber": "5634",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-half-shaft-outer-seal-70-x-92-x-14mm-5634",
+      "price": {
+        "exVat": 5.25,
+        "incVat": 6.3,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "axle-seals",
+      "supplier": "agriline-products",
+      "title": "Halfshaft Inner Seal",
+      "supplierPartNumber": "5153",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-halfshaft-inner-seal-5153",
+      "price": {
+        "exVat": 5.25,
+        "incVat": 6.3,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "rear-hub",
+      "supplier": "agriline-products",
+      "title": "Outer Halfshaft Bearing",
+      "supplierPartNumber": "5705",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-outer-halfshaft-bearing-5705",
+      "price": {
+        "exVat": 23.33,
+        "incVat": 28,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "axle-trumpet-lh",
+      "supplier": "agriline-products",
+      "title": "Trumpet Housing Gasket",
+      "supplierPartNumber": "5636",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-trumpet-housing-gasket-5636",
+      "price": {
+        "exVat": 3.94,
+        "incVat": 4.73,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "axle-trumpet-rh",
+      "supplier": "agriline-products",
+      "title": "Trumpet Housing Gasket",
+      "supplierPartNumber": "5636",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-trumpet-housing-gasket-5636",
+      "price": {
+        "exVat": 3.94,
+        "incVat": 4.73,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "crown-wheel",
+      "supplier": "agriline-products",
+      "title": "Crown Wheel & Pinion",
+      "supplierPartNumber": "50391",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-crown-wheel-pinion-50391",
+      "price": {
+        "exVat": 150,
+        "incVat": 180,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "pinion",
+      "supplier": "agriline-products",
+      "title": "Crown Wheel & Pinion",
+      "supplierPartNumber": "50391",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-crown-wheel-pinion-50391",
+      "price": {
+        "exVat": 150,
+        "incVat": 180,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "centre-housing",
+      "supplier": "agriline-products",
+      "title": "Rear Axle to Transmission Gasket",
+      "supplierPartNumber": "72310",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-rear-axle-to-transmission-gasket-72310",
+      "price": {
+        "exVat": 4.2,
+        "incVat": 5.04,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "wheel-studs-rear",
+      "supplier": "agriline-products",
+      "title": "Rear Wheel Stud",
+      "supplierPartNumber": "4113",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-rear-wheel-stud-4113",
+      "price": {
+        "exVat": 2.05,
+        "incVat": 2.46,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "rear-wheel-nuts",
+      "supplier": "agriline-products",
+      "title": "Cone Rear Wheel Nut",
+      "supplierPartNumber": "4111",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-cone-rear-wheel-nut-4111",
+      "price": {
+        "exVat": 1.05,
+        "incVat": 1.26,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "pto-seals",
+      "supplier": "agriline-products",
+      "title": "PTO Shaft Oil Seal",
+      "supplierPartNumber": "5152",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-pto-shaft-oil-seal-5152",
+      "price": {
+        "exVat": 5.25,
+        "incVat": 6.3,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "Listed under FE35 4-cyl; description quotes MF135 up to serial 457633",
+      "source": "SRC-040",
+      "notes": "The listing text refers to MF135 serials; confirm the seal size for the 35."
+    },
+    {
+      "node": "pto-seals",
+      "supplier": "agriline-products",
+      "title": "PTO Selector Shaft Seal",
+      "supplierPartNumber": "6826",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-pto-selector-shaft-seal-6826",
+      "price": {
+        "exVat": 6.83,
+        "incVat": 8.2,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "pto-guard",
+      "supplier": "agriline-products",
+      "title": "PTO Cap",
+      "supplierPartNumber": "4138",
+      "oemQuoted": [
+        "180313M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-pto-cap-180313m1-4138",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "Listed under FE35 4-cyl; description quotes MF135 up to serial 457632",
+      "source": "SRC-040",
+      "notes": "The 2008 Heritage number for the 35 PTO shield is 1868778V1, which does not match."
+    },
+    {
+      "node": "pto-guard",
+      "supplier": "agriline-products",
+      "title": "PTO Guard",
+      "supplierPartNumber": "5697",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-pto-guard-5697",
+      "price": {
+        "exVat": 41.66,
+        "incVat": 49.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "Listed under FE35 4-cyl; description quotes MF135 from serial 439191",
+      "source": "SRC-040",
+      "notes": "Later-style guard. Check against the original shield."
+    },
+    {
+      "node": "hyd-pump",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Pump (10 spline)",
+      "supplierPartNumber": "6227",
+      "oemQuoted": [
+        "184472M93",
+        "184473M1",
+        "184473M93"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-pump-6227",
+      "price": {
+        "exVat": 205,
+        "incVat": 246,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35 4-cyl, FE35 petrol, 35 3-cyl, 65",
+      "source": "SRC-040"
+    },
+    {
+      "node": "hyd-pump",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Pump Repair Kit",
+      "supplierPartNumber": "5983",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-pump-repair-kit-5983",
+      "price": {
+        "exVat": 93,
+        "incVat": 111.6,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "hyd-pump-pistons",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Pump Piston",
+      "supplierPartNumber": "6161",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-pump-piston-6161",
+      "price": {
+        "exVat": 9.98,
+        "incVat": 11.98,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "Two required."
+    },
+    {
+      "node": "hyd-valve-chamber",
+      "supplier": "agriline-products",
+      "title": "Valve Chamber Assembly",
+      "supplierPartNumber": "6162",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-valve-chamber-assembly-6162",
+      "price": {
+        "exVat": 37.49,
+        "incVat": 44.99,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "hyd-relief-valve",
+      "supplier": "agriline-products",
+      "title": "Relief Valve - 2300/2800 psi",
+      "supplierPartNumber": "4483",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-relief-valve-2300-2800-psi-4483",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "hyd-pump-camshaft-bearing",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Pump Camshaft Bearing",
+      "supplierPartNumber": "5786",
+      "oemQuoted": [
+        "1000251M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-pump-camshaft-bearing-1000251m1-5786",
+      "price": {
+        "exVat": 4.73,
+        "incVat": 5.68,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "hyd-strainer",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Oil Strainer",
+      "supplierPartNumber": "4474",
+      "oemQuoted": [
+        "1687042M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-oil-strainer-1687042m91-4474",
+      "price": {
+        "exVat": 4.19,
+        "incVat": 5.03,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "hyd-strainer",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Pump Filter Kit",
+      "supplierPartNumber": "7848",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-pump-filter-kit-7848",
+      "price": {
+        "exVat": 21.66,
+        "incVat": 25.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "draft-control-spring",
+      "supplier": "agriline-products",
+      "title": "Draft Control Spring",
+      "supplierPartNumber": "4338",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-draft-control-spring-4338",
+      "price": {
+        "exVat": 15.83,
+        "incVat": 19,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "draft-control-plunger",
+      "supplier": "agriline-products",
+      "title": "Draft Control Plunger Seat",
+      "supplierPartNumber": "4358",
+      "oemQuoted": [
+        "182581M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-draft-control-plunger-seat-182581m1-4358",
+      "price": {
+        "exVat": 6.3,
+        "incVat": 7.56,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "draft-control-plunger",
+      "supplier": "agriline-products",
+      "title": "Draft Control Plunger",
+      "supplierPartNumber": "4339",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-draft-control-plunger-4339",
+      "price": {
+        "exVat": 6.51,
+        "incVat": 7.81,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "draft-control-rocker",
+      "supplier": "agriline-products",
+      "title": "Draft Control Rocker",
+      "supplierPartNumber": "4341",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-draft-control-rocker-4341",
+      "price": {
+        "exVat": 15.83,
+        "incVat": 19,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "quadrant",
+      "supplier": "agriline-products",
+      "title": "Quadrant Assembly",
+      "supplierPartNumber": "4309",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-quadrant-assembly-4309",
+      "price": {
+        "exVat": 67,
+        "incVat": 80.4,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "35, 35X, FE35, 65",
+      "source": "SRC-040"
+    },
+    {
+      "node": "top-link-bracket",
+      "supplier": "agriline-products",
+      "title": "Top Link Bracket Rubber Boot",
+      "supplierPartNumber": "5450",
+      "oemQuoted": [
+        "180980M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-top-link-bracket-rubber-boot-180980m1-5450",
+      "price": {
+        "exVat": 3.1,
+        "incVat": 3.72,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "lift-piston-rings",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Piston Ring Set",
+      "supplierPartNumber": "4479",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-piston-ring-set-4479",
+      "price": {
+        "exVat": 6.83,
+        "incVat": 8.2,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "lift-piston",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Piston",
+      "supplierPartNumber": "4780",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-piston-4780",
+      "price": {
+        "exVat": 26.66,
+        "incVat": 31.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "lift-cylinder",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Cylinder",
+      "supplierPartNumber": "4778A",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-cylinder-4778a",
+      "price": {
+        "exVat": 78,
+        "incVat": 93.6,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "lift-cover-gasket",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Top Cover Gasket",
+      "supplierPartNumber": "6228",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-top-cover-gasket-6228",
+      "price": {
+        "exVat": 4.73,
+        "incVat": 5.68,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "rockshaft",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Cross Shaft",
+      "supplierPartNumber": "4781",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-cross-shaft-4781",
+      "price": {
+        "exVat": 53,
+        "incVat": 63.6,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "rockshaft-bushes",
+      "supplier": "agriline-products",
+      "title": "Hydraulic Cross Shaft Bush",
+      "supplierPartNumber": "4782",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-hydraulic-cross-shaft-bush-4782",
+      "price": {
+        "exVat": 4.2,
+        "incVat": 5.04,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "lift-arm-lh",
+      "supplier": "agriline-products",
+      "title": "Lift Arm LH/RH",
+      "supplierPartNumber": "4321",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-lift-arm-lh-rh-4321",
+      "price": {
+        "exVat": 31.66,
+        "incVat": 37.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "lift-arm-rh",
+      "supplier": "agriline-products",
+      "title": "Lift Arm LH/RH",
+      "supplierPartNumber": "4321",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-lift-arm-lh-rh-4321",
+      "price": {
+        "exVat": 31.66,
+        "incVat": 37.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "levelling-box",
+      "supplier": "agriline-products",
+      "title": "Levelling Box",
+      "supplierPartNumber": "4003",
+      "oemQuoted": [
+        "182642M94",
+        "1884342M92"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-levelling-box-4003",
+      "price": {
+        "exVat": 41.66,
+        "incVat": 49.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "Quotes 182642M94; the 2008 Heritage number for the hand crank is 182642V93 (a later revision of the same number)."
+    },
+    {
+      "node": "lift-rod-lh",
+      "supplier": "agriline-products",
+      "title": "Fixed Drop Arm",
+      "supplierPartNumber": "4192",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-fixed-drop-arm-4192",
+      "price": {
+        "exVat": 26.66,
+        "incVat": 31.99,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "lower-link-lh",
+      "supplier": "agriline-products",
+      "title": "Link Arm (single hole)",
+      "supplierPartNumber": "4009",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-link-arm-4009",
+      "price": {
+        "exVat": 41.66,
+        "incVat": 49.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "Sold singly, fits either side."
+    },
+    {
+      "node": "lower-link-rh",
+      "supplier": "agriline-products",
+      "title": "Link Arm (single hole)",
+      "supplierPartNumber": "4009",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-link-arm-4009",
+      "price": {
+        "exVat": 41.66,
+        "incVat": 49.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "Sold singly, fits either side."
+    },
+    {
+      "node": "check-chains",
+      "supplier": "agriline-products",
+      "title": "Check Chain Assembly - Inner",
+      "supplierPartNumber": "4134",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-check-chain-assembly-inner-4134",
+      "price": {
+        "exVat": 5.2,
+        "incVat": 6.24,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "check-chains",
+      "supplier": "agriline-products",
+      "title": "Stabiliser Bracket LH",
+      "supplierPartNumber": "4011",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-stabiliser-bracket-lh-4011",
+      "price": {
+        "exVat": 14.95,
+        "incVat": 17.94,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "RH is 4012."
+    },
+    {
+      "node": "drawbar",
+      "supplier": "agriline-products",
+      "title": "Drawbar Assembly Complete MF35/135/TE20 (swinging)",
+      "supplierPartNumber": "4151",
+      "oemQuoted": [
+        "872142M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-drawbar-assembly-complete-mf35-135-te20-4151",
+      "price": {
+        "exVat": 139,
+        "incVat": 166.8,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "MF35, 135, TE20",
+      "source": "SRC-040"
+    },
+    {
+      "node": "drawbar",
+      "supplier": "agriline-products",
+      "title": "Drawbar with Clevis (Cat. 1)",
+      "supplierPartNumber": "4318",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-drawbar-with-clevis-4318",
+      "price": {
+        "exVat": 45,
+        "incVat": 54,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "top-link",
+      "supplier": "agriline-products",
+      "title": "Top Link (Cat. 1/1) with Ball Ends, 625–825 mm",
+      "supplierPartNumber": "4143",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-top-link-cat-1-1-with-ball-ends-4143",
+      "price": {
+        "exVat": 24.95,
+        "incVat": 29.94,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "linkage-pins",
+      "supplier": "agriline-products",
+      "title": "Hinge Pin (Cat. 1)",
+      "supplierPartNumber": "4133",
+      "oemQuoted": [
+        "180901M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-hinge-pin-cat-1-180901m91-4133",
+      "price": {
+        "exVat": 12.49,
+        "incVat": 14.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "ball-ends",
+      "supplier": "agriline-products",
+      "title": "Lower Link Ball (Cat. 1)",
+      "supplierPartNumber": "4838",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-lower-link-ball-cat-1-4838",
+      "price": {
+        "exVat": 5.24,
+        "incVat": 6.29,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "battery-cables",
+      "supplier": "agriline-products",
+      "title": "Battery Lead Negative",
+      "supplierPartNumber": "55064",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-battery-lead-negative-55064",
+      "price": {
+        "exVat": 18.33,
+        "incVat": 22,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "battery-cables",
+      "supplier": "agriline-products",
+      "title": "Battery Lead Positive",
+      "supplierPartNumber": "55072",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-battery-lead-positive-55072",
+      "price": {
+        "exVat": 11.66,
+        "incVat": 13.99,
+        "currency": "GBP"
+      },
+      "stock": "Out of stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "starter-switch",
+      "supplier": "agriline-products",
+      "title": "Premium Ignition Switch, Heat and Start",
+      "supplierPartNumber": "74911",
+      "oemQuoted": [
+        "883920M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-premium-ignition-switch-heat-and-start-74911",
+      "price": {
+        "exVat": 19.16,
+        "incVat": 22.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "The 2008 Heritage number for the 35 starter switch is 883928V91, a different number."
+    },
+    {
+      "node": "wiring-harness",
+      "supplier": "agriline-products",
+      "title": "Wiring Harness",
+      "supplierPartNumber": "5014A",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-wiring-harness-5014a",
+      "price": {
+        "exVat": 26.66,
+        "incVat": 31.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "regulator",
+      "supplier": "agriline-products",
+      "title": "Control Box",
+      "supplierPartNumber": "5079",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-control-box-5079",
+      "price": {
+        "exVat": 34.16,
+        "incVat": 40.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "starter-motor",
+      "supplier": "agriline-products",
+      "title": "Starter Motor",
+      "supplierPartNumber": "5269",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-starter-motor-5269",
+      "price": {
+        "exVat": 124,
+        "incVat": 148.8,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "Agriline also offers a gear-reduction starter (80119). Match the voltage of your tractor."
+    },
+    {
+      "node": "dynamo",
+      "supplier": "agriline-products",
+      "title": "Tractor Dynamo",
+      "supplierPartNumber": "5297",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-tractor-dynamo-5297",
+      "price": {
+        "exVat": 57,
+        "incVat": 68.4,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "heater-plugs",
+      "supplier": "agriline-products",
+      "title": "Heater Plug (screw terminal)",
+      "supplierPartNumber": "5452",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-heater-plug-5452",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "horn",
+      "supplier": "agriline-products",
+      "title": "12 V Horn",
+      "supplierPartNumber": "5121",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-12v-horn-5121",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "oil-pressure-gauge",
+      "supplier": "agriline-products",
+      "title": "Oil Pressure Gauge",
+      "supplierPartNumber": "5057",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-oil-pressure-gauge-5057",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "ammeter",
+      "supplier": "agriline-products",
+      "title": "Ammeter - 40 mm",
+      "supplierPartNumber": "5058",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-ammeter-40mm-5058",
+      "price": {
+        "exVat": 13.33,
+        "incVat": 16,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "tractormeter",
+      "supplier": "agriline-products",
+      "title": "Tachometer",
+      "supplierPartNumber": "5129",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-tachometer-5129",
+      "price": {
+        "exVat": 26.66,
+        "incVat": 31.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "tractormeter",
+      "supplier": "agriline-products",
+      "title": "Tachometer Cable (1224 mm) FE35 835 23C",
+      "supplierPartNumber": "5285",
+      "oemQuoted": [
+        "829487M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-tachometer-cable-1224mm-fe35-835-23c-5285",
+      "price": {
+        "exVat": 10.24,
+        "incVat": 12.29,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35, 835 (23C)",
+      "source": "SRC-040"
+    },
+    {
+      "node": "headlamps",
+      "supplier": "agriline-products",
+      "title": "Headlights - Side Mounting (pair)",
+      "supplierPartNumber": "6200",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-headlights-side-mounting-6200",
+      "price": {
+        "exVat": 41.66,
+        "incVat": 49.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "rear-lamp",
+      "supplier": "agriline-products",
+      "title": "Plough Lamp - Ferguson Grey",
+      "supplierPartNumber": "5158B",
+      "oemQuoted": [
+        "1886656M91",
+        "886997M91",
+        "886998M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-plough-lamp-ferguson-grey-5158b",
+      "price": {
+        "exVat": 20.83,
+        "incVat": 25,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "battery",
+      "supplier": "agriline-products",
+      "title": "643 Type, 12 V Wet Battery 95 Ah",
+      "supplierPartNumber": "AB643E",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-643-type-12v-wet-battery-95ah-ab643e",
+      "price": {
+        "exVat": 114,
+        "incVat": 136.8,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "12 V. Whether the 1958 tractor left the factory with 12 V or 6 V electrics is not yet confirmed (electrics axis). A 6 V battery (AB541A) is also listed."
+    },
+    {
+      "node": "grille",
+      "supplier": "agriline-products",
+      "title": "Front Grille",
+      "supplierPartNumber": "2140",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-front-grille-2140",
+      "price": {
+        "exVat": 30.83,
+        "incVat": 37,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040",
+      "notes": "Needs two grille fasteners (5366)."
+    },
+    {
+      "node": "side-panels",
+      "supplier": "agriline-products",
+      "title": "Side Panel - Left Hand",
+      "supplierPartNumber": "2146",
+      "oemQuoted": [
+        "890162M91",
+        "890162R91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-side-panel-left-hand-2146",
+      "price": {
+        "exVat": 39.16,
+        "incVat": 46.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "bonnet",
+      "supplier": "agriline-products",
+      "title": "Bonnet Assembly FE35 Push Button",
+      "supplierPartNumber": "2451",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-bonnet-assembly-fe35-push-button-2451",
+      "price": {
+        "exVat": 360,
+        "incVat": 432,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35",
+      "source": "SRC-040"
+    },
+    {
+      "node": "front-badge",
+      "supplier": "agriline-products",
+      "title": "Front Badge Chrome FE35",
+      "supplierPartNumber": "6231",
+      "oemQuoted": [
+        "826686M1"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-front-badge-chrome-fe35-826686m1-6231",
+      "price": {
+        "exVat": 19.99,
+        "incVat": 23.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "FE35",
+      "source": "SRC-040",
+      "notes": "The 2008 Heritage numbers for the 35 emblem are 187990V1 and 79024624V; 826686M1 is a different (Ferguson-era) number."
+    },
+    {
+      "node": "dashboard",
+      "supplier": "agriline-products",
+      "title": "Dash Rubber",
+      "supplierPartNumber": "5815",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-dash-rubber-5815",
+      "price": {
+        "exVat": 8.93,
+        "incVat": 10.72,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "footplates",
+      "supplier": "agriline-products",
+      "title": "Ferguson Footplates",
+      "supplierPartNumber": "2113",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-ferguson-footplates-2113",
+      "price": {
+        "exVat": 58,
+        "incVat": 69.6,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "seat",
+      "supplier": "agriline-products",
+      "title": "Seat Pan",
+      "supplierPartNumber": "2139",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-seat-pan-2139",
+      "price": {
+        "exVat": 34.16,
+        "incVat": 40.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "seat",
+      "supplier": "agriline-products",
+      "title": "Seat Assembly",
+      "supplierPartNumber": "1760",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-seat-assembly-1760",
+      "price": {
+        "exVat": 101,
+        "incVat": 121.2,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "seat-support",
+      "supplier": "agriline-products",
+      "title": "Seat Pan Bracket with Hinge",
+      "supplierPartNumber": "5631",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-seat-pan-bracket-with-hinge-5631",
+      "price": {
+        "exVat": 52.49,
+        "incVat": 62.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "mudguards",
+      "supplier": "agriline-products",
+      "title": "Wing Skin and Bracket as Original",
+      "supplierPartNumber": "2155",
+      "oemQuoted": [
+        "509415M91",
+        "1807007M92",
+        "827351M91"
+      ],
+      "url": "https://agrilineproducts.com/ferguson-wing-skin-and-bracket-as-original-2155",
+      "price": {
+        "exVat": 78,
+        "incVat": 93.6,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "mudguards",
+      "supplier": "agriline-products",
+      "title": "Mudguard / Fender Skin - Heavy Duty",
+      "supplierPartNumber": "2154",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-mudguard-fender-skin-heavy-duty-2154",
+      "price": {
+        "exVat": 37.49,
+        "incVat": 44.99,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "serial-plate",
+      "supplier": "agriline-products",
+      "title": "Commission Plate - Std Motor Co., 15 patent numbers, FE35",
+      "supplierPartNumber": "5607",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-commission-plate-std-motor-co-15-pat-no-s-fe35-5607",
+      "price": {
+        "exVat": 7.88,
+        "incVat": 9.46,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "check-fit",
+      "fits": "FE35",
+      "source": "SRC-040",
+      "notes": "Reproduction plate. Agriline sells several patterns (7, 8, 13, 15 and 16 patent numbers); match the original."
+    },
+    {
+      "node": "rear-rim",
+      "supplier": "agriline-products",
+      "title": "Wheel Rim 9 x 28",
+      "supplierPartNumber": "2157",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-wheel-rim-9-x-28-2157",
+      "price": {
+        "exVat": 55,
+        "incVat": 66,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "rear-wheel-centre",
+      "supplier": "agriline-products",
+      "title": "28\" Centre Disc",
+      "supplierPartNumber": "23000",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-28-centre-disc-23000",
+      "price": {
+        "exVat": 92,
+        "incVat": 110.4,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    },
+    {
+      "node": "rear-rim-clamps",
+      "supplier": "agriline-products",
+      "title": "Rim to Disc Nut, Bolt & Washer",
+      "supplierPartNumber": "5462",
+      "oemQuoted": [],
+      "url": "https://agrilineproducts.com/ferguson-rim-to-disc-nut-bolt-washer-gold-5462",
+      "price": {
+        "exVat": 3.1,
+        "incVat": 3.72,
+        "currency": "GBP"
+      },
+      "stock": "In stock",
+      "checked": "2026-11-08",
+      "match": "listed-fit",
+      "fits": "Agriline FE35 4-cylinder category",
+      "source": "SRC-040"
+    }
+  ]
+}

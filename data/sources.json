@@ -490,7 +490,8 @@
       "dateResearched": null,
       "reference": "Identified via SRC-015 and SRC-016; copy not yet obtained. Required to verify OEM part numbers and quantities.",
       "extracted": [],
-      "conflicts": []
+      "conflicts": [],
+      "notes": "PDF copies found 2026-11-08: aservicemanualpdf.com (about $15; its genuine sample pages show item / part number / qty / description / serial-range tables, but every sampled section is headed A3.152, so 23C coverage is unconfirmed until the file is seen), heavy-equipmentmanual.com ($32, searchable), farmingparts.com / masseytractorparts.com (AGCO PDF, about £130). A 177-page scan is also on Scribd (document 706566071)."
     },
     {
       "id": "SRC-033",
@@ -588,14 +589,15 @@
       "dateResearched": "2026-11-07",
       "reference": "Suggested by the owner. AGCO dealer ordering guide listing publication numbers by model. Read through a text extract; the column layout (operator / repair / time schedule / parts / microfiche) could not be matched with certainty, so numbers are recorded in the order printed. No prices, no serial ranges. It is a catalogue of publications, not a publication with part data.",
       "extracted": [
-        "FE 35 (4 cyl. Dsl.): 690274M2, 819146M4, 819045M4, 653116M91 (microfiche Red 22). Reading across the column order these are the operator manual, repair manual, parts book and microfiche.",
+        "FE 35 (4 cyl. Dsl.) row: 690274M2, 819146M4, 819045M4, 653116M91 (microfiche, Red 22). Column headings are Operator Manual, Repair Manual, Time Schedule, Parts Book, Microfiche; the row has four numbers in five columns and no cell borders, so the assignment is inferred: 690274M2 operator manual, 819146M4 repair manual, 819045M4 parts book (confirmed as the parts book by SRC-015 and the sellers), 653116M91 parts microfiche.",
         "FE 35 (3 cyl. Dsl.): 819146M4, 819045M4, 653116M91. The same parts book 819045M4 and repair manual 819146M4 serve both FE35 engines.",
         "35 Dsl. (U.S.): 690454M4, 1448811M91, 651093M93, 653110M91. 35 Gas.: 690495M3, 1448811M91, 651093M93, 653118M91. So 1448811M91 is the US-built 35 repair manual and 651093M93 its parts book, which are not the Coventry FE35 publications.",
         "TO 35 Gas (Ferguson): 690241M4, 693063M4, 653115M91; TO 35 Dsl.: 690348M2, 693063M4, 653115M91.",
         "Publications are ordered through AGCO dealers as regular parts orders."
       ],
       "conflicts": [
-        "SRC-015 pairs the FE-35 4-cyl diesel with service manual 1448811M1 plus supplement 690560M1. This catalogue lists 1448811M91 against the US-built 35 and 819146M4 against the FE 35, so 819146M4 is the better candidate for the Coventry diesel repair manual. Unconfirmed until a copy is seen."
+        "SRC-015 pairs the FE-35 4-cyl diesel with service manual 1448811M1 plus supplement 690560M1. This catalogue lists 1448811M91 against the US-built 35 and 819146M4 against the FE 35, so 819146M4 is the better candidate for the Coventry diesel repair manual. Unconfirmed until a copy is seen.",
+        "819146M4 sits in the repair-manual position of the FE 35 rows here, but masseytractorparts.com and farmingparts.com both sell 819146M4 as the \"35X Operators Manual\" and sell 819147M1 as the \"35/35X Workshop Manual\" (checked 8 Nov 2026). Its exact identity is unresolved; either way it is a later 35/35X-era publication, not the 1958 FE35 operator book 819046M1."
       ]
     },
     {
@@ -622,6 +624,61 @@
         "Bottom gasket set 1810027V91 is listed against \"175 23C Diesel Engine\"; the 175 never had a 23C (p.176).",
         "The earlier text extract paired 836117V91 with a 23C liner; the page image shows it is the ring kit, and no 23C liner is listed."
       ]
+    },
+    {
+      "id": "SRC-039",
+      "name": "Anglo Agriparts: Ferguson FE35 tractor parts listing (196 products) and product pages",
+      "url": "https://www.anglo-agriparts.com/tractor-parts-ferguson-fe35",
+      "type": "supplier-catalogue",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-08",
+      "reference": "Both listing pages (view-all-products, pages 1 and 2) read on 2026-11-08 for name, A-number, ex/inc VAT price and stock; product pages read for A57146 (hydraulic pump), A65600 (top gasket set) and A67170 (lift arm) to capture the OEM numbers quoted. Prices and stock change; the date checked is stored on each reference.",
+      "extracted": [
+        "FE35 section lists 196 products; most do not name the engine. 23C-specific items: engine overhaul kit A67254, valve train kit A67273, small-end bushes A65678, top gasket set A65600 (quotes 1810028M91 and 827561M92), piston A59681 (84.05 mm, 5 ring).",
+        "Top gasket set A46800 (87 mm) is the petrol-engine set; A65600 is the 23C one.",
+        "Hydraulic pump A57146 (MK1, 10 spline) quotes 184472M93 and 184473M93; lift arm A67170 quotes 180910M1 (37 spline, 50 mm shaft).",
+        "Listed front wheel is 4.50 x 16 in, a later size; the 1958 specification is 4.00 x 19 (SRC-035).",
+        "Two starters (A46111, A57688), two release-bearing carriers (53 and 56 mm) and both a 9 in single clutch cover and an 11 in main plate are offered under FE35, so the fit depends on the tractor."
+      ],
+      "conflicts": [
+        "Several product pages show both a stock count and an out-of-stock notice at the same time; the listing-page status was recorded."
+      ]
+    },
+    {
+      "id": "SRC-040",
+      "name": "Agriline Products: Ferguson FE35 4-cylinder parts range (category pages by system)",
+      "url": "https://agrilineproducts.com/ferguson/ferguson/fe35-4cyl",
+      "type": "supplier-catalogue",
+      "reliability": "supplier",
+      "accessed": true,
+      "dateResearched": "2026-11-08",
+      "reference": "Category pages read on 2026-11-08: hydraulics (59), clutch (23), brakes (24), transmission and PTO (35), cooling (30), linkage (66), electrical (62), rear wheel and axle (30), body (65). The engine and front-axle category pages returned a server error on 2026-11-08 and were not read; the engine overhaul kit page (7008) and hydraulic pump page (6227) were read. UK supplier, +44 (0)1527 579 111; the site states its parts are Agriline parts, not OEM, unless stated.",
+      "extracted": [
+        "OEM numbers quoted in titles: brake drum 5666 = 181230M1 / 827707M3 / 827707M5; brake shoe 5143 = 830480M92 and others; levelling box 4003 = 182642M94 / 1884342M92; water hose kit 106-KIT = 826988M1 / 827496M1; gear lever boot 5190 = 180579M3; hydraulic pump 6227 = 184472M93 / 184473M1 / 184473M93; radiator 5471 = 828108M91; front badge 6231 = 826686M1.",
+        "Dual clutch kits are split at serial 36227 (C0251 up to, C0252 from); gearbox input housing 5576 is listed up to serial 121069 (inside the 1958 range).",
+        "Engine overhaul kit 7008 (23C): 4 pistons, liners, rings, top and lower gasket sets, crank seals, 8 valves, springs, guides; Agriline says it was reverse-engineered with reduced piston-to-liner clearance.",
+        "Several PTO listings quote MF135 serial breaks, not FE35 ones."
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-041",
+      "name": "Ferguson TO35 Tractor Parts Book, Gas and Diesel (illustrated parts catalogue, 1970 reprint), scanned copy on the Internet Archive",
+      "url": "https://archive.org/details/ferguson-to-35-tractor-parts-book-gas-and-diesel",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": true,
+      "reference": "Downloaded 2026-11-08 from the Internet Archive (text PDF, 247 pages, 32 MB) and stored as project file research/Ferguson-TO35-Parts-Book-Gas-and-Diesel-archive-org.pdf. Genuine Massey-Ferguson dealer parts book (Printed in U.S.A., pictorial indexes for Gas and Diesel). The diesel engine sections are headed STANDARD MOTORS DIESEL, i.e. the 23C. OCR text layer has errors (M1 read as Ml, digits dropped); read numbers from the page image before citing. The TO35 is US-built: chassis, electrical and sheet-metal numbers are US-specific and must not be applied to the Coventry FE35 without a matching FE35 reference.",
+      "extracted": [
+        "Structure: pictorial index pp.4–7 (Gas, Diesel); Standard Motors Diesel engine pp.45–69 (cylinder block and timing cover p.45, flywheel/camshaft/crankshaft/timing gears p.47); differential housing p.191; hydraulic lift shaft p.225.",
+        "p.45 (Standard Motors Diesel): cylinder block assembly 827483M91 (order 1884088M1); cylinder liners grades F/G/H 827556M1 / 827557M1 / 827558M1 (order 1884940M1).",
+        "p.47: crankshaft assembly 827506M92; crankshaft bearing housings front 826007M92, centre 827503M91, rear 826018M91.",
+        "p.191: hydraulic lift cover gasket 886549M2 (Heritage 2008 lists 886549V2); transmission to differential housing gasket 521181M1 (OCR uncertain).",
+        "p.225 (hydraulic lift shaft): lift arm 180910M1 (the number Anglo Agriparts quotes for A67170); lift arm washer 180917M1; lift shaft O-ring 195565M1; hydraulic lift shaft 184359M1 (Heritage 184359V91); ram arm 180970M2; piston connecting rod 180903M2; lift piston assembly 3 in 184443M91 (Heritage 184443V91); ring kit 830741M91 (Heritage 830741V91)."
+      ],
+      "conflicts": [],
+      "dateResearched": "2026-11-08"
     }
   ]
 }

@@ -34,7 +34,11 @@
     lastDecode: null
   };
   state.resolved = core.resolveConfiguration(config, state.overrides);
-  var searchDocs = core.buildSearchIndex(index, sourcesById, technical);
+  var SUPPLIERS = DATA.suppliers || { suppliers: [], references: [] };
+  var supplierById = {};
+  SUPPLIERS.suppliers.forEach(function (s) { supplierById[s.id] = s; });
+  var supByNode = core.supplierRefsByNode(SUPPLIERS);
+  var searchDocs = core.buildSearchIndex(index, sourcesById, technical, SUPPLIERS);
 
   /* ---------- 3D viewer (Phase 3) ---------- */
   var viewer = null;
@@ -466,6 +470,7 @@
         '<td class="muted">' + esc(assembly) + '</td>' +
         '<td class="mono">' + (n.quantity ? n.quantity : '<span class="muted">–</span>') + '</td>' +
         '<td>' + statusBadge(st) + '</td>' +
+        '<td>' + (function () { var rs = supByNode[id] || []; if (!rs.length) return '<span class="muted">–</span>'; var best = rs.some(function (r) { return r.match === 'agco-ref'; }) ? 'agco-ref' : (rs.every(function (r) { return r.match === 'check-fit'; }) ? 'check-fit' : 'listed-fit'); return '<span class="badge match-' + best + '" title="' + esc(core.MATCH_LABELS[best]) + '">' + rs.length + ' UK ref' + (rs.length > 1 ? 's' : '') + '</span>'; })() + '</td>' +
         '<td><a href="#/anatomy/' + encodeURIComponent(id) + '">View</a></td></tr>';
     }).join('');
     return '<div class="page">' +
@@ -478,7 +483,7 @@
       '<label class="note" style="display:flex;align-items:center;gap:6px"><input id="cat-fitted" type="checkbox"' + (c.fittedOnly ? ' checked' : '') + '> Fitted to shown configuration</label>' +
       '</div>' +
       '<div class="result-count">' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + '</div>' +
-      '<div class="table-wrap"><table><thead><tr><th>Component</th><th>Original part no.</th><th>Assembly</th><th>Qty</th><th>Status</th><th>3D</th></tr></thead><tbody>' +
+      '<div class="table-wrap"><table><thead><tr><th>Component</th><th>Original part no.</th><th>Assembly</th><th>Qty</th><th>Status</th><th>UK suppliers</th><th>3D</th></tr></thead><tbody>' +
       (body || '<tr><td colspan="6" class="muted">No components match. Try fewer words or another spelling.</td></tr>') +
       '</tbody></table></div></div>';
   }
@@ -710,9 +715,9 @@
   }
 
   function viewResearch() {
-    var cov = core.coverage(index, modelledIds(), DIAGRAM_DATA);
+    var cov = core.coverage(index, modelledIds(), DIAGRAM_DATA, SUPPLIERS);
     var sys = index.byId[index.rootId].childIds;
-    var tot = { total: 0, verified: 0, 'partially-verified': 0, unverified: 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, diagram: 0, model: 0 };
+    var tot = { total: 0, verified: 0, 'partially-verified': 0, unverified: 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, diagram: 0, model: 0, supplier: 0 };
     sys.forEach(function (s) { Object.keys(tot).forEach(function (k) { tot[k] += cov[s][k]; }); });
     var claims = 0;
     index.order.forEach(function (id) { if ((nodeOf(id).supplierClaimedOem || []).length) claims++; });
@@ -723,9 +728,9 @@
     };
     return '<div class="page"><div class="page-head"><div><h1>Research status</h1><p class="lede">How much of the tractor is documented, and from what. Nothing is marked verified until it has been checked against an original Massey Ferguson publication.</p></div></div>' +
       '<div class="stats">' + stat(tot.total, 'Items identified') + stat(tot.verified, 'Verified') + stat(tot['partially-verified'], 'Partially verified') +
-      stat(tot['variant-dependent'], 'Variant dependent') + stat(tot.unverified, 'Unverified') + stat(tot.oem, 'Confirmed OEM numbers') + stat(tot.replacement, 'With AGCO replacement refs') + stat(tot.described, 'With description and function') + stat(tot.diagram, 'In drawn diagrams') + stat(claims, 'With unverified supplier refs') + stat(tot.model, 'Modelled in 3D') + '</div>' +
-      '<h2>By system</h2><div class="table-wrap"><table><thead><tr><th>System</th><th>Items</th><th>Verified</th><th>Partial</th><th>Variant</th><th>Unverified</th><th>AGCO refs</th><th>Described</th><th>Diagram</th><th>In 3D</th><th>Progress</th></tr></thead><tbody>' +
-      sys.map(function (s) { var c = cov[s]; return '<tr class="clickable" data-goto="' + s + '"><td><strong>' + esc(nameOf(s)) + '</strong></td><td class="mono">' + c.total + '</td><td class="mono">' + c.verified + '</td><td class="mono">' + c['partially-verified'] + '</td><td class="mono">' + c['variant-dependent'] + '</td><td class="mono">' + c.unverified + '</td><td class="mono">' + c.replacement + '</td><td class="mono">' + c.described + '</td><td class="mono">' + c.diagram + '</td><td class="mono">' + c.model + '</td><td>' + bar(c) + '</td></tr>'; }).join('') +
+      stat(tot['variant-dependent'], 'Variant dependent') + stat(tot.unverified, 'Unverified') + stat(tot.oem, 'Confirmed OEM numbers') + stat(tot.replacement, 'With AGCO replacement refs') + stat(tot.described, 'With description and function') + stat(tot.diagram, 'In drawn diagrams') + stat(claims, 'With unverified supplier refs') + stat(tot.supplier, 'With UK purchase references') + stat(tot.model, 'Modelled in 3D') + '</div>' +
+      '<h2>By system</h2><div class="table-wrap"><table><thead><tr><th>System</th><th>Items</th><th>Verified</th><th>Partial</th><th>Variant</th><th>Unverified</th><th>AGCO refs</th><th>Described</th><th>Diagram</th><th>UK refs</th><th>In 3D</th><th>Progress</th></tr></thead><tbody>' +
+      sys.map(function (s) { var c = cov[s]; return '<tr class="clickable" data-goto="' + s + '"><td><strong>' + esc(nameOf(s)) + '</strong></td><td class="mono">' + c.total + '</td><td class="mono">' + c.verified + '</td><td class="mono">' + c['partially-verified'] + '</td><td class="mono">' + c['variant-dependent'] + '</td><td class="mono">' + c.unverified + '</td><td class="mono">' + c.replacement + '</td><td class="mono">' + c.described + '</td><td class="mono">' + c.diagram + '</td><td class="mono">' + c.supplier + '</td><td class="mono">' + c.model + '</td><td>' + bar(c) + '</td></tr>'; }).join('') +
       '</tbody></table></div>' +
       '<h2>Source register</h2><div class="table-wrap"><table><thead><tr><th>Id</th><th>Source</th><th>Grade</th><th>Read</th></tr></thead><tbody>' +
       DATA.sources.map(function (s) {
@@ -733,7 +738,43 @@
           (s.extracted && s.extracted.length ? '<div class="muted" style="font-size:12px;margin-top:2px">' + esc(s.extracted[0]) + (s.extracted.length > 1 ? ' (+' + (s.extracted.length - 1) + ' more)' : '') + '</div>' : '') +
           (s.conflicts && s.conflicts.length ? '<div style="font-size:12px;color:#8a5a10;margin-top:2px">Conflict: ' + esc(s.conflicts[0]) + '</div>' : '') + '</td>' +
           '<td>' + esc(s.reliability) + '</td><td>' + (s.accessed ? esc(s.dateResearched) : '<span class="badge partially-verified">not yet obtained</span>') + '</td></tr>';
+      }).join('') + '</tbody></table></div>' +
+      '<h2>UK suppliers checked</h2><p class="lede" style="margin-top:0">The application is not a shop. These are legitimate UK suppliers whose FE35 listings were read; a purchase reference is graded by how well it is tied to this tractor, and nothing is graded an exact match until the parts book has been read.</p>' +
+      '<div class="table-wrap"><table><thead><tr><th>Supplier</th><th>References</th><th>Matches AGCO no.</th><th>Listed for FE35</th><th>Check fit</th><th>Last checked</th></tr></thead><tbody>' +
+      SUPPLIERS.suppliers.map(function (s) {
+        var rs = SUPPLIERS.references.filter(function (r) { return r.supplier === s.id; });
+        var n = function (m) { return rs.filter(function (r) { return r.match === m; }).length; };
+        var last = rs.map(function (r) { return r.checked; }).sort().pop() || '';
+        return '<tr><td><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + '</a><div class="muted" style="font-size:12px;margin-top:2px">' + esc(s.notes || '') + ' Source <a href="#/research/' + esc(s.source) + '">' + esc(s.source) + '</a>.</div></td><td class="mono">' + rs.length + '</td><td class="mono">' + n('agco-ref') + '</td><td class="mono">' + n('listed-fit') + '</td><td class="mono">' + n('check-fit') + '</td><td class="mono">' + esc(last) + '</td></tr>';
       }).join('') + '</tbody></table></div></div>';
+  }
+
+  /** Purchase options section for one hierarchy node (Phase 7). */
+  function purchaseOptions(id) {
+    var refs = supByNode[id] || [];
+    if (!refs.length) return missing('No UK supplier listing found for this part yet. Anglo Agriparts and Agriline Products were checked (see Research Status); the search goes on as the catalogue grows.');
+    var order = { 'agco-ref': 0, 'listed-fit': 1, 'check-fit': 2 };
+    refs = refs.slice().sort(function (a, b) { return (order[a.match] - order[b.match]) || a.title.localeCompare(b.title); });
+    var price = function (p) {
+      if (!p) return '<span class="muted">Price not shown</span>';
+      return '£' + p.exVat.toFixed(2) + ' ex VAT' + (p.incVat != null ? ' <span class="muted">(£' + p.incVat.toFixed(2) + ' inc)</span>' : '');
+    };
+    var html = '<ul class="sup-list">' + refs.map(function (r) {
+      var s = supplierById[r.supplier] || { name: r.supplier };
+      return '<li class="sup-item"><div class="sup-head"><a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.title) + '</a> <span class="badge match-' + esc(r.match) + '" title="' + esc(matchHelp(r)) + '">' + esc(core.MATCH_LABELS[r.match] || r.match) + '</span></div>' +
+        '<div class="sup-meta">' + esc(s.name) + ' · <span class="mono">' + esc(r.supplierPartNumber) + '</span> · ' + price(r.price) + (r.stock ? ' · ' + esc(r.stock) : '') + '</div>' +
+        (r.oemQuoted && r.oemQuoted.length ? '<div class="sup-meta">Supplier quotes OEM ' + r.oemQuoted.map(function (q) { return '<span class="mono' + (r.matchedNumber && core.normaliseNumber(q) === core.normaliseNumber(r.matchedNumber) ? ' hit' : '') + '">' + esc(q) + '</span>'; }).join(', ') + (r.matchedNumber ? ' <span class="muted">(= AGCO ' + esc(r.matchedNumber) + ')</span>' : ' <span class="muted">(not yet checked against the parts book)</span>') + '</div>' : '') +
+        (r.fits ? '<div class="sup-meta muted">Supplier fitment: ' + esc(r.fits) + '</div>' : '') +
+        (r.notes ? '<div class="sup-note">' + esc(r.notes) + '</div>' : '') +
+        '<div class="sup-meta muted">Checked ' + esc(r.checked) + ' · <a href="#/research/' + esc(r.source) + '">' + esc(r.source) + '</a></div></li>';
+    }).join('') + '</ul>';
+    html += '<p class="muted" style="font-size:12px;margin:6px 0 0">Prices and stock are as shown on the date checked and will change. None of these is confirmed against parts book 819045M4 yet, so check the fit against your tractor before ordering.</p>';
+    return html;
+  }
+  function matchHelp(r) {
+    if (r.match === 'agco-ref') return 'The supplier quotes an OEM number that equals the AGCO supply number recorded for this part (M and V suffixes treated as the same).';
+    if (r.match === 'check-fit') return 'Listed for the FE35, but there is a known reason to check the fit first. See the note.';
+    return 'Listed by the supplier for the Ferguson FE35 / 23C. The fit is the supplier\'s claim; it has not been checked against the parts book.';
   }
 
   /* ----- Info panel ----- */
@@ -812,7 +853,7 @@
       })() + '</dd>' +
       '<dt>3D object</dt><dd>' + model3dStatus(id) + '</dd></dl></div>' +
 
-      '<div class="info-section"><h3>Purchase options (UK)</h3>' + missing('No verified UK supplier reference yet. Suppliers are added in Phase 7, and only where the part number matches the parts book.') + '</div>' +
+      '<div class="info-section"><h3>Purchase options (UK)' + ((supByNode[id] || []).length ? ' <span class="badge supplier">' + supByNode[id].length + '</span>' : '') + '</h3>' + purchaseOptions(id) + '</div>' +
 
       '<div class="info-section"><h3>Sources</h3>' + (srcs ? '<ul class="source-list">' + srcs + '</ul>' : missing('No source cited yet: existence assumed from the product scope list')) + '</div>';
   }
