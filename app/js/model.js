@@ -443,11 +443,25 @@
       }
       // Mudguard and footplate bracket on each housing
       add(id, rbox(0.06, 0.26, 0.03, 0.01), M.grey, V(0.05, RR + 0.12, s * 0.46));
-      // Brakes: shoe brakes on the differential shafts at the inner end of each trumpet (SRC-004)
-      add('brake-drum', cyl(0.17, 0.17, 0.08, 'z', 32), M.greyDark, V(0, RR, s * 0.27));
-      add('brake-shoes', ring(0.145, 0.014, 'z'), M.bronze, V(0, RR, s * 0.27));
-      add('brake-springs', cyl(0.008, 0.008, 0.16, 'x', 8), M.steel, V(0, RR + 0.09, s * 0.27));
-      add('brake-cam', cyl(0.018, 0.018, 0.06, 'z', 12), M.steelDark, V(0.05, RR - 0.17, s * 0.30));
+      // Brakes (SRC-035 P.1, K.11): Girling double-anchor floating-cam drum brakes, 14 x 2 in, at the rear
+      // wheels. The backplate is bolted to the outer end of the axle housing; the drum is fitted to the axle
+      // shaft between the hub and the wheel centre and opens inboard over the shoes. The operating camshaft
+      // passes through the backplate and carries the rear brake lever on its inboard side.
+      var BZ = 0.548;                                   // backplate, at the trumpet's outer flange
+      add('brake-backing-plate', cyl(0.172, 0.172, 0.008, 'z', 40), M.greyDark, V(0, RR, s * BZ));
+      add('brake-backing-plate', ring(0.168, 0.008, 'z'), M.greyDark, V(0, RR, s * (BZ + 0.006)));
+      var drum = add('brake-drum', lathe([[0.090, 0.0], [0.180, 0.0], [0.180, 0.012], [0.187, 0.018], [0.187, 0.058], [0.178, 0.058], [0.178, 0.008], [0.090, 0.008]], 'z', 48), M.greyDark, V(0, RR, s * 0.604));
+      drum.scale.z = -s;                                // closed face outboard, open inboard
+      for (var bs = 0; bs < 2; bs++) {                  // two shoes, each with its lining
+        var shoe = add('brake-shoes', new THREE.TorusGeometry(0.163, 0.011, 6, 20, Math.PI * 0.82), M.bronze, V(0, RR, s * 0.575));
+        shoe.rotation.z = bs * Math.PI + Math.PI * 0.09;
+        shoe.scale.z = 2.2;
+      }
+      add('brake-springs', cyl(0.006, 0.006, 0.20, 'x', 8), M.steel, V(0, RR + 0.12, s * 0.574));
+      add('brake-springs', cyl(0.006, 0.006, 0.20, 'x', 8), M.steel, V(0, RR - 0.12, s * 0.574));
+      // Operating camshaft through the backplate (front, low) and the rear brake lever hanging from it
+      add('brake-cam', cyl(0.014, 0.014, 0.07, 'z', 12), M.steelDark, V(0.115, RR - 0.10, s * (BZ - 0.02)));
+      bar('brake-cam', V(0.115, RR - 0.10, s * (BZ - 0.05)), V(0.13, RR - 0.21, s * (BZ - 0.05)), 0.03, 0.012, M.steelDark);
       add('half-shaft', cyl(0.03, 0.03, 0.48, 'z', 16), M.steel, V(0, RR, s * 0.34));
       add('rear-hub', cyl(0.11, 0.11, 0.06, 'z', 32), M.greyDark, V(0, RR, s * 0.615));
       add('axle-seals', ring(0.06, 0.01, 'z'), M.rubber, V(0, RR, s * 0.59));
@@ -1009,14 +1023,32 @@
       for (var cp = 0; cp < 5; cp++) for (var cq = 0; cq < 3; cq++) add('footplates', box(0.03, 0.003, 0.012), M.greyDark, V(0.26 + cp * 0.13, 0.567, s * (0.27 + cq * 0.10))).rotation.y = 0.6;
       add('footplates', box(0.30, 0.008, 0.14), M.greyDark, V(0.58, 0.40, s * 0.50));   // step
       bar('footplates', V(0.58, 0.40, s * 0.44), V(0.58, 0.56, s * 0.44), 0.06, 0.008, M.greyDark);
-      if (s > 0) {
-        [0.29, 0.345].forEach(function (z, i) {
-          bar('brake-pedals', V(0.86, 0.47, z), V(0.77, 0.72, z + 0.01), 0.022, 0.014, M.steelDark);
-          add('brake-pedals', rbox(0.06, 0.012, 0.045, 0.006), M.steelDark, V(0.765, 0.73, z + 0.01));
-          rod('brake-linkage', V(0.86, 0.47, z), V(0.06, RR - 0.17, s * 0.31), 0.008, M.steel);
-        });
-        add('parking-brake', box(0.02, 0.08, 0.02), M.steelDark, V(0.79, 0.77, 0.37));
+    });
+    // Brake pedals and linkage (SRC-035 P.1-P.2, Fig. 2). Both pedals sit on the right of the transmission
+    // housing and pivot on the combined brake cross shaft, which runs across under the front of the
+    // transmission beside the radius rod ball cap. The left-wheel pedal is keyed to the cross shaft; the
+    // combined brake arm on the shaft's left end works the left brake. The right-wheel pedal turns freely on
+    // the shaft and works the right brake through its own lever. A rod and yoke from each arm runs back to
+    // the rear brake lever on that wheel's backplate.
+    var XS = 1.10, YS = 0.42, BZ_ROD = 0.548 - 0.05;                          // cross shaft
+    rod('brake-linkage', V(XS, YS, -0.33), V(XS, YS, 0.37), 0.014, M.steel);
+    add('parking-brake', rbox(0.10, 0.05, 0.01, 0.01), M.steelDark, V(XS - 0.04, YS + 0.05, 0.17));   // parking brake sector
+    [0.29, 0.345].forEach(function (z, i) {
+      add('brake-pedals', cyl(0.028, 0.028, 0.045, 'z', 16), M.steelDark, V(XS, YS, z));             // boss on the cross shaft
+      // Arm: back from the boss under the footplate, then up through it to the pad
+      bar('brake-pedals', V(XS, YS, z), V(0.84, 0.46, z), 0.03, 0.016, M.steelDark);
+      bar('brake-pedals', V(0.84, 0.46, z), V(0.79, 0.70, z), 0.026, 0.016, M.steelDark);
+      add('brake-pedals', rbox(0.075, 0.014, 0.05, 0.006), M.steelDark, V(0.78, 0.715, z));         // pad
+      if (i === 1) {
+        bar('brake-pedals', V(XS, YS, z + 0.03), V(XS + 0.01, YS - 0.11, z + 0.03), 0.03, 0.014, M.steelDark);   // right pedal's own lever
       }
+    });
+    add('parking-brake', box(0.012, 0.06, 0.012), M.steelDark, V(0.80, 0.62, 0.275));                // latch on the left-wheel pedal
+    add('brake-pedals', box(0.02, 0.012, 0.06), M.steel, V(0.785, 0.70, 0.318));                      // combined brake lock
+    bar('brake-linkage', V(XS, YS, -0.31), V(XS + 0.01, YS - 0.11, -0.31), 0.03, 0.014, M.steelDark); // combined brake arm (LH)
+    SIDES.forEach(function (s) {
+      var zArm = s > 0 ? 0.375 : -0.31;
+      rod('brake-linkage', V(XS + 0.01, YS - 0.11, zArm), V(0.13, RR - 0.21, s * (BZ_ROD)), 0.008, M.steel);
     });
     // Front weights: removable, not fitted in the default model
     add('front-weights', rbox(0.06, 0.18, 0.40, 0.02), M.greyDark, V(2.14, 0.66, 0));

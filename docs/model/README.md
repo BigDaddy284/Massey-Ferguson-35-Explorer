@@ -17,6 +17,7 @@ code. It is not traced from any AGCO drawing or taken from a third-party 3D asse
 | PTO shaft | 1⅜ in, 6 splines | M.3 |
 | Hydraulic pump | Four cylinders, two opposed valve chambers, in the sump between gearbox and final drive | L.5–L.6 |
 | Lift linkage | Lift shaft and arms, lift rods (RH with levelling box), lower links on ball mountings, check chains, top link | L.5 |
+| Brakes | 14 × 2 in drums at the rear wheels, backplate on the outer end of each axle housing; pedals on the right on a combined brake cross shaft under the front of the transmission; rod and yoke from each arm back to the rear brake lever (corrected in Phase 9 after the owner spotted the pedal linkage; the drums were previously inboard) | P.1–P.2, K.11 |
 
 ## Approximate
 
