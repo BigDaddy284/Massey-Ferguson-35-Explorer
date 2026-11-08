@@ -214,6 +214,19 @@ svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; 
 .badge.neutral { color: var(--slate); background: var(--silver-light); }
 .badge.claim { color: #8a5a10; background: #fbf1df; border-color: #f0d9ad; font-weight: 500; }
 .badge.replacement { color: var(--blue-strong); background: #e8f0fb; border-color: #c5d6f0; font-weight: 500; }
+/* Phase 7: UK purchase references */
+.badge.supplier { color: var(--blue-strong); background: #e8f0fb; border-color: #c5d6f0; font-weight: 600; vertical-align: middle; margin-left: 4px; }
+.badge.match-agco-ref { color: var(--st-verified); background: #e7f4ec; border-color: #c4e3cf; font-weight: 600; }
+.badge.match-listed-fit { color: var(--blue-strong); background: #e8f0fb; border-color: #c5d6f0; font-weight: 500; }
+.badge.match-check-fit { color: #8a5a10; background: #fbf1df; border-color: #f0d9ad; font-weight: 500; }
+.sup-list { list-style: none; margin: 0; padding: 0; }
+.sup-item { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.sup-item:last-child { border-bottom: 0; }
+.sup-head { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.sup-head a { font-weight: 600; }
+.sup-meta { font-size: 12px; margin-top: 2px; }
+.sup-meta .mono.hit { color: var(--st-verified); font-weight: 600; }
+.sup-note { font-size: 12px; margin-top: 4px; padding: 5px 8px; background: #fbf1df; border: 1px solid #f0d9ad; border-radius: 6px; color: #5a3d0a; }
 .rep-list { list-style: none; margin: 0; padding: 0; }
 .rep-list li { padding: 4px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
 .rep-list li:last-child { border-bottom: 0; }

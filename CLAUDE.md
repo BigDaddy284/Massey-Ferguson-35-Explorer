@@ -25,7 +25,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 6 (technical diagrams) built: 17 original exploded line diagrams generated from the 3D model, numbered to match the 3D exploded views and linked to the records. Phase 7 (UK supplier references) is next. Part numbers and quantities still await parts book 819045M4.**
+research, build, test and verify before moving on. Current status: **Phase 7 (UK supplier references) built: `data/suppliers.json` holds 235 graded purchase references from two UK suppliers on 149 parts, shown in the record panel, catalogue and research page. Phase 8 (completeness and QA) is next. Part numbers and quantities still await parts book 819045M4.**
 
 ## Commands
 
@@ -63,9 +63,23 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
 
 - `data/technical.json`: Technical Information rows (value + status + sources; `display:false`
   rows are withheld) and the Identification guide (steps, serial prefix letter table).
+- `data/suppliers.json` (Phase 7): `suppliers` (UK suppliers, each citing a `supplier`-grade source) and
+  `references` (`{node, supplier, title, supplierPartNumber, oemQuoted[], url, price{exVat,incVat,currency},
+  stock, checked, match, fits, notes, source}`). `match` is `agco-ref` (a quoted OEM number equals one of the
+  node's `replacementReferences` / `oemPartNumber` once the M/V suffix letter is normalised, e.g. 827707M5 =
+  827707V5), `listed-fit` (listed by the supplier for the FE35, fit is the supplier's claim) or `check-fit`
+  (listed, but with a known reason to check; see `notes`). Nothing is graded exact until the parts book is read.
+  The validator enforces node/supplier existence, https URLs, the checked date, the grade list, and that
+  `agco-ref` is used exactly when a quoted number matches. Prices and stock are as seen on `checked`.
 - `app/js/core.js`: pure logic, loaded in the browser as `window.MF35Core` and through `require` in tests.
   It covers hierarchy indexing, configuration resolution, applicability, serial decoding, fuzzy search
   and coverage. Put anything testable here.
+- Purchase options (Phase 7): the record panel's "Purchase options (UK)" section lists the node's references
+  sorted agco-ref → listed-fit → check-fit with price, stock, quoted OEM numbers (matched number highlighted),
+  fitment, notes and the checked date; the catalogue has a "UK suppliers" column; Research Status has a
+  "With UK purchase references" stat, a "UK refs" column and a "UK suppliers checked" table. Search covers
+  supplier part numbers and quoted OEM numbers. `core.supplierRefsByNode`, `core.normaliseNumber`,
+  `core.MATCH_LABELS`; `coverage(..., suppliers).supplier`.
 - `app/js/app.js`: DOM/UI only. It uses hash routing (`#/anatomy/<id>`, `#/catalogue`, `#/technical/<section>`,
   `#/identification`, `#/tractor`, `#/research/<SRC-id>`), and the views are string-rendered. "My Tractor"
   entries are saved in `localStorage` (`mf35.owner.v1`) as overrides on `ownerTractor`. They only
@@ -117,6 +131,8 @@ These are enforced by the validator where possible.
 - A status other than `unverified` must cite sources.
 - OEM numbers quoted by suppliers or forums go in `supplierClaimedOem`, never in `oemPartNumber`,
   until checked against parts book 819045M4 (SRC-032).
+- Supplier listings never set `oemPartNumber`. A supplier's quoted OEM number lives in `suppliers.json`
+  `oemQuoted`; the UI shows it as the supplier's quote, highlighted only when it equals an AGCO number.
 - Numbers from the 2008 AGCO Heritage catalogue (SRC-038) go in `replacementReferences`
   (`{number, description, models, source, page, confidence}`), never in `oemPartNumber`: they are
   the numbers AGCO supplied the part under in 2008 and may supersede the 1958 number. `confidence`

@@ -219,8 +219,9 @@
    * Build a search index over hierarchy nodes and technical rows.
    * Each document: { kind, id, title, fields: [{text, weight}] }.
    */
-  function buildSearchIndex(index, sourcesById, technical) {
+  function buildSearchIndex(index, sourcesById, technical, suppliers) {
     var docs = [];
+    var supByNode = supplierRefsByNode(suppliers);
     index.order.forEach(function (id) {
       var e = index.byId[id];
       var n = e.node;
@@ -240,7 +241,10 @@
         { text: n.failure || '', weight: 1 },
         { text: n.specifications ? Object.keys(n.specifications).map(function (k) { return k + ' ' + n.specifications[k]; }).join(' ') : '', weight: 2 },
         { text: n.notes || '', weight: 2 },
-        { text: n.kind, weight: 1 }
+        { text: n.kind, weight: 1 },
+        { text: (supByNode[id] || []).map(function (r) { return r.supplierPartNumber; }).join(' '), weight: 8, raw: (supByNode[id] || []).map(function (r) { return r.supplierPartNumber; }) },
+        { text: (supByNode[id] || []).map(function (r) { return (r.oemQuoted || []).join(' '); }).join(' '), weight: 6, raw: [].concat.apply([], (supByNode[id] || []).map(function (r) { return r.oemQuoted || []; })) },
+        { text: (supByNode[id] || []).map(function (r) { return r.title; }).join(' '), weight: 2 }
       ];
       docs.push({ kind: 'component', id: id, title: n.name, fields: prep(fields) });
     });
@@ -341,7 +345,24 @@
     return out.map(function (r) { return { diagram: r.diagram, title: r.title, n: r.n, item: r.item, exact: r.exact }; });
   }
 
-  function coverage(index, modelledIds, diagrams) {
+  /** Group supplier references by hierarchy id: { id: [ref, ...] }. */
+  function supplierRefsByNode(suppliers) {
+    var out = {};
+    ((suppliers && suppliers.references) || []).forEach(function (r) {
+      (out[r.node] = out[r.node] || []).push(r);
+    });
+    return out;
+  }
+
+  /** Normalise an AGCO/MF number so 1884123M1 and 1884123V1 compare equal. */
+  function normaliseNumber(x) {
+    return String(x).toUpperCase().replace(/[^0-9A-Z]/g, '').replace(/^(\d+)[MV](\d*)$/, '$1X$2');
+  }
+
+  var MATCH_LABELS = { 'agco-ref': 'Matches AGCO number', 'listed-fit': 'Listed for the FE35', 'check-fit': 'Check fit' };
+
+  function coverage(index, modelledIds, diagrams, suppliers) {
+    var supByNode = supplierRefsByNode(suppliers);
     var inModel = {};
     (modelledIds || []).forEach(function (id) { inModel[id] = true; });
     var bySystem = {};
@@ -349,8 +370,9 @@
       var e = index.byId[id];
       if (e.depth === 0) return;
       var sys = e.path[1];
-      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, diagram: 0, model: 0 };
+      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, diagram: 0, model: 0, supplier: 0 };
       c.total++;
+      if ((supByNode[id] || []).length) c.supplier++;
       if (diagrams && diagramRefs(index, diagrams, id).length) c.diagram++;
       if (e.node.description && e.node.function) c.described++;
       c[statusOf(e.node)]++;
@@ -377,6 +399,9 @@
     buildSearchIndex: buildSearchIndex,
     search: search,
     coverage: coverage,
-    diagramRefs: diagramRefs
+    diagramRefs: diagramRefs,
+    supplierRefsByNode: supplierRefsByNode,
+    normaliseNumber: normaliseNumber,
+    MATCH_LABELS: MATCH_LABELS
   };
 });

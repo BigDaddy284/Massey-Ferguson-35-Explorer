@@ -13,7 +13,8 @@ const bundle = {
   sources: read('sources.json').sources,
   configurations: read('configurations.json'),
   hierarchy: read('hierarchy.json').root,
-  technical: read('technical.json')
+  technical: read('technical.json'),
+  suppliers: read('suppliers.json')
 };
 mkdirSync(join(root, 'app', 'data'), { recursive: true });
 const out = join(root, 'app', 'data', 'mf35-data.js');

@@ -5,7 +5,10 @@
 // every cited source exists in the register, appliesTo uses known variant
 // axes/options, no unverified source is used as the sole support for a
 // "verified" status, and replacementReferences (current AGCO supply numbers)
-// cite an accessed source and never repeat the oemPartNumber.
+// cite an accessed source and never repeat the oemPartNumber. Phase 7:
+// suppliers.json references point at existing nodes and suppliers, use https
+// URLs, carry a checked date and an allowed match grade, and `agco-ref` is only
+// allowed when a quoted OEM number really equals one of the node's numbers.
 
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -47,12 +50,14 @@ for (const [k, v] of Object.entries(config.defaultTarget)) {
 const { root: tree } = load('hierarchy.json');
 const ids = new Set();
 const relatedRefs = [];
+const nodeNumbers = new Map();
 const counts = { total: 0, byStatus: {} };
 (function walk(node, path) {
   const where = [...path, node.id].join(' > ');
   if (!ID_RE.test(node.id)) err(`${where}: id must be kebab-case`);
   if (ids.has(node.id)) err(`${where}: duplicate id ${node.id}`);
   ids.add(node.id);
+  nodeNumbers.set(node.id, (node.replacementReferences ?? []).map((r) => r.number).concat(node.oemPartNumber ? [node.oemPartNumber] : []));
   if (!KINDS.has(node.kind)) err(`${where}: bad kind ${node.kind}`);
   const status = node.status ?? 'unverified';
   if (!STATUSES.has(status)) err(`${where}: bad status ${status}`);
@@ -113,6 +118,37 @@ for (const sec of technical.sections) {
 }
 for (const st of technical.identification.steps) for (const s of st.sources) if (!sourceById.has(s)) err(`identification step: unknown source ${s}`);
 
+const sup = load('suppliers.json');
+const MATCHES = new Set(['agco-ref', 'listed-fit', 'check-fit']);
+const normNumber = (x) => String(x).toUpperCase().replace(/[^0-9A-Z]/g, '').replace(/^(\d+)[MV](\d*)$/, '$1X$2');
+const supplierIds = new Set();
+for (const s of sup.suppliers) {
+  if (!ID_RE.test(s.id)) err(`supplier ${s.id}: id must be kebab-case`);
+  if (supplierIds.has(s.id)) err(`duplicate supplier id ${s.id}`);
+  supplierIds.add(s.id);
+  if (!/^https:\/\//.test(s.url ?? '')) err(`supplier ${s.id}: url must be https`);
+  if (!sourceById.has(s.source)) err(`supplier ${s.id}: unknown source ${s.source}`);
+}
+const supCounts = { total: 0, byMatch: {} };
+for (const [i, r] of sup.references.entries()) {
+  const where = `suppliers.references[${i}] (${r.node} / ${r.supplierPartNumber})`;
+  if (!ids.has(r.node)) err(`${where}: unknown node ${r.node}`);
+  if (!supplierIds.has(r.supplier)) err(`${where}: unknown supplier ${r.supplier}`);
+  if (!r.title || !r.supplierPartNumber) err(`${where}: needs title and supplierPartNumber`);
+  if (!/^https:\/\//.test(r.url ?? '')) err(`${where}: url must be https`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(r.checked ?? '')) err(`${where}: checked must be an ISO date`);
+  if (!MATCHES.has(r.match)) err(`${where}: bad match grade ${r.match}`);
+  if (!sourceById.has(r.source) || !sourceById.get(r.source).accessed) err(`${where}: must cite an accessed source`);
+  if (!Array.isArray(r.oemQuoted)) err(`${where}: oemQuoted must be an array`);
+  if (r.price !== null && (typeof r.price !== 'object' || typeof r.price.exVat !== 'number' || r.price.currency !== 'GBP')) err(`${where}: price must be null or {exVat:number, incVat, currency:'GBP'}`);
+  const nums = (nodeNumbers.get(r.node) ?? []).map(normNumber);
+  const hit = (r.oemQuoted ?? []).some((q) => nums.includes(normNumber(q)));
+  if (r.match === 'agco-ref' && !hit) err(`${where}: 'agco-ref' needs a quoted OEM number matching the node's AGCO/OEM numbers`);
+  if (r.match !== 'agco-ref' && hit) err(`${where}: quoted number matches the node's AGCO number, grade it 'agco-ref'`);
+  supCounts.total++;
+  supCounts.byMatch[r.match] = (supCounts.byMatch[r.match] ?? 0) + 1;
+}
+
 if (errors.length) {
   console.error(`Data validation FAILED with ${errors.length} error(s):`);
   for (const e of errors) console.error('  - ' + e);
@@ -120,3 +156,4 @@ if (errors.length) {
 }
 console.log(`OK: ${sources.length} sources, ${axes.size} variant axes, ${counts.total} hierarchy nodes`);
 console.log('   by status:', JSON.stringify(counts.byStatus));
+console.log(`   suppliers: ${sup.suppliers.length}, references: ${supCounts.total}`, JSON.stringify(supCounts.byMatch));
