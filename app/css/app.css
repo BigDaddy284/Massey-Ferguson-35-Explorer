@@ -565,3 +565,95 @@ svg.diagram .dg-callouts .callout { cursor: pointer; }
 svg.diagram .dg-callouts .callout.hl .num, svg.diagram .dg-callouts .dg-callout:hover .num { fill: var(--blue); }
 svg.diagram .dg-callouts .callout.hl text, svg.diagram .dg-callouts .dg-callout:hover text { fill: #fff; }
 @media (max-width: 900px) { .dg-layout { grid-template-columns: 1fr; } .dg-legend { position: static; max-height: none; } }
+
+/* ===================== Phase 9: final polish ===================== */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 3D start-up: the page is drawn first, the model follows a frame later */
+.viewport-loading { display: grid; place-items: center; }
+.loading { display: flex; align-items: center; gap: 10px; color: var(--steel); font-weight: 600; position: relative; z-index: 1; }
+.spinner { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid var(--silver); border-top-color: var(--blue); animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Configuration banner: full chips on wide screens, one tappable line on phones */
+.banner-full { display: contents; }
+.banner-toggle { display: none; }
+.banner-dots { display: inline-flex; gap: 3px; margin-left: auto; }
+.banner-dots .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--st-partial); }
+.banner-dots .dot.confirmed { background: var(--st-verified); }
+
+/* Record panel */
+.quick-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.quick-links .tool { text-decoration: none; font-size: 12.5px; padding: 4px 10px; height: auto; }
+.info-summary { margin: 0; padding: 12px 20px; font-size: 13.5px; color: var(--graphite); border-bottom: 1px solid var(--silver-light); }
+details.more { margin-top: 4px; }
+details.more summary { cursor: pointer; color: var(--blue); font-size: 12.5px; font-weight: 600; padding: 4px 0; list-style: none; }
+details.more summary::-webkit-details-marker { display: none; }
+details.more summary::before { content: "▸ "; }
+details.more[open] summary::before { content: "▾ "; }
+
+/* Search: "see all" row */
+.search-result.search-all { display: block; color: var(--blue-strong); font-weight: 600; font-size: 13px; border-top: 1px solid var(--silver-light); }
+
+/* Catalogue filter checkbox (was picking up the text-input sizing) */
+.filters label.check { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 4px; font-size: 13px; color: var(--slate); cursor: pointer; }
+.filters label.check input { height: 16px; width: 16px; min-width: 0; flex: none; margin: 0; padding: 0; accent-color: var(--blue); }
+
+/* Technical page: section shortcuts, power-flow diagrams, glossary */
+.toc { display: flex; flex-wrap: wrap; gap: 6px; margin: -6px 0 16px; }
+.toc a { font-size: 12.5px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--white); text-decoration: none; color: var(--graphite); }
+.toc a:hover { border-color: var(--blue-light); color: var(--blue-strong); }
+.table-wrap.flush { border: 0; border-radius: 0; box-shadow: none; }
+.flow { margin: 0; padding: 14px 16px 6px; border-top: 1px solid var(--silver-light); }
+.flow figcaption { font-weight: 700; font-size: 13.5px; margin-bottom: 8px; }
+.flow-svg { width: 100%; height: auto; display: block; max-width: 820px; }
+.flow-svg .flow-edges line { stroke: var(--steel); stroke-width: 2; }
+.flow-svg marker path { fill: var(--steel); }
+.flow-box rect { fill: var(--blue-wash); stroke: var(--blue); stroke-width: 1.4; }
+.flow-box text { font: 600 13px var(--font); fill: var(--blue-strong); }
+.flow-box:hover rect, .flow-box:focus rect { fill: var(--blue); }
+.flow-box:hover text, .flow-box:focus text { fill: var(--white); }
+.flow-note { font: italic 12px var(--font); fill: var(--slate); }
+.flow-cap { font-size: 12px; margin: 4px 0 6px; }
+dl.glossary { margin: 0; display: grid; gap: 0; }
+dl.glossary .term { padding: 10px 0; border-top: 1px solid var(--silver-light); scroll-margin-top: 12px; }
+dl.glossary .term.selected { background: var(--blue-wash); margin: 0 -18px; padding: 10px 18px; }
+dl.glossary dt { font-weight: 700; }
+dl.glossary dd { margin: 2px 0 0; font-size: 13.5px; color: var(--graphite); }
+
+/* Header navigation: fade the edge when the tabs scroll sideways */
+@media (max-width: 1180px) {
+  .main-nav { -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent); mask-image: linear-gradient(90deg, #000 92%, transparent); padding-right: 24px; }
+}
+
+/* Tablet: give the 3D view the screen height instead of a fixed strip */
+@media (max-width: 980px) {
+  .viewport { flex: none; height: 62vh; height: 62svh; min-height: 320px; }
+  .ws-anatomy { height: auto; }
+}
+
+/* Phones */
+@media (max-width: 720px) {
+  .config-banner { padding: 0; display: block; }
+  .banner-toggle { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 14px; background: none; border: 0; text-align: left; font-size: 12.5px; color: var(--slate); cursor: pointer; }
+  .banner-toggle > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .banner-toggle svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; transition: transform .15s; }
+  .config-banner.open .banner-toggle svg { transform: rotate(180deg); }
+  .banner-full { display: none; }
+  .config-banner.open .banner-full { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 0 14px 10px; }
+  .viewport { height: 56vh; height: 56svh; min-height: 300px; margin: 10px; }
+  .page h1 { font-size: 20px; }
+
+  /* Tables become one card per row */
+  .stack-table thead { display: none; }
+  .stack-table, .stack-table tbody { display: block; }
+  .stack-table tr { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; padding: 12px 14px; border-bottom: 1px solid var(--silver-light); }
+  .stack-table td { display: block; padding: 0; border: 0; min-width: 0; overflow-wrap: anywhere; }
+  .stack-table td::before { content: attr(data-label); display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--steel); font-weight: 700; }
+  .stack-table td.c-name, .stack-table td[data-label="Value"], .stack-table td[data-label="Assembly"], .stack-table td[data-label="Original part no."] { grid-column: 1 / -1; }
+  .stack-table td.c-name::before { display: none; }
+  .stack-table th[style], .stack-table td[style] { width: auto !important; }
+  .filters input:not([type="checkbox"]) { min-width: 0; flex-basis: 100%; }
+  .filters select { flex: 1 1 45%; min-width: 0; }
+}
+.flow-svg text { stroke: none; paint-order: normal; }

@@ -260,6 +260,12 @@
           });
         });
       });
+      (technical.glossary || []).forEach(function (g, i) {
+        docs.push({
+          kind: 'term', id: 'glossary:' + i, title: g.term,
+          fields: prep([{ text: g.term, weight: 9 }, { text: 'glossary term', weight: 1 }, { text: g.text, weight: 2 }])
+        });
+      });
     }
     return docs;
 

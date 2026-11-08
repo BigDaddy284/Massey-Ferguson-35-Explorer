@@ -27,7 +27,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 8 (completeness and QA) built and the AGCO MF35/35X parts book 819045 (SRC-032, the owner's copy) read: 716 rows from it are stored on 213 nodes as `partsBookReferences` with `book:'MF35'`; 135 components carry their original part number and quantity from a `primary` row and are `verified`, the rest keep every candidate row where the book splits by serial or engine number. The 521 TO35 numbers are flagged by whether they also appear in 819045 (301 do). The completeness report (`npm run report` → `docs/research/08-completeness-report.md`, and the Research Status page) lists what is still missing. Phase 9 (final polish) is next.**
+research, build, test and verify before moving on. Current status: **Phase 9 (final polish) built: on-demand 3D rendering and a deferred model start, phone and tablet layouts (folding tractor banner, stacked tables, taller viewer), record quick links and folded reference lists, search "see all" into the catalogue, PTO and hydraulic power-flow diagrams and a glossary (`technical.json` `glossary`, searchable, validated). Phases 1–8 as before: 716 rows of the AGCO MF35/35X parts book 819045 (SRC-032) on 213 nodes, 135 original numbers, the completeness report (`npm run report`). Next: bring the 3D model's part shapes and positions into line with the workshop manual (SRC-035) and then with photographs of 1958 De Luxe tractors.**
 
 ## Commands
 
@@ -37,6 +37,7 @@ npm run build           # validate, then regenerate app/data/mf35-data.js from d
 npm test                # node:test suite for app/js/core.js (tests/*.test.js)
 node --test tests/core.test.js   # single test file
 npm run serve           # optional: http://localhost:8035 (python3); the app also works opened directly
+npm run smoke           # Playwright check of every view at 1440/820/390 px: no page errors, no sideways scroll
 npm run diagrams        # regenerate app/data/mf35-diagrams.js from the 3D model (needs Playwright + Chromium)
 ```
 
@@ -86,7 +87,9 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   one-way related links, variant axis use, supplier grades, a 3D placement audit against the manual's layout, and
   unresolved items. Re-run it after data or model changes. The Research Status page shows a live summary.
 - `data/technical.json`: Technical Information rows (value + status + sources; `display:false`
-  rows are withheld) and the Identification guide (steps, serial prefix letter table).
+  rows are withheld) and the Identification guide (steps, serial prefix letter table), plus `glossary` (Phase 9: `{term, text, related[], sources[]}`,
+  plain-English explanations with no status; the validator checks related ids and sources). The PTO and hydraulics
+  power-flow diagrams are `FLOWS` in app.js: boxes are hierarchy ids and the wording repeats the cited explainer.
 - `data/suppliers.json` (Phase 7): `suppliers` (UK suppliers, each citing a `supplier`-grade source) and
   `references` (`{node, supplier, title, supplierPartNumber, oemQuoted[], url, price{exVat,incVat,currency},
   stock, checked, match, fits, notes, source}`). `match` is `exact` (a quoted OEM number equals the node's

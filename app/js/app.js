@@ -176,8 +176,14 @@
       return '<span class="config-chip ' + cls + '"><span class="dot"></span><strong>' + pair[1] + ':</strong> ' + esc(val) + esc(suffix) + '</span>';
     }).join('');
     var serial = r.owner.serialNumber ? esc((r.owner.serialPrefix ? r.owner.serialPrefix + ' ' : '') + r.owner.serialNumber) : 'not entered';
-    el.banner.innerHTML = '<span class="config-chip"><strong>Your tractor:</strong> MF35, believed 1958 · serial ' + serial + '</span>' + chips +
-      '<a href="#/tractor">Update my tractor →</a>';
+    // On phones the banner folds to one line; the toggle shows the full chips.
+    var short = ['engine', 'clutch', 'pto'].map(function (axis) { return '<span class="dot ' + (r.confirmed[axis] ? 'confirmed' : 'assumed') + '"></span>'; }).join('');
+    el.banner.innerHTML = '<button type="button" class="banner-toggle only-mobile" aria-expanded="' + !!state.bannerOpen + '" aria-controls="config-banner-full">' +
+      '<span><strong>Your tractor:</strong> MF35 1958 diesel · 23C · ' + esc(optionLabel('clutch', r.values.clutch).replace(/ \(.*\)$/, '')) + '</span><span class="banner-dots" aria-hidden="true">' + short + '</span>' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg><span class="sr-only">Show tractor details</span></button>' +
+      '<div class="banner-full" id="config-banner-full"><span class="config-chip"><strong>Your tractor:</strong> MF35, believed 1958 · serial ' + serial + '</span>' + chips +
+      '<a href="#/tractor">Update my tractor →</a></div>';
+    el.banner.classList.toggle('open', !!state.bannerOpen);
   }
 
   /* ----- Tree ----- */
@@ -256,7 +262,26 @@
     { id: 'linkage', shape: '<path class="shape" d="M736 214 h96 v58 h-96 z"/>', label: [784, 247, '3-point linkage'] },
     { id: 'front-axle', shape: '<rect class="shape" x="96" y="330" width="130" height="26" rx="6"/>', label: [161, 348, 'Front axle & steering'] }
   ];
+  // The page is drawn first and the 3D model is built on the next frames (Phase 9), so the
+  // header, tree and record appear at once instead of after the WebGL start-up pause.
+  var viewerBooting = false;
+  function bootViewerSoon() {
+    if (viewerBooting) return;
+    viewerBooting = true;
+    requestAnimationFrame(function () {
+      setTimeout(function () {
+        getViewer();
+        viewerBooting = false;
+        if (state.view === 'anatomy') { view3d.frameNext = !!state.selectedId; renderWorkspace(); renderInfo(); }
+      }, 0);
+    });
+  }
   function viewAnatomy() {
+    if (!viewer && !viewerFailed) {
+      bootViewerSoon();
+      return '<div class="ws-anatomy"><div class="viewport viewport-3d viewport-loading" id="viewer-host" role="status">' +
+        '<div class="loading"><span class="spinner" aria-hidden="true"></span>Building the 3D tractor…</div></div></div>';
+    }
     var v = getViewer();
     if (!v) return viewSchematic();
     var sel = state.selectedId;
@@ -471,13 +496,13 @@
         reps.length ? '<span class="badge replacement" title="Current AGCO supply number (2008 Heritage catalogue), not the original 1958 number">' + reps.length + ' AGCO replacement ref' + (reps.length > 1 ? 's' : '') + '</span>' :
         (n.supplierClaimedOem && n.supplierClaimedOem.length ? '<span class="badge claim" title="Supplier-claimed, not verified">' + n.supplierClaimedOem.length + ' unverified ref' + (n.supplierClaimedOem.length > 1 ? 's' : '') + '</span>' : '<span class="muted">Not yet documented</span>'));
       return '<tr class="clickable' + (state.selectedId === id ? ' selected' : '') + '" data-id="' + esc(id) + '">' +
-        '<td><strong>' + esc(n.name) + '</strong>' + (app.applies ? '' : ' <span class="badge neutral">not fitted to shown config</span>') + '<div class="muted mono">' + esc(id) + '</div></td>' +
-        '<td>' + pn + '</td>' +
-        '<td class="muted">' + esc(assembly) + '</td>' +
-        '<td class="mono">' + (n.quantity ? n.quantity : '<span class="muted">–</span>') + '</td>' +
-        '<td>' + statusBadge(st) + '</td>' +
-        '<td>' + (function () { var rs = supByNode[id] || []; if (!rs.length) return '<span class="muted">–</span>'; var best = rs.map(function (r) { return r.match; }).sort(function (a, b) { return core.MATCH_ORDER[a] - core.MATCH_ORDER[b]; })[0]; return '<span class="badge match-' + best + '" title="' + esc(core.MATCH_LABELS[best]) + '">' + rs.length + ' UK ref' + (rs.length > 1 ? 's' : '') + '</span>'; })() + '</td>' +
-        '<td><a href="#/anatomy/' + encodeURIComponent(id) + '">View</a></td></tr>';
+        '<td data-label="Component" class="c-name"><strong>' + esc(n.name) + '</strong>' + (app.applies ? '' : ' <span class="badge neutral">not fitted to shown config</span>') + '<div class="muted mono">' + esc(id) + '</div></td>' +
+        '<td data-label="Original part no.">' + pn + '</td>' +
+        '<td data-label="Assembly" class="muted">' + esc(assembly) + '</td>' +
+        '<td data-label="Qty" class="mono">' + (n.quantity ? n.quantity : '<span class="muted">–</span>') + '</td>' +
+        '<td data-label="Status">' + statusBadge(st) + '</td>' +
+        '<td data-label="UK suppliers">' + (function () { var rs = supByNode[id] || []; if (!rs.length) return '<span class="muted">–</span>'; var best = rs.map(function (r) { return r.match; }).sort(function (a, b) { return core.MATCH_ORDER[a] - core.MATCH_ORDER[b]; })[0]; return '<span class="badge match-' + best + '" title="' + esc(core.MATCH_LABELS[best]) + '">' + rs.length + ' UK ref' + (rs.length > 1 ? 's' : '') + '</span>'; })() + '</td>' +
+        '<td data-label="3D" class="c-view"><a href="#/anatomy/' + encodeURIComponent(id) + '">View in 3D</a></td></tr>';
     }).join('');
     return '<div class="page">' +
       '<div class="page-head"><div><h1>Parts catalogue</h1><p class="lede">Every component identified so far. Original part numbers are read from the AGCO MF35 / 35X parts book 819045 and apply to the 1958 Coventry serial range unless the record says the row depends on a serial or engine number. TO35 parts-book numbers come from the Ferguson TO35 book, whose Standard Motors Diesel engine is the 23C. AGCO replacement references come from the 2008 Heritage catalogue and may supersede the original number; supplier numbers are shown as unverified references.</p></div></div>' +
@@ -486,11 +511,11 @@
       '<select id="cat-system" aria-label="System"><option value="">All systems</option>' + systems.map(function (s) { return '<option value="' + s + '"' + (c.system === s ? ' selected' : '') + '>' + esc(nameOf(s)) + '</option>'; }).join('') + '</select>' +
       '<select id="cat-status" aria-label="Verification status"><option value="">Any status</option>' + Object.keys(core.STATUS_LABELS).map(function (s) { return '<option value="' + s + '"' + (c.status === s ? ' selected' : '') + '>' + core.STATUS_LABELS[s] + '</option>'; }).join('') + '</select>' +
       '<select id="cat-kind" aria-label="Level"><option value="component"' + (c.kind === 'component' ? ' selected' : '') + '>Components only</option><option value=""' + (c.kind === '' ? ' selected' : '') + '>All levels</option></select>' +
-      '<label class="note" style="display:flex;align-items:center;gap:6px"><input id="cat-fitted" type="checkbox"' + (c.fittedOnly ? ' checked' : '') + '> Fitted to shown configuration</label>' +
+      '<label class="check"><input id="cat-fitted" type="checkbox"' + (c.fittedOnly ? ' checked' : '') + '> Fitted to shown configuration</label>' +
       '</div>' +
       '<div class="result-count">' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + '</div>' +
-      '<div class="table-wrap"><table><thead><tr><th>Component</th><th>Original part no.</th><th>Assembly</th><th>Qty</th><th>Status</th><th>UK suppliers</th><th>3D</th></tr></thead><tbody>' +
-      (body || '<tr><td colspan="6" class="muted">No components match. Try fewer words or another spelling.</td></tr>') +
+      '<div class="table-wrap"><table class="stack-table cat-table"><thead><tr><th>Component</th><th>Original part no.</th><th>Assembly</th><th>Qty</th><th>Status</th><th>UK suppliers</th><th>3D</th></tr></thead><tbody>' +
+      (body || '<tr><td colspan="7" class="muted">No components match. Try fewer words or another spelling.</td></tr>') +
       '</tbody></table></div></div>';
   }
   function bindCatalogue() {
@@ -606,20 +631,78 @@
     return sys && sys !== id ? [sys, nameOf(sys)] : null;
   }
 
+  // Original power-flow diagrams for the Technical page (Phase 9). Boxes are hierarchy records,
+  // so each one opens its part; the wording repeats the cited explainer text, nothing new.
+  var FLOWS = {
+    pto: {
+      title: 'How engine power reaches the PTO (dual-stage clutch)',
+      w: 930, h: 270,
+      boxes: [
+        ['engine', 10, 100, 'Engine (23C)'], ['flywheel', 190, 100, 'Flywheel'],
+        ['clutch-dual-transmission-plate', 370, 20, '11 in gearbox disc'], ['clutch-dual-pto-plate', 370, 180, '9 in PTO disc'],
+        ['transmission', 560, 20, 'Gearbox'], ['rear-axle', 760, 20, 'Rear axle, wheels'],
+        ['pto-drive-shaft', 560, 180, 'PTO drive shaft'], ['hyd-pump', 760, 140, 'Hydraulic pump'], ['pto-engagement', 760, 214, 'PTO lever, shaft']
+      ],
+      arrows: [[0, 1], [1, 2], [1, 3], [2, 4], [4, 5], [3, 6], [6, 7], [6, 8]],
+      notes: [[372, 108, 'Half pedal: gearbox disc released, PTO and pump keep turning'], [372, 128, 'Full pedal: both discs released, everything stops']]
+    },
+    hydraulics: {
+      title: 'How the hydraulic lift raises an implement',
+      w: 930, h: 280,
+      boxes: [
+        ['pto-drive-shaft', 10, 20, 'PTO drive line'], ['hyd-pump', 190, 20, 'Pump (4 pistons)'], ['hyd-control-valve', 370, 20, 'Control valve'],
+        ['lift-cylinder', 560, 20, 'Ram cylinder'], ['rockshaft', 760, 20, 'Lift shaft, arms'], ['lower-link-lh', 760, 160, 'Lift rods, links'],
+        ['top-link', 370, 160, 'Top link, spring'], ['position-lever', 560, 160, 'Position lever, cam'], ['hyd-strainer', 190, 160, 'Strainer']
+      ],
+      arrows: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [6, 2], [7, 2], [8, 1]],
+      notes: [[10, 238, 'Draft: soil load on the top link moves the control valve. Position: the cam returns the valve at the set height.'], [10, 260, 'To lower, oil is let out and the weight on the links pushes the piston back.']]
+    }
+  };
+  function flowSvg(f) {
+    var BW = 160, BH = 44;
+    var c = function (b) { return [b[1] + BW / 2, b[2] + BH / 2]; };
+    var edge = function (a, b) {
+      var p = c(a), q = c(b);
+      var dx = q[0] - p[0], dy = q[1] - p[1];
+      var sx = Math.abs(dx) * BH > Math.abs(dy) * BW ? (BW / 2) / Math.abs(dx || 1) : (BH / 2) / Math.abs(dy || 1);
+      var x1 = p[0] + dx * sx, y1 = p[1] + dy * sx, x2 = q[0] - dx * sx, y2 = q[1] - dy * sx;
+      return '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" marker-end="url(#flow-arrow)"/>';
+    };
+    return '<svg class="flow-svg" viewBox="0 0 ' + (f.w + 20) + ' ' + f.h + '" role="img" aria-label="' + esc(f.title) + '">' +
+      '<defs><marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z"/></marker></defs>' +
+      '<g class="flow-edges">' + f.arrows.map(function (a) { return edge(f.boxes[a[0]], f.boxes[a[1]]); }).join('') + '</g>' +
+      f.boxes.map(function (b) {
+        return '<a href="#/anatomy/' + encodeURIComponent(b[0]) + '" class="flow-box"><rect x="' + b[1] + '" y="' + b[2] + '" width="' + BW + '" height="' + BH + '" rx="8"/>' +
+          '<text x="' + (b[1] + BW / 2) + '" y="' + (b[2] + BH / 2 + 4.5) + '" text-anchor="middle">' + esc(b[3]) + '</text></a>';
+      }).join('') +
+      (f.notes || []).map(function (n) { return '<text class="flow-note" x="' + n[0] + '" y="' + n[1] + '">' + esc(n[2]) + '</text>'; }).join('') + '</svg>';
+  }
   function viewTechnical() {
+    var glossary = technical.glossary || [];
+    var toc = technical.sections.map(function (sec) { return '<a href="#/technical/' + sec.id + '">' + esc(sec.title.replace(/:.*$/, '')) + '</a>'; }).join('') +
+      (glossary.length ? '<a href="#/technical/glossary">Glossary</a>' : '');
     return '<div class="page"><div class="page-head"><div><h1>Technical information</h1><p class="lede">Only figures with a cited source are shown, each with its verification status. Where sources disagree or a figure looks wrong, it is held back.</p></div></div>' +
+      '<nav class="toc" aria-label="Sections">' + toc + '</nav>' +
       '<div class="tech-grid">' + technical.sections.map(function (sec) {
         return '<section class="card" id="anchor-' + sec.id + '"><div class="card-pad" style="padding-bottom:6px"><h2 style="margin:0 0 8px">' + esc(sec.title) + '</h2></div>' +
-          '<div class="table-wrap" style="border:0;border-radius:0;box-shadow:none"><table><thead><tr><th style="width:26%">Item</th><th>Value</th><th style="width:150px">Status</th><th style="width:150px">Sources</th></tr></thead><tbody>' +
+          '<div class="table-wrap flush"><table class="stack-table tech-table"><thead><tr><th style="width:26%">Item</th><th>Value</th><th style="width:150px">Status</th><th style="width:150px">Sources</th></tr></thead><tbody>' +
           sec.rows.map(function (row) {
             if (row.display === false) {
-              return '<tr class="tech-row-withheld"><td>' + esc(row.label) + '</td><td colspan="2">Withheld until checked against the service manual</td><td>' + sourceLinks(row.sources) + '</td></tr>';
+              return '<tr class="tech-row-withheld"><td data-label="Item" class="c-name">' + esc(row.label) + '</td><td data-label="Value" colspan="2">Withheld until checked against the service manual</td><td data-label="Sources">' + sourceLinks(row.sources) + '</td></tr>';
             }
-            return '<tr><td>' + esc(row.label) + '</td><td>' + (row.value ? esc(row.value) : missing()) + '</td><td>' + statusBadge(row.status) + '</td><td>' + sourceLinks(row.sources) + '</td></tr>';
+            return '<tr><td data-label="Item" class="c-name">' + esc(row.label) + '</td><td data-label="Value">' + (row.value ? esc(row.value) : missing()) + '</td><td data-label="Status">' + statusBadge(row.status) + '</td><td data-label="Sources">' + sourceLinks(row.sources) + '</td></tr>';
           }).join('') + '</tbody></table></div>' +
+          (FLOWS[sec.id] ? '<figure class="flow"><figcaption>' + esc(FLOWS[sec.id].title) + '</figcaption>' + flowSvg(FLOWS[sec.id]) + '<p class="muted flow-cap">Original diagram. Each box opens that part; the arrows follow the text below. Not to scale.</p></figure>' : '') +
           (sec.explainer ? '<p class="explainer"><strong>How it works.</strong> ' + esc(sec.explainer) + '</p>' : '') +
           '</section>';
-      }).join('') + '</div></div>';
+      }).join('') +
+      (glossary.length ? '<section class="card" id="anchor-glossary"><div class="card-pad"><h2 style="margin:0 0 4px">Glossary</h2><p class="muted" style="margin:0 0 10px">Plain-English meanings of the terms used in this catalogue, with links to the parts involved.</p><dl class="glossary">' +
+        glossary.map(function (g, i) {
+          return '<div class="term" id="anchor-term-' + i + '"><dt>' + esc(g.term) + '</dt><dd>' + esc(g.text) +
+            (g.related.length ? '<div class="chips" style="margin-top:6px">' + g.related.map(function (rid) { return '<a class="chip" href="#/anatomy/' + encodeURIComponent(rid) + '">' + esc(nameOf(rid)) + '</a>'; }).join('') + '</div>' : '') +
+            (g.sources.length ? '<div class="muted" style="font-size:12px;margin-top:4px">Sources: ' + sourceLinks(g.sources) + '</div>' : '') + '</dd></div>';
+        }).join('') + '</dl></div></section>' : '') +
+      '</div></div>';
   }
 
   function viewIdentification() {
@@ -803,6 +886,14 @@
     return 'Listed by the supplier for the Ferguson FE35 / 23C. The fit is the supplier\'s claim; it has not been checked against the parts book.';
   }
 
+  /** A reference list that shows the first few rows and folds the rest (Phase 9). */
+  function refList(rows, render, label) {
+    var SHOW = 3;
+    var head = rows.slice(0, SHOW).map(render).join('');
+    if (rows.length <= SHOW + 1) return '<ul class="rep-list">' + rows.map(render).join('') + '</ul>';
+    return '<ul class="rep-list">' + head + '</ul><details class="more"><summary>Show ' + (rows.length - SHOW) + ' more ' + esc(label) + '</summary><ul class="rep-list">' + rows.slice(SHOW).map(render).join('') + '</ul></details>';
+  }
+
   /* ----- Info panel ----- */
   function renderInfo() {
     var id = state.selectedId;
@@ -839,29 +930,30 @@
 
     el.info.innerHTML =
       '<div class="info-head"><button class="text-btn only-mobile" data-close-info style="float:right">Close</button><div class="info-kind">' + kindLabel(n.kind) + (e.depth > 1 ? ' · ' + esc(nameOf(e.path[1])) : '') + '</div>' +
-      '<h2>' + esc(n.name) + '</h2>' + statusBadge(st) + ' <span class="info-id">' + esc(id) + '</span></div>' +
+      '<h2>' + esc(n.name) + '</h2>' + statusBadge(st) + ' <span class="info-id">' + esc(id) + '</span>' + quickLinks(id) + '</div>' +
+      (n.description ? '<p class="info-summary">' + esc(n.description) + '</p>' : '') +
 
       '<div class="info-section"><h3>Identification</h3><dl class="fields">' +
       '<dt>Original part no.</dt><dd>' + (prim ? '<span class="mono" style="font-size:15px">' + esc(prim.number) + '</span> <span class="badge mf35" title="AGCO MF35 / 35X parts book 819045">819045 p.' + esc(String(prim.page)) + (prim.item ? ' item ' + esc(prim.item) : '') + '</span>' +
         '<div class="muted">' + esc(prim.description) + (prim.qty ? ' · qty ' + prim.qty : '') + (prim.letters ? ' · footnote ' + esc(prim.letters) : '') + (prim.condition ? '. ' + esc(prim.condition) : '') + (prim.bookNote ? '. ' + esc(prim.bookNote) : '') + (prim.note ? '. ' + esc(prim.note) : '') + ' (<a href="#/research/SRC-032">SRC-032</a>)</div>' :
         (mf35.length ? missing('Not settled: see the 819045 numbers below') : missing('Not yet documented (no row found in parts book 819045)'))) + (n.partsBookNote ? '<div class="muted" style="margin-top:4px">' + esc(n.partsBookNote) + '</div>' : '') + '</dd>' +
-      '<dt>Also in 819045</dt><dd>' + (mf35.length ? '<ul class="rep-list">' + mf35.map(function (r) {
+      '<dt>Also in 819045</dt><dd>' + (mf35.length ? refList(mf35, function (r) {
         return '<li><span class="mono">' + esc(r.number) + '</span> <span class="badge mf35" title="Listed in the AGCO MF35 parts book 819045 for this part">p.' + esc(String(r.page)) + (r.item ? ' item ' + esc(r.item) : '') + '</span>' +
           '<div class="muted">' + esc(r.description) + (r.qty ? ' · qty ' + r.qty : '') + (r.letters ? ' · footnote ' + esc(r.letters) : '') + (r.condition ? '. ' + esc(r.condition) : '') + (r.bookNote ? '. ' + esc(r.bookNote) : '') + (r.note ? '. ' + esc(r.note) : '') + '</div></li>';
-      }).join('') + '</ul><p class="muted" style="font-size:12px;margin:4px 0 0">Other rows the MF35 parts book gives for this part: components, alternatives, or numbers that depend on a serial or engine number (<a href="#/research/SRC-032">SRC-032</a>).</p>' : missing()) + '</dd>' +
-      '<dt>Parts book no. (TO35)</dt><dd>' + (to35.length ? '<ul class="rep-list">' + to35.map(function (r) {
+      }, '819045 rows') + '<p class="muted" style="font-size:12px;margin:4px 0 0">Other rows the MF35 parts book gives for this part: components, alternatives, or numbers that depend on a serial or engine number (<a href="#/research/SRC-032">SRC-032</a>).</p>' : missing()) + '</dd>' +
+      '<dt>Parts book no. (TO35)</dt><dd>' + (to35.length ? refList(to35, function (r) {
         return '<li><span class="mono">' + esc(r.number) + '</span> <span class="badge ' + (r.confidence === 'possible' ? 'claim' : 'book') + '" title="' + (r.confidence === 'possible' ? 'Chassis or installation part of the US-built TO35; the Coventry FE35 number may differ' : 'Standard Motors Diesel (23C) engine part, common to the FE35 and TO35') + '">' + (r.confidence === 'possible' ? 'TO35, check for FE35' : '23C engine part') + '</span>' + (r.heritage ? ' <span class="badge replacement" title="The same number appears in the 2008 AGCO Heritage catalogue for the 35">also AGCO 2008</span>' : '') + (r.inBook819045 ? ' <span class="badge mf35" title="This number also appears in the MF35 parts book 819045">in 819045</span>' : ' <span class="badge neutral" title="This number does not appear anywhere in the MF35 parts book 819045 (often because 819045 lists a later supersession number)">not in 819045</span>') +
           '<div class="muted">' + esc(r.description) + (r.qty ? ' · qty ' + r.qty : '') + (r.note ? '. ' + esc(r.note) : '') + '. TO35 parts book p.' + esc(String(r.page)) + ' (<a href="#/research/' + esc(r.source) + '">' + esc(r.source) + '</a>)</div></li>';
-      }).join('') + '</ul><p class="muted" style="font-size:12px;margin:4px 0 0">Read from the Ferguson TO35 parts book (693 063 M4). Its diesel engine is the Standard 23C. Each number is marked by whether it also appears in the MF35 book 819045.</p>' : missing()) + '</dd>' +
-      '<dt>AGCO replacement no.</dt><dd>' + (reps.length ? '<ul class="rep-list">' + reps.map(function (r) {
+      }, 'TO35 numbers') + '<p class="muted" style="font-size:12px;margin:4px 0 0">Read from the Ferguson TO35 parts book (693 063 M4). Its diesel engine is the Standard 23C. Each number is marked by whether it also appears in the MF35 book 819045.</p>' : missing()) + '</dd>' +
+      '<dt>AGCO replacement no.</dt><dd>' + (reps.length ? refList(reps, function (r) {
         return '<li><span class="mono">' + esc(r.number) + '</span> <span class="badge ' + (r.confidence === 'possible' ? 'claim' : 'replacement') + '">' + (r.confidence === 'possible' ? 'possible fit' : 'listed for the 35') + '</span><div class="muted">' + esc(r.description) + '. Catalogue row: ' + esc(r.models) + ' (<a href="#/research/' + esc(r.source) + '">' + esc(r.source) + '</a> p.' + esc(String(r.page)) + ')</div></li>';
-      }).join('') + '</ul><p class="muted" style="font-size:12px;margin:4px 0 0">Numbers AGCO used to supply the part in 2008. They may supersede the original 1958 number shown above.</p>' : missing()) + '</dd>' +
+      }, 'AGCO numbers') + '<p class="muted" style="font-size:12px;margin:4px 0 0">Numbers AGCO used to supply the part in 2008. They may supersede the original 1958 number shown above.</p>' : missing()) + '</dd>' +
       '<dt>Other references</dt><dd>' + (claims.length ? '<div class="chips">' + claims.map(function (c) { return '<span class="chip mono" style="cursor:default">' + esc(c) + '</span>'; }).join('') + '</div><div style="margin-top:4px"><span class="badge claim">Supplier/forum claim, unverified</span></div>' : missing()) + '</dd>' +
       '<dt>Quantity</dt><dd>' + (n.quantity ? n.quantity + ' per tractor' : missing()) + '</dd>' +
       '<dt>Assembly</dt><dd>' + (e.parentId && e.parentId !== index.rootId ? esc(nameOf(e.parentId)) : esc(nameOf(index.rootId))) + '</dd></dl></div>' +
 
       '<div class="info-section"><h3>What it does</h3><dl class="fields">' +
-      '<dt>Description</dt><dd>' + (n.description ? esc(n.description) : missing()) + '</dd>' +
+      (n.description ? '' : '<dt>Description</dt><dd>' + missing() + '</dd>') +
       '<dt>Function</dt><dd>' + (n.function ? esc(n.function) : missing()) + '</dd>' +
       '<dt>Location</dt><dd>' + (n.location ? esc(n.location) : missing()) + '</dd>' +
       '<dt>Specifications</dt><dd>' + (n.specifications && Object.keys(n.specifications).length ? Object.keys(n.specifications).map(function (k) { return esc(k) + ': ' + esc(n.specifications[k]); }).join('<br>') : missing()) + '</dd>' +
@@ -898,6 +990,16 @@
       '<div class="info-section"><h3>Sources</h3>' + (srcs ? '<ul class="source-list">' + srcs + '</ul>' : missing('No source cited yet: existence assumed from the product scope list')) + '</div>';
   }
 
+  // Jump links under the record title: the same part in 3D, its exploded view and its drawn diagram.
+  function quickLinks(id) {
+    var links = [];
+    if (state.view !== 'anatomy' && (!viewer || viewer.isModelled(id))) links.push('<a class="tool" href="#/anatomy/' + encodeURIComponent(id) + '">Show in 3D</a>');
+    var refs = core.diagramRefs(index, DIAGRAM_DATA, id);
+    if (refs.length && !(state.view === 'diagram' && state.routeArg === refs[0].diagram)) links.push('<a class="tool" href="#/diagram/' + encodeURIComponent(refs[0].diagram) + '/' + encodeURIComponent(id) + '">Diagram, item ' + refs[0].n + '</a>');
+    if (state.view !== 'catalogue') links.push('<a class="tool" href="#/catalogue/' + encodeURIComponent(id) + '">In catalogue</a>');
+    return links.length ? '<div class="quick-links">' + links.join('') + '</div>' : '';
+  }
+
   function model3dStatus(id) {
     if (!viewer) return '<span class="mono">' + esc(id) + '</span> · ' + missing(viewerFailed ? '3D view unavailable in this browser' : 'Open Tractor Anatomy to load the model');
     if (viewer.meshesByPart[id]) return '<span class="mono">' + esc(id) + '</span> · Modelled (simplified shape)';
@@ -924,7 +1026,9 @@
   function renderSearch() {
     var q = el.search.value;
     if (!q.trim()) { el.results.hidden = true; el.search.setAttribute('aria-expanded', 'false'); return; }
-    var res = core.search(searchDocs, q, 12);
+    var all = core.search(searchDocs, q, 400);
+    var res = all.slice(0, 12);
+    var compCount = all.filter(function (r) { return r.doc.kind === 'component'; }).length;
     activeResult = res.length ? 0 : -1;
     el.results.innerHTML = res.length ? res.map(function (r, i) {
       var d = r.doc;
@@ -932,13 +1036,17 @@
       if (d.kind === 'component') {
         path = index.byId[d.id].path.slice(1, -1).map(nameOf).join(' › ') || 'System';
         badge = statusBadge(core.displayStatus(index, d.id, state.resolved));
+      } else if (d.kind === 'term') {
+        path = 'Glossary';
+        badge = '<span class="badge neutral">Term</span>';
       } else {
         path = 'Technical information';
         badge = '<span class="badge neutral">Spec</span>';
       }
       return '<div class="search-result" role="option" id="sr-' + i + '" data-kind="' + d.kind + '" data-id="' + esc(d.id) + '" aria-selected="' + (i === 0) + '">' +
         '<span class="sr-title">' + esc(d.title) + '</span>' + badge + '<span class="sr-path">' + esc(path) + '</span></div>';
-    }).join('') : '<div class="search-empty">No matches for “' + esc(q) + '”. Try a shorter word or a part number.</div>';
+    }).join('') + (compCount > 0 ? '<div class="search-result search-all" role="option" id="sr-all" data-kind="all" data-id="" aria-selected="false">See all ' + compCount + ' matching component' + (compCount === 1 ? '' : 's') + ' in the Parts Catalogue →</div>' : '') :
+      '<div class="search-empty">No matches for “' + esc(q) + '”. Try a shorter word or a part number.</div>';
     el.results.hidden = false;
     el.search.setAttribute('aria-expanded', 'true');
   }
@@ -947,6 +1055,14 @@
     var kind = node.getAttribute('data-kind'), id = node.getAttribute('data-id');
     el.results.hidden = true;
     el.search.blur();
+    if (kind === 'all') {
+      state.catalogue.q = el.search.value.trim();
+      state.catalogue.system = ''; state.catalogue.status = '';
+      el.search.value = '';
+      go('#/catalogue');
+      return;
+    }
+    if (kind === 'term') { go('#/technical/term-' + id.split(':')[1]); return; }
     if (kind === 'component') {
       state.view = 'anatomy';
       go('#/anatomy/' + encodeURIComponent(id));
@@ -1097,6 +1213,11 @@
     if (e.key === 'Escape') { closeDrawers(); if (viewer && viewer.state.isolate && state.view === 'anatomy') { viewer.isolate(null); renderToolbarState(); } }
   });
 
+  el.banner.addEventListener('click', function (e) {
+    if (!e.target.closest('.banner-toggle')) return;
+    state.bannerOpen = !state.bannerOpen;
+    renderBanner();
+  });
   $('toggle-tree').addEventListener('click', function () { if (document.body.classList.contains('tree-open')) closeDrawers(); else { closeDrawers(); openDrawer('tree'); renderTree(); } });
   $('toggle-info').addEventListener('click', function () { if (document.body.classList.contains('info-open')) closeDrawers(); else { closeDrawers(); openDrawer('info'); } });
   el.scrim.addEventListener('click', closeDrawers);

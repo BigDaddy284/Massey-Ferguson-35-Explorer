@@ -975,5 +975,185 @@
     ],
     "prefixStatus": "partially-verified",
     "prefixNote": "The workshop manual (SRC-035 B.1) confirms the FE-35 codes: chassis S, V, J; engine G, H, D, N, K, L; clutch F (single) or M (dual). Other letters come only from a supplier list and may apply to other markets. The Perkins letter is N, not P as that list says. Not yet checked against a known 1958 plate."
-  }
+  },
+  "glossary": [
+    {
+      "term": "Live PTO",
+      "text": "A PTO that keeps turning while the gearbox drive is released. On the MF35 it comes from the dual-stage clutch: the first half of pedal travel frees the gearbox only, so the PTO and hydraulic pump keep running; full travel stops both.",
+      "related": [
+        "clutch-dual",
+        "pto-drive-shaft",
+        "pto-output-shaft"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Dual-stage clutch",
+      "text": "Two clutch discs in tandem worked by one pedal: an 11 in disc for the gearbox and a 9 in disc for the PTO and hydraulic pump. Fitted to the De Luxe tractor; the Standard tractor has a single 10 in disc.",
+      "related": [
+        "clutch-dual",
+        "clutch-single",
+        "clutch-pedal"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Ground-speed PTO",
+      "text": "A PTO setting in which the shaft is driven from the road-wheel drive line, so it turns in step with the rear wheels (about one revolution per 20 in of travel) instead of with engine speed.",
+      "related": [
+        "pto-engagement",
+        "pto-gears"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Engine-speed PTO",
+      "text": "The normal PTO setting: the shaft speed follows engine speed, giving 540 rpm at 1,500 engine rpm.",
+      "related": [
+        "pto-engagement",
+        "pto-output-shaft"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Draft control",
+      "text": "The hydraulic setting that keeps the pull of a soil-engaging implement steady. The top link presses on the main control spring, which moves the control valve so the implement lifts slightly when the load rises and drops back when it falls.",
+      "related": [
+        "draft-lever",
+        "draft-control-spring",
+        "top-link-bracket",
+        "hyd-control-valve"
+      ],
+      "sources": [
+        "SRC-035",
+        "SRC-012"
+      ]
+    },
+    {
+      "term": "Position control",
+      "text": "The hydraulic setting that holds the lift arms at the height chosen with the position lever, whatever the load. A cam on the lift shaft returns the control valve to neutral when the arms reach that height.",
+      "related": [
+        "position-lever",
+        "position-control-cam",
+        "hyd-control-valve"
+      ],
+      "sources": [
+        "SRC-023",
+        "SRC-012"
+      ]
+    },
+    {
+      "term": "Single-acting ram",
+      "text": "A hydraulic cylinder that is pushed by oil in one direction only. The MF35 lift ram raises the arms under pump pressure; to lower, oil is let out and the weight on the links pushes the piston back.",
+      "related": [
+        "lift-cylinder",
+        "lift-piston"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Relief valve",
+      "text": "A spring-loaded safety valve in the pump outlet that dumps oil back to the sump when the pressure passes its setting (2,500 lb/sq in nominal), for example when the arms are at the top.",
+      "related": [
+        "hyd-relief-valve",
+        "hyd-pump"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Three-point linkage",
+      "text": "The two lower links and the top link that carry a mounted implement. The lower links take the implement's weight and pull; the top link sets its pitch and feeds the draft load back to the control spring.",
+      "related": [
+        "lower-link-lh",
+        "lower-link-rh",
+        "top-link",
+        "lift-rod-lh",
+        "lift-rod-rh"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Levelling box",
+      "text": "The screwed adjuster with a crank handle in the right lift rod. Turning it lengthens or shortens that rod to level the implement from side to side.",
+      "related": [
+        "levelling-box",
+        "lift-rod-rh"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Lift shaft (rockshaft)",
+      "text": "The heavy cross shaft in the lift cover. The ram pushes its central arm, and the lift arms splined on each end raise the lift rods.",
+      "related": [
+        "rockshaft",
+        "lift-arm-lh",
+        "lift-arm-rh"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Indirect injection",
+      "text": "Fuel is sprayed into a small hot pre-combustion chamber in the head (on the 23C a Ricardo Comet chamber) rather than straight into the cylinder. The burning charge then blows into the cylinder.",
+      "related": [
+        "combustion-chamber-insert",
+        "injector"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Distributor injection pump",
+      "text": "A single pumping element with a rotor that sends fuel to each injector in firing order. The 23C uses a CAV DPA pump with a built-in mechanical governor.",
+      "related": [
+        "injection-pump",
+        "injection-pump-drive"
+      ],
+      "sources": [
+        "SRC-035"
+      ]
+    },
+    {
+      "term": "Serial prefix letters",
+      "text": "The letters before the tractor serial number. The first gives the chassis, the second the fuel, the third the clutch (M = dual-stage). They decide which variant parts fit.",
+      "related": [],
+      "sources": [
+        "SRC-002",
+        "SRC-003"
+      ]
+    },
+    {
+      "term": "Supersession",
+      "text": "When a part number is replaced by a newer one. The 2008 AGCO numbers shown as replacement references may supersede the original 1958 number from parts book 819045.",
+      "related": [],
+      "sources": [
+        "SRC-038",
+        "SRC-032"
+      ]
+    },
+    {
+      "term": "Variant dependent",
+      "text": "A record that differs between versions of the 1958 tractor (for example single or dual clutch) when the version fitted to this tractor has not been confirmed yet.",
+      "related": [],
+      "sources": []
+    }
+  ]
 }

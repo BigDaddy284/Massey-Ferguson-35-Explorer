@@ -150,6 +150,15 @@ for (const sec of technical.sections) {
   }
 }
 for (const st of technical.identification.steps) for (const s of st.sources) if (!sourceById.has(s)) err(`identification step: unknown source ${s}`);
+// Phase 9 glossary: plain-English terms linked to records. Explanations only; they carry no status.
+const terms = new Set();
+for (const g of technical.glossary ?? []) {
+  if (!g.term || !g.text) err(`glossary: entry needs term and text`);
+  if (terms.has(g.term)) err(`glossary: duplicate term ${g.term}`);
+  terms.add(g.term);
+  for (const r of g.related ?? []) if (!ids.has(r)) err(`glossary ${g.term}: unknown related id ${r}`);
+  for (const s of g.sources ?? []) if (!sourceById.has(s)) err(`glossary ${g.term}: unknown source ${s}`);
+}
 
 const sup = load('suppliers.json');
 const MATCHES = new Set(['exact', 'agco-ref', 'book-ref', 'listed-fit', 'check-fit']);
