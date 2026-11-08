@@ -38,11 +38,22 @@
     el.appendChild(tip);
     this.tip = tip;
 
-    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    // Performance (after Phase 9): multisampling is only worth its fill-rate cost below 2 device pixels per CSS pixel
+    // (phones and tablets draw at 2x or 3x, where the edges are already smooth), the picture is drawn at a lower
+    // resolution while the camera or the parts are moving and at full resolution once they stop, and the shadow map
+    // is redrawn only when a part moves or changes visibility, not on every frame.
+    var dpr = window.devicePixelRatio || 1;
+    var smallScreen = Math.min(window.screen ? window.screen.width : 9999, window.screen ? window.screen.height : 9999) < 700;
+    var renderer = new THREE.WebGLRenderer({ antialias: dpr < 2, alpha: true, powerPreference: 'high-performance' });
+    this.fullRatio = Math.min(dpr, 2);
+    this.motionRatio = Math.min(dpr, smallScreen ? 0.85 : 1);
+    this.lowRes = false;
+    renderer.setPixelRatio(this.fullRatio);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.autoUpdate = false;
+    this._shadowDirty = true;
     renderer.domElement.setAttribute('aria-label', '3D model of the tractor. Drag to rotate, scroll to zoom, right-drag to pan, click a part to select it.');
     renderer.domElement.setAttribute('role', 'img');
     el.insertBefore(renderer.domElement, tip);
@@ -86,7 +97,7 @@
     var key = new THREE.DirectionalLight(0xffffff, 0.9);
     key.position.set(2.5, 5, 3.5);
     key.castShadow = true;
-    key.shadow.mapSize.set(2048, 2048);
+    key.shadow.mapSize.set(smallScreen ? 1024 : 2048, smallScreen ? 1024 : 2048);
     key.shadow.camera.left = -2.4; key.shadow.camera.right = 2.4;
     key.shadow.camera.top = 2.4; key.shadow.camera.bottom = -2.4;
     key.shadow.camera.near = 1; key.shadow.camera.far = 14;
@@ -151,6 +162,8 @@
       m.userData.centre = c;
       m.userData.homeBox = tmpBox.clone();
       m.userData.side = c.z > 0.12 ? 1 : (c.z < -0.12 ? -1 : 0);
+      // Small fittings (nuts, clips, short pipes) are invisible at ghost opacity, so they are skipped while ghosted.
+      m.userData.small = tmpBox.getSize(new THREE.Vector3()).length() < 0.05;
       m.userData.toLocal = m.parent.getWorldQuaternion(tmpQ).clone().invert();
       m.userData.off = new THREE.Vector3();
     });
@@ -220,7 +233,7 @@
       requestAnimationFrame(function () {
         hoverQueued = false;
         var id = pickAt(ev);
-        if (id !== self.state.hover) { self.state.hover = id; self.applyVisuals(); }
+        if (id !== self.state.hover) self.setHover(id);
         renderer.domElement.style.cursor = id ? 'pointer' : 'grab';
         if (id) {
           var r = el.getBoundingClientRect();
@@ -233,7 +246,7 @@
     });
     renderer.domElement.addEventListener('pointerleave', function () {
       tip.hidden = true;
-      if (self.state.hover) { self.state.hover = null; self.applyVisuals(); }
+      if (self.state.hover) self.setHover(null);
     });
 
     // Parts between the camera and the selection turn see-through, like a cutaway.
@@ -249,7 +262,8 @@
     // sluggish on tablets. A frame is drawn only when the camera, an animation or the visual
     // state has changed (see invalidate() and the method wrapping at the end of this file).
     this._dirty = true;
-    controls.addEventListener('change', function () { self._dirty = true; });
+    this._lastChange = 0;
+    controls.addEventListener('change', function () { self._dirty = true; self._lastChange = performance.now(); });
     var wasConnected = false;
     var loop = function () {
       requestAnimationFrame(loop);
@@ -257,14 +271,22 @@
       if (connected && !wasConnected) self._dirty = true;
       wasConnected = connected;
       if (!connected) return;
+      var now = performance.now();
       var animating = !!(self.tween || self.explode.tween);
       if (self.tween) self._stepTween();
       if (self.explode.tween) self._stepExplode();
       controls.update();
+      // Lower resolution while the camera or the parts are moving; back to full once they have settled.
+      var moving = animating || now - self._lastChange < 160;
+      if (moving && !self.lowRes && self.motionRatio < self.fullRatio) { self.lowRes = true; renderer.setPixelRatio(self.motionRatio); self._dirty = true; }
+      else if (!moving && self.lowRes) { self.lowRes = false; renderer.setPixelRatio(self.fullRatio); self._dirty = true; }
       if (!animating && !self._dirty) return;
       self._dirty = false;
       self._placeCallouts();
       self._placePin();
+      // The light never moves, so the shadow map only changes when parts move or change visibility.
+      // During an explode animation it is refreshed every third frame and once more at the end.
+      if (self._shadowDirty || (self.explode.tween && (self.frames || 0) % 3 === 0)) { renderer.shadowMap.needsUpdate = true; self._shadowDirty = false; }
       renderer.render(scene, camera);
       self.frames = (self.frames || 0) + 1;
     };
@@ -361,8 +383,26 @@
     if (changed) { st.occluders = next; this.applyVisuals(); }
   };
 
+  // Hover highlight: only the meshes of the part left and the part entered are touched.
+  Viewer.prototype.setHover = function (id) {
+    var st = this.state, prev = st.hover;
+    st.hover = id || null;
+    var self = this;
+    var sel = {};
+    if (st.selected) (this.partsUnder[st.selected] || []).forEach(function (p) { sel[p] = true; });
+    [prev, st.hover].forEach(function (pid) {
+      if (!pid || sel[pid]) return;
+      (self.meshesByPart[pid] || []).forEach(function (m) {
+        var mt = m.material;
+        if (pid === st.hover) { mt.emissive.setHex(0x4a87d6); mt.emissiveIntensity = 0.25; }
+        else { mt.emissive.setHex(m.userData.base.emissive); mt.emissiveIntensity = 1; }
+      });
+    });
+  };
+
   Viewer.prototype.applyVisuals = function () {
     var st = this.state;
+    this._shadowDirty = true;
     var under = function (list) { var o = {}; (list || []).forEach(function (p) { o[p] = true; }); return o; };
     var sel = st.selected ? under(this.partsUnder[st.selected]) : {};
     // While an assembly is exploded on its own, selecting that assembly would tint every part: skip it.
@@ -396,6 +436,7 @@
       m.visible = fitted && !st.hidden[pid];
       var ghost = !!(iso && !iso[pid]);
       m.userData.ghost = ghost;
+      if (ghost && m.userData.small) m.visible = false;
       var occluding = !ghost && !sel[pid] && !!(st.occluders && st.occluders[pid]);
       m.userData.occluding = occluding;
       var opacity = base.opacity, transparent = base.transparent;
@@ -409,7 +450,6 @@
       if (sel[pid]) { mt.emissive.setHex(0x1f6fe0); mt.emissiveIntensity = 0.55; }
       else if (hov[pid]) { mt.emissive.setHex(0x4a87d6); mt.emissiveIntensity = 0.25; }
       else { mt.emissive.setHex(base.emissive); mt.emissiveIntensity = 1; }
-      mt.needsUpdate = true;
     });
   };
 
@@ -529,18 +569,20 @@
     this.explodeCache[key] = out;
     return out;
   };
-  Viewer.prototype._setExplodeOffsets = function (t, fromOffsets, k) {
+  Viewer.prototype._setExplodeOffsets = function (t, fromOffsets, k, moving) {
     var vecs = this._explodeVectors(this.explode.scope, this.explode.depth);
     var tmp = new this.THREE.Vector3();
-    this.meshes.forEach(function (m) {
+    // Only meshes that have somewhere to go, or are away from home, are touched: the rest keep their matrices.
+    (moving || this.meshes).forEach(function (m) {
       var v = vecs.get(m);
+      if (!v && m.userData.off.lengthSq() === 0 && !(fromOffsets && fromOffsets.get(m).lengthSq())) return;
       tmp.set(0, 0, 0);
       if (v) tmp.copy(v).multiplyScalar(t);
       if (fromOffsets) tmp.lerpVectors(fromOffsets.get(m), tmp, k);
       m.userData.off.copy(tmp);
       m.position.copy(m.userData.home).add(tmp.applyQuaternion(m.userData.toLocal));
     });
-    this._calloutsDirty = true; this._pinDirty = true;
+    this._calloutsDirty = true; this._pinDirty = true; this._shadowDirty = true;
   };
   // Move parts to the explosion amount t (0 assembled, 1 fully exploded) for the given scope and depth.
   Viewer.prototype.setExplode = function (opts, animate, onDone) {
@@ -559,17 +601,22 @@
       if (onDone) onDone();
       return;
     }
-    var from = new Map();
-    this.meshes.forEach(function (m) { from.set(m, m.userData.off.clone()); });
+    var from = new Map(), moving = [];
     ex.scope = next.scope; ex.depth = next.depth;
-    ex.tween = { from: from, to: next.t, start: performance.now(), dur: animate ? 750 : 1, onDone: onDone };
+    var vecs = this._explodeVectors(ex.scope, ex.depth);
+    this.meshes.forEach(function (m) {
+      if (!vecs.get(m) && m.userData.off.lengthSq() === 0) return;
+      from.set(m, m.userData.off.clone());
+      moving.push(m);
+    });
+    ex.tween = { from: from, to: next.t, start: performance.now(), dur: animate ? 750 : 1, onDone: onDone, moving: moving };
     this.applyVisuals();
   };
   Viewer.prototype._stepExplode = function () {
     var ex = this.explode, tw = ex.tween;
     var k = Math.min(1, (performance.now() - tw.start) / tw.dur);
     var e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-    this._setExplodeOffsets(tw.to, tw.from, e);
+    this._setExplodeOffsets(tw.to, tw.from, e, tw.moving);
     ex.t = tw.to;
     if (k >= 1) {
       ex.tween = null;
@@ -665,7 +712,11 @@
     if (v.z > 1 || Math.abs(v.x) > 1 || Math.abs(v.y) > 1) { pin.hidden = true; return; }
     var w = this.el.clientWidth, h = this.el.clientHeight;
     pin.hidden = false;
-    pin.style.transform = 'translate(' + ((v.x + 1) / 2 * w).toFixed(1) + 'px,' + ((1 - v.y) / 2 * h).toFixed(1) + 'px)';
+    var px = (v.x + 1) / 2 * w;
+    // Label to the left of the dot when the part is in the right-hand part of the view, so it stays on screen.
+    var flip = px > w * 0.58;
+    if (flip !== this._pinFlip) { this._pinFlip = flip; pin.classList.toggle('flip', flip); }
+    pin.style.transform = 'translate(' + px.toFixed(1) + 'px,' + ((1 - v.y) / 2 * h).toFixed(1) + 'px)';
   };
   Viewer.prototype._placeCallouts = function () {
     var show = this.callouts.length && this.explode.t > 0.3;
@@ -844,7 +895,7 @@
   // Every method that can change what is on screen marks the frame dirty after it runs.
   // Read-only helpers and the per-frame steps called from the loop itself are left alone.
   var NO_REDRAW = { isModelled: 1, modelledIds: 1, hiddenCount: 1, isExploded: 1, explodeRefs: 1, invalidate: 1,
-    _boxFor: 1, _inside: 1, _explodeVectors: 1, _placeCallouts: 1, _stepTween: 1, _stepExplode: 1 };
+    _boxFor: 1, _inside: 1, _explodeVectors: 1, _placeCallouts: 1, _placePin: 1, _stepTween: 1, _stepExplode: 1 };
   Object.keys(Viewer.prototype).forEach(function (name) {
     var fn = Viewer.prototype[name];
     if (typeof fn !== 'function' || NO_REDRAW[name]) return;
