@@ -3701,9 +3701,10 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "listed-fit",
+      "match": "book-ref",
       "fits": "MF35, 135, TE20",
-      "source": "SRC-040"
+      "source": "SRC-040",
+      "notes": "Quoted 872142M91 is the swinging drawbar bracket in 819045 (p275 item 34)."
     },
     {
       "node": "drawbar",

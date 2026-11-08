@@ -61,6 +61,7 @@ accessed primary source.
 | SRC-040 | Agriline Products: Ferguson FE35 4-cylinder parts range | supplier | **Read 2026-11-08.** Category pages by system with price, stock and quoted OEM numbers, recorded in `data/suppliers.json` |
 | SRC-041 | Ferguson TO35 Tractor Parts Book, Gas and Diesel (1970 reprint), Internet Archive scan | primary | **Read 2026-11-08.** US-built TO35 with the Standard 23C diesel; its numbers are `partsBookReferences` with `book: 'TO35'` |
 | SRC-042 | Wikimedia Commons: photographs of FE35 / MF35 tractors | community | **Viewed 2026-11-08.** Shapes and positions of visible parts for the 3D model detail pass; photos are not copied into the repository. See `docs/model/README.md` |
+| SRC-043 | MF 35 and 35X Tractors Parts Book 819045 M4, Issue 1 (8/69): the owner's illustrated scan | primary | **Read 2026-11-08.** Same book and page numbers as SRC-032, with the exploded figures; used to identify items and place new parts. Kept off the repository. See `09-parts-book-819045.md` |
 
 ## Sources tried but not readable from this environment
 
