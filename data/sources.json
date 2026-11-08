@@ -668,10 +668,17 @@
       "url": "https://archive.org/details/ferguson-to-35-tractor-parts-book-gas-and-diesel",
       "type": "primary",
       "reliability": "primary",
-      "accessed": false,
-      "reference": "Identified 2026-11-08; about 420 MB, PDF and other formats, uploaded 20 Oct 2020. The TO35 is the US-built sister of the FE35 and the TO35 diesel used the same Standard 23C engine, so its engine section gives genuine Ferguson part numbers for the 23C. Chassis, electrical and sheet-metal numbers are US-specific and must not be applied to the Coventry tractor without a matching FE35 reference (same rule as the US serial breaks). The owner has been asked to download it into the project files; the proxy here cannot reach archive.org.",
-      "extracted": [],
-      "conflicts": []
+      "accessed": true,
+      "reference": "Downloaded 2026-11-08 from the Internet Archive (text PDF, 247 pages, 32 MB) and stored as project file research/Ferguson-TO35-Parts-Book-Gas-and-Diesel-archive-org.pdf. Genuine Massey-Ferguson dealer parts book (Printed in U.S.A., pictorial indexes for Gas and Diesel). The diesel engine sections are headed STANDARD MOTORS DIESEL, i.e. the 23C. OCR text layer has errors (M1 read as Ml, digits dropped); read numbers from the page image before citing. The TO35 is US-built: chassis, electrical and sheet-metal numbers are US-specific and must not be applied to the Coventry FE35 without a matching FE35 reference.",
+      "extracted": [
+        "Structure: pictorial index pp.4–7 (Gas, Diesel); Standard Motors Diesel engine pp.45–69 (cylinder block and timing cover p.45, flywheel/camshaft/crankshaft/timing gears p.47); differential housing p.191; hydraulic lift shaft p.225.",
+        "p.45 (Standard Motors Diesel): cylinder block assembly 827483M91 (order 1884088M1); cylinder liners grades F/G/H 827556M1 / 827557M1 / 827558M1 (order 1884940M1).",
+        "p.47: crankshaft assembly 827506M92; crankshaft bearing housings front 826007M92, centre 827503M91, rear 826018M91.",
+        "p.191: hydraulic lift cover gasket 886549M2 (Heritage 2008 lists 886549V2); transmission to differential housing gasket 521181M1 (OCR uncertain).",
+        "p.225 (hydraulic lift shaft): lift arm 180910M1 (the number Anglo Agriparts quotes for A67170); lift arm washer 180917M1; lift shaft O-ring 195565M1; hydraulic lift shaft 184359M1 (Heritage 184359V91); ram arm 180970M2; piston connecting rod 180903M2; lift piston assembly 3 in 184443M91 (Heritage 184443V91); ring kit 830741M91 (Heritage 830741V91)."
+      ],
+      "conflicts": [],
+      "dateResearched": "2026-11-08"
     }
   ]
 }
