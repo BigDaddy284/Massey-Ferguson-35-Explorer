@@ -46,11 +46,11 @@ for (const [name, [w, h]] of Object.entries(SIZES)) {
   if (!(await page.evaluate(() => location.hash.startsWith('#/catalogue')))) { failures++; console.log('  FAIL search: "see all" did not open the catalogue'); }
   // Idle 3D view should not keep redrawing.
   await page.evaluate(() => { location.hash = '#/anatomy'; });
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(2500);
   const f0 = await page.evaluate(() => window.MF35Explorer.viewer().frames);
   await page.waitForTimeout(1000);
   const f1 = await page.evaluate(() => window.MF35Explorer.viewer().frames);
-  if (f1 - f0 > 2) { failures++; console.log(`  FAIL idle 3D view drew ${f1 - f0} frames in 1 s`); }
+  if (f1 - f0 > 1) { failures++; console.log(`  FAIL idle 3D view drew ${f1 - f0} frames in 1 s`); }
   if (errors.length) { failures++; console.log('  FAIL errors:', errors.slice(0, 5)); }
   await page.close();
 }

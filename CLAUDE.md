@@ -121,7 +121,11 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
 - `app/js/viewer.js`: Three.js scene, OrbitControls, picking, highlight, hide, isolate, X-ray
   (casing list in model.js), auto see-through for parts blocking the selection, camera presets.
   The anatomy view moves one persistent viewer element into each re-render (no WebGL re-creation).
-  Without WebGL it falls back to the SVG schematic.
+  Without WebGL it falls back to the SVG schematic. Performance: frames are drawn on demand; the shadow map is
+  redrawn only when parts move or change visibility (`_shadowDirty`, every third frame during an explode); the
+  picture drops to `motionRatio` device pixels while the camera or parts move and returns to `fullRatio` when still;
+  multisampling is off at 2x+ DPR; hover touches only the two parts concerned (`setHover`); an explode tween moves
+  only the meshes that have an offset; ghosted fittings under 5 cm are skipped; phones get a 1024 px shadow map.
 - Exploded views (Phase 4, viewer.js): `setExplode({scope, depth, t})` moves meshes from their
   stored home positions. Directions come from `EXPLODE` hints in model.js (metres at full explode,
   relative to the parent; `'mirror'` flips z for the LH side), otherwise radially from the parent's
