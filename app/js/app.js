@@ -461,8 +461,14 @@
       var app = core.applicability(index, id, state.resolved);
       var assembly = e.path.slice(1, -1).map(nameOf).join(' › ');
       var reps = n.replacementReferences || [];
-      var pn = n.oemPartNumber ? '<span class="mono">' + esc(n.oemPartNumber) + '</span>' :
-        (reps.length ? '<span class="badge replacement" title="Current AGCO supply number (2008 Heritage catalogue), not the original 1958 number">' + reps.length + ' AGCO replacement ref' + (reps.length > 1 ? 's' : '') + '</span>' :
+      var books = n.partsBookReferences || [];
+      var prim = books.filter(function (r) { return r.primary; })[0];
+      var mf35 = books.filter(function (r) { return r.book === 'MF35' && !r.primary; });
+      var to35 = books.filter(function (r) { return r.book === 'TO35'; });
+      var pn = n.oemPartNumber ? '<span class="mono">' + esc(n.oemPartNumber) + '</span>' + (prim ? ' <span class="badge mf35" title="Read from the AGCO MF35 parts book 819045, page ' + esc(String(prim.page)) + (prim.condition ? '. ' + esc(prim.condition) : '') + '">819045 p.' + esc(String(prim.page)) + '</span>' : '') :
+        (mf35.length ? '<span class="badge mf35" title="Numbers listed in the AGCO MF35 parts book 819045 for this part, but more than one applies or the row depends on a serial or engine number not yet known">' + mf35.length + ' no' + (mf35.length > 1 ? 's' : '') + ' in 819045, see record</span>' :
+        to35.length ? '<span class="badge book" title="Number read in the Ferguson TO35 parts book (Standard Motors Diesel); not found in the MF35 book 819045">' + to35.length + ' TO35 parts-book no' + (to35.length > 1 ? 's' : '') + '</span>' + (reps.length ? ' <span class="badge replacement" title="Current AGCO supply number (2008 Heritage catalogue)">+' + reps.length + ' AGCO</span>' : '') :
+        reps.length ? '<span class="badge replacement" title="Current AGCO supply number (2008 Heritage catalogue), not the original 1958 number">' + reps.length + ' AGCO replacement ref' + (reps.length > 1 ? 's' : '') + '</span>' :
         (n.supplierClaimedOem && n.supplierClaimedOem.length ? '<span class="badge claim" title="Supplier-claimed, not verified">' + n.supplierClaimedOem.length + ' unverified ref' + (n.supplierClaimedOem.length > 1 ? 's' : '') + '</span>' : '<span class="muted">Not yet documented</span>'));
       return '<tr class="clickable' + (state.selectedId === id ? ' selected' : '') + '" data-id="' + esc(id) + '">' +
         '<td><strong>' + esc(n.name) + '</strong>' + (app.applies ? '' : ' <span class="badge neutral">not fitted to shown config</span>') + '<div class="muted mono">' + esc(id) + '</div></td>' +
@@ -470,11 +476,11 @@
         '<td class="muted">' + esc(assembly) + '</td>' +
         '<td class="mono">' + (n.quantity ? n.quantity : '<span class="muted">–</span>') + '</td>' +
         '<td>' + statusBadge(st) + '</td>' +
-        '<td>' + (function () { var rs = supByNode[id] || []; if (!rs.length) return '<span class="muted">–</span>'; var best = rs.some(function (r) { return r.match === 'agco-ref'; }) ? 'agco-ref' : (rs.every(function (r) { return r.match === 'check-fit'; }) ? 'check-fit' : 'listed-fit'); return '<span class="badge match-' + best + '" title="' + esc(core.MATCH_LABELS[best]) + '">' + rs.length + ' UK ref' + (rs.length > 1 ? 's' : '') + '</span>'; })() + '</td>' +
+        '<td>' + (function () { var rs = supByNode[id] || []; if (!rs.length) return '<span class="muted">–</span>'; var best = rs.map(function (r) { return r.match; }).sort(function (a, b) { return core.MATCH_ORDER[a] - core.MATCH_ORDER[b]; })[0]; return '<span class="badge match-' + best + '" title="' + esc(core.MATCH_LABELS[best]) + '">' + rs.length + ' UK ref' + (rs.length > 1 ? 's' : '') + '</span>'; })() + '</td>' +
         '<td><a href="#/anatomy/' + encodeURIComponent(id) + '">View</a></td></tr>';
     }).join('');
     return '<div class="page">' +
-      '<div class="page-head"><div><h1>Parts catalogue</h1><p class="lede">Every component identified so far. Original part numbers appear only once checked against the AGCO parts book (819045M4). AGCO replacement references come from the 2008 Heritage catalogue and may supersede the original number; supplier numbers are shown as unverified references.</p></div></div>' +
+      '<div class="page-head"><div><h1>Parts catalogue</h1><p class="lede">Every component identified so far. Original part numbers are read from the AGCO MF35 / 35X parts book 819045 and apply to the 1958 Coventry serial range unless the record says the row depends on a serial or engine number. TO35 parts-book numbers come from the Ferguson TO35 book, whose Standard Motors Diesel engine is the 23C. AGCO replacement references come from the 2008 Heritage catalogue and may supersede the original number; supplier numbers are shown as unverified references.</p></div></div>' +
       '<div class="filters">' +
       '<input id="cat-q" type="search" placeholder="Search name, part number, assembly…" value="' + esc(c.q) + '" aria-label="Search catalogue">' +
       '<select id="cat-system" aria-label="System"><option value="">All systems</option>' + systems.map(function (s) { return '<option value="' + s + '"' + (c.system === s ? ' selected' : '') + '>' + esc(nameOf(s)) + '</option>'; }).join('') + '</select>' +
@@ -717,7 +723,7 @@
   function viewResearch() {
     var cov = core.coverage(index, modelledIds(), DIAGRAM_DATA, SUPPLIERS);
     var sys = index.byId[index.rootId].childIds;
-    var tot = { total: 0, verified: 0, 'partially-verified': 0, unverified: 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, diagram: 0, model: 0, supplier: 0 };
+    var tot = { total: 0, verified: 0, 'partially-verified': 0, unverified: 0, 'variant-dependent': 0, oem: 0, replacement: 0, partsBook: 0, described: 0, diagram: 0, model: 0, supplier: 0 };
     sys.forEach(function (s) { Object.keys(tot).forEach(function (k) { tot[k] += cov[s][k]; }); });
     var claims = 0;
     index.order.forEach(function (id) { if ((nodeOf(id).supplierClaimedOem || []).length) claims++; });
@@ -728,10 +734,28 @@
     };
     return '<div class="page"><div class="page-head"><div><h1>Research status</h1><p class="lede">How much of the tractor is documented, and from what. Nothing is marked verified until it has been checked against an original Massey Ferguson publication.</p></div></div>' +
       '<div class="stats">' + stat(tot.total, 'Items identified') + stat(tot.verified, 'Verified') + stat(tot['partially-verified'], 'Partially verified') +
-      stat(tot['variant-dependent'], 'Variant dependent') + stat(tot.unverified, 'Unverified') + stat(tot.oem, 'Confirmed OEM numbers') + stat(tot.replacement, 'With AGCO replacement refs') + stat(tot.described, 'With description and function') + stat(tot.diagram, 'In drawn diagrams') + stat(claims, 'With unverified supplier refs') + stat(tot.supplier, 'With UK purchase references') + stat(tot.model, 'Modelled in 3D') + '</div>' +
-      '<h2>By system</h2><div class="table-wrap"><table><thead><tr><th>System</th><th>Items</th><th>Verified</th><th>Partial</th><th>Variant</th><th>Unverified</th><th>AGCO refs</th><th>Described</th><th>Diagram</th><th>UK refs</th><th>In 3D</th><th>Progress</th></tr></thead><tbody>' +
-      sys.map(function (s) { var c = cov[s]; return '<tr class="clickable" data-goto="' + s + '"><td><strong>' + esc(nameOf(s)) + '</strong></td><td class="mono">' + c.total + '</td><td class="mono">' + c.verified + '</td><td class="mono">' + c['partially-verified'] + '</td><td class="mono">' + c['variant-dependent'] + '</td><td class="mono">' + c.unverified + '</td><td class="mono">' + c.replacement + '</td><td class="mono">' + c.described + '</td><td class="mono">' + c.diagram + '</td><td class="mono">' + c.supplier + '</td><td class="mono">' + c.model + '</td><td>' + bar(c) + '</td></tr>'; }).join('') +
+      stat(tot['variant-dependent'], 'Variant dependent') + stat(tot.unverified, 'Unverified') + stat(tot.oem, 'Original numbers from 819045') + stat(tot.partsBook, 'With parts-book numbers') + stat(tot.replacement, 'With AGCO replacement refs') + stat(tot.described, 'With description and function') + stat(tot.diagram, 'In drawn diagrams') + stat(claims, 'With unverified supplier refs') + stat(tot.supplier, 'With UK purchase references') + stat(tot.model, 'Modelled in 3D') + '</div>' +
+      '<h2>By system</h2><div class="table-wrap"><table><thead><tr><th>System</th><th>Items</th><th>Verified</th><th>Partial</th><th>Variant</th><th>Unverified</th><th>Parts book</th><th>AGCO refs</th><th>Described</th><th>Diagram</th><th>UK refs</th><th>In 3D</th><th>Progress</th></tr></thead><tbody>' +
+      sys.map(function (s) { var c = cov[s]; return '<tr class="clickable" data-goto="' + s + '"><td><strong>' + esc(nameOf(s)) + '</strong></td><td class="mono">' + c.total + '</td><td class="mono">' + c.verified + '</td><td class="mono">' + c['partially-verified'] + '</td><td class="mono">' + c['variant-dependent'] + '</td><td class="mono">' + c.unverified + '</td><td class="mono">' + c.partsBook + '</td><td class="mono">' + c.replacement + '</td><td class="mono">' + c.described + '</td><td class="mono">' + c.diagram + '</td><td class="mono">' + c.supplier + '</td><td class="mono">' + c.model + '</td><td>' + bar(c) + '</td></tr>'; }).join('') +
       '</tbody></table></div>' +
+      (function () {
+        var modelled = {}; modelledIds().forEach(function (id) { modelled[id] = true; });
+        var comps = index.order.filter(function (id) { return nodeOf(id).kind === 'component'; });
+        var notModelled = comps.filter(function (id) { return !modelled[id]; });
+        var noNumber = comps.filter(function (id) { var n = nodeOf(id); return !n.oemPartNumber && !(n.partsBookReferences || []).length && !(n.replacementReferences || []).length; });
+        var fastenerRe = /stud|bolt|nut|pin\b|pins\b|washer|circlip|seal|gasket|o-ring|clip|spring|bush|bearing|shim|spacer|union|dowel|plug|collet/i;
+        var fasteners = comps.filter(function (id) { return fastenerRe.test(nameOf(id)); });
+        var fastenersWithRefs = fasteners.filter(function (id) { return (nodeOf(id).partsBookReferences || []).length; });
+        var scopes = {}; Object.keys(DIAGRAM_DATA).forEach(function (k) { scopes[DIAGRAM_DATA[k].scope || k] = true; });
+        var noDiagram = index.order.filter(function (id) { var k = nodeOf(id).kind; return (k === 'assembly' || k === 'subassembly' || k === 'system') && !scopes[id]; });
+        var chips = function (ids) { return ids.length ? '<div class="chips">' + ids.map(function (id) { return '<a class="chip" href="#/anatomy/' + encodeURIComponent(id) + '">' + esc(nameOf(id)) + '</a>'; }).join('') + '</div>' : '<span class="muted">none</span>'; };
+        return '<h2>Completeness report</h2><p class="lede" style="margin-top:0">What is still missing, so that no part of the catalogue is mistaken for complete. The full report with the 3D placement audit is in <span class="mono">docs/research/08-completeness-report.md</span>.</p>' +
+          '<div class="stats">' + stat(fasteners.length, 'Fastener and small-part records') + stat(fastenersWithRefs.length, 'of them with parts-book numbers') + stat(notModelled.length, 'Components not yet in 3D') + stat(noNumber.length, 'Components with no part number of any kind') + stat(noDiagram.length, 'Assemblies without their own diagram') + '</div>' +
+          '<dl class="fields" style="margin-top:12px"><dt>Not in 3D</dt><dd>' + chips(notModelled) + '</dd>' +
+          '<dt>No number yet</dt><dd>' + chips(noNumber) + '</dd>' +
+          '<dt>No diagram</dt><dd>' + chips(noDiagram) + '<div class="muted" style="font-size:12px;margin-top:4px">Their parts appear in the parent assembly\'s diagram.</div></dd>' +
+          '<dt>Unresolved</dt><dd><ul class="muted" style="margin:0;padding-left:18px;font-size:13px"><li>Original part numbers: read from parts book 819045 (SRC-032). Records whose row depends on a serial split inside 1958 or on the 23C engine number (lift pump, injectors, dipstick, oil filter, levelling-box shaft, nose badge, clutch springs) list every candidate and stay partially verified until the owner reads the serial and engine plates.</li><li>Owner\'s serial number and prefix letters: not yet entered, so clutch and PTO stay owner-reported.</li><li>Individual fasteners are rows inside their component records, not separate records yet.</li><li>UK Lucas electrical equipment is not in the TO35 book, which lists US Delco-Remy parts.</li><li>Supplier links were live when captured; they are not re-checked automatically.</li></ul></dd></dl>';
+      })() +
       '<h2>Source register</h2><div class="table-wrap"><table><thead><tr><th>Id</th><th>Source</th><th>Grade</th><th>Read</th></tr></thead><tbody>' +
       DATA.sources.map(function (s) {
         return '<tr id="anchor-' + s.id + '"><td class="mono">' + s.id + '</td><td>' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + '</a>' : esc(s.name)) +
@@ -739,13 +763,13 @@
           (s.conflicts && s.conflicts.length ? '<div style="font-size:12px;color:#8a5a10;margin-top:2px">Conflict: ' + esc(s.conflicts[0]) + '</div>' : '') + '</td>' +
           '<td>' + esc(s.reliability) + '</td><td>' + (s.accessed ? esc(s.dateResearched) : '<span class="badge partially-verified">not yet obtained</span>') + '</td></tr>';
       }).join('') + '</tbody></table></div>' +
-      '<h2>UK suppliers checked</h2><p class="lede" style="margin-top:0">The application is not a shop. These are legitimate UK suppliers whose FE35 listings were read; a purchase reference is graded by how well it is tied to this tractor, and nothing is graded an exact match until the parts book has been read.</p>' +
-      '<div class="table-wrap"><table><thead><tr><th>Supplier</th><th>References</th><th>Matches AGCO no.</th><th>Listed for FE35</th><th>Check fit</th><th>Last checked</th></tr></thead><tbody>' +
+      '<h2>UK suppliers checked</h2><p class="lede" style="margin-top:0">The application is not a shop. These are legitimate UK suppliers whose FE35 listings were read; a purchase reference is graded by how well it is tied to this tractor: exact when the supplier quotes the original 819045 number.</p>' +
+      '<div class="table-wrap"><table><thead><tr><th>Supplier</th><th>References</th><th>Exact (819045)</th><th>Matches AGCO no.</th><th>Matches a book no.</th><th>Listed for FE35</th><th>Check fit</th><th>Last checked</th></tr></thead><tbody>' +
       SUPPLIERS.suppliers.map(function (s) {
         var rs = SUPPLIERS.references.filter(function (r) { return r.supplier === s.id; });
         var n = function (m) { return rs.filter(function (r) { return r.match === m; }).length; };
         var last = rs.map(function (r) { return r.checked; }).sort().pop() || '';
-        return '<tr><td><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + '</a><div class="muted" style="font-size:12px;margin-top:2px">' + esc(s.notes || '') + ' Source <a href="#/research/' + esc(s.source) + '">' + esc(s.source) + '</a>.</div></td><td class="mono">' + rs.length + '</td><td class="mono">' + n('agco-ref') + '</td><td class="mono">' + n('listed-fit') + '</td><td class="mono">' + n('check-fit') + '</td><td class="mono">' + esc(last) + '</td></tr>';
+        return '<tr><td><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + '</a><div class="muted" style="font-size:12px;margin-top:2px">' + esc(s.notes || '') + ' Source <a href="#/research/' + esc(s.source) + '">' + esc(s.source) + '</a>.</div></td><td class="mono">' + rs.length + '</td><td class="mono">' + n('exact') + '</td><td class="mono">' + n('agco-ref') + '</td><td class="mono">' + n('book-ref') + '</td><td class="mono">' + n('listed-fit') + '</td><td class="mono">' + n('check-fit') + '</td><td class="mono">' + esc(last) + '</td></tr>';
       }).join('') + '</tbody></table></div></div>';
   }
 
@@ -753,7 +777,7 @@
   function purchaseOptions(id) {
     var refs = supByNode[id] || [];
     if (!refs.length) return missing('No UK supplier listing found for this part yet. Anglo Agriparts and Agriline Products were checked (see Research Status); the search goes on as the catalogue grows.');
-    var order = { 'agco-ref': 0, 'listed-fit': 1, 'check-fit': 2 };
+    var order = core.MATCH_ORDER;
     refs = refs.slice().sort(function (a, b) { return (order[a.match] - order[b.match]) || a.title.localeCompare(b.title); });
     var price = function (p) {
       if (!p) return '<span class="muted">Price not shown</span>';
@@ -763,16 +787,18 @@
       var s = supplierById[r.supplier] || { name: r.supplier };
       return '<li class="sup-item"><div class="sup-head"><a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.title) + '</a> <span class="badge match-' + esc(r.match) + '" title="' + esc(matchHelp(r)) + '">' + esc(core.MATCH_LABELS[r.match] || r.match) + '</span></div>' +
         '<div class="sup-meta">' + esc(s.name) + ' · <span class="mono">' + esc(r.supplierPartNumber) + '</span> · ' + price(r.price) + (r.stock ? ' · ' + esc(r.stock) : '') + '</div>' +
-        (r.oemQuoted && r.oemQuoted.length ? '<div class="sup-meta">Supplier quotes OEM ' + r.oemQuoted.map(function (q) { return '<span class="mono' + (r.matchedNumber && core.normaliseNumber(q) === core.normaliseNumber(r.matchedNumber) ? ' hit' : '') + '">' + esc(q) + '</span>'; }).join(', ') + (r.matchedNumber ? ' <span class="muted">(= AGCO ' + esc(r.matchedNumber) + ')</span>' : ' <span class="muted">(not yet checked against the parts book)</span>') + '</div>' : '') +
+        (r.oemQuoted && r.oemQuoted.length ? '<div class="sup-meta">Supplier quotes OEM ' + r.oemQuoted.map(function (q) { return '<span class="mono' + (r.matchedNumber && core.normaliseNumber(q) === core.normaliseNumber(r.matchedNumber) ? ' hit' : '') + '">' + esc(q) + '</span>'; }).join(', ') + (r.matchedNumber ? ' <span class="muted">(= ' + (r.match === 'exact' ? 'original no. ' : r.match === 'book-ref' ? 'parts-book no. ' : 'AGCO ') + esc(r.matchedNumber) + ')</span>' : ' <span class="muted">(does not match a number on this record)</span>') + '</div>' : '') +
         (r.fits ? '<div class="sup-meta muted">Supplier fitment: ' + esc(r.fits) + '</div>' : '') +
         (r.notes ? '<div class="sup-note">' + esc(r.notes) + '</div>' : '') +
         '<div class="sup-meta muted">Checked ' + esc(r.checked) + ' · <a href="#/research/' + esc(r.source) + '">' + esc(r.source) + '</a></div></li>';
     }).join('') + '</ul>';
-    html += '<p class="muted" style="font-size:12px;margin:6px 0 0">Prices and stock are as shown on the date checked and will change. None of these is confirmed against parts book 819045M4 yet, so check the fit against your tractor before ordering.</p>';
+    html += '<p class="muted" style="font-size:12px;margin:6px 0 0">Prices and stock are as shown on the date checked and will change. Only an "exact" grade means the supplier quotes the original 819045 number for this part; for every other grade check the fit against your tractor before ordering.</p>';
     return html;
   }
   function matchHelp(r) {
-    if (r.match === 'agco-ref') return 'The supplier quotes an OEM number that equals the AGCO supply number recorded for this part (M and V suffixes treated as the same).';
+    if (r.match === 'exact') return 'The supplier quotes an OEM number that equals the original part number read from the AGCO MF35 parts book 819045 for this part (M and V suffixes treated as the same).';
+    if (r.match === 'agco-ref') return 'The supplier quotes an OEM number that equals the 2008 AGCO supply number recorded for this part (M and V suffixes treated as the same).';
+    if (r.match === 'book-ref') return 'The supplier quotes an OEM number that equals one of the other parts-book numbers on this record (a TO35 number, or an 819045 alternative or serial-dependent number). It is not the confirmed original number.';
     if (r.match === 'check-fit') return 'Listed for the FE35, but there is a known reason to check the fit first. See the note.';
     return 'Listed by the supplier for the Ferguson FE35 / 23C. The fit is the supplier\'s claim; it has not been checked against the parts book.';
   }
@@ -805,6 +831,10 @@
     }).join('');
     var claims = (n.supplierClaimedOem || []);
     var reps = (n.replacementReferences || []);
+    var books = (n.partsBookReferences || []);
+    var prim = books.filter(function (r) { return r.primary; })[0];
+    var mf35 = books.filter(function (r) { return r.book === 'MF35' && !r.primary; });
+    var to35 = books.filter(function (r) { return r.book === 'TO35'; });
     var related = (n.related || []).filter(function (rid) { return index.byId[rid]; });
 
     el.info.innerHTML =
@@ -812,10 +842,20 @@
       '<h2>' + esc(n.name) + '</h2>' + statusBadge(st) + ' <span class="info-id">' + esc(id) + '</span></div>' +
 
       '<div class="info-section"><h3>Identification</h3><dl class="fields">' +
-      '<dt>Original part no.</dt><dd>' + (n.oemPartNumber ? '<span class="mono">' + esc(n.oemPartNumber) + '</span>' : missing('Not yet documented (needs parts book 819045M4)')) + '</dd>' +
+      '<dt>Original part no.</dt><dd>' + (prim ? '<span class="mono" style="font-size:15px">' + esc(prim.number) + '</span> <span class="badge mf35" title="AGCO MF35 / 35X parts book 819045">819045 p.' + esc(String(prim.page)) + (prim.item ? ' item ' + esc(prim.item) : '') + '</span>' +
+        '<div class="muted">' + esc(prim.description) + (prim.qty ? ' · qty ' + prim.qty : '') + (prim.letters ? ' · footnote ' + esc(prim.letters) : '') + (prim.condition ? '. ' + esc(prim.condition) : '') + (prim.bookNote ? '. ' + esc(prim.bookNote) : '') + (prim.note ? '. ' + esc(prim.note) : '') + ' (<a href="#/research/SRC-032">SRC-032</a>)</div>' :
+        (mf35.length ? missing('Not settled: see the 819045 numbers below') : missing('Not yet documented (no row found in parts book 819045)'))) + (n.partsBookNote ? '<div class="muted" style="margin-top:4px">' + esc(n.partsBookNote) + '</div>' : '') + '</dd>' +
+      '<dt>Also in 819045</dt><dd>' + (mf35.length ? '<ul class="rep-list">' + mf35.map(function (r) {
+        return '<li><span class="mono">' + esc(r.number) + '</span> <span class="badge mf35" title="Listed in the AGCO MF35 parts book 819045 for this part">p.' + esc(String(r.page)) + (r.item ? ' item ' + esc(r.item) : '') + '</span>' +
+          '<div class="muted">' + esc(r.description) + (r.qty ? ' · qty ' + r.qty : '') + (r.letters ? ' · footnote ' + esc(r.letters) : '') + (r.condition ? '. ' + esc(r.condition) : '') + (r.bookNote ? '. ' + esc(r.bookNote) : '') + (r.note ? '. ' + esc(r.note) : '') + '</div></li>';
+      }).join('') + '</ul><p class="muted" style="font-size:12px;margin:4px 0 0">Other rows the MF35 parts book gives for this part: components, alternatives, or numbers that depend on a serial or engine number (<a href="#/research/SRC-032">SRC-032</a>).</p>' : missing()) + '</dd>' +
+      '<dt>Parts book no. (TO35)</dt><dd>' + (to35.length ? '<ul class="rep-list">' + to35.map(function (r) {
+        return '<li><span class="mono">' + esc(r.number) + '</span> <span class="badge ' + (r.confidence === 'possible' ? 'claim' : 'book') + '" title="' + (r.confidence === 'possible' ? 'Chassis or installation part of the US-built TO35; the Coventry FE35 number may differ' : 'Standard Motors Diesel (23C) engine part, common to the FE35 and TO35') + '">' + (r.confidence === 'possible' ? 'TO35, check for FE35' : '23C engine part') + '</span>' + (r.heritage ? ' <span class="badge replacement" title="The same number appears in the 2008 AGCO Heritage catalogue for the 35">also AGCO 2008</span>' : '') + (r.inBook819045 ? ' <span class="badge mf35" title="This number also appears in the MF35 parts book 819045">in 819045</span>' : ' <span class="badge neutral" title="This number does not appear anywhere in the MF35 parts book 819045 (often because 819045 lists a later supersession number)">not in 819045</span>') +
+          '<div class="muted">' + esc(r.description) + (r.qty ? ' · qty ' + r.qty : '') + (r.note ? '. ' + esc(r.note) : '') + '. TO35 parts book p.' + esc(String(r.page)) + ' (<a href="#/research/' + esc(r.source) + '">' + esc(r.source) + '</a>)</div></li>';
+      }).join('') + '</ul><p class="muted" style="font-size:12px;margin:4px 0 0">Read from the Ferguson TO35 parts book (693 063 M4). Its diesel engine is the Standard 23C. Each number is marked by whether it also appears in the MF35 book 819045.</p>' : missing()) + '</dd>' +
       '<dt>AGCO replacement no.</dt><dd>' + (reps.length ? '<ul class="rep-list">' + reps.map(function (r) {
         return '<li><span class="mono">' + esc(r.number) + '</span> <span class="badge ' + (r.confidence === 'possible' ? 'claim' : 'replacement') + '">' + (r.confidence === 'possible' ? 'possible fit' : 'listed for the 35') + '</span><div class="muted">' + esc(r.description) + '. Catalogue row: ' + esc(r.models) + ' (<a href="#/research/' + esc(r.source) + '">' + esc(r.source) + '</a> p.' + esc(String(r.page)) + ')</div></li>';
-      }).join('') + '</ul><p class="muted" style="font-size:12px;margin:4px 0 0">Numbers AGCO used to supply the part in 2008. They may supersede the original 1958 number, which still needs parts book 819045M4.</p>' : missing()) + '</dd>' +
+      }).join('') + '</ul><p class="muted" style="font-size:12px;margin:4px 0 0">Numbers AGCO used to supply the part in 2008. They may supersede the original 1958 number shown above.</p>' : missing()) + '</dd>' +
       '<dt>Other references</dt><dd>' + (claims.length ? '<div class="chips">' + claims.map(function (c) { return '<span class="chip mono" style="cursor:default">' + esc(c) + '</span>'; }).join('') + '</div><div style="margin-top:4px"><span class="badge claim">Supplier/forum claim, unverified</span></div>' : missing()) + '</dd>' +
       '<dt>Quantity</dt><dd>' + (n.quantity ? n.quantity + ' per tractor' : missing()) + '</dd>' +
       '<dt>Assembly</dt><dd>' + (e.parentId && e.parentId !== index.rootId ? esc(nameOf(e.parentId)) : esc(nameOf(index.rootId))) + '</dd></dl></div>' +

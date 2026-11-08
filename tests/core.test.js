@@ -54,8 +54,10 @@ test("owner-reported dual clutch: live PTO, dual-clutch parts fitted, single-clu
 
 test('parts with no appliesTo are not variant dependent', () => {
   const r = core.resolveConfiguration(config);
-  assert.equal(core.displayStatus(index, 'lift-piston', r), 'partially-verified');
-  assert.equal(core.displayStatus(index, 'core-plugs', r), 'unverified');
+  assert.equal(core.displayStatus(index, 'lift-piston', r), 'verified', 'lift piston 184443M91 is read from parts book 819045');
+  assert.equal(core.displayStatus(index, 'core-plugs', r), 'partially-verified', 'core plugs are listed in the TO35 parts book (SRC-041)');
+  assert.equal(core.displayStatus(index, 'serial-plate', r), 'partially-verified', 'serial plate is described in the workshop manual');
+  assert.equal(core.displayStatus(index, 'crankshaft', r), 'verified', 'crankshaft 827506M92 is read from parts book 819045');
 });
 
 test('serial decoding: 1958 dual-clutch diesel', () => {
@@ -107,12 +109,12 @@ test('AGCO Heritage replacement references: searchable, sourced, never the OEM n
       count++;
       assert.ok(byId[r.source] && byId[r.source].accessed, `${id}: ${r.number} cites an accessed source`);
       assert.ok((n.sources || []).includes(r.source), `${id}: node cites ${r.source}`);
-      assert.notEqual(n.oemPartNumber, r.number, `${id}: replacement reference is not the OEM number`);
+      if (n.oemPartNumber === r.number) assert.ok((n.partsBookReferences || []).some((b) => b.primary), `${id}: a replacement reference equal to the OEM number needs an 819045 primary`);
       assert.ok(['listed', 'possible'].includes(r.confidence), `${id}: confidence recorded`);
     }
   }
   assert.ok(count >= 140, `expected the Heritage references to be attached, got ${count}`);
-  assert.equal(index.byId['piston'].node.oemPartNumber, undefined, 'the piston still has no verified OEM number');
+  assert.equal(index.byId['piston'].node.oemPartNumber, '1884101M91', 'the piston number is read from parts book 819045 page 84');
   const cov = core.coverage(index);
   assert.ok(cov.engine.replacement >= 10 && cov.hydraulics.replacement >= 8, 'coverage counts nodes with replacement refs');
 });
@@ -143,7 +145,7 @@ test('coverage counts every non-root node', () => {
   const cov = core.coverage(index);
   const total = Object.values(cov).reduce((a, c) => a + c.total, 0);
   assert.equal(total, index.order.length - 1);
-  assert.equal(Object.values(cov).reduce((a, c) => a + c.verified, 0), 0, 'nothing is verified yet');
+  assert.ok(Object.values(cov).reduce((a, c) => a + c.verified, 0) >= 120, 'components with an 819045 number are verified');
 });
 
 test('coverage counts parts represented in 3D', () => {

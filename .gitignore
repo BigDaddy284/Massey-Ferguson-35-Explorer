@@ -1,0 +1,4 @@
+# Purchased / copyrighted reference material stays out of the repository
+*.pdf
+*.pdf.txt
+research/

@@ -19,21 +19,31 @@ test('every reference points at a real part, a real UK supplier and an accessed 
     assert.ok(supplierIds.has(r.supplier), `${r.supplier} is a registered supplier`);
     assert.match(r.url, /^https:\/\//);
     assert.match(r.checked, /^\d{4}-\d{2}-\d{2}$/);
-    assert.ok(['agco-ref', 'listed-fit', 'check-fit'].includes(r.match), `${r.match} is an allowed grade`);
+    assert.ok(['exact', 'agco-ref', 'book-ref', 'listed-fit', 'check-fit'].includes(r.match), `${r.match} is an allowed grade`);
     const src = sources.find((s) => s.id === r.source);
     assert.ok(src && src.accessed && src.reliability === 'supplier', `${r.source} is an accessed supplier source`);
   }
   for (const s of suppliers.suppliers) assert.equal(s.country, 'UK');
 });
 
-test('agco-ref is only used where a quoted number really equals the AGCO number', () => {
+test('exact, agco-ref and book-ref are only used where a quoted number really equals the recorded number', () => {
   for (const r of suppliers.references) {
-    const nums = (index.byId[r.node].node.replacementReferences || []).map((x) => core.normaliseNumber(x.number));
-    const hit = (r.oemQuoted || []).some((q) => nums.includes(core.normaliseNumber(q)));
-    assert.equal(r.match === 'agco-ref', hit, `${r.node} / ${r.supplierPartNumber}: grade matches the evidence`);
-    assert.notEqual(r.match, 'exact', 'nothing is exact before the parts book');
+    const n = index.byId[r.node].node;
+    const q = (r.oemQuoted || []).map(core.normaliseNumber);
+    const exact = !!n.oemPartNumber && q.includes(core.normaliseNumber(n.oemPartNumber));
+    const nums = (n.replacementReferences || []).map((x) => core.normaliseNumber(x.number));
+    const books = (n.partsBookReferences || []).map((x) => core.normaliseNumber(x.number));
+    const hit = !exact && q.some((x) => nums.includes(x));
+    const bookHit = !exact && !hit && q.some((x) => books.includes(x));
+    assert.equal(r.match === 'exact', exact, `${r.node} / ${r.supplierPartNumber}: exact matches the evidence`);
+    assert.equal(r.match === 'agco-ref', hit, `${r.node} / ${r.supplierPartNumber}: agco-ref matches the evidence`);
+    assert.equal(r.match === 'book-ref', bookHit, `${r.node} / ${r.supplierPartNumber}: book-ref matches the evidence`);
+    if (r.match === 'exact') assert.equal(core.normaliseNumber(r.matchedNumber), core.normaliseNumber(n.oemPartNumber));
   }
   assert.ok(suppliers.references.some((r) => r.match === 'agco-ref'), 'at least one AGCO-number match exists');
+  assert.ok(suppliers.references.some((r) => r.match === 'exact' && r.node === 'lift-arm-lh'), 'the Anglo lift arm quotes the original number 180910M1');
+  assert.equal(core.MATCH_ORDER.exact, 0);
+  assert.ok(core.MATCH_ORDER['agco-ref'] < core.MATCH_ORDER['book-ref'] && core.MATCH_ORDER['book-ref'] < core.MATCH_ORDER['listed-fit']);
 });
 
 test('normaliseNumber treats the M and V suffix letters as the same number', () => {
