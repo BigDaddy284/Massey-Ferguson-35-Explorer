@@ -295,17 +295,17 @@
   "ownerTractor": {
     "$comment": "The owner's tractor profile. null = not yet known. Update from physical inspection; the app derives compatibility from this.",
     "model": "MF35",
-    "builtAt": "Coventry (assumed)",
+    "builtAt": "Coventry (serial in the Coventry FE35 series)",
     "yearBelieved": 1958,
     "serialNumber": null,
-    "serialPrefix": null,
+    "serialPrefix": "SDM",
     "engineNumber": null,
     "engine": "std-23c-diesel",
-    "engineStatus": "provisional",
+    "engineStatus": "plate-read",
     "clutch": "dual-stage",
     "pto": null,
     "chassis": "standard",
-    "chassisStatus": "assumed",
+    "chassisStatus": "plate-read",
     "electrics": null,
     "coldStart": null,
     "diffLock": null,
@@ -339,10 +339,18 @@
         "by": "owner (relayed from the person who drives the tractor)",
         "observation": "Pressing the clutch pedal half-way lets the gears be changed; pressing it all the way down stops the PTO, and releasing it restarts the PTO.",
         "inference": "This is the defining two-stage pedal action of the dual-stage clutch (first stage: transmission plate released; second stage: PTO plate released; SRC-035 clutch section, SRC-001, SRC-010). It confirms the dual-stage clutch and live PTO independently of the plate letter M. Clutch now rests on two owner observations plus the plate letter; it stays owner-reported until the full serial prefix is read."
+      },
+      {
+        "date": "2026-11-08",
+        "by": "owner",
+        "observation": "Owner read the plates: the full chassis (serial) number, prefix SDM, and the engine number, prefix SJ with the suffix ES. At the owner's request the numbers themselves are not recorded in this repository; the owner enters them in My Tractor on their own machine.",
+        "inference": "Prefix decoded from the FE-35 workshop manual table (SRC-035 B.1): S = standard chassis, D = Standard 23C diesel, M = dual-stage clutch. The serial falls in the 1958 Coventry range (79553-125067) and before the 107892/107893, 111443/111444 and 117267/117268 parts-book splits. The engine number is a 23C number after SJ37181E and SJ44130E and before SJ86046E, SJ93988E, SJ102045E and SJ107814E, which settles the lift pump, injector, dipstick, oil filter and head-bolt rows in parts book 819045 (SRC-032). The trailing S after the E is not explained by any source read so far and is recorded as stamped. The engine, chassis and clutch axes are now plate-read; the fuel letter D confirms the 23C."
       }
     ],
-    "clutchStatus": "plate-letter-reported",
+    "clutchStatus": "plate-read",
     "serialPrefixLetters": {
+      "chassis": "S",
+      "fuel": "D",
       "clutch": "M"
     }
   },

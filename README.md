@@ -29,8 +29,10 @@ the 2008 AGCO Heritage catalogue, photographs and UK supplier listings, all cite
   Isolate, hide, X-ray, explode any assembly, and jump between the 3D view, the drawn diagram and the record.
 - **Every part explained.** What it is, what it does, where it sits, what happens if it fails, and the parts it
   connects to.
-- **Original part numbers.** 135 components carry their original number and quantity from the 1958 parts book,
-  with later AGCO and TO35 numbers alongside. Where the book splits a part inside 1958, every candidate is listed.
+- **Original part numbers.** 140 components carry their original number and quantity from the 1958 parts book,
+  with later AGCO and TO35 numbers alongside. The owner's serial plate and engine number (read by the owner and kept private; they are entered in My Tractor,
+  not stored here) decide which side of the book's serial and engine-number splits applies; where the book lists alternatives
+  without a condition, every candidate is shown and the record stays partially verified.
 - **UK purchase references.** Supplier listings matched to the original number, marked exact, AGCO reference,
   listed fit or check fit, with the price and stock seen on the date checked.
 - **Technical information.** Sourced figures, torque settings, capacities, power-flow diagrams for the PTO and

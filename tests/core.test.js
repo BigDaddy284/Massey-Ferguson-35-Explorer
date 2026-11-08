@@ -25,7 +25,8 @@ test('unknown owner clutch falls back to default and is not confirmed', () => {
   const r = core.resolveConfiguration(unknownClutch);
   assert.equal(r.values.clutch, config.defaultTarget.clutch);
   assert.equal(r.confirmed.clutch, false);
-  assert.equal(r.confirmed.engine, false, 'engine is provisional in the data file');
+  assert.equal(r.confirmed.engine, true, 'the fuel letter D on the serial plate confirms the 23C');
+  assert.equal(core.resolveConfiguration({ ...config, ownerTractor: { ...config.ownerTractor, engineStatus: 'provisional' } }).confirmed.engine, false, 'a provisional engine is not confirmed');
 });
 
 test('PTO is derived from the clutch', () => {

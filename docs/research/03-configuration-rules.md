@@ -14,7 +14,7 @@ Correcting the engine or clutch must be a data edit, never a code change.
 | Axis | Options | Target scope |
 |---|---|---|
 | `engine` | `std-23c-diesel` · `std-petrol` · `std-tvo` · `perkins-3-152` | Only `std-23c-diesel` is in scope. The others are recorded so the app can say "this part is for a different engine" |
-| `clutch` | `single-stage` (F) · `dual-stage` (M) | Both in scope; owner unknown |
+| `clutch` | `single-stage` (F) · `dual-stage` (M) | Both in scope; owner: dual-stage (plate prefix SDM, read 2026-11-08) |
 | `pto` | `transmission-pto` · `live-pto` | **Derived from clutch**, never set on its own |
 | `chassis` | `standard` (S) · `vineyard` (V) · `industrial` (J) | Standard assumed |
 | `electrics` | `12v` · `6v` | 12 V working assumption, unverified |
