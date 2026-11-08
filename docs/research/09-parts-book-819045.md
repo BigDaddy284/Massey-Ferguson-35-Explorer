@@ -60,46 +60,55 @@ What was not settled: the tool box figure does not show which radius rod it is o
 the positions of the side cover, dipstick and front tank mountings on their castings are placed by eye from the
 figures.
 
-## Items still not catalogued
+## Second pass: every applicable row on the 23C and chassis pages (2026-11-08)
 
-A count of 819045 item numbers on each 23C and chassis page that no record cites yet, made by a script over the
-SRC-032 text copy (the script is not kept in the repository; counts are approximate because some table rows
-wrap). Most are fasteners, washers and seals, which the spec wants catalogued in time.
+The owner asked for everything in the book that fits the tractor. Each 819045 row on the 23C and chassis
+pages was tested against the tractor (by a script that is not kept in the repository, then checked page by
+page):
 
-| Page | Group | Items | Not yet cited |
-|---|---|---|---|
-| 72 | Cylinder block, crankshaft, flywheel | 48 | 22 |
-| 79 | Cylinder head | 72 | 28 |
-| 83 | Heater | 28 | 20 |
-| 87 | Camshaft, timing gear and cover | 33 | 9 |
-| 88 | Cover kit | 17 | 11 |
-| 91 / 92 | Oil filter (early / late) | 32 / 36 | 24 / 28 |
-| 95 | Injection pump drive | 26 | 14 |
-| 96 | Water pump | 24 | 12 |
-| 99 / 100 | Feed (lift) pump internals | 25 / 19 | 25 / 19 |
-| 104 / 107 | Single / dual clutch | 21 / 34 | 13 / 20 |
-| 111 | Radiator and fuel tank | 47 | 22 |
-| 116 | Fuel lines and heater equipment | 76 | 41 |
-| 124 / 127 | Vertical / horizontal exhaust | 23 / 25 | 17 / 21 |
-| 128 | Air intake | 42 | 32 |
-| 139 | Throttle controls | 57 | 40 |
-| 152 | Electrical 23C | 44 | 25 |
-| 156 / 159 | Lighting | 48 / 56 | 48 / 54 |
-| 163 | Hood and panels | 73 | 59 |
-| 167 | Wheels and rims | 23 | 9 |
-| 168 | Front axle and support | 77 | 51 |
-| 175 | Steering and instrument panel | 84 | 56 |
-| 187 / 188 | Selector / transmission | 30 / 66 | 12 / 37 |
-| 196 | Transmission case | 54 | 34 |
-| 204 | PTO | 31 | 12 |
-| 207 | Centre housing | 36 | 25 |
-| 211 / 215 / 216 | Differential, diff lock | 34 / 14 / 52 | 23 / 9 / 32 |
-| 220 | Rear axle housing | 31 | 16 |
-| 223 / 224 | Brakes, pedals and rods | 24 / 46 | 12 / 31 |
-| 228 | Hydraulic pump | 79 | 60 |
-| 235 / 240 | Lift cover / lift arms | 86 / 39 | 63 / 13 |
-| 243 / 247 | Links / levelling box | 63 / 35 | 40 / 21 |
-| 263 / 275 | Wheel weights / drawbar | 24 / 37 | 18 / 25 |
+- **Left out:** rows for the A3.152 and 87 mm engines, vineyard, high-clearance, Multi-Power, single clutch,
+  industrial and Finland applications; serial conditions that end before 79553 or start after 125067; engine
+  conditions that end before SJ37181E or start after SJ93988E (the owner's engine lies between them, as the lift
+  pump and dipstick records show). The later oil filter page (p92), the early lift pump (p99), the horizontal
+  exhaust (p127 items 15 on) and option pages (diff lock, dual spool valve, hitches, stabilisers, pulley, jack,
+  safety kits, wheel weights) were not used.
+- **Kept with a note:** splits that fall inside 1958 or inside the owner's engine range, and rows whose footnote
+  could not be matched automatically. These are listed on the record, never made primary, and say to check the
+  plates.
+- **Attached:** about 1,170 rows went onto 178 existing records as further 819045 rows ("Also in 819045" in the
+  record panel). Parts were placed by what they are and by the figure (for example the steering box shafts,
+  arms, seals and shims on `steering-box`; lift pump internals on `fuel-lift-pump`; drag-link sockets, caps and
+  clamps on `drag-links`). Fasteners, washers, seals and pins were attached to the part they follow in the
+  book's item order, which is how the book groups them. Rows that are not illustrated were left out.
+- **New records:** `spigot-bearing` (828123M1, verified; also listed in the transmission), `front-axle-support`
+  (the casting was modelled but filed under the sump), `hyd-pump-body` (the two pump bodies, also modelled
+  before under the pump assembly), `heater-plug-wiring` (cold-climate only, variant dependent) and
+  `wheel-brace` (wheel nut socket and handle, not in 3D).
+- **Supplier grade:** Agriline's swinging drawbar quotes 872142M91, which is now a book row on the drawbar
+  (p275 item 34), so that reference is graded `book-ref`.
 
-The figures for these pages are in SRC-043, so the next passes can work page by page: identify each item on the
-figure, decide whether it is a part of its own or a fastener of an existing record, and add its rows.
+No row from this pass sets an `oemPartNumber`: the original-number rules above are unchanged. The rows show what
+the book lists with each part; a record only becomes verified from one primary row.
+
+## Items still not cited
+
+What is left on the pages used (counted the same way; most remaining items are for other engines or options,
+or not illustrated):
+
+| Page | Group | Not yet cited |
+|---|---|---|
+| 83 | Heater (battery, harness and switch rows for the heater kit) | 15 |
+| 107 | Dual clutch (facings and rivets serviced only in kits) | 10 |
+| 128 | Air intake (87 mm rows) | 17 |
+| 152 | Electrical 23C (Lucas caps, clips, bolts) | 13 |
+| 159 | Lighting (general hardware groups) | 36 |
+| 163 | Hood (A3.152 and later hood rows) | 17 |
+| 188 | Transmission (conversion kits) | 11 |
+| 211 | Differential (not-serviced and Loctite rows) | 11 |
+| 228 | Hydraulic pump (O-ring and seal kit rows marked E/F) | 21 |
+| 243 | Links (alternative link assemblies) | 11 |
+| 263 | Wheel weights (option) | 15 |
+| 207 | Centre housing: shaft 181439M93, bearing 195513M1 and coupling 880069M1 at the front | 5 |
+
+The centre housing shaft and coupling are left unattached because the figure does not say what they drive;
+they need the workshop manual before they are given a record.

@@ -41,7 +41,7 @@
   // Hierarchy ids treated as outer casings: made see-through in X-ray mode.
   var CASINGS = ['engine-block', 'cylinder-head', 'rocker-cover', 'sump', 'timing-cover', 'clutch-housing',
     'gearbox-casing', 'gearbox-top-cover', 'centre-housing', 'axle-trumpet-lh', 'axle-trumpet-rh', 'brake-drum',
-    'lift-cover-casting', 'bonnet', 'side-panels', 'grille', 'fuel-tank', 'radiator', 'dashboard', 'hyd-pump',
+    'lift-cover-casting', 'bonnet', 'side-panels', 'grille', 'fuel-tank', 'radiator', 'dashboard', 'hyd-pump', 'hyd-pump-body',
     'cylinder-liner', 'lift-cylinder', 'clutch-dual-cover', 'clutch-single-cover', 'pto-guard', 'air-cleaner', 'mudguards',
     'footplates', 'seat', 'steering-box', 'flywheel', 'clutch-dual-transmission-plate', 'clutch-dual-pto-plate', 'clutch-single-plate'];
 
@@ -574,6 +574,10 @@
       add('injector-seals', ring(0.009, 0.002, 'y', 16), M.copper, V(x, 1.033, -0.07));
       add('heater-plugs', cyl(0.006, 0.006, 0.05, 'z', 8), M.brass, V(x, 1.03, 0.16));
     });
+    // Spigot bearing in the crankshaft flange carrying the gearbox input shaft (819045 p72 items 31-32)
+    add('spigot-bearing', cyl(0.024, 0.024, 0.016, 'x', 18), M.steel, V(1.058, CY, 0));
+    // Heater plug circuit from the starter switch to the plugs (819045 p83), cold-climate tractors only
+    tube('heater-plug-wiring', [V(0.80, 0.96, -0.13), V(0.86, 1.06, -0.05), V(1.00, 1.08, 0.12), V(1.20, 1.036, 0.18)], 0.004, M.black);
     // Crankshaft main journals and the parts along it
     add('crankshaft', cyl(0.035, 0.035, EX1 - EX0 + 0.08, 'x', 20), M.steel, V((EX0 + EX1) / 2, CY, 0));
     [EX0 + 0.02, 1.40, EX1 - 0.02].forEach(function (x) { add('main-bearings', cyl(0.042, 0.042, 0.035, 'x', 24, true), M.bronze, V(x, CY, 0)); });
@@ -903,8 +907,8 @@
     // four cylinders in two opposed valve chambers (SRC-035 L.5-L.6, Figs. 8-9)
     var PX = 0.26, LX = 0.15;   // pump centre; lift shaft, ahead of the axle (SRC-035 L Fig. 7; the manual puts it
                                 // about 0.25-0.3 m ahead, limited here by the modelled centre-housing length)
-    add('hyd-pump', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX + 0.08, CS, 0));
-    add('hyd-pump', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX - 0.08, CS, 0));
+    add('hyd-pump-body', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX + 0.08, CS, 0));   // front and rear pump bodies (819045 p228 items 2, 39)
+    add('hyd-pump-body', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX - 0.08, CS, 0));
     add('hyd-pump-camshaft', cyl(0.022, 0.022, 0.18, 'x', 12, true), M.steel, V(PX, CS, 0));
     SIDES.forEach(function (s) {
       add('hyd-pump-camshaft-bearing', ring(0.024, 0.005, 'x', 16), M.steel, V(PX + s * 0.07, CS, 0));
@@ -1055,7 +1059,7 @@
       bar('steering-box', V(0.86, 0.91, s * 0.20), V(0.88, 0.65, s * 0.25), 0.04, 0.02, M.greyDark);
     });
     // Front axle support bracket bolted to the engine front, carrying the pivot pin (SRC-035 O.3, O.6)
-    add('sump', rbox(0.24, 0.14, 0.26, 0.04), M.grey, V(1.84, 0.555, 0));
+    add('front-axle-support', rbox(0.24, 0.14, 0.26, 0.04), M.grey, V(1.84, 0.555, 0));   // 819045 p168 item 45
     add('steering-box', rbox(0.16, 0.14, 0.30, 0.03), M.grey, V(0.86, 0.95, 0));
     var colA = V(0.82, 0.98, 0), colB = V(0.62, 1.29, 0);
     rod('steering-column', colA, colB, 0.022, M.greyDark);
