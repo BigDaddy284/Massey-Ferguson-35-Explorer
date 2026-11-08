@@ -490,7 +490,8 @@
       "dateResearched": null,
       "reference": "Identified via SRC-015 and SRC-016; copy not yet obtained. Required to verify OEM part numbers and quantities.",
       "extracted": [],
-      "conflicts": []
+      "conflicts": [],
+      "notes": "PDF copies found 2026-11-08: aservicemanualpdf.com (about $15; its genuine sample pages show item / part number / qty / description / serial-range tables, but every sampled section is headed A3.152, so 23C coverage is unconfirmed until the file is seen), heavy-equipmentmanual.com ($32, searchable), farmingparts.com / masseytractorparts.com (AGCO PDF, about £130). A 177-page scan is also on Scribd (document 706566071)."
     },
     {
       "id": "SRC-033",
@@ -659,6 +660,17 @@
         "Engine overhaul kit 7008 (23C): 4 pistons, liners, rings, top and lower gasket sets, crank seals, 8 valves, springs, guides; Agriline says it was reverse-engineered with reduced piston-to-liner clearance.",
         "Several PTO listings quote MF135 serial breaks, not FE35 ones."
       ],
+      "conflicts": []
+    },
+    {
+      "id": "SRC-041",
+      "name": "Ferguson TO35 Tractor Parts Book, Gas and Diesel (illustrated parts catalogue, 1970 reprint), scanned copy on the Internet Archive",
+      "url": "https://archive.org/details/ferguson-to-35-tractor-parts-book-gas-and-diesel",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": false,
+      "reference": "Identified 2026-11-08; about 420 MB, PDF and other formats, uploaded 20 Oct 2020. The TO35 is the US-built sister of the FE35 and the TO35 diesel used the same Standard 23C engine, so its engine section gives genuine Ferguson part numbers for the 23C. Chassis, electrical and sheet-metal numbers are US-specific and must not be applied to the Coventry tractor without a matching FE35 reference (same rule as the US serial breaks). The owner has been asked to download it into the project files; the proxy here cannot reach archive.org.",
+      "extracted": [],
       "conflicts": []
     }
   ]
