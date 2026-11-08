@@ -3,12 +3,7 @@
 An interactive digital anatomy and parts catalogue for a **1958 Massey Ferguson 35 diesel**
 (Standard 23C engine), built to run locally in a web browser.
 
-**Status:** Phase 7 built. Two UK suppliers (Anglo Agriparts, Agriline Products) have been read for their
-Ferguson FE35 ranges and 235 purchase references are attached to 149 parts, each graded by how well it is
-tied to this tractor: four quote an OEM number that equals the 2008 AGCO supply number, most are simply
-listed for the FE35, and a few carry a reason to check the fit first. Prices, stock and the date checked are
-shown. Nothing is graded an exact match until the parts book (819045M4) has been read. Phase 8
-(completeness and QA) comes next.
+**Status:** Phase 8 built. 521 part numbers with quantities were read from the Ferguson TO35 parts book (whose diesel engine is the Standard 23C) and attached to 180 components as parts-book references, graded by whether the row is an engine part common to the FE35 or a US-built chassis part. A completeness report (`npm run report`) and a live summary on the Research Status page list what is still missing. Nothing is marked verified until the FE35 parts book 819045M4 is read.
 
 ## Open the app
 

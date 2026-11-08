@@ -25,7 +25,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 7 (UK supplier references) built: `data/suppliers.json` holds 235 graded purchase references from two UK suppliers on 149 parts, shown in the record panel, catalogue and research page. Phase 8 (completeness and QA) is next. Part numbers and quantities still await parts book 819045M4.**
+research, build, test and verify before moving on. Current status: **Phase 8 (completeness and QA) built: 521 part numbers with quantities read from the Ferguson TO35 parts book (SRC-041) are stored on 180 nodes as `partsBookReferences`; the completeness report (`npm run report` → `docs/research/08-completeness-report.md`, and the Research Status page) lists what is still missing. Phase 9 (final polish) is next. Original FE35 numbers still await parts book 819045M4; nothing is `verified`.**
 
 ## Commands
 
@@ -61,21 +61,34 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   explanations; they never change `status`) and `related` (hierarchy ids shown as "Connected parts"
   chips). `specifications` holds measured values only, each node citing the source it came from.
 
+- `partsBookReferences` (Phase 8) on hierarchy nodes: `{number, description, qty, source:'SRC-041', page, pdfPage,
+  book:'TO35', confidence, note?, heritage?}` read from the page images of the Ferguson TO35 parts book (US-built
+  TO35; its Standard Motors Diesel is the 23C). `confidence` is `listed` for rows on the engine pages (common to the
+  FE35) and `possible` for chassis, electrical and installation rows (the Coventry number may differ). `heritage`
+  marks a number whose base digits also appear in the node's 2008 AGCO `replacementReferences`. They never go in
+  `oemPartNumber`; statuses stay at most `partially-verified`. The validator checks the primary accessed source, the
+  page, the grade and that the node cites SRC-041. The generator that produced them is kept outside the repo; edit
+  the JSON directly for corrections.
+- `scripts/completeness-report.mjs` (`npm run report`): writes `docs/research/08-completeness-report.md` (spec §16):
+  totals and per-system coverage, fasteners, parts not in 3D, parts with no number, assemblies without diagrams,
+  one-way related links, variant axis use, supplier grades, a 3D placement audit against the manual's layout, and
+  unresolved items. Re-run it after data or model changes. The Research Status page shows a live summary.
 - `data/technical.json`: Technical Information rows (value + status + sources; `display:false`
   rows are withheld) and the Identification guide (steps, serial prefix letter table).
 - `data/suppliers.json` (Phase 7): `suppliers` (UK suppliers, each citing a `supplier`-grade source) and
   `references` (`{node, supplier, title, supplierPartNumber, oemQuoted[], url, price{exVat,incVat,currency},
   stock, checked, match, fits, notes, source}`). `match` is `agco-ref` (a quoted OEM number equals one of the
   node's `replacementReferences` / `oemPartNumber` once the M/V suffix letter is normalised, e.g. 827707M5 =
-  827707V5), `listed-fit` (listed by the supplier for the FE35, fit is the supplier's claim) or `check-fit`
+  827707V5), `book-ref` (Phase 8: a quoted number equals one of the node's `partsBookReferences` and no AGCO
+  number matches), `listed-fit` (listed by the supplier for the FE35, fit is the supplier's claim) or `check-fit`
   (listed, but with a known reason to check; see `notes`). Nothing is graded exact until the parts book is read.
   The validator enforces node/supplier existence, https URLs, the checked date, the grade list, and that
-  `agco-ref` is used exactly when a quoted number matches. Prices and stock are as seen on `checked`.
+  `agco-ref` / `book-ref` are used exactly when a quoted number matches. Prices and stock are as seen on `checked`.
 - `app/js/core.js`: pure logic, loaded in the browser as `window.MF35Core` and through `require` in tests.
   It covers hierarchy indexing, configuration resolution, applicability, serial decoding, fuzzy search
   and coverage. Put anything testable here.
 - Purchase options (Phase 7): the record panel's "Purchase options (UK)" section lists the node's references
-  sorted agco-ref → listed-fit → check-fit with price, stock, quoted OEM numbers (matched number highlighted),
+  sorted agco-ref → book-ref → listed-fit → check-fit (`core.MATCH_ORDER`) with price, stock, quoted OEM numbers (matched number highlighted),
   fitment, notes and the checked date; the catalogue has a "UK suppliers" column; Research Status has a
   "With UK purchase references" stat, a "UK refs" column and a "UK suppliers checked" table. Search covers
   supplier part numbers and quoted OEM numbers. `core.supplierRefsByNode`, `core.normaliseNumber`,

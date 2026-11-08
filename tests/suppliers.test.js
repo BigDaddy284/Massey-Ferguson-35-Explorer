@@ -19,21 +19,26 @@ test('every reference points at a real part, a real UK supplier and an accessed 
     assert.ok(supplierIds.has(r.supplier), `${r.supplier} is a registered supplier`);
     assert.match(r.url, /^https:\/\//);
     assert.match(r.checked, /^\d{4}-\d{2}-\d{2}$/);
-    assert.ok(['agco-ref', 'listed-fit', 'check-fit'].includes(r.match), `${r.match} is an allowed grade`);
+    assert.ok(['agco-ref', 'book-ref', 'listed-fit', 'check-fit'].includes(r.match), `${r.match} is an allowed grade`);
     const src = sources.find((s) => s.id === r.source);
     assert.ok(src && src.accessed && src.reliability === 'supplier', `${r.source} is an accessed supplier source`);
   }
   for (const s of suppliers.suppliers) assert.equal(s.country, 'UK');
 });
 
-test('agco-ref is only used where a quoted number really equals the AGCO number', () => {
+test('agco-ref and book-ref are only used where a quoted number really equals the recorded number', () => {
   for (const r of suppliers.references) {
-    const nums = (index.byId[r.node].node.replacementReferences || []).map((x) => core.normaliseNumber(x.number));
+    const n = index.byId[r.node].node;
+    const nums = (n.replacementReferences || []).map((x) => core.normaliseNumber(x.number));
+    const books = (n.partsBookReferences || []).map((x) => core.normaliseNumber(x.number));
     const hit = (r.oemQuoted || []).some((q) => nums.includes(core.normaliseNumber(q)));
-    assert.equal(r.match === 'agco-ref', hit, `${r.node} / ${r.supplierPartNumber}: grade matches the evidence`);
-    assert.notEqual(r.match, 'exact', 'nothing is exact before the parts book');
+    const bookHit = !hit && (r.oemQuoted || []).some((q) => books.includes(core.normaliseNumber(q)));
+    assert.equal(r.match === 'agco-ref', hit, `${r.node} / ${r.supplierPartNumber}: agco-ref matches the evidence`);
+    assert.equal(r.match === 'book-ref', bookHit, `${r.node} / ${r.supplierPartNumber}: book-ref matches the evidence`);
+    assert.notEqual(r.match, 'exact', 'nothing is exact before the FE35 parts book');
   }
   assert.ok(suppliers.references.some((r) => r.match === 'agco-ref'), 'at least one AGCO-number match exists');
+  assert.ok(suppliers.references.some((r) => r.match === 'book-ref' && r.node === 'lift-arm-lh'), 'the Anglo lift arm quotes the TO35 number 180910M1');
 });
 
 test('normaliseNumber treats the M and V suffix letters as the same number', () => {

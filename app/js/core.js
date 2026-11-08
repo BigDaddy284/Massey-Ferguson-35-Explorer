@@ -234,6 +234,8 @@
         { text: (n.oemPartNumber || ''), weight: 10, raw: n.oemPartNumber ? [n.oemPartNumber] : [] },
         { text: (n.replacementReferences || []).map(function (r) { return r.number; }).join(' '), weight: 9, raw: (n.replacementReferences || []).map(function (r) { return r.number; }) },
         { text: (n.replacementReferences || []).map(function (r) { return r.description; }).join(' '), weight: 2 },
+        { text: (n.partsBookReferences || []).map(function (r) { return r.number; }).join(' '), weight: 9, raw: (n.partsBookReferences || []).map(function (r) { return r.number; }) },
+        { text: (n.partsBookReferences || []).map(function (r) { return r.description; }).join(' '), weight: 2 },
         { text: pathNames, weight: 3 },
         { text: n.description || '', weight: 3 },
         { text: n.function || '', weight: 2 },
@@ -359,7 +361,8 @@
     return String(x).toUpperCase().replace(/[^0-9A-Z]/g, '').replace(/^(\d+)[MV](\d*)$/, '$1X$2');
   }
 
-  var MATCH_LABELS = { 'agco-ref': 'Matches AGCO number', 'listed-fit': 'Listed for the FE35', 'check-fit': 'Check fit' };
+  var MATCH_LABELS = { 'agco-ref': 'Matches AGCO number', 'book-ref': 'Matches TO35 parts book', 'listed-fit': 'Listed for the FE35', 'check-fit': 'Check fit' };
+  var MATCH_ORDER = { 'agco-ref': 0, 'book-ref': 1, 'listed-fit': 2, 'check-fit': 3 };
 
   function coverage(index, modelledIds, diagrams, suppliers) {
     var supByNode = supplierRefsByNode(suppliers);
@@ -370,8 +373,9 @@
       var e = index.byId[id];
       if (e.depth === 0) return;
       var sys = e.path[1];
-      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, diagram: 0, model: 0, supplier: 0 };
+      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, replacement: 0, partsBook: 0, described: 0, diagram: 0, model: 0, supplier: 0 };
       c.total++;
+      if ((e.node.partsBookReferences || []).length) c.partsBook++;
       if ((supByNode[id] || []).length) c.supplier++;
       if (diagrams && diagramRefs(index, diagrams, id).length) c.diagram++;
       if (e.node.description && e.node.function) c.described++;
@@ -402,6 +406,7 @@
     diagramRefs: diagramRefs,
     supplierRefsByNode: supplierRefsByNode,
     normaliseNumber: normaliseNumber,
-    MATCH_LABELS: MATCH_LABELS
+    MATCH_LABELS: MATCH_LABELS,
+    MATCH_ORDER: MATCH_ORDER
   };
 });

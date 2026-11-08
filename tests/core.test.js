@@ -55,7 +55,8 @@ test("owner-reported dual clutch: live PTO, dual-clutch parts fitted, single-clu
 test('parts with no appliesTo are not variant dependent', () => {
   const r = core.resolveConfiguration(config);
   assert.equal(core.displayStatus(index, 'lift-piston', r), 'partially-verified');
-  assert.equal(core.displayStatus(index, 'core-plugs', r), 'unverified');
+  assert.equal(core.displayStatus(index, 'core-plugs', r), 'partially-verified', 'core plugs are listed in the TO35 parts book (SRC-041)');
+  assert.equal(core.displayStatus(index, 'horn', r), 'unverified');
 });
 
 test('serial decoding: 1958 dual-clutch diesel', () => {
