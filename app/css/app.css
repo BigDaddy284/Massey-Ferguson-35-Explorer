@@ -500,7 +500,9 @@ dl.fields dd { margin: 0; font-size: 13px; }
 }
 @media (max-width: 980px) {
   :root { --header-h: auto; }
-  body { overflow: auto; }
+  /* The page itself scrolls (not the body box): on phones the browser's address bar collapses as you scroll, and a
+     fixed-height body kept the bottom bar pinned to the old, shorter height, floating over the toolbar buttons. */
+  html, body { height: auto; min-height: 100%; overflow: visible; }
   .app-header { flex-wrap: wrap; padding: 8px 12px; gap: 8px 12px; height: auto; }
   .main-nav { order: 3; flex-basis: 100%; }
   .search { flex: 1; min-width: 0; }
@@ -518,7 +520,7 @@ dl.fields dd { margin: 0; font-size: 13px; }
   body.tree-open .tree-panel, body.info-open .info-panel { transform: none; }
   .page { padding: 16px; }
   .letters { grid-template-columns: 1fr; }
-  .bottom-bar { position: sticky; bottom: 0; z-index: 10; }
+  .bottom-bar { position: sticky; bottom: 0; z-index: 10; padding-bottom: env(safe-area-inset-bottom); height: auto; min-height: var(--bottom-h); }
 }
 @media (max-width: 520px) {
   .logo-text { font-size: 15px; }
