@@ -178,3 +178,27 @@ test('exploded-view directions and stacking axes name real hierarchy ids', () =>
     assert.ok(v.length === 3 || (v.length === 4 && v[3] === 'mirror'), id);
   }
 });
+
+test('Phase 5 records: every node explains itself and cross-references real parts', () => {
+  let described = 0;
+  for (const id of index.order) {
+    const n = index.byId[id].node;
+    for (const k of ['description', 'function', 'location']) assert.ok(typeof n[k] === 'string' && n[k].length > 10, `${id}: has ${k}`);
+    if (n.description && n.function) described++;
+    for (const r of n.related || []) {
+      assert.ok(index.byId[r], `${id}: related id ${r} exists`);
+      assert.notEqual(r, id, `${id}: does not relate to itself`);
+    }
+    if (n.specifications && Object.keys(n.specifications).length) assert.ok((n.sources || []).length, `${id}: specifications cite a source`);
+  }
+  assert.equal(described, index.order.length, 'every node has a description and function');
+  assert.ok(index.byId['hyd-pump'].node.related.includes('hyd-control-valve'), 'pump links to its control valve');
+  assert.ok(index.byId['pto-output-shaft'].node.related.includes('pto-gears'), 'PTO shaft links to its gears');
+  assert.match(index.byId['clutch-dual'].node.function, /Half pedal/, 'dual clutch explains the two-stage pedal');
+  const docs = core.buildSearchIndex(index, null, technical);
+  const top = (q) => core.search(docs, q, 5).map((r) => r.doc.id);
+  assert.ok(top('Ricardo Comet').includes('combustion-chamber-insert'), 'descriptions are searchable');
+  assert.ok(top('levelling lever').includes('levelling-box'), 'locations/descriptions find the levelling box');
+  const cov = core.coverage(index);
+  assert.equal(Object.values(cov).reduce((a, c) => a + c.described, 0), index.order.length - 1, 'coverage counts described nodes');
+});

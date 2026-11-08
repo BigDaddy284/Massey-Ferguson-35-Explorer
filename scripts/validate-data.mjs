@@ -46,6 +46,7 @@ for (const [k, v] of Object.entries(config.defaultTarget)) {
 
 const { root: tree } = load('hierarchy.json');
 const ids = new Set();
+const relatedRefs = [];
 const counts = { total: 0, byStatus: {} };
 (function walk(node, path) {
   const where = [...path, node.id].join(' > ');
@@ -62,6 +63,21 @@ const counts = { total: 0, byStatus: {} };
   }
   if (status !== 'unverified' && !(node.sources?.length) && node.kind !== 'tractor') {
     err(`${where}: status '${status}' needs sources`);
+  }
+  for (const k of ['description', 'function', 'location', 'failure']) {
+    if (k in node && (typeof node[k] !== 'string' || !node[k].trim())) err(`${where}: ${k} must be a non-empty string`);
+  }
+  if ('specifications' in node) {
+    if (typeof node.specifications !== 'object' || Array.isArray(node.specifications)) err(`${where}: specifications must be an object`);
+    else for (const [k, v] of Object.entries(node.specifications)) if (typeof v !== 'string' || !v.trim()) err(`${where}: specifications.${k} must be a string`);
+    if (Object.keys(node.specifications ?? {}).length && !(node.sources?.length)) err(`${where}: specifications need a cited source`);
+  }
+  if ('related' in node) {
+    if (!Array.isArray(node.related)) err(`${where}: related must be an array of ids`);
+    else for (const r of node.related) {
+      if (r === node.id) err(`${where}: related must not include the node itself`);
+      relatedRefs.push([where, r]);
+    }
   }
   for (const [i, r] of (node.replacementReferences ?? []).entries()) {
     const w = `${where}: replacementReferences[${i}]`;
@@ -82,6 +98,7 @@ const counts = { total: 0, byStatus: {} };
   }
   for (const c of node.children ?? []) walk(c, [...path, node.id]);
 })(tree, []);
+for (const [where, r] of relatedRefs) if (!ids.has(r)) err(`${where}: related id ${r} does not exist`);
 
 const technical = load('technical.json');
 for (const sec of technical.sections) {

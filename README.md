@@ -3,10 +3,13 @@
 An interactive digital anatomy and parts catalogue for a **1958 Massey Ferguson 35 diesel**
 (Standard 23C engine), built to run locally in a web browser.
 
-**Status:** Phase 4 built: an original, separable 3D model of the tractor (216 parts, each linked
-to its catalogue record) that can be rotated, zoomed, panned, selected, hidden, isolated, X-rayed
-and exploded. You can explode the whole tractor, any system or any subassembly, with numbered
-callouts that open each part's record. The component catalogue (Phase 5) comes next.
+**Status:** Phase 5 first pass built. Every one of the 247 catalogued parts now has a plain-English
+description, what it does, where it sits, what happens when it fails, and links to the parts it
+works with, written from the workshop manual and the Ferguson System literature. Measured figures
+appear only where the manual states them. Original part numbers and quantities still wait for the
+AGCO parts book (819045M4). The separable 3D model (Phase 3–4) can be rotated, selected, hidden,
+isolated, X-rayed and exploded, with numbered callouts opening each record. Technical diagrams
+(Phase 6) come next.
 
 ## Open the app
 

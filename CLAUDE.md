@@ -25,7 +25,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 4 (exploded views) built; Phase 5 (component catalogue) is next.**
+research, build, test and verify before moving on. Current status: **Phase 5 (component catalogue) first pass built: every node has description, function, location, failure and related; part numbers and quantities still await parts book 819045M4. Phase 6 (technical diagrams) is next.**
 
 ## Commands
 
@@ -56,6 +56,9 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   The node `id` is the permanent key shared by the catalogue record, the 3D object name and
   diagram references. `appliesTo: {axis: [options]}` restricts a node to configurations (keys
   ANDed, values ORed).
+  Phase 5 fields on every node: `description`, `function`, `location`, `failure` (plain-English
+  explanations; they never change `status`) and `related` (hierarchy ids shown as "Connected parts"
+  chips). `specifications` holds measured values only, each node citing the source it came from.
 
 - `data/technical.json`: Technical Information rows (value + status + sources; `display:false`
   rows are withheld) and the Identification guide (steps, serial prefix letter table).
