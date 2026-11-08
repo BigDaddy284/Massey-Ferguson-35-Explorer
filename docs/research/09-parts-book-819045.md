@@ -108,7 +108,21 @@ or not illustrated):
 | 228 | Hydraulic pump (O-ring and seal kit rows marked E/F) | 21 |
 | 243 | Links (alternative link assemblies) | 11 |
 | 263 | Wheel weights (option) | 15 |
-| 207 | Centre housing: shaft 181439M93, bearing 195513M1 and coupling 880069M1 at the front | 5 |
 
-The centre housing shaft and coupling are left unattached because the figure does not say what they drive;
-they need the workshop manual before they are given a record.
+## Third pass: the centre housing shaft, heater kit and wheel brace (2026-11-08)
+
+The five centre housing rows the second pass left unattached (p207 items 21-25: shaft 181439M93, bare shaft 22,
+needle bearing 195513M1, coupling 880069M1 and pin 354416X1) are the PTO drive through the centre housing. Three
+things agree: figure C-5 draws them as a splined shaft along the bottom of the housing with the bearing at its rear
+end and the coupling at the front; the Ferguson TO35 parts book (SRC-041 p163) lists the same numbers as "Shaft
+Assembly, Rear Drive", "Bearing, Needle" and "Coupling, Rear Drive" in its differential housing group; and the
+workshop manual's PTO section (SRC-035 M.1 Fig. 1) describes the shaft carried at its front by a needle roller
+bearing, with the needle bearing and retainer in the centre housing as a separate operation (M.5). They are now
+the record `pto-rear-drive-shaft` (verified, 181439M93), and `pto-drive-shaft` keeps only the gearbox shaft
+180429M1 with the TO35 rear drive rows moved across.
+
+The same pass placed the three parts the first pass had records for but no 3D part: the wheel nut socket and
+L-shaped tommy bar (p167 figure A-7, items 18-19) inside the tool box, and the heater plug resistor and warning
+light (p83 figure H-15, items 13 and 12) on the instrument panel. The resistor and light were also made
+cold-climate variant parts (`appliesTo coldStart: cold-climate`), like the heater plugs and their wiring: the
+book lists them only under the heater kit.

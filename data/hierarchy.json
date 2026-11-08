@@ -20435,7 +20435,8 @@
               "clutch-dual-pto-plate",
               "countershaft",
               "hyd-pump-camshaft",
-              "pto-gears"
+              "pto-gears",
+              "pto-rear-drive-shaft"
             ],
             "notes": "Dual clutch: tubular shaft from the rear disc around the gearbox input shaft, geared to a solid shaft through the hollow countershaft (SRC-035 J.4).",
             "partsBookReferences": [
@@ -20461,40 +20462,6 @@
                 "book": "TO35",
                 "confidence": "possible",
                 "inBook819045": true
-              },
-              {
-                "number": "181439M93",
-                "description": "Shaft Assembly, Rear Drive",
-                "qty": 1,
-                "source": "SRC-041",
-                "page": 163,
-                "pdfPage": 191,
-                "book": "TO35",
-                "confidence": "possible",
-                "note": "needle bearing 195513M1",
-                "inBook819045": true
-              },
-              {
-                "number": "183088M1",
-                "description": "Coupling, Rear Drive (C, SN 169566 up)",
-                "qty": 1,
-                "source": "SRC-041",
-                "page": 163,
-                "pdfPage": 191,
-                "book": "TO35",
-                "confidence": "possible",
-                "inBook819045": false
-              },
-              {
-                "number": "180467M1",
-                "description": "Coupling, Rear Drive (D prior)",
-                "qty": 1,
-                "source": "SRC-041",
-                "page": 163,
-                "pdfPage": 191,
-                "book": "TO35",
-                "confidence": "possible",
-                "inBook819045": false
               },
               {
                 "number": "180429M1",
@@ -20523,16 +20490,6 @@
                 "letters": "B,D",
                 "condition": "Up to Serial or Engine Number 307657",
                 "bookNote": "FOR DE-LUXE TRACTORS"
-              },
-              {
-                "number": "181439M93",
-                "description": "Shaft",
-                "qty": 1,
-                "source": "SRC-032",
-                "page": 207,
-                "book": "MF35",
-                "confidence": "listed",
-                "item": "21"
               },
               {
                 "number": "195569M1",
@@ -20622,8 +20579,115 @@
                 "bookNote": "1/2\""
               }
             ],
-            "partsBookNote": "De Luxe (dual clutch, the owner's model) tractors carry the PTO drive through the gearbox: pinion 180427M2 and shaft 180429M1 up to serial 307657; 181439M93 is the shaft in the centre housing.",
+            "partsBookNote": "De Luxe (dual clutch, the owner's model) tractors carry the PTO drive through the gearbox: pinion 180427M2 and shaft 180429M1 up to serial 307657. The shaft that continues through the centre housing (181439M93) has its own record.",
             "oemPartNumber": "180429M1",
+            "quantity": 1
+          },
+          {
+            "id": "pto-rear-drive-shaft",
+            "name": "Rear drive shaft (centre housing)",
+            "kind": "component",
+            "description": "Splined shaft along the bottom of the centre housing that carries the PTO drive from the gearbox to the hydraulic pump and the PTO shifter. A sleeve coupling joins its front end to the gearbox PTO shaft; a needle roller bearing carries its rear end.",
+            "function": "Takes engine power from the gearbox PTO shaft through the hydraulic pump drive to the PTO sliding gear, so the pump and the PTO turn whenever the second clutch stage is engaged.",
+            "location": "Along the bottom of the centre housing, from the coupling at the front wall through the hydraulic pump to the PTO sliding gear behind it (819045 centre axle housing figure C-5, items 21 to 25; SRC-035 M.1 Fig. 1 shows the PTO shaft on a needle bearing at the front and a ball bearing at the rear).",
+            "failure": "Worn coupling or shaft splines make the PTO and hydraulics knock under load; a failed needle bearing lets the shaft run out of line and wear the pump drive.",
+            "related": [
+              "pto-drive-shaft",
+              "hyd-pump-camshaft",
+              "pto-gears",
+              "pto-output-shaft",
+              "centre-housing"
+            ],
+            "partsBookReferences": [
+              {
+                "number": "181439M93",
+                "description": "Shaft",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 207,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "21",
+                "primary": true,
+                "note": "Item 22 is the bare shaft, listed as not serviced separately."
+              },
+              {
+                "number": "195513M1",
+                "description": "Bearing",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 207,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "23",
+                "note": "Needle bearing; the TO35 book lists the same number as 'Bearing, Needle' under the rear drive shaft."
+              },
+              {
+                "number": "880069M1",
+                "description": "Coupling",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 207,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "24",
+                "note": "Sleeve coupling to the gearbox PTO shaft ('Coupling, Rear Drive' in the TO35 book)."
+              },
+              {
+                "number": "354416X1",
+                "description": "Pin",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 207,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "25",
+                "note": "Drawn beside the coupling in figure C-5 (the TO35 book lists a cotter pin here)."
+              },
+              {
+                "number": "181439M93",
+                "description": "Shaft Assembly, Rear Drive",
+                "qty": 1,
+                "source": "SRC-041",
+                "page": 163,
+                "pdfPage": 191,
+                "book": "TO35",
+                "confidence": "possible",
+                "note": "needle bearing 195513M1",
+                "inBook819045": true
+              },
+              {
+                "number": "183088M1",
+                "description": "Coupling, Rear Drive (C, SN 169566 up)",
+                "qty": 1,
+                "source": "SRC-041",
+                "page": 163,
+                "pdfPage": 191,
+                "book": "TO35",
+                "confidence": "possible",
+                "inBook819045": false
+              },
+              {
+                "number": "180467M1",
+                "description": "Coupling, Rear Drive (D prior)",
+                "qty": 1,
+                "source": "SRC-041",
+                "page": 163,
+                "pdfPage": 191,
+                "book": "TO35",
+                "confidence": "possible",
+                "inBook819045": false
+              }
+            ],
+            "partsBookNote": "The book calls item 21 only 'Shaft'. The TO35 book names the same number 'Shaft Assembly, Rear Drive' with its needle bearing and rear drive coupling, and the workshop manual's PTO section describes the shaft in the centre housing on a needle bearing at the front, so the three items are recorded as the centre housing PTO drive shaft.",
+            "sources": [
+              "SRC-032",
+              "SRC-043",
+              "SRC-041",
+              "SRC-035"
+            ],
+            "status": "verified",
+            "oemPartNumber": "181439M93",
             "quantity": 1
           },
           {
@@ -20635,10 +20699,11 @@
             "location": "Front of the gearbox and in the centre housing behind the hydraulic pump.",
             "failure": "Chipped teeth or worn bearings make a whine under PTO load.",
             "related": [
+              "pto-bearings",
               "pto-drive-shaft",
-              "pto-output-shaft",
               "pto-engagement",
-              "pto-bearings"
+              "pto-output-shaft",
+              "pto-rear-drive-shaft"
             ],
             "partsBookReferences": [
               {
@@ -20961,11 +21026,12 @@
               "Speed": "540 rpm at 1,500 engine rpm"
             },
             "related": [
-              "pto-gears",
-              "pto-housing",
               "pto-bearings",
-              "pto-seals",
-              "pto-guard"
+              "pto-gears",
+              "pto-guard",
+              "pto-housing",
+              "pto-rear-drive-shaft",
+              "pto-seals"
             ],
             "partsBookReferences": [
               {
@@ -21610,7 +21676,8 @@
                 "related": [
                   "hyd-pump-cam-blocks",
                   "hyd-pump-camshaft-bearing",
-                  "pto-drive-shaft"
+                  "pto-drive-shaft",
+                  "pto-rear-drive-shaft"
                 ],
                 "notes": "The manual calls it the pump drive shaft, with eccentrics carrying the cam blocks.",
                 "partsBookReferences": [
@@ -30308,14 +30375,15 @@
             "name": "Heater plug resistor",
             "kind": "component",
             "sources": [
+              "SRC-032",
               "SRC-035",
               "SRC-041",
-              "SRC-032"
+              "SRC-043"
             ],
-            "status": "verified",
+            "status": "variant-dependent",
             "description": "Wire-wound ballast resistor in series with the heater plugs.",
             "function": "Drops the battery voltage to the heater plug rating and glows as a sign that the plugs are drawing current.",
-            "location": "On or behind the dashboard.",
+            "location": "Behind the instrument panel on the left, beside the starter switch, wired between the switch and the heater plugs (819045 heater plugs figure H-15, item 13).",
             "failure": "An open resistor means no heater plug current and poor cold starting.",
             "related": [
               "heater-plugs",
@@ -30409,21 +30477,28 @@
               }
             ],
             "oemPartNumber": "890393M1",
-            "quantity": 1
+            "quantity": 1,
+            "appliesTo": {
+              "coldStart": [
+                "cold-climate"
+              ]
+            },
+            "notes": "Fitted only with the heater plug kit, like the plugs and their wiring, so it depends on the cold-start option."
           },
           {
             "id": "heater-warning-light",
             "name": "Heater plug warning light",
             "kind": "component",
             "sources": [
+              "SRC-032",
               "SRC-035",
               "SRC-041",
-              "SRC-032"
+              "SRC-043"
             ],
-            "status": "verified",
+            "status": "variant-dependent",
             "description": "Small lamp on the dashboard in the heater plug circuit.",
             "function": "Shows when the heater plugs are switched on during pre-heating.",
-            "location": "On the instrument panel.",
+            "location": "On the instrument panel beside the starter switch (819045 heater plugs figure H-15, item 12).",
             "failure": "A dead bulb gives no sign that pre-heating is working.",
             "related": [
               "heater-plugs",
@@ -30467,7 +30542,13 @@
               }
             ],
             "oemPartNumber": "54945635",
-            "quantity": 1
+            "quantity": 1,
+            "appliesTo": {
+              "coldStart": [
+                "cold-climate"
+              ]
+            },
+            "notes": "Fitted only with the heater plug kit, like the plugs and their wiring, so it depends on the cold-start option."
           },
           {
             "id": "intake-heater",
@@ -33785,8 +33866,9 @@
             "location": "Clamped to a front radius rod near its front eye (819045 front axle figure A-9, inset items 75 to 80). The book does not show which side; the 3D model puts it on the left.",
             "failure": "Loose clips let the box slide along the rod and rattle against the front axle.",
             "related": [
+              "front-axle-beam",
               "radius-rods",
-              "front-axle-beam"
+              "wheel-brace"
             ],
             "partsBookReferences": [
               {
@@ -34542,7 +34624,7 @@
             "kind": "component",
             "description": "Box socket and tommy-bar handle supplied with the tractor for the wheel nuts.",
             "function": "Tightens and loosens the wheel nuts and rim clamp nuts.",
-            "location": "Carried in the tool kit (819045 wheels and rims, p167 items 18-19).",
+            "location": "Carried in the tool box on the left-hand radius rod (819045 wheels and rims figure A-7, items 18 and 19: a box socket and an L-shaped tommy bar).",
             "failure": "A worn socket rounds off the wheel nuts.",
             "related": [
               "rear-wheel-nuts",
@@ -34551,7 +34633,8 @@
             ],
             "partsBookNote": "Two separate parts (socket and handle) with no set number; both are listed.",
             "sources": [
-              "SRC-032"
+              "SRC-032",
+              "SRC-043"
             ],
             "status": "partially-verified",
             "partsBookReferences": [
