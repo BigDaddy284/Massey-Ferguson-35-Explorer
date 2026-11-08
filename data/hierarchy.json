@@ -3704,9 +3704,9 @@
                   "SRC-041",
                   "SRC-032"
                 ],
-                "description": "Gear and shaft taking drive from the timing gear train to the DPA pump, with the pump timed by its slotted mounting flange.",
+                "description": "Gear drive housing bolted to a machined face on the left of the block, driving the DPA pump at half engine speed from the camshaft through an idler gear; its front cover carries the tractormeter drive where fitted (SRC-035 E.110, E.113-E.114).",
                 "function": "Turns the injection pump at half engine speed, in step with the crankshaft.",
-                "location": "On the left side of the timing case, behind the injection pump.",
+                "location": "Left side of the block at the front, ahead of the injection pump.",
                 "failure": "A sheared key or slipped flange puts the injection timing out: smoke, knock and no start.",
                 "specifications": {
                   "Pump timing": "19 deg BTDC (DPA 3240011/12/13/15); 13 deg BTDC for the light-load-advance pumps; flywheel timing hole locates 16 deg BTDC"
@@ -6219,7 +6219,7 @@
                 ],
                 "description": "AC type YD diaphragm pump with a hand priming lever, driven by an eccentric at the rear of the camshaft.",
                 "function": "Lifts fuel from the tank line through the filter to the injection pump at 4 to 7 lb/sq in, and primes the system by hand after a filter change.",
-                "location": "Left side of the block, low down towards the rear.",
+                "location": "Low on the left of the block, under the hydraulic head of the injection pump.",
                 "failure": "A split diaphragm leaks fuel into the sump or stops delivery.",
                 "specifications": {
                   "Type": "AC type YD",
@@ -6434,7 +6434,7 @@
                 ],
                 "description": "Paper-element fuel filter with a bleed screw in its head.",
                 "function": "Removes fine dirt and water before the fuel reaches the injection pump.",
-                "location": "On the left of the engine between the lift pump and the injection pump.",
+                "location": "Rear left corner of the engine, below the back of the fuel tank, between the lift pump and the injection pump.",
                 "failure": "A blocked element gives power loss at high speed; a bad seal lets air in.",
                 "related": [
                   "fuel-lift-pump",
@@ -7566,7 +7566,7 @@
                 ],
                 "description": "AC oil-bath cleaner: a wire-mesh element above an oil bowl holding 3/4 pint.",
                 "function": "Air drawn down over the oil drops its dust there and the mesh catches the rest.",
-                "location": "Left side of the engine under the bonnet, connected to the inlet manifold.",
+                "location": "Right side of the engine towards the rear, under the bonnet edge; outlet hose to the rear of the inlet manifold, intake hose from behind the instrument panel (SRC-035 E.101, E.122).",
                 "failure": "Low or dirty oil lets dust through to the engine; too much oil is drawn into the engine.",
                 "specifications": {
                   "Type": "AC oil bath",
@@ -7771,9 +7771,9 @@
                     "confidence": "possible"
                   }
                 ],
-                "description": "Intake stack and pre-cleaner bowl rising through the bonnet, with the hose to the air cleaner.",
+                "description": "Hoses on the air cleaner: the outlet hose to the rear end of the inlet manifold, beside the Thermostart, and the intake hose drawing air from behind the instrument panel. A vertical intake stack through the bonnet was an option.",
                 "function": "Takes the cleanest air available, above the dust, and spins out the heaviest particles.",
-                "location": "Through the left of the bonnet.",
+                "location": "Right side of the engine, between the air cleaner, the inlet manifold and the dash.",
                 "failure": "Perished hose or a loose clip lets unfiltered air in below the cleaner.",
                 "related": [
                   "air-cleaner",
@@ -10673,7 +10673,7 @@
             "id": "range-gears",
             "name": "High/low range gears",
             "kind": "component",
-            "description": "High and low range reduction gears behind the main box, with the sliding coupler.",
+            "description": "Epicyclic (planetary) reduction unit on the output end of the main shaft giving about 4:1 in Low: sun gear, planets on a driven carrier and a ring gear fixed to the rear wall, with its own shifter rail (SRC-035 J.1-J.2).",
             "function": "Double the main-box ratios to give six forward speeds.",
             "location": "Rear of the gearbox.",
             "failure": "Worn coupler teeth let it jump out of range under load.",
@@ -13528,9 +13528,9 @@
             "id": "pto-gears",
             "name": "PTO gears",
             "kind": "component",
-            "description": "Reduction gears at the rear of the centre housing between the drive shaft and the output shaft, including the ground-speed pick-up.",
+            "description": "Gears in the PTO drive line: on dual-clutch tractors the pinion and gear joining the tubular shaft to the PTO drive shaft at the front, and at the rear a sliding gear that either couples to the pump drive for engine speed or meshes a gear on the pinion sleeve for ground speed (SRC-035 J.4, M.1-M.2).",
             "function": "Reduce engine speed to 540 rpm at the output shaft, or take drive from the wheels for ground speed.",
-            "location": "In the rear of the centre housing.",
+            "location": "Front of the gearbox and in the centre housing behind the hydraulic pump.",
             "failure": "Chipped teeth or worn bearings make a whine under PTO load.",
             "related": [
               "pto-drive-shaft",
@@ -18890,7 +18890,7 @@
             ],
             "description": "Two 6 volt batteries connected in series for 12 volts, 38 Ah at the 10-hour rate.",
             "function": "Store electricity for starting and lighting.",
-            "location": "Under the bonnet beside the fuel tank.",
+            "location": "One on the carrier under the rear of the bonnet (which also holds the back of the fuel tank) and one on the left rear axle housing, wired in series (SRC-035 G.34-G.35).",
             "failure": "Sulphated cells or corroded terminals; a diesel needs a full battery to start.",
             "related": [
               "battery-cables",
@@ -20662,7 +20662,7 @@
                 "confidence": "listed"
               }
             ],
-            "description": "Pivoted bracket and coil spring carrying the seat on the lift cover.",
+            "description": "Hinged seat mounting bracket bolted to two studs on the lift cover, carrying the De Luxe bucket pan; the basic seat uses a flat leaf spring instead (SRC-035 R.1).",
             "function": "Cushions the ride.",
             "location": "Behind the lift cover, over the PTO.",
             "failure": "A broken spring or worn pivot gives a hard ride.",

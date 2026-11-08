@@ -204,3 +204,15 @@ test('Phase 5 records: every node explains itself and cross-references real part
   const cov = core.coverage(index);
   assert.equal(Object.values(cov).reduce((a, c) => a + c.described, 0), index.order.length - 1, 'coverage counts described nodes');
 });
+
+test('Phase 9 glossary terms are searchable and link only to real records', () => {
+  const docs = core.buildSearchIndex(index, null, technical);
+  const hits = core.search(docs, 'live pto', 5);
+  assert.ok(hits.some((r) => r.doc.kind === 'term' && r.doc.title === 'Live PTO'), 'glossary term found');
+  assert.ok(core.search(docs, 'draft contrl', 5).some((r) => r.doc.kind === 'term'), 'misspelt term still found');
+  assert.ok(technical.glossary.length >= 10);
+  for (const g of technical.glossary) {
+    for (const r of g.related) assert.ok(index.byId[r], `${g.term}: related ${r} exists`);
+    assert.ok(!/\d{6}M\d/.test(g.text), `${g.term}: glossary text carries no part numbers`);
+  }
+});

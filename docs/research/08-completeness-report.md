@@ -17,8 +17,8 @@ Generated 2026-11-08 by `npm run report` (`scripts/completeness-report.mjs`) fro
 | TO35 parts-book numbers (SRC-041) | 521 numbers, 270 on 23C engine pages, 37 also in the 2008 AGCO catalogue, 301 also found in 819045 |
 | With 2008 AGCO replacement references (SRC-038) | 90 (35%) |
 | With description and function | 255 (100%) |
-| In drawn exploded diagrams | 166 (65%) (17 diagrams) |
-| Represented in 3D | 216 (85%) |
+| In drawn exploded diagrams | 171 (67%) (17 diagrams) |
+| Represented in 3D | 221 (87%) |
 | With UK purchase references | 149 (58%) (235 references, 2 suppliers) |
 | Fastener and small-part records (studs, bolts, nuts, pins, seals, gaskets, bushes, bearings, springs…) | 50, of which 50 carry parts-book numbers |
 
@@ -26,12 +26,12 @@ Generated 2026-11-08 by `npm run report` (`scripts/completeness-report.mjs`) fro
 
 | System | Items | Verified | Partial | Variant | Unverified | Original no. | Parts book | AGCO 2008 | Described | Diagram | 3D | UK refs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Engine: Standard 23C diesel | 69 | 38 | 26 | 0 | 5 | 38 | 62 | 11 | 69 | 64 | 55 | 30 |
+| Engine: Standard 23C diesel | 69 | 38 | 26 | 0 | 5 | 38 | 62 | 11 | 69 | 68 | 59 | 30 |
 | Diesel fuel system | 20 | 5 | 10 | 0 | 5 | 5 | 15 | 7 | 20 | 6 | 15 | 9 |
 | Cooling system | 11 | 9 | 0 | 1 | 1 | 9 | 9 | 4 | 11 | 9 | 10 | 8 |
 | Clutch | 12 | 8 | 1 | 3 | 0 | 8 | 10 | 4 | 12 | 7 | 9 | 9 |
 | Gearbox | 12 | 6 | 6 | 0 | 0 | 6 | 11 | 4 | 12 | 11 | 11 | 6 |
-| Rear axle, differential and brakes | 24 | 11 | 9 | 1 | 3 | 11 | 22 | 9 | 24 | 19 | 20 | 16 |
+| Rear axle, differential and brakes | 24 | 11 | 9 | 1 | 3 | 11 | 22 | 9 | 24 | 20 | 21 | 16 |
 | PTO system | 9 | 5 | 4 | 0 | 0 | 5 | 8 | 3 | 9 | 8 | 8 | 2 |
 | Hydraulic lift system | 33 | 25 | 6 | 0 | 2 | 25 | 30 | 12 | 33 | 20 | 30 | 22 |
 | Three-point linkage | 11 | 6 | 5 | 0 | 0 | 6 | 9 | 7 | 11 | 10 | 10 | 9 |
@@ -109,11 +109,11 @@ Assemblies without their own diagram (16): `valvetrain`, `lubrication-assy`, `fl
 
 ## 3D placement
 
-Model outline: 3.07 m long, 1.65 m wide, 1.79 m high (workshop manual B.1: 117 × 64 × 54 in = 2.97 × 1.63 × 1.37 m to the bonnet; the model's height includes the exhaust stack and steering wheel). Front axle centre at x = 1.829 m against a 72 in (1.829 m) wheelbase.
+Model outline: 3.07 m long, 1.67 m wide, 1.78 m high (workshop manual B.1: 117 × 64 × 54 in = 2.97 × 1.63 × 1.37 m; the model's height includes the exhaust stack and steering wheel). Front wheel centre at x = 1.829 m against a 72 in (1.829 m) wheelbase.
 
 Each modelled part's centre was checked against the region its system occupies on the real tractor. No part sits outside its system's region. Shapes and internal positions remain approximate as listed in `docs/model/README.md`.
 
-Components not represented in 3D (7): `oil-strainer`, `throttle-lever`, `throttle-linkage`, `stop-control`, `brake-backing-plate`, `heater-plug-resistor`, `heater-warning-light`.
+Components not represented in 3D (2): `heater-plug-resistor`, `heater-warning-light`.
 
 ## Unresolved items
 

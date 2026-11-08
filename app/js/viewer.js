@@ -238,14 +238,28 @@
     });
 
     this.tween = null;
+    // Render on demand (Phase 9): the scene has ~900 meshes and a soft shadow map, so redrawing
+    // it 60 times a second while nothing moves wastes battery and makes the rest of the page
+    // sluggish on tablets. A frame is drawn only when the camera, an animation or the visual
+    // state has changed (see invalidate() and the method wrapping at the end of this file).
+    this._dirty = true;
+    controls.addEventListener('change', function () { self._dirty = true; });
+    var wasConnected = false;
     var loop = function () {
       requestAnimationFrame(loop);
-      if (!el.isConnected) return;
+      var connected = el.isConnected;
+      if (connected && !wasConnected) self._dirty = true;
+      wasConnected = connected;
+      if (!connected) return;
+      var animating = !!(self.tween || self.explode.tween);
       if (self.tween) self._stepTween();
       if (self.explode.tween) self._stepExplode();
       controls.update();
+      if (!animating && !self._dirty) return;
+      self._dirty = false;
       self._placeCallouts();
       renderer.render(scene, camera);
+      self.frames = (self.frames || 0) + 1;
     };
     loop();
     window.addEventListener('resize', function () { self.resize(); });
@@ -797,6 +811,22 @@
     this.controls.target.lerpVectors(tw.t0, tw.t1, e);
     if (k >= 1) this.tween = null;
   };
+
+  /** Ask for a fresh frame on the next animation tick. */
+  Viewer.prototype.invalidate = function () { this._dirty = true; };
+  // Every method that can change what is on screen marks the frame dirty after it runs.
+  // Read-only helpers and the per-frame steps called from the loop itself are left alone.
+  var NO_REDRAW = { isModelled: 1, modelledIds: 1, hiddenCount: 1, isExploded: 1, explodeRefs: 1, invalidate: 1,
+    _boxFor: 1, _inside: 1, _explodeVectors: 1, _placeCallouts: 1, _stepTween: 1, _stepExplode: 1 };
+  Object.keys(Viewer.prototype).forEach(function (name) {
+    var fn = Viewer.prototype[name];
+    if (typeof fn !== 'function' || NO_REDRAW[name]) return;
+    Viewer.prototype[name] = function () {
+      var out = fn.apply(this, arguments);
+      this._dirty = true;
+      return out;
+    };
+  });
 
   root.MF35Viewer = {
     available: function () { return !!(root.THREE && root.THREE.OrbitControls && root.MF35Model && webglAvailable()); },

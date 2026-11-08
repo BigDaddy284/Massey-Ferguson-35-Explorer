@@ -367,13 +367,18 @@
       pts.push([yBottom, halfW]);
       return pts;
     }
+    // Bonnet crown height along x: nearly level at about 1.31 m (owner and period photos; it has to clear the
+    // long fuel tank over the rocker cover), dropping slightly towards the nose.
+    function bonnetTop(x) { var t = (x - 0.86) / (1.99 - 0.86); return 1.31 - 0.035 * t * t; }
     function hexNut(id, pos, size, axis, material) {
       return add(id, cyl(size, size, size * 0.9, axis, 6), material || M.steelDark, pos);
     }
     var SIDES = [-1, 1];
+    M.wheel.side = THREE.DoubleSide;   // pressed discs and rims are open lathe shells
 
     var WB = DIM.wheelbase, RR = DIM.rearTyreR, RF = DIM.frontTyreR, TR = DIM.rearHalfTrack, TF = DIM.frontHalfTrack;
     var CY = DIM.crankY;
+    var CS = 0.51;   // countershaft, PTO and hydraulic pump drive line height (approximate)
 
     /* =====================================================================
      * WHEELS AND TYRES (10-28 rear on dished pressed-steel centres, 4.00-19 three-rib front)
@@ -388,7 +393,7 @@
         for (var h = -1; h <= 1; h += 2) {
           var a = (i / lugs) * Math.PI * 2 + (h > 0 ? Math.PI / lugs : 0);
           var lug = add('rear-tyre', rbox(0.035, 0.028, 0.125, 0.008), M.tyre,
-            V(Math.cos(a) * 0.599, RR + Math.sin(a) * 0.599, z + h * 0.06));
+            V(Math.cos(a) * 0.588, RR + Math.sin(a) * 0.588, z + h * 0.06));
           lug.rotation.set(0, 0, a);
           lug.rotateX(h * 0.55);
         }
@@ -428,9 +433,8 @@
      * ===================================================================== */
     // Centre housing: a deep casting with a flat top for the lift cover, rounded lower corners,
     // a rear face carrying the PTO and top-link bracket, and side faces for the axle housings.
-    add('centre-housing', rbox(0.54, 0.60, 0.46, 0.09), M.grey, V(0.07, 0.60, 0));
+    add('centre-housing', rbox(0.54, 0.575, 0.46, 0.09), M.grey, V(0.07, 0.6125, 0));
     add('centre-housing', rbox(0.56, 0.08, 0.50, 0.02), M.grey, V(0.07, 0.885, 0));        // top flange
-    add('centre-housing', rbox(0.30, 0.22, 0.40, 0.06), M.grey, V(-0.12, 0.46, 0));        // rear lower boss (PTO housing area)
     for (var cb = 0; cb < 7; cb++) SIDES.forEach(function (s) { hexNut('centre-housing', V(-0.16 + cb * 0.077, 0.93, s * 0.225), 0.008, 'y'); });
     SIDES.forEach(function (s) {
       var id = s > 0 ? 'axle-trumpet-rh' : 'axle-trumpet-lh';
@@ -443,11 +447,25 @@
       }
       // Mudguard and footplate bracket on each housing
       add(id, rbox(0.06, 0.26, 0.03, 0.01), M.grey, V(0.05, RR + 0.12, s * 0.46));
-      // Brakes: shoe brakes on the differential shafts at the inner end of each trumpet (SRC-004)
-      add('brake-drum', cyl(0.17, 0.17, 0.08, 'z', 32), M.greyDark, V(0, RR, s * 0.27));
-      add('brake-shoes', ring(0.145, 0.014, 'z'), M.bronze, V(0, RR, s * 0.27));
-      add('brake-springs', cyl(0.008, 0.008, 0.16, 'x', 8), M.steel, V(0, RR + 0.09, s * 0.27));
-      add('brake-cam', cyl(0.018, 0.018, 0.06, 'z', 12), M.steelDark, V(0.05, RR - 0.17, s * 0.30));
+      // Brakes (SRC-035 P.1, K.11): Girling double-anchor floating-cam drum brakes, 14 x 2 in, at the rear
+      // wheels. The backplate is bolted to the outer end of the axle housing; the drum is fitted to the axle
+      // shaft between the hub and the wheel centre and opens inboard over the shoes. The operating camshaft
+      // passes through the backplate and carries the rear brake lever on its inboard side.
+      var BZ = 0.548;                                   // backplate, at the trumpet's outer flange
+      add('brake-backing-plate', cyl(0.172, 0.172, 0.008, 'z', 40), M.greyDark, V(0, RR, s * BZ));
+      add('brake-backing-plate', ring(0.168, 0.008, 'z'), M.greyDark, V(0, RR, s * (BZ + 0.006)));
+      var drum = add('brake-drum', lathe([[0.090, 0.0], [0.180, 0.0], [0.180, 0.012], [0.187, 0.018], [0.187, 0.058], [0.178, 0.058], [0.178, 0.008], [0.090, 0.008]], 'z', 48), M.greyDark, V(0, RR, s * 0.604));
+      drum.scale.z = -s;                                // closed face outboard, open inboard
+      for (var bs = 0; bs < 2; bs++) {                  // two shoes, each with its lining
+        var shoe = add('brake-shoes', new THREE.TorusGeometry(0.163, 0.011, 6, 20, Math.PI * 0.82), M.bronze, V(0, RR, s * 0.575));
+        shoe.rotation.z = bs * Math.PI + Math.PI * 0.09;
+        shoe.scale.z = 2.2;
+      }
+      add('brake-springs', cyl(0.006, 0.006, 0.20, 'x', 8), M.steel, V(0, RR + 0.12, s * 0.574));
+      add('brake-springs', cyl(0.006, 0.006, 0.20, 'x', 8), M.steel, V(0, RR - 0.12, s * 0.574));
+      // Operating camshaft through the backplate (front, low) and the rear brake lever hanging from it
+      add('brake-cam', cyl(0.014, 0.014, 0.07, 'z', 12), M.steelDark, V(0.115, RR - 0.10, s * (BZ - 0.02)));
+      bar('brake-cam', V(0.115, RR - 0.10, s * (BZ - 0.05)), V(0.13, RR - 0.21, s * (BZ - 0.05)), 0.03, 0.012, M.steelDark);
       add('half-shaft', cyl(0.03, 0.03, 0.48, 'z', 16), M.steel, V(0, RR, s * 0.34));
       add('rear-hub', cyl(0.11, 0.11, 0.06, 'z', 32), M.greyDark, V(0, RR, s * 0.615));
       add('axle-seals', ring(0.06, 0.01, 'z'), M.rubber, V(0, RR, s * 0.59));
@@ -455,13 +473,18 @@
         var wa = (ws / 8) * Math.PI * 2;
         add('wheel-studs-rear', cyl(0.007, 0.007, 0.08, 'z', 8), M.steel, V(Math.cos(wa) * 0.09, RR + Math.sin(wa) * 0.09, s * TR));
       }
-      add('diff-bearings', ring(0.06, 0.014, 'z'), M.steel, V(0, RR, s * 0.12));
+      add('diff-bearings', ring(0.06, 0.014, 'z'), M.steel, V(0, RR, s * 0.25));
       add('diff-gears', cyl(0.035, 0.02, 0.04, 'z', 16), M.steelDark, V(0, RR, s * 0.05)).rotation.x = s > 0 ? Math.PI / 2 : -Math.PI / 2;
     });
     add('crown-wheel', cyl(0.15, 0.15, 0.03, 'z', 48), M.steelDark, V(0, RR, -0.09));
-    add('pinion', cyl(0.025, 0.045, 0.08, 'x', 20), M.steelDark, V(0.12, RR, -0.03));
-    add('diff-cage', cyl(0.08, 0.08, 0.16, 'z', 24), M.steel, V(0, RR, 0.0));
-    add('diff-lock', cyl(0.05, 0.05, 0.03, 'z', 20), M.brass, V(0, RR, 0.14));
+    add('pinion', cyl(0.025, 0.045, 0.08, 'x', 20), M.steelDark, V(0.10, RR, 0));
+    add('diff-cage', cyl(0.07, 0.07, 0.40, 'z', 24), M.steel, V(0, RR, 0.02));
+    // Differential lock (SRC-035 K.10-K.11 Figs. 17-19): coupler on the RH axle shaft splines, cam shaft under the axle
+    // shaft and a foot pedal at the rear of the RH footplate (pedal shape approximate)
+    add('diff-lock', cyl(0.05, 0.05, 0.04, 'z', 20), M.brass, V(0, RR, 0.29));
+    add('diff-lock', cyl(0.012, 0.012, 0.18, 'z', 12), M.steel, V(0.09, 0.47, 0.32));
+    bar('diff-lock', V(0.09, 0.47, 0.41), V(0.22, 0.57, 0.41), 0.03, 0.012, M.steelDark);
+    add('diff-lock', rbox(0.10, 0.015, 0.06, 0.004), M.steelDark, V(0.24, 0.58, 0.41));
 
     /* =====================================================================
      * ENGINE: STANDARD 23C
@@ -505,7 +528,9 @@
       });
       // Cylinder head details over each bore
       add('combustion-chamber-insert', cyl(0.0178, 0.0178, 0.02, 'y', 20), M.steelDark, V(x, 1.0, -0.055));
-      [[-0.025, 'inlet'], [0.025, 'exhaust']].forEach(function (v) {
+      // Adjacent cylinders mirror their valves (head port face, SRC-035 Fig. 122): E I | I E | E I | I E from the front.
+      var vo = i % 2 === 0 ? 1 : -1;
+      [[-0.025 * vo, 'inlet'], [0.025 * vo, 'exhaust']].forEach(function (v) {
         var vx = x + v[0];
         var kind = v[1];
         add(kind + '-valve', cyl(0.0039, 0.0039, 0.13, 'y', 8), M.steel, V(vx, 1.05, 0.0));
@@ -532,6 +557,7 @@
     add('rear-crank-seal', ring(0.052, 0.008, 'x', 28), M.rubber, V(EX0 - 0.005, CY, 0));
     add('front-crank-seal', ring(0.03, 0.006, 'x', 24), M.rubber, V(EX1 + 0.055, CY, 0));
     add('crank-pulley', cyl(0.073, 0.073, 0.035, 'x', 32), M.greyDark, V(1.79, CY, 0));
+    add('crank-pulley', cyl(0.025, 0.025, 0.04, 'x', 12), M.steel, V(1.825, CY, 0));               // starting-handle dog
     // Camshaft and timing chain (chain drive: SRC-035, SRC-008)
     add('camshaft', cyl(0.016, 0.016, EX1 - EX0 + 0.04, 'x', 14), M.steel, V((EX0 + EX1) / 2, 0.76, -0.11));
     CYLX.forEach(function (x) { [-0.025, 0.025].forEach(function (o) { add('camshaft', cyl(0.022, 0.022, 0.012, 'x', 3), M.steel, V(x + o, 0.76, -0.11)); }); });
@@ -544,19 +570,27 @@
     add('injection-pump-drive', cyl(0.02, 0.02, 0.17, 'x', 14), M.steelDark, V(1.635, 0.82, -0.245));
     // Lubrication
     add('sump', rbox(EX1 - EX0 + 0.02, 0.18, 0.30, 0.04), M.grey, V((EX0 + EX1) / 2, 0.53, 0));
-    add('sump', rbox(0.22, 0.13, 0.26, 0.04), M.grey, V(1.82, 0.535, 0));   // forward extension carrying the front axle (shape approximate)
     hexNut('sump', V(1.40, 0.435, 0.0), 0.012, 'y');   // drain plug
     for (var sb = 0; sb < 6; sb++) SIDES.forEach(function (s) { hexNut('sump', V(1.14 + sb * 0.105, 0.62, s * 0.16), 0.007, 'y'); });
-    add('oil-pump', cyl(0.03, 0.03, 0.08, 'y', 18), M.steelDark, V(1.55, 0.56, 0.04));
-    add('oil-pressure-relief', cyl(0.012, 0.012, 0.03, 'z', 10), M.brass, V(1.55, 0.58, 0.16));
+    // Rotor oil pump flange-bolted to the front main bearing housing, gear-driven from the crankshaft
+    // (SRC-035 C.102, Figs. 101 and 130); gauze strainer in the sump below it; relief valve in the filter head.
+    add('oil-pump', cyl(0.035, 0.035, 0.06, 'x', 18), M.steelDark, V(1.67, CY - 0.085, 0));
+    add('oil-pump', cyl(0.03, 0.03, 0.015, 'x', 24), M.steelDark, V(1.745, CY - 0.085, 0));       // driven gear
+    add('oil-pump', cyl(0.05, 0.05, 0.015, 'x', 30), M.steelDark, V(1.758, CY, 0));               // driving gear on the crank nose
+    add('oil-strainer', rbox(0.12, 0.012, 0.10, 0.004), M.steel, V(1.64, 0.47, 0));
+    rod('oil-strainer', V(1.65, 0.48, 0), V(1.67, CY - 0.12, 0), 0.008, M.steel);
+    add('oil-pressure-relief', cyl(0.012, 0.012, 0.04, 'x', 10), M.brass, V(1.52, 0.815, -0.255));
     add('oil-filter', cyl(0.05, 0.05, 0.16, 'y', 24), M.greyDark, V(1.52, 0.72, -0.225));
     add('oil-filter', cyl(0.055, 0.055, 0.03, 'y', 24), M.grey, V(1.52, 0.815, -0.225));
     hexNut('oil-filter', V(1.52, 0.63, -0.225), 0.012, 'y');
-    tube('oil-pipes', [V(1.55, 0.62, 0.04), V(1.56, 0.64, -0.12), V(1.53, 0.66, -0.2)], 0.005, M.copper);
-    tube('oil-pipes', [V(1.52, 0.80, -0.2), V(1.45, 0.86, -0.16), V(1.40, 1.12, -0.05)], 0.004, M.copper);
+    // Engine oil filler: ribbed cap on the left of the block below the head joint, near the front (SRC-035 Fig. 109 'O')
+    add('engine-block', cyl(0.02, 0.02, 0.04, 'z', 16), M.grey, V(1.60, 0.93, -0.19));
+    add('engine-block', cyl(0.03, 0.03, 0.025, 'z', 20), M.black, V(1.60, 0.93, -0.215));
+    // Pump to filter head on the left; the rocker shaft is fed through internal drillings, not a pipe.
+    tube('oil-pipes', [V(1.67, CY - 0.085, -0.03), V(1.64, 0.62, -0.14), V(1.55, 0.70, -0.21), V(1.53, 0.80, -0.225)], 0.005, M.copper);
     rod('dipstick', V(1.30, 0.55, -0.16), V(1.32, 0.96, -0.23), 0.004, M.steel);
     add('dipstick', ring(0.014, 0.003, 'x'), M.steel, V(1.32, 0.975, -0.23));
-    tube('engine-breather', [V(1.30, 1.16, 0.06), V(1.27, 1.19, 0.12), V(1.25, 0.90, 0.19)], 0.008, M.black);
+    tube('engine-breather', [V(1.30, 1.16, 0.06), V(1.27, 1.19, 0.12), V(1.25, 0.90, 0.20), V(1.24, 0.55, 0.20)], 0.008, M.black);
     // Flywheel
     add('flywheel', cyl(0.20, 0.20, 0.05, 'x', 48), M.steelDark, V(1.065, CY, 0));
     add('ring-gear', ring(0.205, 0.008, 'x', 64), M.steel, V(1.07, CY, 0));
@@ -567,22 +601,27 @@
     // Head, gasket, rocker gear
     add('head-gasket', box(0.58, 0.004, 0.32), M.copper, V(1.40, DECK + 0.002, 0));
     add('cylinder-head', rbox(0.58, 0.105, 0.30, 0.02), M.grey, V(1.40, DECK + 0.057, 0));
-    CYLX.forEach(function (x) {
-      add('cylinder-head', cyl(0.024, 0.024, 0.02, 'z', 16), M.grey, V(x - 0.025, 1.04, 0.158));   // inlet port boss
-      add('cylinder-head', cyl(0.024, 0.024, 0.02, 'z', 16), M.grey, V(x + 0.025, 1.0, 0.158));    // exhaust port boss
+    CYLX.forEach(function (x, i) {
+      var vo = i % 2 === 0 ? 1 : -1;
+      add('cylinder-head', cyl(0.024, 0.024, 0.02, 'z', 16), M.grey, V(x - 0.025 * vo, 1.04, 0.158));   // inlet port boss
+      add('cylinder-head', cyl(0.024, 0.024, 0.02, 'z', 16), M.grey, V(x + 0.025 * vo, 1.0, 0.158));    // exhaust port boss
     });
     add('cylinder-head', rbox(0.08, 0.06, 0.06, 0.015), M.grey, V(1.69, 1.05, 0.04));   // thermostat outlet boss
-    for (var hn = 0; hn < 5; hn++) SIDES.forEach(function (s) { hexNut('head-studs-nuts', V(1.15 + hn * 0.125, 1.115, s * 0.12), 0.011, 'y'); });
+    // 22 head set screws and nuts (SRC-035 Fig. 120): two outer rows of nine and four between the valve groups.
+    for (var hn = 0; hn < 9; hn++) SIDES.forEach(function (s) { hexNut('head-studs-nuts', V(1.14 + hn * 0.065, 1.115, s * 0.12), 0.011, 'y'); });
+    [1.27, 1.40, 1.53, 1.66].forEach(function (x) { hexNut('head-studs-nuts', V(x, 1.115, 0.03), 0.011, 'y'); });
     add('rocker-shaft', cyl(0.0079, 0.0079, 0.50, 'x', 12), M.steel, V(1.40, 1.13, -0.06));
     [1.17, 1.40, 1.63].forEach(function (x) { add('rocker-shaft', rbox(0.025, 0.04, 0.03, 0.006), M.greyDark, V(x, 1.115, -0.06)); });
     add('rocker-cover', rbox(0.50, 0.085, 0.22, 0.035), M.alu, V(1.40, 1.155, -0.01));
-    add('rocker-cover', cyl(0.03, 0.03, 0.03, 'y', 20), M.black, V(1.60, 1.21, -0.01));     // oil filler cap
     [1.22, 1.40, 1.58].forEach(function (x) { hexNut('rocker-cover', V(x, 1.205, -0.01), 0.008, 'y'); });
     // Manifolds on the right-hand side, exhaust stack ahead of the dash (owner photo)
     add('inlet-manifold', rbox(0.48, 0.05, 0.06, 0.02), M.greyDark, V(1.40, 1.07, 0.185));
-    CYLX.forEach(function (x) { add('exhaust-manifold', cyl(0.022, 0.022, 0.07, 'z', 14), M.core, V(x + 0.025, 1.0, 0.18)); });
+    CYLX.forEach(function (x, i) { add('exhaust-manifold', cyl(0.022, 0.022, 0.07, 'z', 14), M.core, V(x + 0.025 * (i % 2 === 0 ? 1 : -1), 1.0, 0.18)); });
     add('exhaust-manifold', cyl(0.035, 0.035, 0.46, 'x', 18), M.core, V(1.40, 0.99, 0.225));
-    tube('exhaust-elbow', [V(1.55, 0.99, 0.23), V(1.585, 1.05, 0.235), V(1.59, 1.14, 0.235), V(1.59, 1.22, 0.235)], 0.035, M.core);
+    // The manual's outlet leaves the middle of the manifold (Fig. 110). Its standard exhaust then runs down and back
+    // under the RH footplate; the owner's tractor has an upright stack through the bonnet instead (owner photo), so the
+    // stack is kept and fed from the mid-manifold outlet.
+    tube('exhaust-elbow', [V(1.45, 0.99, 0.24), V(1.50, 1.0, 0.265), V(1.57, 1.06, 0.25), V(1.59, 1.14, 0.235), V(1.59, 1.22, 0.235)], 0.035, M.core);
     add('silencer', lathe([[0.0, 0.0], [0.03, 0.0], [0.046, 0.03], [0.046, 0.30], [0.03, 0.33], [0.0, 0.33]], 'y', 24), M.core, V(1.59, 1.22, 0.235));
     add('silencer', cyl(0.024, 0.024, 0.22, 'y', 16), M.core, V(1.59, 1.65, 0.235));
     add('silencer', ring(0.047, 0.006, 'y', 24), M.steelDark, V(1.59, 1.26, 0.235));
@@ -590,35 +629,61 @@
     /* =====================================================================
      * FUEL SYSTEM
      * ===================================================================== */
-    add('fuel-tank', rbox(0.26, 0.21, 0.46, 0.06), M.red, V(0.98, 1.055, 0));
-    add('fuel-cap', cyl(0.035, 0.035, 0.025, 'y', 20), M.steel, V(0.96, 1.195, -0.07));
-    add('fuel-tap', cyl(0.01, 0.01, 0.05, 'y', 10), M.brass, V(0.90, 0.93, -0.16));
-    add('sediment-bowl', cyl(0.025, 0.02, 0.045, 'y', 18), M.fuelGlass, V(0.90, 0.885, -0.16));
-    add('fuel-lift-pump', rbox(0.06, 0.06, 0.04, 0.012), M.greyDark, V(1.15, 0.76, -0.19));
-    [0, 1].forEach(function (i) { add('fuel-filters', cyl(0.035, 0.035, 0.1, 'y', 20), M.steelDark, V(1.25 + i * 0.08, 1.0, -0.235)); });
-    tube('fuel-pipes-lp', [V(0.90, 0.86, -0.16), V(1.0, 0.80, -0.20), V(1.15, 0.76, -0.215)], 0.004, M.copper);
-    tube('fuel-pipes-lp', [V(1.15, 0.79, -0.21), V(1.22, 0.92, -0.24), V(1.25, 0.95, -0.235)], 0.004, M.copper);
-    tube('fuel-pipes-lp', [V(1.33, 0.95, -0.235), V(1.38, 0.88, -0.25), V(1.42, 0.86, -0.25)], 0.004, M.copper);
+    // Long tank over the whole engine under the bonnet crown, 7 1/2 gal (SRC-035 B.2, E.101-E.103 Figs. 101-102):
+    // front on the thermostat housing, rear on the battery carrier. Its depth is limited by the rocker cover, so
+    // the modelled volume is smaller than 34 litres (shape approximate).
+    (function () {
+      var secs = [[0.95, 0.17, 1.15], [1.10, 0.17, 1.215], [1.68, 0.17, 1.215]].map(function (q) {
+        var pts = crownSection(q[1], q[2], bonnetTop(q[0]) - 0.025, 0.05, 10);
+        pts.push(pts[0]);
+        return { x: q[0], pts: pts };
+      });
+      add('fuel-tank', loft(secs, true), M.red).material.side = THREE.DoubleSide;
+    })();
+    add('fuel-cap', cyl(0.024, 0.024, 0.04, 'y', 16), M.steel, V(1.00, bonnetTop(1.0) - 0.005, 0));
+    add('fuel-cap', cyl(0.036, 0.036, 0.03, 'y', 20), M.steel, V(1.00, bonnetTop(1.0) + 0.025, 0));
+    // Tap and sediment bowl at the tank outlet, under the rear of the tank on the left (SRC-035 E.101, Figs. 103-104)
+    add('fuel-tap', cyl(0.01, 0.01, 0.05, 'y', 10), M.brass, V(1.00, 1.125, -0.12));
+    add('sediment-bowl', cyl(0.025, 0.02, 0.045, 'y', 18), M.fuelGlass, V(1.00, 1.08, -0.12));
+    // Lift pump low on the left of the block under the pump head; one main CAV filter at the rear left
+    // (SRC-035 E.104, E.109, Fig. 102; twin filters were special order only).
+    add('fuel-lift-pump', rbox(0.06, 0.06, 0.04, 0.012), M.greyDark, V(1.35, 0.69, -0.20));
+    add('fuel-lift-pump', cyl(0.004, 0.004, 0.06, 'y', 8), M.steel, V(1.37, 0.65, -0.225));      // priming lever
+    add('fuel-filters', cyl(0.04, 0.04, 0.12, 'y', 20), M.steelDark, V(1.06, 0.93, -0.22));
+    add('fuel-filters', cyl(0.045, 0.045, 0.025, 'y', 20), M.grey, V(1.06, 1.0, -0.22));
+    tube('fuel-pipes-lp', [V(1.00, 1.055, -0.12), V(1.00, 0.98, -0.15), V(1.03, 0.80, -0.18), V(1.15, 0.72, -0.20), V(1.32, 0.69, -0.205)], 0.004, M.copper);
+    tube('fuel-pipes-lp', [V(1.35, 0.72, -0.225), V(1.25, 0.78, -0.25), V(1.12, 0.92, -0.255), V(1.08, 1.0, -0.245)], 0.004, M.copper);
+    tube('fuel-pipes-lp', [V(1.04, 1.0, -0.245), V(1.12, 1.01, -0.27), V(1.30, 0.92, -0.27), V(1.38, 0.86, -0.26)], 0.004, M.copper);
     // DPA distributor pump on the left side (SRC-035 B.41); body and governor head
     add('injection-pump', cyl(0.06, 0.06, 0.16, 'x', 24), M.steel, V(1.48, 0.82, -0.25));
     add('injection-pump', rbox(0.08, 0.06, 0.07, 0.015), M.steel, V(1.44, 0.885, -0.25));
     add('injection-pump', cyl(0.045, 0.045, 0.05, 'x', 24), M.alu, V(1.38, 0.82, -0.25));          // hydraulic head
     [0, 1, 2, 3].forEach(function (i) { add('injection-pump', cyl(0.007, 0.007, 0.02, 'y', 8), M.brass, V(1.385 + i * 0.015, 0.875, -0.235)); });   // outlet unions
-    add('injection-pump', rbox(0.05, 0.03, 0.04, 0.008), M.steel, V(1.56, 0.80, -0.27));          // stop control
-    add('injection-pump', cyl(0.004, 0.004, 0.10, 'y', 8), M.steel, V(1.50, 0.94, -0.26));        // throttle lever
+    // Drive housing bolted to the left of the block, gear-driven from the camshaft (SRC-035 E.110, E.113)
+    add('injection-pump-drive', rbox(0.09, 0.10, 0.08, 0.015), M.grey, V(1.60, 0.82, -0.21));
+    add('injection-pump-drive', cyl(0.03, 0.03, 0.02, 'x', 18), M.greyDark, V(1.655, 0.82, -0.23));   // front cover / tractormeter drive
+    // Throttle and shut-off levers on top of the pump (SRC-035 F.102 Fig. 101); rod and cable back to the dash
+    add('throttle-linkage', cyl(0.004, 0.004, 0.10, 'y', 8), M.steel, V(1.50, 0.94, -0.26));
+    tube('throttle-linkage', [V(1.50, 0.99, -0.26), V(1.30, 1.06, -0.245), V(1.12, 1.09, -0.235), V(0.86, 1.10, -0.20)], 0.004, M.steel);
+    add('stop-control', rbox(0.05, 0.03, 0.04, 0.008), M.steel, V(1.56, 0.80, -0.27));
+    tube('stop-control', [V(1.56, 0.80, -0.29), V(1.30, 0.86, -0.30), V(1.06, 0.96, -0.285), V(0.88, 1.0, -0.22), V(0.80, 1.0, -0.20)], 0.003, M.black);
+    add('stop-control', cyl(0.012, 0.012, 0.02, 'x', 12), M.black, V(0.79, 1.0, -0.20));            // pull knob (position approximate)
+    // Hand throttle under the steering wheel (position approximate)
+    add('throttle-lever', cyl(0.018, 0.018, 0.03, 'z', 14), M.steelDark, V(0.70, 1.17, 0.03));
+    bar('throttle-lever', V(0.70, 1.17, 0.04), V(0.67, 1.19, 0.15), 0.012, 0.008, M.steelDark);
     CYLX.forEach(function (x, i) {
       tube('injector-pipes', [V(1.40 + i * 0.015, 0.87, -0.22), V(1.40 + i * 0.015, 0.94, -0.19), V((x + 1.40) / 2, 1.06, -0.16), V(x, 1.12, -0.10)], 0.0035, M.steel);
     });
-    tube('fuel-leak-off', [V(CYLX[3], 1.13, -0.1), V(CYLX[2], 1.135, -0.1), V(CYLX[1], 1.135, -0.1), V(CYLX[0], 1.13, -0.1), V(1.62, 1.08, -0.2), V(1.35, 1.0, -0.25)], 0.003, M.copper);
-    // Air intake: oil-bath cleaner beside the engine, intake stack through the bonnet (positions approximate)
-    // Oil-bath cleaner stands on the left beside the gearbox-end of the engine; its intake stack
-    // rises through the bonnet on the left of the dash with a pre-cleaner bowl on top (owner photo).
-    add('air-cleaner', cyl(0.07, 0.07, 0.30, 'y', 24), M.greyDark, V(1.02, 0.82, -0.235));
-    add('air-cleaner', cyl(0.074, 0.065, 0.06, 'y', 24), M.greyDark, V(1.02, 0.64, -0.235));
-    add('air-cleaner', ring(0.071, 0.006, 'y', 24), M.steelDark, V(1.02, 0.70, -0.235));
-    tube('air-intake-pipe', [V(1.02, 0.97, -0.235), V(1.06, 1.03, -0.21), V(1.14, 1.06, -0.19), V(1.20, 1.07, -0.19)], 0.03, M.black);
-    add('air-intake-pipe', cyl(0.03, 0.03, 0.30, 'y', 16), M.greyDark, V(0.96, 1.21, -0.19));
-    add('air-intake-pipe', lathe([[0.0, 0.0], [0.05, 0.0], [0.058, 0.03], [0.05, 0.06], [0.03, 0.075], [0.0, 0.075]], 'y', 24), M.red, V(0.96, 1.36, -0.19));   // pre-cleaner bowl
+    // Leak-off along the injector tops, returning to the main filter (SRC-035 E.101)
+    tube('fuel-leak-off', [V(CYLX[3], 1.13, -0.1), V(CYLX[2], 1.135, -0.1), V(CYLX[1], 1.135, -0.1), V(CYLX[0], 1.13, -0.1), V(1.62, 1.12, -0.14), V(1.30, 1.10, -0.19), V(1.08, 1.03, -0.22)], 0.003, M.copper);
+    // Air intake: vertical oil-bath cleaner on the right towards the rear of the engine, intake hose from behind
+    // the instrument panel, outlet hose into the rear of the inlet manifold (SRC-035 E.101, E.122 Fig. 120).
+    add('air-cleaner', cyl(0.07, 0.07, 0.23, 'y', 24), M.greyDark, V(1.00, 0.855, 0.29));
+    add('air-cleaner', cyl(0.074, 0.065, 0.06, 'y', 24), M.greyDark, V(1.00, 0.71, 0.29));
+    add('air-cleaner', ring(0.071, 0.006, 'y', 24), M.steelDark, V(1.00, 0.74, 0.29));
+    add('air-cleaner', cyl(0.05, 0.07, 0.03, 'y', 24), M.greyDark, V(1.00, 0.985, 0.29));
+    tube('air-intake-pipe', [V(1.03, 0.99, 0.27), V(1.09, 1.04, 0.235), V(1.14, 1.07, 0.20), V(1.17, 1.07, 0.185)], 0.025, M.black);
+    tube('air-intake-pipe', [V(0.97, 0.99, 0.28), V(0.92, 1.03, 0.25), V(0.86, 1.04, 0.22)], 0.022, M.black);
 
     /* =====================================================================
      * COOLING
@@ -656,9 +721,15 @@
     add('clutch-single-plate', cyl(0.127, 0.127, 0.012, 'x', 40), M.bronze, V(1.03, CY, 0));
     add('clutch-single-cover', cyl(0.175, 0.16, 0.06, 'x', 36, true), M.steelDark, V(1.0, CY, 0));
     add('release-bearing', cyl(0.045, 0.045, 0.03, 'x', 24), M.steel, V(0.93, CY, 0));
-    bar('release-fork', V(0.92, CY + 0.03, 0), V(0.90, CY - 0.15, -0.22), 0.02, 0.012, M.steelDark);
-    // Pedals: clutch on the left, brakes on the right
-    bar('clutch-pedal', V(0.88, 0.47, -0.27), V(0.78, 0.72, -0.31), 0.025, 0.015, M.steelDark);
+    // Release fork clamped on a cross shaft above the input shaft: pivot shaft from the right, pedal shaft from the left
+    // (SRC-035 J.4 Fig. 5, J.6, J.10)
+    rod('release-fork', V(0.90, 0.74, -0.30), V(0.90, 0.74, 0.24), 0.012, M.steel);
+    add('release-fork', cyl(0.025, 0.025, 0.10, 'z', 16), M.steelDark, V(0.90, 0.74, 0));
+    SIDES.forEach(function (s) { bar('release-fork', V(0.90, 0.74, s * 0.045), V(0.925, CY + 0.03, s * 0.045), 0.02, 0.01, M.steelDark); });
+    // Clutch pedal clamped by a pinch bolt to the left end of the pedal shaft, cranked arm to the pad (SRC-035 I Fig. 4)
+    add('clutch-pedal', cyl(0.03, 0.03, 0.04, 'z', 16), M.steelDark, V(0.90, 0.74, -0.31));
+    bar('clutch-pedal', V(0.90, 0.74, -0.31), V(0.82, 0.66, -0.31), 0.03, 0.015, M.steelDark);
+    bar('clutch-pedal', V(0.82, 0.66, -0.31), V(0.78, 0.72, -0.32), 0.025, 0.015, M.steelDark);
     add('clutch-pedal', box(0.06, 0.012, 0.09), M.steelDark, V(0.775, 0.73, -0.32));
 
     /* =====================================================================
@@ -668,91 +739,128 @@
     add('gearbox-top-cover', rbox(0.40, 0.03, 0.30, 0.01), M.greyDark, V(0.60, 0.895, 0));
     add('input-shaft', cyl(0.02, 0.02, 0.30, 'x', 14), M.steel, V(0.90, CY, 0));
     add('main-shaft', cyl(0.025, 0.025, 0.46, 'x', 14), M.steel, V(0.58, CY, 0));
-    add('countershaft', cyl(0.025, 0.025, 0.46, 'x', 14, true), M.steel, V(0.58, 0.52, 0));
-    [[0.45, 0.075, 0.045], [0.56, 0.06, 0.06], [0.68, 0.045, 0.075], [0.78, 0.055, 0.065]].forEach(function (g) {
+    add('countershaft', cyl(0.025, 0.025, 0.46, 'x', 14, true), M.steel, V(0.58, CS, 0));
+    // Gear train (SRC-035 J.1 Fig. 1): 3rd/2nd cluster at the rear, 1st forward of it, constant mesh in front of the
+    // centre flange; each main-shaft sliding gear larger than its partner. Sizes approximate.
+    [[0.44, 0.08, 0.07], [0.52, 0.09, 0.06], [0.60, 0.10, 0.05], [0.70, 0.055, 0.095]].forEach(function (g) {
       add('gearbox-gears', cyl(g[1], g[1], 0.028, 'x', 30), M.steelDark, V(g[0], CY, 0));
-      add('gearbox-gears', cyl(g[2], g[2], 0.028, 'x', 30), M.steelDark, V(g[0], 0.52, 0));
+      add('gearbox-gears', cyl(g[2], g[2], 0.028, 'x', 30), M.steelDark, V(g[0], CS, 0));
     });
-    add('range-gears', cyl(0.07, 0.07, 0.03, 'x', 30), M.steelDark, V(0.37, CY, 0));
-    add('range-gears', cyl(0.05, 0.05, 0.03, 'x', 30), M.steelDark, V(0.37, 0.52, 0));
-    [0.50, 0.62, 0.73].forEach(function (x) { bar('selector-forks', V(x, 0.84, 0.0), V(x, CY + 0.05, 0.0), 0.03, 0.008, M.steel); });
-    [0.36, 0.83].forEach(function (x) { add('gearbox-bearings', ring(0.035, 0.009, 'x', 24), M.steel, V(x, CY, 0)); add('gearbox-bearings', ring(0.035, 0.009, 'x', 24), M.steel, V(x, 0.52, 0)); });
-    rod('gear-lever-main', V(0.62, 0.91, -0.04), V(0.47, 1.22, -0.13), 0.011, M.black);
-    add('gear-lever-main', sphere(0.022), M.black, V(0.47, 1.225, -0.13));
-    rod('gear-lever-range', V(0.55, 0.91, 0.06), V(0.50, 1.07, 0.11), 0.01, M.black);
-    add('gear-lever-range', sphere(0.02), M.black, V(0.50, 1.075, 0.11));
+    add('gearbox-casing', box(0.02, 0.40, 0.32), M.grey, V(0.65, 0.645, 0));                       // centre flange
+    // Reverse idler cluster on its own shaft, on the left (SRC-035 J.2 Fig. 3, J.9 Fig. 16)
+    rod('gearbox-gears', V(0.40, 0.60, -0.10), V(0.65, 0.60, -0.10), 0.012, M.steel);
+    add('gearbox-gears', cyl(0.035, 0.035, 0.03, 'x', 22), M.steelDark, V(0.60, 0.60, -0.10));
+    add('gearbox-gears', cyl(0.05, 0.05, 0.03, 'x', 26), M.steelDark, V(0.47, 0.60, -0.10));
+    // High/low range: epicyclic unit on the main-shaft output behind the rear wall; ring gear fixed to the wall,
+    // planet carrier driven (SRC-035 J.1-J.2)
+    add('range-gears', ring(0.075, 0.012, 'x', 36), M.steelDark, V(0.315, CY, 0));
+    add('range-gears', cyl(0.025, 0.025, 0.03, 'x', 18), M.steelDark, V(0.315, CY, 0));
+    for (var pl = 0; pl < 3; pl++) {
+      var pa = pl * Math.PI * 2 / 3;
+      add('range-gears', cyl(0.022, 0.022, 0.03, 'x', 16), M.steel, V(0.315, CY + Math.cos(pa) * 0.048, Math.sin(pa) * 0.048));
+    }
+    add('range-gears', cyl(0.06, 0.06, 0.012, 'x', 24), M.steelDark, V(0.295, CY, 0));
+    // Three selector rails under the top cover sliding in the end walls; two forks on the sliding gears and the
+    // range shifter at the rear (SRC-035 J.2, J.8 step 6)
+    [-0.05, 0, 0.05].forEach(function (z) { rod('selector-forks', V(0.33, 0.83, z), V(0.84, 0.83, z), 0.008, M.steel); });
+    [[0.47, 0.05], [0.58, -0.05], [0.33, 0]].forEach(function (f) { bar('selector-forks', V(f[0], 0.83, f[1]), V(f[0], CY + 0.08, 0.0), 0.03, 0.008, M.steel); });
+    [0.36, 0.65].forEach(function (x) { add('gearbox-bearings', ring(0.035, 0.009, 'x', 24), M.steel, V(x, CY, 0)); add('gearbox-bearings', ring(0.035, 0.009, 'x', 24), M.steel, V(x, CS, 0)); });
+    rod('gear-lever-main', V(0.55, 0.91, -0.04), V(0.42, 1.22, -0.13), 0.011, M.black);
+    add('gear-lever-main', sphere(0.022), M.black, V(0.42, 1.225, -0.13));
+    rod('gear-lever-range', V(0.53, 0.91, 0.06), V(0.48, 1.07, 0.11), 0.01, M.black);
+    add('gear-lever-range', sphere(0.02), M.black, V(0.48, 1.075, 0.11));
 
     /* =====================================================================
      * PTO (live via the dual clutch's rear disc: SRC-035 J.4, M.3)
      * ===================================================================== */
-    add('pto-drive-shaft', cyl(0.016, 0.016, 1.30, 'x', 12), M.steel, V(0.33, 0.52, 0.0));
-    add('pto-gears', cyl(0.05, 0.05, 0.025, 'x', 26), M.steelDark, V(-0.10, 0.52, 0));
-    add('pto-gears', cyl(0.035, 0.035, 0.025, 'x', 22), M.steelDark, V(-0.10, 0.44, 0));
-    add('pto-output-shaft', cyl(0.0175, 0.0175, 0.20, 'x', 6), M.steel, V(-0.26, 0.44, 0));
-    add('pto-housing', rbox(0.03, 0.12, 0.14, 0.02), M.greyDark, V(-0.215, 0.44, 0));
-    add('pto-bearings', ring(0.03, 0.008, 'x', 20), M.steel, V(-0.19, 0.44, 0));
-    add('pto-seals', ring(0.022, 0.005, 'x', 20), M.rubber, V(-0.235, 0.44, 0));
-    var guard = add('pto-guard', new THREE.CylinderGeometry(0.075, 0.075, 0.16, 20, 1, true, -Math.PI / 2, Math.PI), M.greyDark, V(-0.30, 0.44, 0));
+    // One straight line (SRC-035 M.1 Fig. 1, M.2): shaft D through the hollow countershaft and the pump drive to a
+    // sliding gear behind the pump, which couples to the drive for engine speed or meshes gear J on the pinion sleeve
+    // for ground speed; output shaft straight back to the rear face.
+    add('pto-drive-shaft', cyl(0.016, 0.016, 0.645, 'x', 12), M.steel, V(0.4775, CS, 0.0));
+    // Dual clutch: tubular shaft C from the 9 in disc round the input shaft, geared to D (SRC-035 J.4 Fig. 5)
+    add('pto-drive-shaft', cyl(0.032, 0.032, 0.22, 'x', 20, true), M.steel, V(0.85, CY, 0));
+    add('pto-drive-shaft', rbox(0.06, 0.14, 0.14, 0.02), M.greyDark, V(0.80, CY, 0));              // main drive shaft retainer
+    add('pto-gears', cyl(0.05, 0.05, 0.03, 'x', 24), M.steelDark, V(0.755, CY, 0));
+    add('pto-gears', cyl(0.10, 0.10, 0.03, 'x', 36), M.steelDark, V(0.755, CS, 0));
+    add('pto-gears', cyl(0.055, 0.055, 0.025, 'x', 26), M.steelDark, V(0.155, CS, 0));          // sliding gear
+    add('pto-gears', cyl(0.035, 0.035, 0.025, 'x', 22), M.steelDark, V(0.155, CS + 0.09, 0));   // gear J on the pinion sleeve
+    add('pto-output-shaft', cyl(0.0175, 0.0175, 0.455, 'x', 6), M.steel, V(-0.0725, CS, 0));
+    add('pto-housing', rbox(0.03, 0.12, 0.14, 0.02), M.greyDark, V(-0.215, CS, 0));
+    add('pto-bearings', ring(0.03, 0.008, 'x', 20), M.steel, V(-0.19, CS, 0));
+    add('pto-seals', ring(0.022, 0.005, 'x', 20), M.rubber, V(-0.235, CS, 0));
+    var guard = add('pto-guard', new THREE.CylinderGeometry(0.075, 0.075, 0.16, 20, 1, true, 0, Math.PI), M.greyDark, V(-0.27, CS, 0));
     guard.rotation.z = Math.PI / 2;
-    add('pto-guard', rbox(0.02, 0.12, 0.16, 0.01), M.greyDark, V(-0.225, 0.50, 0));   // shield bracket on the housing
-    add('pto-output-shaft', cyl(0.0175, 0.0175, 0.06, 'x', 6), M.steel, V(-0.33, 0.44, 0));   // splined end under the guard
-    bar('pto-engagement', V(0.0, 0.50, -0.235), V(-0.05, 0.62, -0.26), 0.018, 0.01, M.steelDark);
-    add('pto-engagement', sphere(0.016), M.black, V(-0.05, 0.625, -0.26));
+    add('pto-guard', rbox(0.02, 0.06, 0.16, 0.01), M.greyDark, V(-0.215, CS + 0.07, 0));   // shield bracket on the retainer
+    // Selector lever on the left of the centre housing at a cover plate marked ENGINE / NEUTRAL / GROUND (SRC-035 M.1 Fig. 2)
+    add('pto-engagement', cyl(0.075, 0.075, 0.012, 'z', 28), M.greyDark, V(0.27, 0.54, -0.236));
+    bar('pto-engagement', V(0.24, 0.50, -0.245), V(0.40, 0.60, -0.27), 0.018, 0.01, M.steelDark);
+    add('pto-engagement', sphere(0.016), M.black, V(0.40, 0.605, -0.27));
 
     /* =====================================================================
      * HYDRAULIC LIFT (SRC-035 L.5-L.6)
      * ===================================================================== */
-    // Pump in the sump between gearbox and final drive: four cylinders in two opposed valve chambers
-    add('hyd-pump', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(0.30, 0.43, 0));
-    add('hyd-pump', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(0.14, 0.43, 0));
-    add('hyd-pump-camshaft', cyl(0.016, 0.016, 0.18, 'x', 12), M.steel, V(0.22, 0.44, 0));
+    // Pump in the sump between gearbox and final drive, on the drive line with the PTO shaft through it:
+    // four cylinders in two opposed valve chambers (SRC-035 L.5-L.6, Figs. 8-9)
+    var PX = 0.26, LX = 0.15;   // pump centre; lift shaft, ahead of the axle (SRC-035 L Fig. 7; the manual puts it
+                                // about 0.25-0.3 m ahead, limited here by the modelled centre-housing length)
+    add('hyd-pump', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX + 0.08, CS, 0));
+    add('hyd-pump', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX - 0.08, CS, 0));
+    add('hyd-pump-camshaft', cyl(0.022, 0.022, 0.18, 'x', 12, true), M.steel, V(PX, CS, 0));
     SIDES.forEach(function (s) {
-      add('hyd-pump-camshaft-bearing', ring(0.018, 0.005, 'x', 16), M.steel, V(0.22 + s * 0.07, 0.44, 0));
-      add('hyd-valve-chamber', rbox(0.12, 0.10, 0.04, 0.015), M.grey, V(0.22, 0.44, s * 0.095));
-      add('hyd-pump-cam-blocks', rbox(0.04, 0.05, 0.04, 0.01), M.steelDark, V(0.22 + s * 0.03, 0.44, 0));
+      add('hyd-pump-camshaft-bearing', ring(0.024, 0.005, 'x', 16), M.steel, V(PX + s * 0.07, CS, 0));
+      add('hyd-valve-chamber', rbox(0.12, 0.10, 0.04, 0.015), M.grey, V(PX, CS, s * 0.095));
+      add('hyd-pump-cam-blocks', rbox(0.04, 0.05, 0.04, 0.01), M.steelDark, V(PX + s * 0.03, CS, 0));
       [-0.03, 0.03].forEach(function (o) {
-        add('hyd-pump-pistons', cyl(0.0115, 0.0115, 0.05, 'z', 14), M.steel, V(0.22 + o, 0.44, s * 0.05));
-        add('hyd-pump-piston-rings', ring(0.0118, 0.0015, 'z', 14), M.steelDark, V(0.22 + o, 0.44, s * 0.058));
+        add('hyd-pump-pistons', cyl(0.0115, 0.0115, 0.05, 'z', 14), M.steel, V(PX + o, CS, s * 0.05));
+        add('hyd-pump-piston-rings', ring(0.0118, 0.0015, 'z', 14), M.steelDark, V(PX + o, CS, s * 0.058));
       });
     });
-    add('hyd-control-valve', cyl(0.012, 0.012, 0.06, 'x', 12), M.brass, V(0.10, 0.46, 0.05));
-    add('hyd-relief-valve', cyl(0.01, 0.01, 0.04, 'z', 12), M.brass, V(0.27, 0.49, 0.12));
-    add('hyd-strainer', cyl(0.03, 0.03, 0.08, 'x', 16), M.steelDark, V(0.22, 0.355, 0));
-    // Lift cover with ram cylinder, rockshaft and lift arms
-    add('lift-cover-casting', rbox(0.50, 0.11, 0.40, 0.04), M.grey, V(0.06, 0.955, 0));
-    add('lift-cover-casting', rbox(0.34, 0.06, 0.20, 0.03), M.grey, V(0.08, 1.03, 0));          // ram cylinder hump
-    add('lift-cover-casting', cyl(0.045, 0.045, 0.24, 'z', 20), M.grey, V(-0.12, 0.985, 0));    // rockshaft boss across the rear
-    add('lift-cover-casting', cyl(0.02, 0.02, 0.025, 'y', 16), M.black, V(0.18, 1.07, -0.12));   // hydraulic filler cap
-    add('lift-cover-gasket', box(0.48, 0.004, 0.38), M.gasket, V(0.06, 0.902, 0));
-    add('lift-cylinder', cyl(0.045, 0.045, 0.20, 'x', 24, true), M.steelDark, V(0.16, 0.86, 0));
-    add('lift-piston', cyl(0.038, 0.038, 0.05, 'x', 24), M.steel, V(0.08, 0.86, 0));
-    add('lift-piston-rings', ring(0.038, 0.003, 'x', 24), M.steelDark, V(0.09, 0.86, 0));
-    rod('connecting-rod-ram', V(0.06, 0.86, 0), V(-0.10, 0.92, 0), 0.01, M.steelDark);
-    add('rockshaft', cyl(0.025, 0.025, 0.56, 'z', 18), M.steel, V(-0.12, 0.985, 0));
-    bar('rockshaft', V(-0.12, 0.985, 0), V(-0.10, 0.92, 0), 0.04, 0.03, M.steelDark);   // ram arm
-    [-0.24, -0.10, 0.10, 0.24].forEach(function (z) { add('rockshaft-bushes', cyl(0.03, 0.03, 0.03, 'z', 16, true), M.bronze, V(-0.12, 0.985, z)); });
+    add('hyd-control-valve', cyl(0.012, 0.012, 0.06, 'x', 12), M.brass, V(PX - 0.10, CS - 0.04, 0.05));
+    add('hyd-relief-valve', cyl(0.01, 0.01, 0.04, 'z', 12), M.brass, V(PX + 0.05, CS + 0.06, 0.12));
+    add('hyd-strainer', cyl(0.03, 0.03, 0.08, 'x', 16), M.steelDark, V(PX, 0.375, 0));
+    // Lift cover with ram cylinder (closed end forward), lift shaft and lift arms; the control spring sits in a
+    // rearward extension of the cover behind the lift shaft (SRC-035 L Figs. 6(b), 7, 25, 29)
+    add('lift-cover-casting', rbox(0.70, 0.11, 0.40, 0.04), M.grey, V(0.10, 0.955, 0));
+    add('lift-cover-casting', rbox(0.30, 0.06, 0.20, 0.03), M.grey, V(0.32, 1.03, 0));          // ram cylinder hump
+    add('lift-cover-casting', cyl(0.045, 0.045, 0.24, 'z', 20), M.grey, V(LX, 0.985, 0));       // lift shaft boss
+    add('lift-cover-casting', cyl(0.02, 0.02, 0.025, 'y', 16), M.black, V(0.36, 1.07, -0.12));   // hydraulic filler cap
+    var sph = add('lift-cover-casting', rbox(0.13, 0.09, 0.10, 0.03), M.grey, V(-0.18, 1.0, 0));   // control spring housing
+    sph.rotation.z = -0.17;
+    add('lift-cover-gasket', box(0.68, 0.004, 0.38), M.gasket, V(0.10, 0.902, 0));
+    add('lift-cylinder', cyl(0.045, 0.045, 0.20, 'x', 24, true), M.steelDark, V(0.32, 0.86, 0));
+    add('lift-cylinder', cyl(0.047, 0.047, 0.015, 'x', 24), M.steelDark, V(0.42, 0.86, 0));      // closed front end
+    // Oil transfer pipe from the pump outlet up past the cylinder's closed end to the transfer cap (SRC-035 L.25, Fig. 7)
+    tube('lift-cylinder', [V(PX + 0.08, CS + 0.06, 0.07), V(0.43, CS + 0.07, 0.07), V(0.44, 0.70, 0.07), V(0.44, 1.0, 0.07)], 0.011, M.steel);
+    add('lift-cylinder', cyl(0.035, 0.035, 0.03, 'y', 20), M.steelDark, V(0.44, 1.025, 0.07));   // oil transfer cap
+    add('lift-piston', cyl(0.038, 0.038, 0.05, 'x', 24), M.steel, V(0.245, 0.86, 0));
+    add('lift-piston-rings', ring(0.038, 0.003, 'x', 24), M.steelDark, V(0.255, 0.86, 0));
+    rod('connecting-rod-ram', V(0.225, 0.86, 0), V(LX - 0.03, 0.86, 0), 0.01, M.steelDark);
+    add('rockshaft', cyl(0.025, 0.025, 0.56, 'z', 18), M.steel, V(LX, 0.985, 0));
+    bar('rockshaft', V(LX, 0.985, 0), V(LX - 0.03, 0.86, 0), 0.04, 0.03, M.steelDark);   // ram arm
+    [-0.24, -0.10, 0.10, 0.24].forEach(function (z) { add('rockshaft-bushes', cyl(0.03, 0.03, 0.03, 'z', 16, true), M.bronze, V(LX, 0.985, z)); });
     SIDES.forEach(function (s) {
-      add('rockshaft-seals', ring(0.027, 0.004, 'z', 16), M.rubber, V(-0.12, 0.985, s * 0.205));
+      add('rockshaft-seals', ring(0.027, 0.004, 'z', 16), M.rubber, V(LX, 0.985, s * 0.205));
       var arm = s > 0 ? 'lift-arm-rh' : 'lift-arm-lh';
-      bar(arm, V(-0.12, 0.985, s * 0.26), V(-0.52, 0.96, s * 0.26), 0.055, 0.03, M.grey);
-      add(arm, cyl(0.035, 0.035, 0.04, 'z', 16), M.grey, V(-0.12, 0.985, s * 0.26));
+      bar(arm, V(LX, 0.985, s * 0.26), V(LX - 0.42, 0.95, s * 0.26), 0.055, 0.03, M.grey);
+      add(arm, cyl(0.035, 0.035, 0.04, 'z', 16), M.grey, V(LX, 0.985, s * 0.26));
     });
-    // Controls on the right of the lift cover
-    var q = add('quadrant', new THREE.TorusGeometry(0.12, 0.008, 6, 20, Math.PI * 0.55), M.steelDark, V(0.10, 0.96, 0.225));
+    // Controls on the right of the lift cover, forward of the lift shaft
+    var q = add('quadrant', new THREE.TorusGeometry(0.12, 0.008, 6, 20, Math.PI * 0.55), M.steelDark, V(0.25, 0.96, 0.225));
     q.rotation.z = Math.PI * 0.2;
-    rod('draft-lever', V(0.10, 0.96, 0.235), V(0.0, 1.10, 0.245), 0.008, M.steelDark);
-    add('draft-lever', sphere(0.015), M.black, V(0.0, 1.105, 0.245));
-    rod('position-lever', V(0.10, 0.96, 0.25), V(0.04, 1.09, 0.26), 0.008, M.steelDark);
-    add('position-lever', sphere(0.014), M.black, V(0.04, 1.095, 0.26));
-    // Draft control: top link bracket presses on the internal control spring
-    add('top-link-bracket', rbox(0.08, 0.10, 0.12, 0.02), M.grey, V(-0.22, 0.98, 0));
-    SIDES.forEach(function (s) { add('top-link-bracket', rbox(0.06, 0.12, 0.012, 0.006), M.grey, V(-0.24, 1.02, s * 0.05)); });
-    add('top-link-bracket', cyl(0.012, 0.012, 0.13, 'z', 12), M.steel, V(-0.25, 1.05, 0));   // top link pin
-    helix('draft-control-spring', V(-0.17, 0.86, 0), 0.10, 0.03, 6, 0.006, M.steel).rotation.z = Math.PI / 2;
-    add('draft-control-plunger', cyl(0.012, 0.012, 0.10, 'x', 12), M.steel, V(-0.12, 0.90, 0));
-    bar('draft-control-rocker', V(-0.05, 0.90, 0.0), V(-0.02, 0.82, 0.0), 0.03, 0.012, M.steelDark);
-    add('position-control-cam', cyl(0.03, 0.03, 0.015, 'z', 3), M.steelDark, V(-0.04, 0.95, 0.10));
-    rod('internal-control-linkage', V(-0.04, 0.95, 0.08), V(0.10, 0.88, 0.05), 0.005, M.steel);
+    rod('draft-lever', V(0.25, 0.96, 0.235), V(0.15, 1.10, 0.245), 0.008, M.steelDark);
+    add('draft-lever', sphere(0.015), M.black, V(0.15, 1.105, 0.245));
+    rod('position-lever', V(0.25, 0.96, 0.25), V(0.19, 1.09, 0.26), 0.008, M.steelDark);
+    add('position-lever', sphere(0.014), M.black, V(0.19, 1.095, 0.26));
+    // Draft control: the top link yoke screws onto the plunger running through the double-acting control spring;
+    // the rocker pivots on a pin above the top link pin.
+    SIDES.forEach(function (s) { add('top-link-bracket', rbox(0.04, 0.11, 0.012, 0.006), M.grey, V(-0.245, 1.045, s * 0.05)); });
+    add('top-link-bracket', cyl(0.012, 0.012, 0.13, 'z', 12), M.steel, V(-0.24, 1.08, 0));   // rocker pivot pin
+    add('top-link-bracket', cyl(0.012, 0.012, 0.13, 'z', 12), M.steel, V(-0.25, 1.01, 0));   // top link pin
+    helix('draft-control-spring', V(-0.13, 0.985, 0), 0.12, 0.033, 6, 0.006, M.steel).rotation.z = Math.PI / 2 - 0.17;
+    rod('draft-control-plunger', V(-0.12, 0.983, 0), V(-0.25, 1.01, 0), 0.011, M.steel);
+    bar('draft-control-rocker', V(-0.10, 0.97, 0.0), V(-0.08, 0.88, 0.0), 0.03, 0.012, M.steelDark);
+    add('position-control-cam', cyl(0.03, 0.03, 0.015, 'z', 3), M.steelDark, V(0.10, 0.95, 0.10));
+    rod('internal-control-linkage', V(0.10, 0.95, 0.08), V(PX - 0.10, CS + 0.03, 0.05), 0.005, M.steel);
 
     /* =====================================================================
      * THREE-POINT LINKAGE (Category I)
@@ -764,13 +872,13 @@
       add('ball-ends', sphere(0.028), M.steel, back);
       add('linkage-pins', cyl(0.011, 0.011, 0.08, 'z', 12), M.steel, front);
       var mid = V(-0.42, 0.40, s * 0.287);
-      var armEnd = V(-0.50, 0.96, s * 0.26);
+      var armEnd = V(-0.27, 0.95, s * 0.26);
       if (s > 0) {
         // Right-hand lift rod with levelling box
-        rod('lift-rod-rh', armEnd, V(-0.48, 0.80, s * 0.27), 0.012, M.steelDark);
-        add('levelling-box', rbox(0.05, 0.12, 0.05, 0.01), M.greyDark, V(-0.475, 0.74, s * 0.272));
-        rod('levelling-box', V(-0.475, 0.80, s * 0.272), V(-0.42, 0.90, s * 0.33), 0.006, M.steel);
-        rod('lift-rod-rh', V(-0.47, 0.68, s * 0.275), mid, 0.012, M.steelDark);
+        rod('lift-rod-rh', armEnd, V(-0.311, 0.80, s * 0.27), 0.012, M.steelDark);
+        add('levelling-box', rbox(0.05, 0.12, 0.05, 0.01), M.greyDark, V(-0.327, 0.74, s * 0.272));
+        rod('levelling-box', V(-0.327, 0.80, s * 0.272), V(-0.27, 0.90, s * 0.33), 0.006, M.steel);
+        rod('lift-rod-rh', V(-0.344, 0.68, s * 0.275), mid, 0.012, M.steelDark);
       } else {
         rod('lift-rod-lh', armEnd, mid, 0.012, M.steelDark);
       }
@@ -782,8 +890,8 @@
         link.rotation.z = 0.4;
       }
     });
-    rod('top-link', V(-0.25, 0.99, 0), V(-0.86, 1.04, 0), 0.016, M.greyDark);
-    add('top-link', cyl(0.024, 0.024, 0.14, 'x', 12), M.greyDark, V(-0.56, 1.015, 0)).rotation.z = Math.PI / 2 + 0.08;
+    rod('top-link', V(-0.25, 1.01, 0), V(-0.885, 1.04, 0), 0.016, M.greyDark);
+    add('top-link', cyl(0.024, 0.024, 0.14, 'x', 12), M.greyDark, V(-0.57, 1.025, 0)).rotation.z = Math.PI / 2 + 0.05;
     // Swinging drawbar: hitch bar hung from a bracket under the centre housing with two stays to the
     // axle housings, clevis and pin at the rear (79026403V kit shape, approximate)
     add('drawbar', rbox(0.70, 0.022, 0.07, 0.006), M.greyDark, V(-0.48, 0.36, 0));
@@ -795,11 +903,18 @@
     /* =====================================================================
      * FRONT AXLE AND STEERING
      * ===================================================================== */
-    add('front-axle-beam', rbox(0.11, 0.09, 0.62, 0.02), M.greyDark, V(WB, 0.58, 0));
-    add('front-axle-pivot-pin', cyl(0.02, 0.02, 0.16, 'x', 14), M.steel, V(WB, 0.60, 0));
+    // Centre member swept rearwards to the extensions (SRC-035 O.1 Figs. 1-2), pivoting fore and aft on a pin in the
+    // front axle support bracket; wheels and kingpins stay at the 72 in wheelbase.
+    add('front-axle-beam', rbox(0.11, 0.09, 0.30, 0.02), M.greyDark, V(WB + 0.10, 0.58, 0));
+    add('front-axle-pivot-pin', cyl(0.02, 0.02, 0.16, 'x', 14), M.steel, V(WB + 0.10, 0.60, 0));
     SIDES.forEach(function (s) {
-      add('front-axle-extensions', rbox(0.09, 0.075, 0.30, 0.015), M.greyDark, V(WB, 0.58, s * 0.40));
-      rod('radius-rods', V(WB - 0.02, 0.57, s * 0.42), V(1.16, 0.50, s * 0.14), 0.016, M.greyDark);
+      bar('front-axle-beam', V(WB + 0.10, 0.58, s * 0.14), V(WB + 0.035, 0.58, s * 0.36), 0.09, 0.11, M.greyDark);
+      var ext = add('front-axle-extensions', rbox(0.09, 0.075, 0.30, 0.015), M.greyDark, V(WB - 0.015, 0.58, s * 0.44));
+      ext.rotation.y = s * 0.12;
+      [0.30, 0.38].forEach(function (z) { hexNut('front-axle-extensions', V(WB + 0.02 - (z - 0.30) * 0.2, 0.63, s * z), 0.01, 'y'); });
+      // Radius rods from the outer axle back to ball sockets under caps on the clutch housing (SRC-035 O.3-O.4)
+      rod('radius-rods', V(WB - 0.02, 0.57, s * 0.42), V(1.04, 0.48, s * 0.19), 0.016, M.greyDark);
+      add('radius-rods', cyl(0.035, 0.035, 0.03, 'z', 18), M.greyDark, V(1.04, 0.48, s * 0.175));
       var kz = s * (TF - 0.075);
       add('stub-axle', cyl(0.03, 0.03, 0.30, 'y', 16), M.greyDark, V(WB, 0.47, kz));
       add('stub-axle', cyl(0.02, 0.02, 0.07, 'z', 14), M.steel, V(WB, RF, s * (TF - 0.04)));
@@ -807,10 +922,16 @@
       add('kingpin-bushes', ring(0.032, 0.006, 'y', 16), M.bronze, V(WB, 0.34, kz));
       add('front-hub', cyl(0.055, 0.05, 0.08, 'z', 24), M.greyDark, V(WB, RF, s * (TF + 0.02)));
       bar('steering-arms', V(WB, 0.62, kz), V(WB - 0.16, 0.63, s * (TF - 0.13)), 0.035, 0.02, M.greyDark);
-      rod('drag-links', V(WB - 0.16, 0.64, s * (TF - 0.13)), V(0.86, 0.80, s * 0.24), 0.014, M.steelDark);
+      // Drag links back to the drop arms, running clear along each side of the engine (SRC-035 O Fig. 1)
+      rod('drag-links', V(WB - 0.16, 0.64, s * (TF - 0.13)), V(0.88, 0.64, s * 0.26), 0.014, M.steelDark);
+      // Primary (LH) and secondary (RH) drop arms on the ends of the steering box rocker shafts (SRC-035 N.1, N Fig. 5)
+      add('steering-box', cyl(0.03, 0.03, 0.05, 'z', 16), M.grey, V(0.86, 0.91, s * 0.17));
+      bar('steering-box', V(0.86, 0.91, s * 0.20), V(0.88, 0.64, s * 0.25), 0.04, 0.02, M.greyDark);
     });
+    // Front axle support bracket bolted to the engine front, carrying the pivot pin (SRC-035 O.3, O.6)
+    add('sump', rbox(0.24, 0.14, 0.26, 0.04), M.grey, V(1.84, 0.555, 0));
     add('steering-box', rbox(0.16, 0.14, 0.30, 0.03), M.grey, V(0.86, 0.95, 0));
-    var colA = V(0.83, 1.0, 0), colB = V(0.585, 1.315, 0);
+    var colA = V(0.82, 0.98, 0), colB = V(0.62, 1.29, 0);
     rod('steering-column', colA, colB, 0.022, M.greyDark);
     var colDir = new THREE.Vector3().subVectors(colB, colA).normalize();
     var sw = part('steering-wheel');
@@ -846,22 +967,37 @@
     add('dynamo', cyl(0.062, 0.062, 0.03, 'x', 24), M.alu, V(1.53, 0.86, 0.255));                 // commutator end bracket
     add('dynamo', rbox(0.10, 0.012, 0.04, 0.004), M.steelDark, V(1.66, 0.92, 0.25));              // adjusting strap
     add('dynamo', cyl(0.035, 0.035, 0.02, 'x', 20), M.greyDark, V(1.79, 0.86, 0.255));
+    // Two 6 V batteries in series (SRC-035 G.34 Fig. 28, G.35, H.8 Fig. 11(b)): one on the carrier under the rear of
+    // the bonnet, which also holds the back of the fuel tank, and one on the left rear axle housing.
+    add('battery', rbox(0.11, 0.17, 0.18, 0.01), M.battery, V(1.01, 1.02, 0.0));
+    add('battery', rbox(0.17, 0.20, 0.13, 0.01), M.battery, V(0.22, 0.76, -0.42));
+    [[1.01, 1.115, 0.06], [1.01, 1.115, -0.06], [0.22, 0.87, -0.38], [0.22, 0.87, -0.46]].forEach(function (q) { add('battery', cyl(0.009, 0.009, 0.02, 'y', 10), M.brass, V(q[0], q[1], q[2])); });
+    add('battery', rbox(0.15, 0.01, 0.22, 0.004), M.steelDark, V(1.01, 0.93, 0.0));                // carrier
+    add('battery', rbox(0.21, 0.01, 0.17, 0.004), M.steelDark, V(0.22, 0.655, -0.42));             // rear carrier
+    // Headlamps on V brackets bolted to the radiator cowl sides (SRC-035 H.3 Fig. 3, H.5 Fig. 8; part of the lighting kit)
     SIDES.forEach(function (s) {
-      add('battery', rbox(0.09, 0.17, 0.16, 0.01), M.battery, V(1.985, 0.78, s * 0.09));
-      add('battery', cyl(0.009, 0.009, 0.02, 'y', 10), M.brass, V(1.985, 0.875, s * 0.09 + 0.04));
-      add('headlamps', lathe([[0.0, 0.0], [0.05, 0.0], [0.068, 0.04], [0.072, 0.09], [0.0, 0.09]], 'x', 28), M.red, V(1.95, 1.04, s * 0.30));
-      add('headlamps', ring(0.07, 0.006, 'x', 28), M.chrome, V(2.04, 1.04, s * 0.30));
-      add('headlamps', cyl(0.064, 0.064, 0.008, 'x', 28), M.lens, V(2.04, 1.04, s * 0.30));
+      add('headlamps', lathe([[0.0, 0.0], [0.05, 0.0], [0.068, 0.04], [0.072, 0.09], [0.0, 0.09]], 'x', 28), M.red, V(1.93, 1.05, s * 0.40));
+      add('headlamps', ring(0.07, 0.006, 'x', 28), M.chrome, V(2.02, 1.05, s * 0.40));
+      add('headlamps', cyl(0.064, 0.064, 0.008, 'x', 28), M.lens, V(2.02, 1.05, s * 0.40));
+      bar('headlamps', V(1.96, 1.0, s * 0.29), V(1.96, 1.0, s * 0.39), 0.03, 0.01, M.steelDark);
     });
-    tube('battery-cables', [V(1.985, 0.88, 0.13), V(1.90, 0.62, 0.22), V(1.40, 0.56, 0.20), V(1.11, 0.56, 0.20)], 0.007, M.black);
+    tube('battery-cables', [V(1.01, 1.125, 0.06), V(1.06, 0.95, 0.15), V(1.10, 0.66, 0.20), V(1.11, 0.58, 0.20)], 0.007, M.black);
+    tube('battery-cables', [V(1.01, 1.125, -0.06), V(0.96, 1.0, -0.21), V(0.70, 0.64, -0.24), V(0.40, 0.68, -0.27), V(0.22, 0.88, -0.38)], 0.007, M.black);
+    tube('battery-cables', [V(0.22, 0.88, -0.46), V(0.16, 0.74, -0.47), V(0.10, 0.66, -0.40)], 0.006, M.black);   // earth strap
     tube('wiring-harness', [V(0.85, 1.0, 0.18), V(1.20, 0.95, 0.20), V(1.65, 0.96, 0.22), V(1.94, 1.04, 0.27)], 0.006, M.black);
     tube('wiring-harness', [V(1.94, 1.04, 0.27), V(1.96, 1.07, 0.0), V(1.94, 1.04, -0.27)], 0.005, M.black);
     tube('wiring-harness', [V(0.80, 0.98, 0.18), V(0.40, 1.02, 0.30), V(-0.05, 1.10, 0.62)], 0.005, M.black);
+    tube('wiring-harness', [V(-0.05, 1.10, 0.62), V(-0.30, 1.05, 0.30), V(-0.30, 1.05, -0.30), V(-0.08, 1.12, -0.66)], 0.005, M.black);
     add('regulator', rbox(0.04, 0.08, 0.10, 0.01), M.black, V(0.88, 1.02, 0.17));
-    add('intake-heater', cyl(0.01, 0.01, 0.06, 'z', 10), M.brass, V(1.25, 1.07, 0.23));
+    add('intake-heater', cyl(0.01, 0.01, 0.06, 'z', 10), M.brass, V(1.20, 1.07, 0.225));
     add('horn', cyl(0.035, 0.02, 0.04, 'x', 18), M.black, V(1.82, 0.98, -0.22));
-    add('rear-lamp', rbox(0.06, 0.06, 0.05, 0.015), M.red, V(-0.12, 1.32, 0.80));
-    add('rear-lamp', cyl(0.022, 0.022, 0.006, 'x', 18), M.glass, V(-0.153, 1.32, 0.80));
+    // Tail lamp on the top outer rear of each mudguard; plough lamp on the left bracket (SRC-035 H.1 Fig. 1, H.9 Fig. 12)
+    SIDES.forEach(function (s) {
+      add('rear-lamp', rbox(0.06, 0.06, 0.05, 0.015), M.red, V(-0.12, 1.32, s * 0.80));
+      add('rear-lamp', cyl(0.022, 0.022, 0.006, 'x', 18), M.glass, V(-0.153, 1.32, s * 0.80));
+    });
+    add('rear-lamp', lathe([[0.0, 0.0], [0.04, 0.0], [0.06, 0.035], [0.065, 0.07], [0.0, 0.07]], 'x', 24), M.black, V(-0.10, 1.41, -0.78)).scale.x = -1;
+    add('rear-lamp', cyl(0.06, 0.06, 0.006, 'x', 24), M.lens, V(-0.172, 1.41, -0.78));
 
     /* =====================================================================
      * BODYWORK AND OPERATOR AREA (shapes from the owner's photo and period views; not measured)
@@ -874,14 +1010,14 @@
       xs.forEach(function (x, i) {
         var t = (x - 0.86) / (1.99 - 0.86);
         var hw = 0.275 - 0.03 * t - (i === xs.length - 1 ? 0.02 : 0);
-        var top = 1.185 - 0.06 * t * t - (i === xs.length - 1 ? 0.025 : 0);
+        var top = bonnetTop(x) - (i === xs.length - 1 ? 0.03 : 0);
         var bottom = 0.97 + (x > 1.6 ? 0.0 : 0.0);
         secs.push({ x: x, pts: crownSection(hw, bottom, top, 0.095 - 0.01 * t, 14) });
       });
       add('bonnet', loft(secs, false), M.red);
       // Bonnet side lips and the raised centre spine
       SIDES.forEach(function (s) { add('bonnet', box(1.12, 0.012, 0.016), M.redDark, V(1.42, 0.965, s * 0.268)); });
-      add('bonnet', rbox(1.0, 0.012, 0.05, 0.004), M.red, V(1.40, 1.183, 0));
+      add('bonnet', rbox(1.0, 0.012, 0.05, 0.004), M.red, V(1.40, bonnetTop(1.40) - 0.002, 0));
       // Hinge and catch (826870V1) at the rear corners
       SIDES.forEach(function (s) { add('bonnet', cyl(0.008, 0.008, 0.06, 'x', 10), M.steelDark, V(0.90, 1.10, s * 0.25)); });
     })();
@@ -894,46 +1030,44 @@
       ].map(function (sec) { return { x: sec.x, pts: sec.pts }; }), false), M.red).material.side = THREE.DoubleSide;
       for (var lv = 0; lv < 6; lv++) add('side-panels', box(0.16, 0.006, 0.012), M.redDark, V(1.78, 0.90 - lv * 0.035, s * 0.252));
     });
-    // Grille: rounded cast shield with horizontal mesh bars, badge above, lamp wings either side.
+    // Grille: rounded cast shield with horizontal mesh bars, badge above.
     (function () {
       var sh = new THREE.Shape();
-      sh.moveTo(-0.27, 0.0); sh.lineTo(0.27, 0.0); sh.lineTo(0.27, -0.30); sh.quadraticCurveTo(0.27, -0.42, 0.15, -0.46);
-      sh.lineTo(-0.15, -0.46); sh.quadraticCurveTo(-0.27, -0.42, -0.27, -0.30); sh.lineTo(-0.27, 0.0);
+      sh.moveTo(-0.27, 0.0); sh.lineTo(0.27, 0.0); sh.lineTo(0.27, -0.36); sh.quadraticCurveTo(0.27, -0.50, 0.15, -0.55);
+      sh.lineTo(-0.15, -0.55); sh.quadraticCurveTo(-0.27, -0.50, -0.27, -0.36); sh.lineTo(-0.27, 0.0);
       var hole = new THREE.Path();
-      hole.moveTo(-0.215, -0.045); hole.lineTo(0.215, -0.045); hole.lineTo(0.215, -0.30); hole.quadraticCurveTo(0.215, -0.385, 0.12, -0.415);
-      hole.lineTo(-0.12, -0.415); hole.quadraticCurveTo(-0.215, -0.385, -0.215, -0.30); hole.lineTo(-0.215, -0.045);
+      hole.moveTo(-0.215, -0.054); hole.lineTo(0.215, -0.054); hole.lineTo(0.215, -0.36); hole.quadraticCurveTo(0.215, -0.46, 0.12, -0.50);
+      hole.lineTo(-0.12, -0.50); hole.quadraticCurveTo(-0.215, -0.46, -0.215, -0.36); hole.lineTo(-0.215, -0.054);
       sh.holes.push(hole);
       var shell = new THREE.ExtrudeGeometry(sh, { depth: 0.06, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.015, bevelSegments: 3, curveSegments: 12 });
       shell.rotateY(Math.PI / 2);
-      add('grille', shell, M.red, V(2.0, 1.14, 0));
+      add('grille', shell, M.red, V(2.0, 1.235, 0));
       // Surround ring and the mesh of bars inside
       var inner = new THREE.Shape();
-      inner.moveTo(-0.22, -0.05); inner.lineTo(0.22, -0.05); inner.lineTo(0.22, -0.30); inner.quadraticCurveTo(0.22, -0.39, 0.12, -0.42);
-      inner.lineTo(-0.12, -0.42); inner.quadraticCurveTo(-0.22, -0.39, -0.22, -0.30); inner.lineTo(-0.22, -0.05);
+      inner.moveTo(-0.22, -0.06); inner.lineTo(0.22, -0.06); inner.lineTo(0.22, -0.36); inner.quadraticCurveTo(0.22, -0.47, 0.12, -0.505);
+      inner.lineTo(-0.12, -0.505); inner.quadraticCurveTo(-0.22, -0.47, -0.22, -0.36); inner.lineTo(-0.22, -0.06);
       var mesh = new THREE.ExtrudeGeometry(inner, { depth: 0.01, bevelEnabled: false, curveSegments: 12 });
       mesh.rotateY(Math.PI / 2);
-      add('grille', mesh, M.black, V(2.02, 1.14, 0));
-      for (var gb = 0; gb < 12; gb++) {
-        var gy = 1.08 - gb * 0.03;
-        var hw = gy > 0.84 ? 0.21 : 0.21 - (0.84 - gy) * 0.9;
+      add('grille', mesh, M.black, V(2.02, 1.235, 0));
+      for (var gb = 0; gb < 15; gb++) {
+        var gy = 1.165 - gb * 0.03;
+        var hw = gy > 0.85 ? 0.21 : 0.21 - (0.85 - gy) * 0.9;
         add('grille', box(0.006, 0.008, hw * 2), M.plate, V(2.04, gy, 0));
       }
-      [-0.10, 0.0, 0.10].forEach(function (z) { add('grille', box(0.006, 0.36, 0.006), M.plate, V(2.041, 0.91, z)); });
-      // Lamp wings each side of the grille
-      SIDES.forEach(function (s) { add('grille', lathe([[0.0, 0.0], [0.085, 0.0], [0.09, 0.03], [0.07, 0.10], [0.0, 0.10]], 'x', 28), M.red, V(1.93, 1.04, s * 0.30)); });
+      [-0.10, 0.0, 0.10].forEach(function (z) { add('grille', box(0.006, 0.44, 0.006), M.plate, V(2.041, 0.955, z)); });
     })();
     // Front badge: the triple-triangle emblem on a plate (187990V1)
-    add('front-badge', cyl(0.045, 0.045, 0.006, 'x', 32), M.badge, V(2.072, 1.10, 0));
-    [[0, 0.016], [-0.016, -0.012], [0.016, -0.012]].forEach(function (o) { add('front-badge', cyl(0.012, 0.012, 0.004, 'x', 3), M.badgeRed, V(2.077, 1.10 + o[1], o[0])).rotation.x = Math.PI / 2; });
+    add('front-badge', cyl(0.045, 0.045, 0.006, 'x', 32), M.badge, V(2.072, 1.20, 0));
+    [[0, 0.016], [-0.016, -0.012], [0.016, -0.012]].forEach(function (o) { add('front-badge', cyl(0.012, 0.012, 0.004, 'x', 3), M.badgeRed, V(2.077, 1.20 + o[1], o[0])).rotation.x = Math.PI / 2; });
     // "Massey Ferguson 35" side name plates on the bonnet
-    SIDES.forEach(function (s) { add('front-badge', rbox(0.26, 0.03, 0.005, 0.004), M.badge, V(1.30, 1.09, s * 0.272)); });
+    SIDES.forEach(function (s) { add('front-badge', rbox(0.26, 0.03, 0.005, 0.004), M.badge, V(1.30, 1.16, s * 0.272)); });
 
     // Dash cowl and instrument panel: a sloping panel between the bonnet rear and the
     // steering column, carrying the gauges, key switch and the serial plate below.
     (function () {
       var cowl = loft([
-        { x: 0.86, pts: crownSection(0.275, 0.95, 1.185, 0.09, 14) },
-        { x: 0.80, pts: crownSection(0.265, 0.95, 1.12, 0.08, 14) }
+        { x: 0.86, pts: crownSection(0.275, 0.95, bonnetTop(0.86), 0.09, 14) },
+        { x: 0.80, pts: crownSection(0.265, 0.95, 1.17, 0.08, 14) }
       ], false);
       add('dashboard', cowl, M.red).material.side = THREE.DoubleSide;
       var panel = add('dashboard', rbox(0.03, 0.24, 0.50, 0.03), M.black, V(0.815, 1.02, 0));
@@ -995,9 +1129,10 @@
       bar('mudguards', V(0.52, RR + 0.02, s * 0.44), V(0.56, RR + 0.30, s * (TR - 0.12)), 0.03, 0.01, M.grey);
     });
 
-    // Seat: De Luxe cushion seat on a sprung pan, with the coil spring under it (825608V1)
-    bar('seat-support', V(-0.08, 0.98, 0), V(-0.30, 1.04, 0), 0.06, 0.012, M.steelDark);
-    helix('seat-support', V(-0.34, 1.045, 0), 0.07, 0.045, 4, 0.006, M.steelDark);
+    // Seat: De Luxe cushion seat on a bucket pan, carried by a hinged mounting bracket bolted to two studs on the
+    // lift cover (SRC-035 R.1 Figs. 1-2); no coil spring.
+    SIDES.forEach(function (s) { bar('seat-support', V(-0.05, 0.99, s * 0.10), V(-0.42, 1.095, s * 0.12), 0.04, 0.01, M.steelDark); });
+    rod('seat-support', V(-0.45, 1.10, -0.15), V(-0.45, 1.10, 0.15), 0.008, M.steel);
     add('seat-support', rbox(0.30, 0.012, 0.36, 0.02), M.steelDark, V(-0.36, 1.115, 0));
     add('seat', rbox(0.34, 0.07, 0.40, 0.035), M.seat, V(-0.36, 1.16, 0));
     add('seat', rbox(0.055, 0.22, 0.38, 0.03), M.seat, V(-0.545, 1.29, 0)).rotation.z = -0.22;
@@ -1009,14 +1144,32 @@
       for (var cp = 0; cp < 5; cp++) for (var cq = 0; cq < 3; cq++) add('footplates', box(0.03, 0.003, 0.012), M.greyDark, V(0.26 + cp * 0.13, 0.567, s * (0.27 + cq * 0.10))).rotation.y = 0.6;
       add('footplates', box(0.30, 0.008, 0.14), M.greyDark, V(0.58, 0.40, s * 0.50));   // step
       bar('footplates', V(0.58, 0.40, s * 0.44), V(0.58, 0.56, s * 0.44), 0.06, 0.008, M.greyDark);
-      if (s > 0) {
-        [0.29, 0.345].forEach(function (z, i) {
-          bar('brake-pedals', V(0.86, 0.47, z), V(0.77, 0.72, z + 0.01), 0.022, 0.014, M.steelDark);
-          add('brake-pedals', rbox(0.06, 0.012, 0.045, 0.006), M.steelDark, V(0.765, 0.73, z + 0.01));
-          rod('brake-linkage', V(0.86, 0.47, z), V(0.06, RR - 0.17, s * 0.31), 0.008, M.steel);
-        });
-        add('parking-brake', box(0.02, 0.08, 0.02), M.steelDark, V(0.79, 0.77, 0.37));
+    });
+    // Brake pedals and linkage (SRC-035 P.1-P.2, Fig. 2). Both pedals sit on the right of the transmission
+    // housing and pivot on the combined brake cross shaft, which passes across through the front of the
+    // transmission case (SRC-035 J.8 step 7, Fig. 12), so the pedals rise almost straight to their pads. The left-wheel pedal is keyed to the cross shaft; the
+    // combined brake arm on the shaft's left end works the left brake. The right-wheel pedal turns freely on
+    // the shaft and works the right brake through its own lever. A rod and yoke from each arm runs back to
+    // the rear brake lever on that wheel's backplate.
+    var XS = 0.90, YS = 0.45, BZ_ROD = 0.548 - 0.05;                          // cross shaft
+    rod('brake-linkage', V(XS, YS, -0.33), V(XS, YS, 0.37), 0.014, M.steel);
+    add('parking-brake', rbox(0.10, 0.05, 0.01, 0.01), M.steelDark, V(XS - 0.04, YS + 0.05, 0.17));   // parking brake sector
+    [0.29, 0.345].forEach(function (z, i) {
+      add('brake-pedals', cyl(0.028, 0.028, 0.045, 'z', 16), M.steelDark, V(XS, YS, z));             // boss on the cross shaft
+      // Arm: up and back from the boss through the footplate to the pad
+      bar('brake-pedals', V(XS, YS, z), V(0.83, 0.58, z), 0.03, 0.016, M.steelDark);
+      bar('brake-pedals', V(0.83, 0.58, z), V(0.79, 0.70, z), 0.026, 0.016, M.steelDark);
+      add('brake-pedals', rbox(0.075, 0.014, 0.05, 0.006), M.steelDark, V(0.78, 0.715, z));         // pad
+      if (i === 1) {
+        bar('brake-pedals', V(XS, YS, z + 0.03), V(XS + 0.01, YS - 0.08, z + 0.03), 0.03, 0.014, M.steelDark);   // right pedal's own lever
       }
+    });
+    add('parking-brake', box(0.012, 0.06, 0.012), M.steelDark, V(0.80, 0.62, 0.275));                // latch on the left-wheel pedal
+    add('brake-pedals', box(0.02, 0.012, 0.06), M.steel, V(0.785, 0.70, 0.318));                      // combined brake lock
+    bar('brake-linkage', V(XS, YS, -0.31), V(XS + 0.01, YS - 0.08, -0.31), 0.03, 0.014, M.steelDark); // combined brake arm (LH)
+    SIDES.forEach(function (s) {
+      var zArm = s > 0 ? 0.375 : -0.31;
+      rod('brake-linkage', V(XS + 0.01, YS - 0.08, zArm), V(0.13, RR - 0.21, s * (BZ_ROD)), 0.008, M.steel);
     });
     // Front weights: removable, not fitted in the default model
     add('front-weights', rbox(0.06, 0.18, 0.40, 0.02), M.greyDark, V(2.14, 0.66, 0));

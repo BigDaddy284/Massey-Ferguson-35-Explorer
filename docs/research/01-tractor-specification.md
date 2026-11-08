@@ -124,7 +124,7 @@ it has live PTO **cannot** be assumed. It is settled by:
 | Item | Finding | Status | Sources |
 |---|---|---|---|
 | Final drive | Spiral bevel crown wheel and pinion with differential in centre housing; half shafts in axle trumpets. Layout inferred from Ferguson system design; **gear type not sourced** | U | — |
-| Brakes | Shoe brakes on the differential shafts ("differential shoe brakes"), independent pedals | PV | SRC-004 |
+| Brakes | Girling double-anchor floating-cam internal-expanding drum brakes, 14 × 2 in, **at the rear wheels**: backplate on the outer end of each axle housing, drum on the axle shaft. Two independent pedals on the right of the transmission housing on a combined brake cross shaft, which carries the left-wheel pedal's motion to the left side; rod and yoke from each arm to the rear brake lever on the backplate (SRC-035 P.1–P.2, K.11). SRC-004's "differential shoe brakes" conflicts with the manual and is not used. | V | SRC-035, SRC-004 |
 | Differential lock | A diff lock was "added" during the 35's life; **date not established**. Treated as variant until confirmed for 1958 | VD | SRC-010 |
 | Casting date codes | Day/month/year on RH side of centre housing forward of the round port. Useful for dating | PV | SRC-003 |
 
