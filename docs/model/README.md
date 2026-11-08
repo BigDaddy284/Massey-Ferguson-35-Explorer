@@ -106,6 +106,17 @@ the tool box clamped to the left radius rod, the steering column upper bearing, 
 and brace. Their positions follow the figures by eye. The book does not show which radius rod carries the tool
 box; the left is assumed.
 
+A later pass placed the three parts that first pass left out of the model and the centre housing items it could
+not name. The centre housing shaft, needle bearing and coupling at the front of figure C-5 (p207 items 21-25) were
+identified as the PTO rear drive shaft through the TO35 parts book's names for the same numbers and the workshop
+manual's PTO section (SRC-035 M.1): the gearbox PTO shaft now stops at the centre housing front wall, where a sleeve
+coupling with its pin joins it to a splined shaft that runs through the hydraulic pump drive to a needle bearing
+just ahead of the PTO sliding gear, all on the `CS` drive line. The wheel nut socket and L-shaped tommy bar (figure
+A-7, items 18-19) lie inside the tool box, which is now a casing for X-ray. The heater plug resistor sits on a bracket
+behind the left of the instrument panel with its warning light on the panel face beside the starter switch (figure
+H-15, items 12-13); both are cold-climate variant parts and hide with the heater plugs. Sizes of the resistor,
+warning light and wheel brace are by eye from the figures.
+
 ## Approximate
 
 These are placed by judgement and the owner's photo, not measured, and should be checked when the

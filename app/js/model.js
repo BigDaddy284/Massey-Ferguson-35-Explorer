@@ -43,7 +43,7 @@
     'gearbox-casing', 'gearbox-top-cover', 'centre-housing', 'axle-trumpet-lh', 'axle-trumpet-rh', 'brake-drum',
     'lift-cover-casting', 'bonnet', 'side-panels', 'grille', 'fuel-tank', 'radiator', 'dashboard', 'hyd-pump', 'hyd-pump-body',
     'cylinder-liner', 'lift-cylinder', 'clutch-dual-cover', 'clutch-single-cover', 'pto-guard', 'air-cleaner', 'mudguards',
-    'footplates', 'seat', 'steering-box', 'flywheel', 'clutch-dual-transmission-plate', 'clutch-dual-pto-plate', 'clutch-single-plate'];
+    'footplates', 'seat', 'steering-box', 'flywheel', 'tool-box', 'clutch-dual-transmission-plate', 'clutch-dual-pto-plate', 'clutch-single-plate'];
 
   // Exploded-view directions: how far (metres, at full explosion) each group moves away from
   // its parent assembly. 'mirror' flips z for the left-hand side so pairs open outwards.
@@ -880,7 +880,13 @@
     // One straight line (SRC-035 M.1 Fig. 1, M.2): shaft D through the hollow countershaft and the pump drive to a
     // sliding gear behind the pump, which couples to the drive for engine speed or meshes gear J on the pinion sleeve
     // for ground speed; output shaft straight back to the rear face.
-    add('pto-drive-shaft', cyl(0.016, 0.016, 0.645, 'x', 12), M.steel, V(0.4775, CS, 0.0));
+    add('pto-drive-shaft', cyl(0.016, 0.016, 0.44, 'x', 12), M.steel, V(0.58, CS, 0.0));          // to the centre housing front wall
+    // Rear drive shaft in the centre housing (819045 p207 items 21-25, figure C-5; SRC-035 M.1 Fig. 1): sleeve coupling
+    // with its pin at the front wall, the shaft through the hydraulic pump drive, needle bearing at its rear end.
+    add('pto-rear-drive-shaft', cyl(0.016, 0.016, 0.17, 'x', 12), M.steel, V(0.245, CS, 0.0));
+    add('pto-rear-drive-shaft', cyl(0.027, 0.027, 0.06, 'x', 16), M.steelDark, V(0.345, CS, 0.0));      // coupling 880069M1
+    add('pto-rear-drive-shaft', cyl(0.004, 0.004, 0.058, 'z', 8), M.steel, V(0.36, CS, 0.0));          // pin 354416X1
+    add('pto-rear-drive-shaft', ring(0.021, 0.005, 'x', 16), M.steel, V(0.172, CS, 0.0));               // needle bearing 195513M1
     // Dual clutch: tubular shaft C from the 9 in disc round the input shaft, geared to D (SRC-035 J.4 Fig. 5)
     add('pto-drive-shaft', cyl(0.032, 0.032, 0.22, 'x', 20, true), M.steel, V(0.85, CY, 0));
     add('pto-drive-shaft', rbox(0.06, 0.14, 0.14, 0.02), M.greyDark, V(0.80, CY, 0));              // main drive shaft retainer
@@ -1036,6 +1042,11 @@
           var cp = c0.clone().addScaledVector(rdir, o);
           add('tool-box', box(0.025, 0.045, 0.06), M.steelDark, cp.clone().addScaledVector(out, 0.025), [0, yaw, 0]);   // clip round the rod
         });
+        // Wheel nut socket and L-shaped tommy bar carried in the tool box (819045 p167 items 18-19, figure A-7)
+        var bc = c0.clone().addScaledVector(out, 0.065).add(V(0, -0.02, 0));
+        add('wheel-brace', cyl(0.017, 0.017, 0.08, 'x', 12), M.steelDark, bc.clone().addScaledVector(rdir, -0.08).addScaledVector(out, 0.02).add(V(0, -0.01, 0)), [0, yaw, 0]);   // socket
+        add('wheel-brace', cyl(0.007, 0.007, 0.26, 'x', 8), M.steelDark, bc.clone().addScaledVector(out, -0.02).add(V(0, -0.025, 0)), [0, yaw, 0]);                          // bar
+        add('wheel-brace', cyl(0.007, 0.007, 0.06, 'z', 8), M.steelDark, bc.clone().addScaledVector(rdir, 0.13).addScaledVector(out, 0.005).add(V(0, -0.025, 0)), [0, yaw, 0]);  // bent end
       }
       add('radius-rods', cyl(0.038, 0.038, 0.03, 'z', 18), M.greyDark, V(1.04, 0.48, s * 0.175));     // socket cap on the clutch housing
       [0, 2.1, 4.2].forEach(function (a) { hexNut('radius-rods', V(1.04 + Math.cos(a) * 0.03, 0.48 + Math.sin(a) * 0.03, s * 0.158), 0.005, 'z'); });
@@ -1236,6 +1247,14 @@
     })();
     add('serial-plate', box(0.004, 0.035, 0.075), M.plate, V(0.796, 0.955, 0.13));
     add('starter-switch', cyl(0.012, 0.012, 0.02, 'x', 12), M.chrome, V(0.805, 0.96, -0.13));
+    // Heater plug resistor on a bracket behind the panel and its warning light beside the starter switch
+    // (819045 p83 items 12-13, figure H-15); both only on cold-climate tractors, hidden with the heater plugs.
+    add('heater-plug-resistor', cyl(0.011, 0.011, 0.06, 'z', 12), M.paper, V(0.845, 1.0, -0.18));            // ceramic former
+    [-0.02, 0, 0.02].forEach(function (dz) { add('heater-plug-resistor', ring(0.012, 0.0015, 'z', 12), M.copper, V(0.845, 1.0, -0.18 + dz)); });   // windings
+    add('heater-plug-resistor', box(0.012, 0.03, 0.08), M.steelDark, V(0.835, 1.0, -0.18));                   // bracket on the panel back
+    [-0.035, 0.035].forEach(function (dz) { add('heater-plug-resistor', cyl(0.004, 0.004, 0.012, 'z', 8), M.brass, V(0.845, 1.0, -0.18 + dz)); });   // terminals
+    add('heater-warning-light', cyl(0.009, 0.009, 0.012, 'x', 12), M.chrome, V(0.797, 0.99, -0.19));          // bezel
+    add('heater-warning-light', cyl(0.0065, 0.0065, 0.006, 'x', 12), M.badgeRed, V(0.79, 0.99, -0.19));       // red lens
     add('starter-switch', cyl(0.004, 0.004, 0.03, 'x', 8), M.steel, V(0.79, 0.96, -0.13));
     // Gauges: chrome bezels, black faces, pointers (ammeter, water temperature, oil pressure, tractormeter)
     function gauge(id, pos, r, nrm) {
