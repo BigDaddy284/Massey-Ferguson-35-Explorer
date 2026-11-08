@@ -126,6 +126,11 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   picture drops to `motionRatio` device pixels while the camera or parts move and returns to `fullRatio` when still;
   multisampling is off at 2x+ DPR; hover touches only the two parts concerned (`setHover`); an explode tween moves
   only the meshes that have an offset; ghosted fittings under 5 cm are skipped; phones get a 1024 px shadow map.
+  Lighting (owner's choice 2026-11-08): the default `simple` mode draws every mesh with a `MeshPhongMaterial` twin
+  (`userData.matSimple`, same colour and bump map) and no environment reflections, shadow map or tone mapping, about
+  8x less drawing time than `studio` mode (`userData.matStudio`: physically based materials, generated environment,
+  soft shadows, ACES). `viewer.setLighting(mode)`; the toolbar's "Studio lighting" button toggles it and the choice
+  is kept in `localStorage` (`mf35.lighting`). `viewer.setTheme('dark'|'light')` recolours the floor grid.
 - Exploded views (Phase 4, viewer.js): `setExplode({scope, depth, t})` moves meshes from their
   stored home positions. Directions come from `EXPLODE` hints in model.js (metres at full explode,
   relative to the parent; `'mirror'` flips z for the LH side), otherwise radially from the parent's
@@ -195,7 +200,14 @@ These are enforced by the validator where possible.
 - Record conflicting information rather than silently picking one value.
 - UK English in user-facing text (tyre, colour, catalogue).
 - UI theme is blue / silver / black / grey (the owner's choice, which overrides the spec's "MF red accent").
-  CSS tokens are in `app/css/app.css` `:root`. The tractor model itself keeps its red/grey livery.
+  **Dark is the default** (owner's choice 2026-11-08); the light palette lives under `:root[data-theme="light"]`.
+  Semantic CSS tokens (`--bg`, `--surface`, `--surface-2/3`, `--text`, `--text-2/3`, `--text-muted`, `--label`,
+  `--faint`, `--border`, `--divider`, `--ok-*`, `--warn-*`, `--info-*`, `--purple-*`, `--vp0/1/2` for the viewport
+  gradient) are defined for both themes in `app/css/app.css` `:root`; the header, bottom bar and search box keep the
+  fixed `--black/--carbon/--graphite/--silver` chrome in both. Never write a literal colour into a rule: add a token.
+  The drawn-diagram sheet stays white paper in both themes. An inline script in `index.html` applies the remembered
+  theme (`localStorage` `mf35.theme`) before first paint; the header moon/sun button toggles it. The tractor model
+  itself keeps its red/grey livery.
 - Missing values render as "Not yet documented". Supplier numbers render as "unverified" claims.
 - 3D model: original procedural Three.js geometry, one group per hierarchy id (a test checks every
   id in model.js exists in hierarchy.json). No suitable licensable separable MF35 model exists

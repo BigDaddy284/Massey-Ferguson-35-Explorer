@@ -87,13 +87,14 @@
         panel(14, 14, new THREE.Vector3(0, -0.5, 0), new THREE.Vector3(0, 1, 0), 0.6, 0xb8bcc2); // floor bounce
         var pmrem = new THREE.PMREMGenerator(renderer);
         var envTex = pmrem.fromScene(env, 0.04).texture;
-        scene.environment = envTex;
+        scene.environment = envTex; self._envTex = envTex;
         pmrem.dispose();
       } catch (e) { /* environment is cosmetic; carry on without it */ }
     })();
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
-    scene.add(new THREE.HemisphereLight(0xf4f7fb, 0x7f858c, 0.55));
+    var hemi = new THREE.HemisphereLight(0xf4f7fb, 0x7f858c, 0.55);
+    scene.add(hemi);
     var key = new THREE.DirectionalLight(0xffffff, 0.9);
     key.position.set(2.5, 5, 3.5);
     key.castShadow = true;
@@ -110,6 +111,7 @@
     var rim = new THREE.DirectionalLight(0xffffff, 0.3);
     rim.position.set(-1, 3, 4);
     scene.add(rim);
+    this.lights = { hemi: hemi, key: key, fill: fill, rim: rim };
 
     var ground = new THREE.Mesh(new THREE.CircleGeometry(4.5, 64), new THREE.ShadowMaterial({ opacity: 0.2 }));
     ground.rotation.x = -Math.PI / 2;
@@ -121,6 +123,9 @@
     grid.material.transparent = true;
     grid.material.opacity = 0.35;
     scene.add(grid);
+    this.ground = ground; this.grid = grid;
+    this.lighting = 'studio';
+    this.setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
 
     var model = root.MF35Model.build(THREE);
     this.model = model;
@@ -139,6 +144,19 @@
       o.material = o.material.clone();
       if (o.material.isMeshStandardMaterial) o.material.envMapIntensity = 0.7;
       o.userData.base = { opacity: o.material.opacity, transparent: o.material.transparent, emissive: o.material.emissive.getHex() };
+      // Two materials per mesh: the physically based one for "studio" lighting (reflections, shadows,
+      // tone mapping) and a plain Phong one for the default "simple" lighting, which is 2-3x cheaper
+      // to draw. Both keep the same colour, grain (bump map) and transparency; applyVisuals writes
+      // opacity and highlight onto whichever is current.
+      o.userData.matStudio = o.material;
+      var sm = o.material;
+      o.userData.matSimple = new THREE.MeshPhongMaterial({
+        color: sm.color.clone(), bumpMap: sm.bumpMap || null, bumpScale: sm.bumpScale || 1,
+        shininess: Math.max(4, Math.round(90 * (1 - (sm.roughness == null ? 0.6 : sm.roughness)))),
+        specular: new THREE.Color().setScalar(0.08 + 0.3 * (sm.metalness || 0)),
+        transparent: sm.transparent, opacity: sm.opacity, side: sm.side, emissive: sm.emissive.clone()
+      });
+      if (sm.bumpMap) o.userData.matSimple.bumpScale = sm.bumpScale * 1.5;
       o.userData.casing = !!casings[pid];
       self.meshes.push(o);
       (self.meshesByPart[pid] = self.meshesByPart[pid] || []).push(o);
@@ -892,6 +910,38 @@
 
   /** Ask for a fresh frame on the next animation tick. */
   Viewer.prototype.invalidate = function () { this._dirty = true; };
+  // 'simple' (default): Phong materials, no reflections, no shadow map, no tone mapping: the cheapest picture
+  // that still shows every part clearly. 'studio': physically based materials with the generated environment
+  // reflections, soft shadows and filmic tone mapping.
+  Viewer.prototype.setLighting = function (mode) {
+    mode = mode === 'studio' ? 'studio' : 'simple';
+    if (mode === this.lighting) return;
+    this.lighting = mode;
+    var THREE = this.THREE, studio = mode === 'studio', L = this.lights;
+    this.meshes.forEach(function (m) { m.material = studio ? m.userData.matStudio : m.userData.matSimple; });
+    this.scene.environment = studio ? (this._envTex || null) : null;
+    this.renderer.shadowMap.enabled = studio;
+    this.renderer.toneMapping = studio ? THREE.ACESFilmicToneMapping : THREE.NoToneMapping;
+    L.key.castShadow = studio;
+    this.ground.visible = studio;
+    // Without tone mapping the lights add up linearly, so they are turned down to keep the paint from clipping.
+    L.hemi.intensity = studio ? 0.55 : 0.62;
+    L.key.intensity = studio ? 0.9 : 0.72;
+    L.fill.intensity = studio ? 0.45 : 0.4;
+    L.rim.intensity = studio ? 0.3 : 0.22;
+    this._shadowDirty = true;
+    this.applyVisuals();
+    this._dirty = true;
+  };
+  // Floor grid and shadow tint for the page theme (the backdrop gradient itself is CSS).
+  Viewer.prototype.setTheme = function (theme) {
+    var dark = theme !== 'light';
+    var colors = this.grid.geometry.attributes.color, c1 = new this.THREE.Color(dark ? 0x4a545f : 0x9aa3ad), c2 = new this.THREE.Color(dark ? 0x333b45 : 0xbfc6ce);
+    for (var i = 0; i < colors.count; i++) { var c = Math.floor(i / 4) === 18 ? c1 : c2; colors.setXYZ(i, c.r, c.g, c.b); }  // GridHelper: 4 vertices per line pair, centre pair is line 18 of 36
+    colors.needsUpdate = true;
+    this.grid.material.opacity = dark ? 0.45 : 0.35;
+    this.ground.material.opacity = dark ? 0.4 : 0.2;
+  };
   // Every method that can change what is on screen marks the frame dirty after it runs.
   // Read-only helpers and the per-frame steps called from the loop itself are left alone.
   var NO_REDRAW = { isModelled: 1, modelledIds: 1, hiddenCount: 1, isExploded: 1, explodeRefs: 1, invalidate: 1,

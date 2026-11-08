@@ -43,7 +43,8 @@
   /* ---------- 3D viewer (Phase 3) ---------- */
   var viewer = null;
   var viewerFailed = false;
-  var view3d = { xray: false, frameNext: false, pendingExplode: null, panelOpen: !window.matchMedia('(max-width: 720px)').matches };
+  var view3d = { xray: false, frameNext: false, pendingExplode: null, panelOpen: !window.matchMedia('(max-width: 720px)').matches, lighting: 'simple' };
+  try { if (localStorage.getItem('mf35.lighting') === 'studio') view3d.lighting = 'studio'; } catch (e) { /* storage unavailable */ }
   function getViewer() {
     if (viewer || viewerFailed) return viewer;
     if (!window.MF35Viewer || !window.MF35Viewer.available()) { viewerFailed = true; return null; }
@@ -58,6 +59,7 @@
       var hiddenByDefault = {};
       (viewer.model.removableHidden || []).forEach(function (id) { hiddenByDefault[id] = true; });
       viewer.fittedFn = function (pid) { return !hiddenByDefault[pid] && core.applicability(index, pid, state.resolved).applies; };
+      viewer.setLighting(view3d.lighting);
     } catch (err) {
       viewerFailed = true; viewer = null;
       if (window.console) console.error('3D viewer failed to start; showing the schematic instead.', err);
@@ -300,6 +302,7 @@
       '<div class="group"><button class="tool" data-act="isolate" aria-pressed="false"' + (sel && !notModelled ? '' : ' disabled') + '>Isolate</button><button class="tool" data-act="hide"' + (sel && !notModelled ? '' : ' disabled') + '>Hide</button><button class="tool" data-act="showall">Show all</button><button class="tool" data-act="xray" aria-pressed="' + view3d.xray + '" title="See through outer casings">X-ray</button></div>' +
       '<div class="group explode-group" id="explode-group" aria-label="Exploded view"></div>' +
       '<div class="group" aria-label="Camera presets"><button class="tool" data-view3d="iso">3/4</button><button class="tool" data-view3d="front">Front</button><button class="tool" data-view3d="side">Right</button><button class="tool" data-view3d="left">Left</button><button class="tool" data-view3d="rear">Rear</button><button class="tool" data-view3d="top">Top</button></div>' +
+      '<div class="group"><button class="tool" data-act="lighting" aria-pressed="' + (view3d.lighting === 'studio') + '" title="Reflections and shadows: slower to draw, off by default">Studio lighting</button></div>' +
       '<span class="note" id="hidden-note"></span>' +
       '</div></div>';
   }
@@ -1148,6 +1151,11 @@
       }
       if (a === 'explode-panel') { view3d.panelOpen = !view3d.panelOpen; renderExplodeUI(); return; }
       if (viewer && a === 'xray') { view3d.xray = !view3d.xray; viewer.setXray(view3d.xray); act.setAttribute('aria-pressed', String(view3d.xray)); }
+      if (viewer && a === 'lighting') {
+        view3d.lighting = view3d.lighting === 'studio' ? 'simple' : 'studio';
+        viewer.setLighting(view3d.lighting); act.setAttribute('aria-pressed', String(view3d.lighting === 'studio'));
+        try { localStorage.setItem('mf35.lighting', view3d.lighting); } catch (e) { /* storage unavailable */ }
+      }
       renderToolbarState();
       return;
     }
@@ -1221,6 +1229,18 @@
     renderBanner();
   });
   $('toggle-tree').addEventListener('click', function () { if (document.body.classList.contains('tree-open')) closeDrawers(); else { closeDrawers(); openDrawer('tree'); renderTree(); } });
+  // Theme switch: dark by default, the choice is kept in this browser only.
+  function applyTheme(theme) {
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light'); else document.documentElement.removeAttribute('data-theme');
+    var btn = $('toggle-theme'), label = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
+    btn.setAttribute('aria-label', label); btn.title = label;
+    if (viewer) viewer.setTheme(theme);
+    try { localStorage.setItem('mf35.theme', theme); } catch (e) { /* storage unavailable: lasts for this page only */ }
+  }
+  $('toggle-theme').addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+  });
+  if (document.documentElement.getAttribute('data-theme') === 'light') { var tb = $('toggle-theme'); tb.setAttribute('aria-label', 'Switch to dark theme'); tb.title = 'Switch to dark theme'; }
   $('toggle-info').addEventListener('click', function () { if (document.body.classList.contains('info-open')) closeDrawers(); else { closeDrawers(); openDrawer('info'); } });
   el.scrim.addEventListener('click', closeDrawers);
   el.info.addEventListener('click', function (e) { if (e.target.closest('[data-close-info]')) closeDrawers(); });
