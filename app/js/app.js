@@ -995,7 +995,8 @@
     var links = [];
     if (state.view !== 'anatomy' && (!viewer || viewer.isModelled(id))) links.push('<a class="tool" href="#/anatomy/' + encodeURIComponent(id) + '">Show in 3D</a>');
     var refs = core.diagramRefs(index, DIAGRAM_DATA, id);
-    if (refs.length && !(state.view === 'diagram' && state.routeArg === refs[0].diagram)) links.push('<a class="tool" href="#/diagram/' + encodeURIComponent(refs[0].diagram) + '/' + encodeURIComponent(id) + '">Diagram, item ' + refs[0].n + '</a>');
+    if (DIAGRAM_DATA[id] && !(state.view === 'diagram' && state.routeArg === id)) links.push('<a class="tool" href="#/diagram/' + encodeURIComponent(id) + '">Drawn diagram</a>');
+    else if (refs.length && !(state.view === 'diagram' && state.routeArg === refs[0].diagram)) links.push('<a class="tool" href="#/diagram/' + encodeURIComponent(refs[0].diagram) + '/' + encodeURIComponent(id) + '">Diagram, item ' + refs[0].n + '</a>');
     if (state.view !== 'catalogue') links.push('<a class="tool" href="#/catalogue/' + encodeURIComponent(id) + '">In catalogue</a>');
     return links.length ? '<div class="quick-links">' + links.join('') + '</div>' : '';
   }
