@@ -86,7 +86,7 @@ test('key 23C engine, hydraulic, PTO and axle numbers read from 819045 are prese
 });
 
 test('serial splits inside 1958 and engine-number splits are left unsettled, with every candidate kept', () => {
-  for (const id of ['fuel-lift-pump', 'dipstick', 'injector', 'lift-rod-rh', 'front-badge', 'countershaft', 'release-fork']) {
+  for (const id of ['fuel-lift-pump', 'dipstick', 'injector', 'lift-rod-rh', 'front-badge', 'flywheel', 'head-gasket']) {
     const n = nodeOf(id);
     assert.equal(n.oemPartNumber, null, `${id} has no settled number`);
     assert.notEqual(n.status, 'verified');
@@ -123,4 +123,11 @@ test('parts-book numbers are searchable and counted in coverage', () => {
   assert.ok(oem >= 120, `${oem} original numbers`);
   assert.ok(cov.engine.verified >= 35, `engine ${cov.engine.verified}`);
   assert.ok(cov.hydraulics.verified >= 20, `hydraulics ${cov.hydraulics.verified}`);
+});
+
+test('De Luxe (dual clutch) rows are settled because the owner\'s tractor has the dual-stage clutch', () => {
+  assert.equal(nodeOf('countershaft').oemPartNumber, '183054M91');
+  assert.equal(nodeOf('release-fork').oemPartNumber, '886719M1');
+  assert.equal(nodeOf('pto-drive-shaft').oemPartNumber, '180429M1');
+  assert.ok(nodeOf('countershaft').partsBookReferences.some((r) => r.number === '183085M1' && !r.primary), 'the Standard-tractor number is kept as an alternative');
 });

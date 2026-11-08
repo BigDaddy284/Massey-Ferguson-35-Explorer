@@ -9811,17 +9811,6 @@
                 "inBook819045": true
               },
               {
-                "number": "180452M1",
-                "description": "Fork",
-                "qty": 1,
-                "source": "SRC-032",
-                "page": 196,
-                "book": "MF35",
-                "confidence": "listed",
-                "letters": "A,F",
-                "bookNote": "ITEMS INCLUDED IN COMPLETE TRANSMISSION ASSEMBLY; FOR STANDARD TRACTOR"
-              },
-              {
                 "number": "886719M1",
                 "description": "Fork",
                 "qty": 1,
@@ -9831,7 +9820,21 @@
                 "confidence": "listed",
                 "item": "40",
                 "letters": "A,H",
-                "bookNote": "ITEMS INCLUDED IN COMPLETE TRANSMISSION ASSEMBLY; FOR DE-LUXE TRACTOR AND MULTI-POWER TRANSMISSION"
+                "bookNote": "ITEMS INCLUDED IN COMPLETE TRANSMISSION ASSEMBLY; FOR DE-LUXE TRACTOR AND MULTI-POWER TRANSMISSION",
+                "note": "(A, H) De Luxe tractor, i.e. dual clutch",
+                "primary": true
+              },
+              {
+                "number": "180452M1",
+                "description": "Fork",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 196,
+                "book": "MF35",
+                "confidence": "listed",
+                "letters": "A,F",
+                "bookNote": "ITEMS INCLUDED IN COMPLETE TRANSMISSION ASSEMBLY; FOR STANDARD TRACTOR",
+                "note": "(A, F) Standard tractor, single clutch"
               },
               {
                 "number": "180449M1",
@@ -9862,9 +9865,10 @@
               "SRC-041",
               "SRC-032"
             ],
-            "partsBookNote": "Standard (single clutch) tractors use 180452M1, De Luxe (dual clutch) 886719M1; the owner's clutch is not yet confirmed.",
-            "oemPartNumber": null,
-            "status": "partially-verified"
+            "partsBookNote": "The owner's tractor is the De Luxe (dual clutch) model, so the De Luxe fork applies; Standard (single clutch) tractors use 180452M1.",
+            "oemPartNumber": "886719M1",
+            "status": "verified",
+            "quantity": 1
           },
           {
             "id": "clutch-pedal",
@@ -10314,7 +10318,7 @@
             "id": "countershaft",
             "name": "Countershaft (layshaft)",
             "kind": "component",
-            "status": "partially-verified",
+            "status": "verified",
             "sources": [
               "SRC-035",
               "SRC-038",
@@ -10368,6 +10372,19 @@
                 "inBook819045": false
               },
               {
+                "number": "183054M91",
+                "description": "Shaft",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 188,
+                "book": "MF35",
+                "confidence": "listed",
+                "letters": "B",
+                "bookNote": "FOR DE-LUXE TRACTORS",
+                "note": "(B) De Luxe tractors, i.e. dual clutch",
+                "primary": true
+              },
+              {
                 "number": "183085M1",
                 "description": "Shaft",
                 "qty": 1,
@@ -10377,22 +10394,13 @@
                 "confidence": "listed",
                 "item": "34",
                 "letters": "A",
-                "bookNote": "FOR STANDARD TRACTOR"
-              },
-              {
-                "number": "183054M91",
-                "description": "Shaft",
-                "qty": 1,
-                "source": "SRC-032",
-                "page": 188,
-                "book": "MF35",
-                "confidence": "listed",
-                "letters": "B",
-                "bookNote": "FOR DE-LUXE TRACTORS"
+                "bookNote": "FOR STANDARD TRACTOR",
+                "note": "(A) Standard tractor, single clutch"
               }
             ],
-            "partsBookNote": "Standard tractors use 183085M1, De Luxe (dual clutch) 183054M91; the owner's clutch is not yet confirmed.",
-            "oemPartNumber": null
+            "partsBookNote": "The owner's tractor is the De Luxe (dual clutch) model, so the De Luxe countershaft applies; Standard (single clutch) tractors use 183085M1.",
+            "oemPartNumber": "183054M91",
+            "quantity": 1
           },
           {
             "id": "gearbox-gears",
@@ -13398,7 +13406,7 @@
             "id": "pto-drive-shaft",
             "name": "PTO drive shaft (through gearbox)",
             "kind": "component",
-            "status": "partially-verified",
+            "status": "verified",
             "sources": [
               "SRC-035",
               "SRC-041",
@@ -13474,19 +13482,6 @@
                 "inBook819045": false
               },
               {
-                "number": "180427M2",
-                "description": "Pinion",
-                "qty": 1,
-                "source": "SRC-032",
-                "page": 188,
-                "book": "MF35",
-                "confidence": "listed",
-                "item": "17",
-                "letters": "B,D",
-                "condition": "Up to Serial or Engine Number 307657",
-                "bookNote": "FOR DE-LUXE TRACTORS"
-              },
-              {
                 "number": "180429M1",
                 "description": "Shaft",
                 "qty": 1,
@@ -13495,6 +13490,21 @@
                 "book": "MF35",
                 "confidence": "listed",
                 "item": "33",
+                "letters": "B,D",
+                "condition": "Up to Serial or Engine Number 307657",
+                "bookNote": "FOR DE-LUXE TRACTORS",
+                "note": "(B, D) De Luxe tractors up to serial 307657",
+                "primary": true
+              },
+              {
+                "number": "180427M2",
+                "description": "Pinion",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 188,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "17",
                 "letters": "B,D",
                 "condition": "Up to Serial or Engine Number 307657",
                 "bookNote": "FOR DE-LUXE TRACTORS"
@@ -13510,8 +13520,9 @@
                 "item": "21"
               }
             ],
-            "partsBookNote": "De Luxe (dual clutch) tractors carry the PTO drive through the gearbox on 180427M2/180429M1 (up to serial 307657); 181439M93 is the shaft in the centre housing.",
-            "oemPartNumber": null
+            "partsBookNote": "De Luxe (dual clutch, the owner's model) tractors carry the PTO drive through the gearbox: pinion 180427M2 and shaft 180429M1 up to serial 307657; 181439M93 is the shaft in the centre housing.",
+            "oemPartNumber": "180429M1",
+            "quantity": 1
           },
           {
             "id": "pto-gears",

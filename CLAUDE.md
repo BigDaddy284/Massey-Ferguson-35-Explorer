@@ -27,7 +27,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 8 (completeness and QA) built and the AGCO MF35/35X parts book 819045 (SRC-032, the owner's copy) read: 716 rows from it are stored on 213 nodes as `partsBookReferences` with `book:'MF35'`; 132 components carry their original part number and quantity from a `primary` row and are `verified`, the rest keep every candidate row where the book splits by serial or engine number. The 521 TO35 numbers are flagged by whether they also appear in 819045 (301 do). The completeness report (`npm run report` → `docs/research/08-completeness-report.md`, and the Research Status page) lists what is still missing. Phase 9 (final polish) is next.**
+research, build, test and verify before moving on. Current status: **Phase 8 (completeness and QA) built and the AGCO MF35/35X parts book 819045 (SRC-032, the owner's copy) read: 716 rows from it are stored on 213 nodes as `partsBookReferences` with `book:'MF35'`; 135 components carry their original part number and quantity from a `primary` row and are `verified`, the rest keep every candidate row where the book splits by serial or engine number. The 521 TO35 numbers are flagged by whether they also appear in 819045 (301 do). The completeness report (`npm run report` → `docs/research/08-completeness-report.md`, and the Research Status page) lists what is still missing. Phase 9 (final polish) is next.**
 
 ## Commands
 

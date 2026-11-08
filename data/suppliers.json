@@ -2457,7 +2457,7 @@
       },
       "stock": "In stock",
       "checked": "2026-11-08",
-      "match": "book-ref",
+      "match": "exact",
       "fits": "Agriline FE35 4-cylinder category",
       "source": "SRC-040",
       "matchedNumber": "886719M1"
