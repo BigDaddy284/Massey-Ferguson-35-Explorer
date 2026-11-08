@@ -25,7 +25,7 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 5 (component catalogue) first pass built: every node has description, function, location, failure and related; part numbers and quantities still await parts book 819045M4. Phase 6 (technical diagrams) is next.**
+research, build, test and verify before moving on. Current status: **Phase 6 (technical diagrams) built: 17 original exploded line diagrams generated from the 3D model, numbered to match the 3D exploded views and linked to the records. Phase 7 (UK supplier references) is next. Part numbers and quantities still await parts book 819045M4.**
 
 ## Commands
 
@@ -35,6 +35,7 @@ npm run build           # validate, then regenerate app/data/mf35-data.js from d
 npm test                # node:test suite for app/js/core.js (tests/*.test.js)
 node --test tests/core.test.js   # single test file
 npm run serve           # optional: http://localhost:8035 (python3); the app also works opened directly
+npm run diagrams        # regenerate app/data/mf35-diagrams.js from the 3D model (needs Playwright + Chromium)
 ```
 
 No dependencies, no bundler (Node >= 18). **After any edit to `data/*.json`, run `npm run build`.**
@@ -84,6 +85,15 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
   split apart. Exploding one assembly ghosts the rest. Numbered callouts with leader lines and the
   exploded parts list use `explodeRefs()`. `#/exploded/<id>` opens an assembly exploded. The layout is
   a presentation choice, not a dismantling procedure.
+- Drawn diagrams (Phase 6): `scripts/build-diagrams.mjs` drives headless Chromium, loads the app, and runs
+  `scripts/diagram-gen.js` against the live viewer for each assembly in its `DIAGRAMS` list. The generator
+  explodes the assembly (same `setExplode`/`explodeRefs` as the 3D view, so the numbers match), projects
+  every mesh orthographically, and writes an SVG: silhouette loops filled per mesh in painter's order,
+  crease lines above 32°, casings that stay in place drawn dashed and see-through, numbered callouts in the
+  margins aimed at the nearest visible face. Output is committed as `app/data/mf35-diagrams.js`
+  (`window.MF35_DIAGRAMS`, about 0.8 MB). **Regenerate it after any change to model.js or the explode
+  hints.** The app shows them at `#/diagram/<id>[/<part>]`; `core.diagramRefs()` maps a part to its
+  diagrams and item numbers; coverage counts `diagram`. Playwright is not a dependency of the app.
 - `app/vendor/three/`: Three.js r147 (MIT), the last release with a classic `three.min.js` and
   `examples/js/OrbitControls.js`. Don't upgrade without replacing those with a non-module build.
 - `window.MF35Explorer.viewer()` is a read-only handle for browser tests.

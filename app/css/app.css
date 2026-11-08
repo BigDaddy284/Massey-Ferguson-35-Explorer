@@ -162,7 +162,7 @@ svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; 
   gap: 0;
 }
 .layout[data-view="catalogue"], .layout[data-view="technical"], .layout[data-view="identification"],
-.layout[data-view="tractor"], .layout[data-view="research"], .layout[data-view="exploded"] {
+.layout[data-view="tractor"], .layout[data-view="research"], .layout[data-view="exploded"], .layout[data-view="diagram"] {
   grid-template-columns: minmax(0, 1fr) var(--info-w);
 }
 .layout:not([data-view="anatomy"]) .tree-panel { display: none; }
@@ -515,3 +515,36 @@ dl.fields dd { margin: 0; font-size: 13px; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* ----- Drawn diagrams (Phase 6) ----- */
+.dg-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: flex-start; }
+.dg-actions .tool { text-decoration: none; }
+.dg-actions .tool.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.dg-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: start; }
+.dg-sheet { padding: 10px; background: #fff; overflow: auto; }
+.dg-sheet svg.diagram { display: block; width: 100%; height: auto; }
+.dg-legend { position: sticky; top: 12px; max-height: calc(100vh - 140px); display: flex; flex-direction: column; overflow: hidden; }
+.dg-legend .ep-head { padding: 10px 12px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+.dg-list { overflow: auto; margin: 0; padding: 4px 0; list-style: none; }
+.dg-list li { border-bottom: 1px solid var(--border); }
+.dg-list li:last-child { border-bottom: 0; }
+.dg-ref { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; padding: 7px 12px; background: none; border: 0; font: inherit; color: inherit; cursor: pointer; flex-wrap: wrap; }
+.dg-ref .num { flex: 0 0 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--blue); color: var(--blue); font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; }
+.dg-ref .dg-name { flex: 1 1 auto; }
+.dg-ref .dg-kids { flex: 0 0 100%; padding-left: 30px; font-size: 11.5px; }
+.dg-list li.hover .dg-ref, .dg-ref:hover { background: var(--blue-wash); }
+.dg-list li.on .dg-ref { background: #d6e5f7; }
+svg.diagram .parts path { stroke: #2b3038; stroke-width: 1.1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+svg.diagram .parts path.c { fill: none; stroke: #4a515b; stroke-width: 0.8; }
+svg.diagram .parts .ghost path { stroke: #9aa3ad; stroke-dasharray: 6 4; fill: none; }
+svg.diagram .parts g { cursor: pointer; }
+svg.diagram .parts g.hl path, svg.diagram .parts g.sel path { fill: #cfe0f7; stroke: var(--blue); }
+svg.diagram .parts g.hl path.c, svg.diagram .parts g.sel path.c { fill: none; stroke: var(--blue); }
+svg.diagram .callouts line { stroke: var(--blue); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+svg.diagram .callouts .tip { fill: var(--blue); }
+svg.diagram .callouts .num { fill: #fff; stroke: var(--blue); stroke-width: 2; }
+svg.diagram .callouts text { font: 600 20px var(--font); fill: var(--blue); pointer-events: none; }
+svg.diagram .callouts .callout { cursor: pointer; }
+svg.diagram .callouts .callout.hl .num, svg.diagram .callouts .callout:hover .num { fill: var(--blue); }
+svg.diagram .callouts .callout.hl text, svg.diagram .callouts .callout:hover text { fill: #fff; }
+@media (max-width: 900px) { .dg-layout { grid-template-columns: 1fr; } .dg-legend { position: static; max-height: none; } }
