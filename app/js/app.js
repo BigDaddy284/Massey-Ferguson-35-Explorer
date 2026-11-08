@@ -573,7 +573,7 @@
     sheet.addEventListener('mouseleave', function () { setHl(null); });
     sheet.addEventListener('click', function (e) {
       var g = e.target.closest('[data-id]'); if (!g) return;
-      var id = g.closest('.callout') ? g.getAttribute('data-id') : (g.getAttribute('data-id'));
+      var id = g.closest('.dg-callout') ? g.getAttribute('data-id') : (g.getAttribute('data-id'));
       if (index.byId[id]) go('#/anatomy/' + encodeURIComponent(id));
     });
     list.addEventListener('mouseover', function (e) { var b = e.target.closest('[data-id]'); setHl(b ? b.getAttribute('data-id') : null); });

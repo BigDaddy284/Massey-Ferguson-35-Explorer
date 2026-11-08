@@ -24,7 +24,7 @@ test('every major assembly has a drawn diagram with numbered items', () => {
       assert.equal(it.n, i + 1, `${id}: numbering is contiguous`);
       assert.ok(index.byId[it.id], `${id}: item ${it.id} exists`);
       assert.ok(index.byId[it.id].path.includes(id), `${id}: item ${it.id} belongs to the assembly`);
-      assert.ok(d.svg.includes(`class="callout" data-id="${it.id}"`), `${id}: item ${it.n} has a callout`);
+      assert.ok(d.svg.includes(`class="dg-callout" data-id="${it.id}"`), `${id}: item ${it.n} has a callout`);
     });
     assert.ok(/<g data-id="[a-z0-9-]+"><path d="M/.test(d.svg), `${id}: parts are drawn as paths with ids`);
     assert.ok(!/<script|<image|href=/.test(d.svg), `${id}: SVG is plain shapes`);

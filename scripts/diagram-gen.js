@@ -195,12 +195,12 @@
       var dx = it.lx - tx, dy = it.ly - ty, L = Math.sqrt(dx * dx + dy * dy) || 1;
       var ax2 = tx, ay2 = ty;
       void ex; void ey;
-      return '<g class="callout" data-id="' + it.id + '" data-n="' + it.n + '"><line x1="' + f(it.lx) + '" y1="' + f(it.ly) + '" x2="' + f(ax2) + '" y2="' + f(ay2) + '"/><circle class="tip" cx="' + f(ax2) + '" cy="' + f(ay2) + '" r="2.6"/>' +
+      return '<g class="dg-callout" data-id="' + it.id + '" data-n="' + it.n + '"><line x1="' + f(it.lx) + '" y1="' + f(it.ly) + '" x2="' + f(ax2) + '" y2="' + f(ay2) + '"/><circle class="tip" cx="' + f(ax2) + '" cy="' + f(ay2) + '" r="2.6"/>' +
         '<circle class="num" cx="' + f(it.lx) + '" cy="' + f(it.ly) + '" r="19"/><text x="' + f(it.lx) + '" y="' + f(it.ly + 7) + '" text-anchor="middle">' + it.n + '</text></g>';
     }).join('');
 
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 ' + totalW + ' ' + totalH + '" role="img">' +
-      '<g class="parts">' + body + '</g><g class="callouts">' + callouts + '</g></svg>';
+      '<g class="parts">' + body + '</g><g class="dg-callouts">' + callouts + '</g></svg>';
     return {
       scope: scope, depth: depth, view: opts.view, viewBox: [totalW, totalH], svg: svg,
       items: items.map(function (it) { return { n: it.n, id: it.id, x: Math.round(it.x), y: Math.round(it.y) }; }),

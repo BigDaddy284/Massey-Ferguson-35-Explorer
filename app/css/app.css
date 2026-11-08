@@ -540,11 +540,11 @@ svg.diagram .parts .ghost path { stroke: #9aa3ad; stroke-dasharray: 6 4; fill: n
 svg.diagram .parts g { cursor: pointer; }
 svg.diagram .parts g.hl path, svg.diagram .parts g.sel path { fill: #cfe0f7; stroke: var(--blue); }
 svg.diagram .parts g.hl path.c, svg.diagram .parts g.sel path.c { fill: none; stroke: var(--blue); }
-svg.diagram .callouts line { stroke: var(--blue); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
-svg.diagram .callouts .tip { fill: var(--blue); }
-svg.diagram .callouts .num { fill: #fff; stroke: var(--blue); stroke-width: 2; }
-svg.diagram .callouts text { font: 600 20px var(--font); fill: var(--blue); pointer-events: none; }
-svg.diagram .callouts .callout { cursor: pointer; }
-svg.diagram .callouts .callout.hl .num, svg.diagram .callouts .callout:hover .num { fill: var(--blue); }
-svg.diagram .callouts .callout.hl text, svg.diagram .callouts .callout:hover text { fill: #fff; }
+svg.diagram .dg-callouts line { stroke: var(--blue); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+svg.diagram .dg-callouts .tip { fill: var(--blue); }
+svg.diagram .dg-callouts .num { fill: #fff; stroke: var(--blue); stroke-width: 2; }
+svg.diagram .dg-callouts text { font: 600 20px var(--font); fill: var(--blue); pointer-events: none; }
+svg.diagram .dg-callouts .callout { cursor: pointer; }
+svg.diagram .dg-callouts .callout.hl .num, svg.diagram .dg-callouts .dg-callout:hover .num { fill: var(--blue); }
+svg.diagram .dg-callouts .callout.hl text, svg.diagram .dg-callouts .dg-callout:hover text { fill: #fff; }
 @media (max-width: 900px) { .dg-layout { grid-template-columns: 1fr; } .dg-legend { position: static; max-height: none; } }

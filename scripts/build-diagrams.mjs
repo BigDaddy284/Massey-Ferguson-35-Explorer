@@ -46,7 +46,7 @@ for (const [id, title, view] of DIAGRAMS) {
   console.log(`${id.padEnd(20)} depth=${String(r.depth).padEnd(3)} items=${String(r.items.length).padEnd(3)} meshes=${String(r.meshes).padEnd(4)} loops=${String(r.loops).padEnd(5)} svg=${(r.svg.length / 1024).toFixed(0)} KB  ${Date.now() - t0} ms`);
   if (pngDir) {
     mkdirSync(pngDir, { recursive: true });
-    const html = `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#fff}svg{width:1400px;display:block}.parts path{stroke:#2b3038;stroke-width:1.1;stroke-linejoin:round}.parts path.c{fill:none;stroke-width:.8;stroke:#4a515b}.parts .ghost path{stroke:#9aa3ad;stroke-dasharray:6 4}.callouts line{stroke:#1f4e9c;stroke-width:1.2}.callouts .tip{fill:#1f4e9c}.callouts .num{fill:#fff;stroke:#1f4e9c;stroke-width:2}.callouts text{font:600 20px system-ui,sans-serif;fill:#1f4e9c}</style>${r.svg}`;
+    const html = `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#fff}svg{width:1400px;display:block}.parts path{stroke:#2b3038;stroke-width:1.1;stroke-linejoin:round}.parts path.c{fill:none;stroke-width:.8;stroke:#4a515b}.parts .ghost path{stroke:#9aa3ad;stroke-dasharray:6 4}.dg-callouts line{stroke:#1f4e9c;stroke-width:1.2}.dg-callouts .tip{fill:#1f4e9c}.dg-callouts .num{fill:#fff;stroke:#1f4e9c;stroke-width:2}.dg-callouts text{font:600 20px system-ui,sans-serif;fill:#1f4e9c}</style>${r.svg}`;
     const p2 = await browser.newPage({ viewport: { width: 1400, height: 100 }, deviceScaleFactor: 1 });
     await p2.setContent(html);
     await p2.locator('svg').screenshot({ path: join(pngDir, id + '.png') });
