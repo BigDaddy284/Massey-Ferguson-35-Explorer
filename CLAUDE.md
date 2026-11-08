@@ -42,7 +42,8 @@ npm run diagrams        # regenerate app/data/mf35-diagrams.js from the 3D model
 npm run check-model     # every rod, bar and pipe in model.js must end on another part (0 loose ends); run after model edits
 ```
 
-No dependencies, no bundler (Node >= 18). **After any edit to `data/*.json`, run `npm run build`.**
+No dependencies, no bundler (Node >= 18). `.github/workflows/pages.yml` publishes `app/` to GitHub Pages
+(https://bigdaddy284.github.io/Massey-Ferguson-35-Explorer/) on every push to `main`. **After any edit to `data/*.json`, run `npm run build`.**
 The app reads only the generated `app/data/mf35-data.js`, which is committed. Open
 `app/index.html` directly in a browser. It must keep working from `file://`, so use classic
 `<script>` tags only: no ES modules and no `fetch()` of local files.

@@ -7,8 +7,11 @@ An interactive digital anatomy and parts catalogue for a **1958 Massey Ferguson 
 
 ## Open the app
 
-Open `app/index.html` in any modern browser. It needs no server or install. Alternatively, run
-`npm run serve` and visit http://localhost:8035.
+**Online:** https://bigdaddy284.github.io/Massey-Ferguson-35-Explorer/ (published from `main` by the
+GitHub Pages workflow in `.github/workflows/pages.yml`).
+
+**Locally:** open `app/index.html` in any modern browser. It needs no server or install. Alternatively,
+run `npm run serve` and visit http://localhost:8035.
 
 ## Using the app
 
