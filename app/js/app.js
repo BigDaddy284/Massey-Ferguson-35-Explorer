@@ -640,7 +640,7 @@
   function viewResearch() {
     var cov = core.coverage(index, modelledIds());
     var sys = index.byId[index.rootId].childIds;
-    var tot = { total: 0, verified: 0, 'partially-verified': 0, unverified: 0, 'variant-dependent': 0, oem: 0, replacement: 0, model: 0 };
+    var tot = { total: 0, verified: 0, 'partially-verified': 0, unverified: 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, model: 0 };
     sys.forEach(function (s) { Object.keys(tot).forEach(function (k) { tot[k] += cov[s][k]; }); });
     var claims = 0;
     index.order.forEach(function (id) { if ((nodeOf(id).supplierClaimedOem || []).length) claims++; });
@@ -651,9 +651,9 @@
     };
     return '<div class="page"><div class="page-head"><div><h1>Research status</h1><p class="lede">How much of the tractor is documented, and from what. Nothing is marked verified until it has been checked against an original Massey Ferguson publication.</p></div></div>' +
       '<div class="stats">' + stat(tot.total, 'Items identified') + stat(tot.verified, 'Verified') + stat(tot['partially-verified'], 'Partially verified') +
-      stat(tot['variant-dependent'], 'Variant dependent') + stat(tot.unverified, 'Unverified') + stat(tot.oem, 'Confirmed OEM numbers') + stat(tot.replacement, 'With AGCO replacement refs') + stat(claims, 'With unverified supplier refs') + stat(tot.model, 'Modelled in 3D') + '</div>' +
-      '<h2>By system</h2><div class="table-wrap"><table><thead><tr><th>System</th><th>Items</th><th>Verified</th><th>Partial</th><th>Variant</th><th>Unverified</th><th>AGCO refs</th><th>In 3D</th><th>Progress</th></tr></thead><tbody>' +
-      sys.map(function (s) { var c = cov[s]; return '<tr class="clickable" data-goto="' + s + '"><td><strong>' + esc(nameOf(s)) + '</strong></td><td class="mono">' + c.total + '</td><td class="mono">' + c.verified + '</td><td class="mono">' + c['partially-verified'] + '</td><td class="mono">' + c['variant-dependent'] + '</td><td class="mono">' + c.unverified + '</td><td class="mono">' + c.replacement + '</td><td class="mono">' + c.model + '</td><td>' + bar(c) + '</td></tr>'; }).join('') +
+      stat(tot['variant-dependent'], 'Variant dependent') + stat(tot.unverified, 'Unverified') + stat(tot.oem, 'Confirmed OEM numbers') + stat(tot.replacement, 'With AGCO replacement refs') + stat(tot.described, 'With description and function') + stat(claims, 'With unverified supplier refs') + stat(tot.model, 'Modelled in 3D') + '</div>' +
+      '<h2>By system</h2><div class="table-wrap"><table><thead><tr><th>System</th><th>Items</th><th>Verified</th><th>Partial</th><th>Variant</th><th>Unverified</th><th>AGCO refs</th><th>Described</th><th>In 3D</th><th>Progress</th></tr></thead><tbody>' +
+      sys.map(function (s) { var c = cov[s]; return '<tr class="clickable" data-goto="' + s + '"><td><strong>' + esc(nameOf(s)) + '</strong></td><td class="mono">' + c.total + '</td><td class="mono">' + c.verified + '</td><td class="mono">' + c['partially-verified'] + '</td><td class="mono">' + c['variant-dependent'] + '</td><td class="mono">' + c.unverified + '</td><td class="mono">' + c.replacement + '</td><td class="mono">' + c.described + '</td><td class="mono">' + c.model + '</td><td>' + bar(c) + '</td></tr>'; }).join('') +
       '</tbody></table></div>' +
       '<h2>Source register</h2><div class="table-wrap"><table><thead><tr><th>Id</th><th>Source</th><th>Grade</th><th>Read</th></tr></thead><tbody>' +
       DATA.sources.map(function (s) {
@@ -692,6 +692,7 @@
     }).join('');
     var claims = (n.supplierClaimedOem || []);
     var reps = (n.replacementReferences || []);
+    var related = (n.related || []).filter(function (rid) { return index.byId[rid]; });
 
     el.info.innerHTML =
       '<div class="info-head"><button class="text-btn only-mobile" data-close-info style="float:right">Close</button><div class="info-kind">' + kindLabel(n.kind) + (e.depth > 1 ? ' · ' + esc(nameOf(e.path[1])) : '') + '</div>' +
@@ -710,7 +711,8 @@
       '<dt>Description</dt><dd>' + (n.description ? esc(n.description) : missing()) + '</dd>' +
       '<dt>Function</dt><dd>' + (n.function ? esc(n.function) : missing()) + '</dd>' +
       '<dt>Location</dt><dd>' + (n.location ? esc(n.location) : missing()) + '</dd>' +
-      '<dt>Specifications</dt><dd>' + (n.specifications && Object.keys(n.specifications).length ? Object.keys(n.specifications).map(function (k) { return esc(k) + ': ' + esc(n.specifications[k]); }).join('<br>') : missing()) + '</dd></dl>' +
+      '<dt>Specifications</dt><dd>' + (n.specifications && Object.keys(n.specifications).length ? Object.keys(n.specifications).map(function (k) { return esc(k) + ': ' + esc(n.specifications[k]); }).join('<br>') : missing()) + '</dd>' +
+      '<dt>If it fails</dt><dd>' + (n.failure ? esc(n.failure) : missing()) + '</dd></dl>' +
       (n.notes ? '<div class="note-box" style="margin-top:10px"><strong>Research note:</strong> ' + esc(n.notes) + '</div>' : '') + '</div>' +
 
       '<div class="info-section"><h3>Compatibility</h3><dl class="fields">' +
@@ -721,7 +723,8 @@
 
       '<div class="info-section"><h3>Hierarchy</h3><div class="chips">' + e.path.slice(0, -1).map(chip).join('<span class="muted">›</span>') + '</div>' +
       (e.childIds.length ? '<h3 style="margin-top:12px">Contains (' + e.childIds.length + ')</h3><div class="chips">' + e.childIds.map(chip).join('') + '</div>' : '') +
-      (siblings.length ? '<h3 style="margin-top:12px">Related</h3><div class="chips">' + siblings.slice(0, 10).map(chip).join('') + (siblings.length > 10 ? '<span class="muted">+' + (siblings.length - 10) + ' more</span>' : '') + '</div>' : '') + '</div>' +
+      (related.length ? '<h3 style="margin-top:12px">Connected parts</h3><div class="chips">' + related.map(chip).join('') + '</div>' : '') +
+      (siblings.length ? '<h3 style="margin-top:12px">Same assembly</h3><div class="chips">' + siblings.slice(0, 10).map(chip).join('') + (siblings.length > 10 ? '<span class="muted">+' + (siblings.length - 10) + ' more</span>' : '') + '</div>' : '') + '</div>' +
 
       '<div class="info-section"><h3>Diagram and 3D</h3><dl class="fields">' +
       '<dt>Exploded view</dt><dd>' + (function () {
