@@ -5897,7 +5897,9 @@
                 "related": [
                   "fuel-cap",
                   "fuel-tap",
-                  "sediment-bowl"
+                  "sediment-bowl",
+                  "battery-platform",
+                  "fuel-tank-mountings"
                 ],
                 "partsBookReferences": [
                   {
@@ -6019,7 +6021,8 @@
                 "related": [
                   "fuel-tank",
                   "sediment-bowl",
-                  "fuel-pipes-lp"
+                  "fuel-pipes-lp",
+                  "fuel-tank-mountings"
                 ],
                 "partsBookReferences": [
                   {
@@ -6085,6 +6088,150 @@
                 "status": "partially-verified",
                 "partsBookNote": "Two valve numbers are listed together (872318M91 and 1881500M91) without a condition.",
                 "oemPartNumber": null
+              },
+              {
+                "id": "fuel-tank-mountings",
+                "name": "Fuel tank mountings",
+                "kind": "component",
+                "description": "The parts that hold the fuel tank: at the rear two bolts, washers, plates, pads and packings on the bracket; at the front a long bolt with a pad, a spring and washers so the tank can move slightly with the engine.",
+                "function": "Holds the tank over the engine while letting it float on pads and a spring, so vibration does not crack the tank or its outlet.",
+                "location": "Rear mounting on the bracket above the front battery, front mounting on the thermostat housing (819045 radiator and fuel tank figure J-15, items 4 to 18).",
+                "failure": "Perished pads or a broken spring let the tank chafe on the rocker cover and split its seams or loosen the outlet.",
+                "related": [
+                  "fuel-tank",
+                  "battery-platform",
+                  "thermostat",
+                  "fuel-tap"
+                ],
+                "partsBookReferences": [
+                  {
+                    "number": "826787M1",
+                    "description": "Bolt",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "4"
+                  },
+                  {
+                    "number": "826786M1",
+                    "description": "Washer",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "5"
+                  },
+                  {
+                    "number": "826784M1",
+                    "description": "Plate",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "6"
+                  },
+                  {
+                    "number": "826783M1",
+                    "description": "Pad",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "7"
+                  },
+                  {
+                    "number": "826785M1",
+                    "description": "Packing",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "8"
+                  },
+                  {
+                    "number": "826780M91",
+                    "description": "Bracket",
+                    "qty": 1,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "9",
+                    "note": "Same number as the battery platform bracket (page 152 item 17)."
+                  },
+                  {
+                    "number": "353804X1",
+                    "description": "Bolt Unf",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "13"
+                  },
+                  {
+                    "number": "890486M1",
+                    "description": "Washer",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "14"
+                  },
+                  {
+                    "number": "890485M1",
+                    "description": "Pad",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "15"
+                  },
+                  {
+                    "number": "187227M1",
+                    "description": "Spring",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "16"
+                  },
+                  {
+                    "number": "353755X1",
+                    "description": "Washer",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "17"
+                  },
+                  {
+                    "number": "376447X1",
+                    "description": "Nut Unf",
+                    "qty": 2,
+                    "source": "SRC-032",
+                    "page": 111,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "18"
+                  }
+                ],
+                "partsBookNote": "A set of separate parts with no single assembly number; every row is listed. None carries an engine or serial condition, so all apply to the 23C.",
+                "sources": [
+                  "SRC-032",
+                  "SRC-043"
+                ],
+                "status": "partially-verified"
               }
             ]
           },
@@ -8724,7 +8871,8 @@
             "related": [
               "top-hose",
               "cylinder-head",
-              "temp-gauge"
+              "temp-gauge",
+              "fuel-tank-mountings"
             ],
             "partsBookReferences": [
               {
@@ -10092,7 +10240,8 @@
               "clutch-housing",
               "centre-housing",
               "gearbox-top-cover",
-              "gearbox-bearings"
+              "gearbox-bearings",
+              "transmission-dipstick"
             ],
             "partsBookReferences": [
               {
@@ -11487,7 +11636,9 @@
               "pto-gears",
               "lift-cover-casting",
               "axle-trumpet-lh",
-              "axle-trumpet-rh"
+              "axle-trumpet-rh",
+              "transmission-dipstick",
+              "centre-housing-side-cover"
             ],
             "notes": "Casting date code on RH side forward of round port (SRC-003).",
             "partsBookReferences": [
@@ -12211,7 +12362,8 @@
               "half-shaft",
               "axle-seals",
               "brakes",
-              "lower-link-lh"
+              "lower-link-lh",
+              "battery-mounting-lh"
             ],
             "partsBookReferences": [
               {
@@ -12301,7 +12453,8 @@
               "half-shaft",
               "axle-seals",
               "brakes",
-              "lower-link-rh"
+              "lower-link-rh",
+              "centre-housing-side-cover"
             ],
             "partsBookReferences": [
               {
@@ -13445,6 +13598,95 @@
                 "status": "partially-verified"
               }
             ]
+          },
+          {
+            "id": "transmission-dipstick",
+            "name": "Transmission oil dipstick",
+            "kind": "component",
+            "description": "Dipstick for the common oil supply of the gearbox, centre housing and hydraulic system.",
+            "function": "Shows the transmission and hydraulic oil level, which is shared by the gearbox, differential and lift.",
+            "location": "On the right-hand side of the centre housing beside the side cover (819045 centre axle housing figure C-5, item 17).",
+            "failure": "A missing dipstick lets dirt and water into the shared oil, which wears the hydraulic pump first.",
+            "related": [
+              "centre-housing",
+              "centre-housing-side-cover",
+              "gearbox-casing",
+              "hyd-pump"
+            ],
+            "partsBookReferences": [
+              {
+                "number": "828810M91",
+                "description": "Dipstick",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 207,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "17",
+                "primary": true
+              }
+            ],
+            "sources": [
+              "SRC-032",
+              "SRC-043"
+            ],
+            "status": "verified",
+            "oemPartNumber": "828810M91",
+            "quantity": 1
+          },
+          {
+            "id": "centre-housing-side-cover",
+            "name": "Centre housing right-hand side cover",
+            "kind": "component",
+            "description": "Round cover plate with its right-hand gasket, held by five screws on the right side of the centre housing.",
+            "function": "Closes the inspection opening in the right side of the centre housing.",
+            "location": "Right-hand side of the centre housing, ahead of the axle housing flange (819045 centre axle housing figure C-5, items 14 to 16).",
+            "failure": "A leaking gasket here loses transmission and hydraulic oil.",
+            "related": [
+              "centre-housing",
+              "transmission-dipstick",
+              "axle-trumpet-rh"
+            ],
+            "partsBookReferences": [
+              {
+                "number": "181218M91",
+                "description": "Cover",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 207,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "15",
+                "primary": true
+              },
+              {
+                "number": "181217M1",
+                "description": "Gasket, Right Hand",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 207,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "14"
+              },
+              {
+                "number": "353696X1",
+                "description": "Screw Unc",
+                "qty": 5,
+                "source": "SRC-032",
+                "page": 207,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "16"
+              }
+            ],
+            "sources": [
+              "SRC-032",
+              "SRC-043"
+            ],
+            "status": "verified",
+            "oemPartNumber": "181218M91",
+            "quantity": 1
           }
         ]
       },
@@ -14432,7 +14674,8 @@
               "hyd-valve-chamber",
               "hyd-control-valve",
               "hyd-relief-valve",
-              "pto-drive-shaft"
+              "pto-drive-shaft",
+              "transmission-dipstick"
             ],
             "notes": "Four-cylinder, constant-running, positive-displacement pump in the sump between gearbox and final drive. Body floats on bronze bushes, held by dowel pins through the centre housing (SRC-035 L.5).",
             "children": [
@@ -17988,7 +18231,8 @@
             "related": [
               "front-axle-extensions",
               "front-axle-pivot-pin",
-              "radius-rods"
+              "radius-rods",
+              "tool-box"
             ],
             "partsBookReferences": [
               {
@@ -18123,7 +18367,8 @@
             "failure": "Worn rear ball joints let the axle move backwards under braking.",
             "related": [
               "front-axle-extensions",
-              "clutch-housing"
+              "clutch-housing",
+              "tool-box"
             ],
             "partsBookReferences": [
               {
@@ -18433,7 +18678,9 @@
             "related": [
               "steering-column",
               "drag-links",
-              "steering-wheel"
+              "steering-wheel",
+              "steering-column-bearing",
+              "dashboard-supports"
             ],
             "partsBookReferences": [
               {
@@ -18557,7 +18804,8 @@
             "related": [
               "steering-wheel",
               "steering-box",
-              "dashboard"
+              "dashboard",
+              "steering-column-bearing"
             ],
             "partsBookReferences": [
               {
@@ -18621,7 +18869,8 @@
             "failure": "Cracked rim; loose on worn splines.",
             "related": [
               "steering-column",
-              "steering-box"
+              "steering-box",
+              "steering-column-bearing"
             ],
             "partsBookReferences": [
               {
@@ -18773,6 +19022,88 @@
             "oemPartNumber": "180350M1",
             "status": "verified",
             "quantity": 2
+          },
+          {
+            "id": "steering-column-bearing",
+            "name": "Steering column upper bearing",
+            "kind": "component",
+            "description": "Ball bearing at the top of the steering column tube: a race and ring with twelve loose balls, two seals and a bush.",
+            "function": "Carries the top of the steering shaft so the wheel turns freely without play.",
+            "location": "Top of the steering column under the steering wheel (819045 steering figure A-17, items 51 to 56).",
+            "failure": "Worn balls or a dry bearing make the wheel rock and knock; a split seal lets water in.",
+            "related": [
+              "steering-column",
+              "steering-wheel",
+              "steering-box"
+            ],
+            "partsBookReferences": [
+              {
+                "number": "1850037M1",
+                "description": "Seal",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 175,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "51"
+              },
+              {
+                "number": "1850031M1",
+                "description": "Ring",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 175,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "52"
+              },
+              {
+                "number": "1850032M1",
+                "description": "Race",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 175,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "53"
+              },
+              {
+                "number": "13535X",
+                "description": "Ball",
+                "qty": 12,
+                "source": "SRC-032",
+                "page": 175,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "54"
+              },
+              {
+                "number": "1850234M1",
+                "description": "Seal",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 175,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "55"
+              },
+              {
+                "number": "1850033M1",
+                "description": "Bush",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 175,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "56"
+              }
+            ],
+            "partsBookNote": "Separate parts with no assembly number; every row is listed. No serial condition.",
+            "sources": [
+              "SRC-032",
+              "SRC-043"
+            ],
+            "status": "partially-verified"
           }
         ]
       },
@@ -18969,7 +19300,9 @@
             "related": [
               "battery-cables",
               "starter-motor",
-              "regulator"
+              "regulator",
+              "battery-platform",
+              "battery-mounting-lh"
             ],
             "notes": "Two 6 V batteries in series (12 V), 38/43 Ah (SRC-035 B.42).",
             "partsBookReferences": [
@@ -19033,7 +19366,9 @@
             "related": [
               "battery",
               "starter-motor",
-              "starter-switch"
+              "starter-switch",
+              "battery-platform",
+              "battery-mounting-lh"
             ],
             "partsBookReferences": [
               {
@@ -20094,6 +20429,138 @@
               "SRC-032"
             ],
             "oemPartNumber": null
+          },
+          {
+            "id": "battery-platform",
+            "name": "Front battery platform, bracket and strap",
+            "kind": "component",
+            "description": "Pressed-steel platform that carries the front 6-volt battery under the rear of the bonnet, with a cross bracket under it and a clamping strap over the battery.",
+            "function": "Holds the front battery firmly so it cannot bounce on rough ground, and the same bracket number also carries the back of the fuel tank.",
+            "location": "Under the rear of the bonnet, ahead of the instrument panel, below the back of the fuel tank (819045 23C electrical figure M-11, items 16 to 18).",
+            "failure": "A cracked platform or missing strap lets the battery move, chafing the cables and breaking the terminals or the case.",
+            "related": [
+              "battery",
+              "battery-mounting-lh",
+              "fuel-tank",
+              "fuel-tank-mountings",
+              "battery-cables"
+            ],
+            "partsBookReferences": [
+              {
+                "number": "827589M91",
+                "description": "Platform",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 152,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "16",
+                "primary": true
+              },
+              {
+                "number": "826780M91",
+                "description": "Bracket",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 152,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "17",
+                "note": "Same number as the fuel tank bracket (page 111 item 9)."
+              },
+              {
+                "number": "827070M91",
+                "description": "Strap",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 152,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "18"
+              }
+            ],
+            "sources": [
+              "SRC-032",
+              "SRC-043"
+            ],
+            "status": "verified",
+            "oemPartNumber": "827589M91",
+            "quantity": 1
+          },
+          {
+            "id": "battery-mounting-lh",
+            "name": "Left-hand battery mounting and bands",
+            "kind": "component",
+            "description": "Left-hand cradle for the second 6-volt battery, with two clamping bands (10 in and 7 in), four studs and a hold-down bolt.",
+            "function": "Carries the rear battery of the series pair beside the transmission on the left side.",
+            "location": "Left side of the tractor at the front of the left rear axle housing, below the footplate (819045 23C electrical figure M-11, items 30 to 32).",
+            "failure": "Corroded bands or a broken cradle let the battery shift; acid spills here rot the cradle first.",
+            "related": [
+              "battery",
+              "battery-platform",
+              "axle-trumpet-lh",
+              "battery-cables"
+            ],
+            "partsBookReferences": [
+              {
+                "number": "826976M92",
+                "description": "Mounting, Left Hand",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 152,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "31",
+                "primary": true
+              },
+              {
+                "number": "826983M1",
+                "description": "Band 10\"",
+                "qty": 2,
+                "source": "SRC-032",
+                "page": 152,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "31"
+              },
+              {
+                "number": "826984M1",
+                "description": "Band 7\"",
+                "qty": 2,
+                "source": "SRC-032",
+                "page": 152,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "31"
+              },
+              {
+                "number": "826974M1",
+                "description": "Stud",
+                "qty": 4,
+                "source": "SRC-032",
+                "page": 152,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "32"
+              },
+              {
+                "number": "826985M1",
+                "description": "Bolt",
+                "qty": 2,
+                "source": "SRC-032",
+                "page": 152,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "30"
+              }
+            ],
+            "sources": [
+              "SRC-032",
+              "SRC-043"
+            ],
+            "status": "verified",
+            "oemPartNumber": "826976M92",
+            "quantity": 1
           }
         ]
       },
@@ -20497,7 +20964,8 @@
               "temp-gauge",
               "oil-pressure-gauge",
               "tractormeter",
-              "steering-column"
+              "steering-column",
+              "dashboard-supports"
             ],
             "partsBookReferences": [
               {
@@ -20908,6 +21376,129 @@
               }
             ],
             "oemPartNumber": null
+          },
+          {
+            "id": "tool-box",
+            "name": "Tool box",
+            "kind": "component",
+            "description": "Steel tool box clamped to a front radius rod by two clips and two bolts.",
+            "function": "Carries the tractor tool kit.",
+            "location": "Clamped to a front radius rod near its front eye (819045 front axle figure A-9, inset items 75 to 80). The book does not show which side; the 3D model puts it on the left.",
+            "failure": "Loose clips let the box slide along the rod and rattle against the front axle.",
+            "related": [
+              "radius-rods",
+              "front-axle-beam"
+            ],
+            "partsBookReferences": [
+              {
+                "number": "825633M91",
+                "description": "Tool Box",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 168,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "78",
+                "primary": true
+              },
+              {
+                "number": "826807M1",
+                "description": "Clip",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 168,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "75",
+                "letters": "A",
+                "condition": "Low clearance"
+              },
+              {
+                "number": "890248M1",
+                "description": "Clip",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 168,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "75",
+                "letters": "B",
+                "condition": "High clearance"
+              },
+              {
+                "number": "826808M1",
+                "description": "Clip",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 168,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "76"
+              },
+              {
+                "number": "353568X1",
+                "description": "Bolt Unf",
+                "qty": 2,
+                "source": "SRC-032",
+                "page": 168,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "77"
+              }
+            ],
+            "partsBookNote": "Clip 75 differs between low-clearance (826807M1) and high-clearance (890248M1) front axles; both are listed.",
+            "sources": [
+              "SRC-032",
+              "SRC-043"
+            ],
+            "status": "verified",
+            "oemPartNumber": "825633M91",
+            "quantity": 1
+          },
+          {
+            "id": "dashboard-supports",
+            "name": "Instrument panel bearer and brace",
+            "kind": "component",
+            "description": "Left-hand bearer and right-hand brace that support the instrument panel and dash cowl on the steering box.",
+            "function": "Hold the instrument panel steady so the gauges and wiring are not shaken loose.",
+            "location": "Under the instrument panel, either side of the steering box (819045 steering figure A-17, item 64).",
+            "failure": "A cracked bearer lets the panel vibrate, breaking gauge pipes and wires.",
+            "related": [
+              "dashboard",
+              "steering-box"
+            ],
+            "partsBookReferences": [
+              {
+                "number": "827591M91",
+                "description": "Bearer, Left Hand",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 175,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "64",
+                "letters": "D",
+                "condition": "For 23C diesel, 87 mm petrol and 87 mm V.O./L.O. engines"
+              },
+              {
+                "number": "826882M1",
+                "description": "Brace, Right Hand",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 175,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "64",
+                "letters": "D",
+                "condition": "For 23C diesel, 87 mm petrol and 87 mm V.O./L.O. engines"
+              }
+            ],
+            "partsBookNote": "Two different parts under one item number; both are listed and apply to the 23C.",
+            "sources": [
+              "SRC-032",
+              "SRC-043"
+            ],
+            "status": "partially-verified"
           }
         ]
       },

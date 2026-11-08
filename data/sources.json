@@ -714,6 +714,25 @@
         "Wheel-centre colour varies (red on US Deluxe examples, silver/grey on UK FE35s); the owner's tractor has silver centres, which the model keeps.",
         "Headlamps are in the grille shell on US 35 Deluxe examples and on brackets on UK FE35s with the lighting kit (SRC-035 H.5); the model follows the UK manual."
       ]
+    },
+    {
+      "id": "SRC-043",
+      "name": "Massey Ferguson 35 and 35X Tractors Parts Book 819045 M4, Issue 1 (8/69): illustrated scan",
+      "url": null,
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": true,
+      "dateResearched": "2026-11-08",
+      "reference": "Owner's scanned PDF of the printed parts book (424 pages, Massey-Ferguson (United Kingdom) Ltd., Central Parts Operation, publication 819 045 M4, Issue 1, 8/69), held on the owner's computer and never copied into the repository. It is the same publication as SRC-032 with the same printed page numbers, but it carries the exploded illustrations (grid figures such as H-5, J-15, M-11, A-9, A-17, C-5) that the text copy lacks. The scan also has the master, group, pictorial and numerical indexes and the vineyard pages 280-293.",
+      "extracted": [
+        "Illustrations were used to identify what each 819045 item number is and where it fits on the tractor; part numbers and quantities are still cited from the 819045 tables (SRC-032).",
+        "New catalogue records from the 23C and chassis figures: front battery platform 827589M91 with bracket 826780M91 and strap 827070M91 (p152, M-11); left-hand battery mounting 826976M92 with 10 in and 7 in bands (p152); fuel tank mountings (p111, J-15: rear bolts, plates, pads and packings on bracket 826780M91, front spring-loaded bolt on the thermostat housing); transmission dipstick 828810M91 and right-hand side cover 181218M91 (p207, C-5); tool box 825633M91 clamped to a radius rod (p168, A-9 inset); steering column upper bearing parts (p175 items 51-56, A-17); instrument panel bearer 827591M91 and brace 826882M1 (p175 item 64).",
+        "The bracket 826780M91 appears both under the fuel tank (p111 item 9) and under the battery platform (p152 item 17): one bracket carries the back of the tank and the front battery, as the workshop manual describes (SRC-035 E.101)."
+      ],
+      "conflicts": [
+        "The OCR text layer of the scan is poor (for example 'ENGINE (23C DIESAL)', '819 <*5'); numbers were therefore read from the SRC-032 text copy and the illustrations only used for identification and position."
+      ],
+      "notes": "Read 2026-11-08 from the owner's PDF through the owner's computer. Like SRC-032 it is kept out of the repository: no page image or text from it is committed."
     }
   ]
 }
