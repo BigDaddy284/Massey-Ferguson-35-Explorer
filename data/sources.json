@@ -483,12 +483,12 @@
     {
       "id": "SRC-032",
       "name": "AGCO/MF Parts Book 819045M4 (FE35 / MF35 / MF35X)",
-      "url": "https://farmingparts.com/products/35-35x-parts-manual-819045m4",
+      "url": null,
       "type": "primary",
       "reliability": "primary",
       "accessed": true,
       "dateResearched": "2026-11-08",
-      "reference": "Owner-supplied text extract of the AGCO parts book PM Massey Ferguson MF 35 / 35X Tractors (publication 819045), 8,173 lines covering printed pages 3 to 292. The copy is the owner's purchased PDF and is kept in the private project library, not in the repository. Pages cited on records are the printed page numbers (Ref N Page N in the extract).",
+      "reference": "Owner-supplied text extract of the AGCO parts book PM Massey Ferguson MF 35 / 35X Tractors (publication 819045), 8,173 lines covering printed pages 3 to 292. The copy is the owner's purchased PDF and is kept in the private project library, not in the repository. Pages cited on records are the printed page numbers (Ref N Page N in the extract). The link formerly given here (farmingparts.com shop listing for 819045M4) is a seller's page, not the book; it is dropped so the register states the title only. The book was read from the owner's purchased copy.",
       "extracted": [
         "Each row gives item, part number, quantity, description, footnote letters and, in footnotes, serial or engine-number conditions. Many 23C engine rows carry (J) 'to service 829420M91' or (K) 'to service 829420M92', i.e. parts for the two replacement engine assemblies; (J)/(N) rows are the earlier parts and are taken as the 1958 numbers, (K)/(P) rows are listed as later alternatives.",
         "Tractor serial conditions were tested against the 1958 Coventry range 79553-125067: a row whose range covers all of it gives the original number (status verified); a split inside the range (e.g. clutch springs 111443/111444, nose badge 107892/107893, levelling-box shaft 117267/117268, dual-clutch pins 80003/80004) leaves both numbers listed and the record partially verified.",
@@ -531,12 +531,12 @@
     {
       "id": "SRC-035",
       "name": "Massey-Ferguson 35 Tractor Workshop Service Manual (FE-35, Sections A–U), scanned copy",
-      "url": "http://www.nrgsurveys.co.uk/downloads/mf35.pdf",
+      "url": null,
       "type": "primary",
       "reliability": "primary",
       "accessed": true,
       "dateResearched": "2026-11-07",
-      "reference": "383-page scan. Page references below give the manual's own section/page number (e.g. B.29) followed by the printed page number. Publication number is not visible on the scan, so it is not yet matched to SRC-030 (1448811M1). Clutch page I.4 is marked 'Second issue'; injector data runs to engine SJ 125725E, so the copy was revised c.1959. The owner also supplied a ManualsLib print of the same manual (manualslib.com/manual/1014005, 412 pages: a 29-page contents index followed by the same 383 scanned pages). Same content; the ManualsLib index was used only as a page finder.",
+      "reference": "383-page scan. Page references below give the manual's own section/page number (e.g. B.29) followed by the printed page number. Publication number is not visible on the scan, so it is not yet matched to SRC-030 (1448811M1). Clutch page I.4 is marked 'Second issue'; injector data runs to engine SJ 125725E, so the copy was revised c.1959. The owner also supplied a ManualsLib print of the same manual (manualslib.com/manual/1014005, 412 pages: a 29-page contents index followed by the same 383 scanned pages). Same content; the ManualsLib index was used only as a page finder. The scan was formerly linked at nrgsurveys.co.uk/downloads/mf35.pdf; that link no longer works, so only the title is given. The owner's copy is kept in the private project library, not in the repository.",
       "extracted": [
         "B.1 (p5): tractor codes. Chassis S standard, V vineyard, J industrial. Engines G petrol, H high-altitude petrol, D diesel (23C), N diesel (3-A-152), K vaporising oil, L lamp oil. Other variations F single clutch, M dual clutch",
         "B.1 (p5): 'The De Luxe version of the Tractor is fitted with Dual Clutch, live P.T.O., Tractormeter, and cushion seat'",
@@ -614,12 +614,12 @@
     {
       "id": "SRC-038",
       "name": "AGCO: 2008 AGCO Heritage Parts and Merchandise Catalog (Massey-Harris, Ferguson, Massey Ferguson, 1940–96 tractors)",
-      "url": "http://gptractorparts.co.za/downloads/mfheritage.pdf",
+      "url": null,
       "type": "primary",
       "reliability": "primary",
       "accessed": true,
       "dateResearched": "2026-11-07",
-      "reference": "PDF supplied by the owner via the project files on 2026-11-07 (342 pages; the site itself blocks downloads). Copyright 2008 AGCO Corporation; a dealer catalogue of genuine parts still supplied for classic tractors, US-oriented, listed by section (filters, aesthetics and gauges, engine, fuel, cooling, electrical, intake and exhaust, steering, clutch, hydraulics, PTO and 3-point hitch, rear axle, brakes, tyres and hubs). Every page naming the 35, 35X, TO35, FE 35, TE35 or 23C was read; ambiguous tables were checked on rendered page images. Findings: docs/research/06-agco-heritage-2008.md.",
+      "reference": "PDF supplied by the owner via the project files on 2026-11-07 (342 pages; the site itself blocks downloads). Copyright 2008 AGCO Corporation; a dealer catalogue of genuine parts still supplied for classic tractors, US-oriented, listed by section (filters, aesthetics and gauges, engine, fuel, cooling, electrical, intake and exhaust, steering, clutch, hydraulics, PTO and 3-point hitch, rear axle, brakes, tyres and hubs). Every page naming the 35, 35X, TO35, FE 35, TE35 or 23C was read; ambiguous tables were checked on rendered page images. Findings: docs/research/06-agco-heritage-2008.md. The catalogue was formerly linked at gptractorparts.co.za/downloads/mfheritage.pdf; that link no longer works, so only the title is given. The owner's copy is kept in the private project library, not in the repository.",
       "extracted": [
         "Publications table repeats SRC-037: FE 35 (4 cyl. Diesel) operator manual 690274M2, repair manual 819146M4, parts book 819045M4.",
         "23C-specific rows: piston kit 830972V92 and ring kit 836117V91 (p.168); inlet valve 1884123V1, exhaust valve 1884124V1 (p.171); top gasket set 1810028V91 for 35/35X Eff. Eng. SN SJ41890E and TO35 (p.175); bottom gasket set 1810027V91 (p.176, MUO misprinted \"175\"); big-end bearing set std 830899V91 (p.178); timing chain 826094V1 (p.183); fan belt 826960V1 FE 35 Diesel 23C (p.188); fuel lift pump 1884857V91 Eff. Eng. SN SJ37180E and 826154V91 before it (p.209); starter switch 883928V91 FE35 Diesel 23C (p.241); tachometer 1850092V93 (p.67); side panels 826815V91 RH and 826816V91 LH for 23C and 87 mm engines (p.56); brake shoes 830480V93, drum 827707V5, springs 180815M1 and 180832M1 for TO35 (23C and A3-152) and 35 (p.319).",

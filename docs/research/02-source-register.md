@@ -50,13 +50,17 @@ accessed primary source.
 | SRC-027 | manytractors.com: FE-35 | aggregator | Gear count only; engine data unreliable |
 | SRC-030 | Service manual 1448811M1 | primary | **Not yet obtained** |
 | SRC-031 | Diesel supplement 690560M1 | primary | **Not yet obtained** |
-| SRC-032 | Parts book 819045 (MF35 / 35X) | primary | **Read 2026-11-08** from the owner's purchased copy (text extract, kept in the private project library, not in the repo). Original part numbers and quantities for 132 components; see `09-parts-book-819045.md` |
+| SRC-032 | AGCO/MF Parts Book 819045 (FE35 / MF35 / MF35X), owner's purchased copy; no public link | primary | **Read 2026-11-08** from the owner's purchased copy (text extract, kept in the private project library, not in the repo). Original part numbers and quantities for 132 components; see `09-parts-book-819045.md` |
 | SRC-033 | Operator book 819046M1 | primary | **Not yet obtained** |
 | SRC-034 | 23C engine operator manual 819050M1 | primary | **Not yet obtained** |
-| SRC-035 | MF35 Workshop Service Manual (FE-35), scanned copy at nrgsurveys.co.uk | primary | **Read 2026-11-07.** Specs, torques, clutch, gearbox, PTO, hydraulics. Publication number not visible; may be SRC-030 |
+| SRC-035 | Massey-Ferguson 35 Tractor Workshop Service Manual (FE-35, Sections A–U), owner's scanned copy; the public link no longer works | primary | **Read 2026-11-07.** Specs, torques, clutch, gearbox, PTO, hydraulics. Publication number not visible; may be SRC-030 |
 | SRC-036 | SlideShare / Scribd preview of a "MF 35X parts catalogue 819045" upload | aggregator | Cover and Perkins-looking pages only; not usable for the 23C |
 | SRC-037 | AGCO Technical Publication Catalog 79017810B | primary | **Read 2026-11-07.** FE 35 4-cyl diesel: operator manual 690274M2, repair manual 819146M4, parts book 819045M4 |
-| SRC-038 | 2008 AGCO Heritage Parts and Merchandise Catalog (PDF from the owner) | primary | **Read 2026-11-07.** Current AGCO supply numbers for 35/23C parts, recorded as `replacementReferences`. See `06-agco-heritage-2008.md` |
+| SRC-038 | 2008 AGCO Heritage Parts and Merchandise Catalog, owner's copy; the public link no longer works | primary | **Read 2026-11-07.** Current AGCO supply numbers for 35/23C parts, recorded as `replacementReferences`. See `06-agco-heritage-2008.md` |
+| SRC-039 | Anglo Agriparts: Ferguson FE35 parts listing and product pages | supplier | **Read 2026-11-08.** 196 products with price, stock and quoted OEM numbers, recorded in `data/suppliers.json` |
+| SRC-040 | Agriline Products: Ferguson FE35 4-cylinder parts range | supplier | **Read 2026-11-08.** Category pages by system with price, stock and quoted OEM numbers, recorded in `data/suppliers.json` |
+| SRC-041 | Ferguson TO35 Tractor Parts Book, Gas and Diesel (1970 reprint), Internet Archive scan | primary | **Read 2026-11-08.** US-built TO35 with the Standard 23C diesel; its numbers are `partsBookReferences` with `book: 'TO35'` |
+| SRC-042 | Wikimedia Commons: photographs of FE35 / MF35 tractors | community | **Viewed 2026-11-08.** Shapes and positions of visible parts for the 3D model detail pass; photos are not copied into the repository. See `docs/model/README.md` |
 
 ## Sources tried but not readable from this environment
 

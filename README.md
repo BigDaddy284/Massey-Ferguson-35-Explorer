@@ -96,9 +96,14 @@ install. Alternatively, run `npm run serve` and visit http://localhost:8035.
 | Completeness report | [docs/research/08-completeness-report.md](docs/research/08-completeness-report.md) | `npm run report` |
 | Parts book 819045 method and page map | [docs/research/09-parts-book-819045.md](docs/research/09-parts-book-819045.md) | `partsBookReferences` (`book: 'MF35'`) |
 | 3D model notes | [docs/model/README.md](docs/model/README.md) | `app/js/model.js` |
+| Owner's photographs (reference only) | [docs/reference/owner-photos/README.md](docs/reference/owner-photos/README.md) | — |
 
 Specifications: [docs/spec/PRODUCT_SPEC.md](docs/spec/PRODUCT_SPEC.md) (governing) and
 [docs/spec/DESIGN.md](docs/spec/DESIGN.md).
+
+The parts books, workshop manual and AGCO catalogue the data was read from are the owner's purchased or
+scanned copies. They are copyrighted, so they are not in this repository and the source register names them by
+title only; the Research Status page in the app lists every source with what was read from it.
 
 ## Development
 
