@@ -3,8 +3,9 @@
 // Usage: node scripts/validate-data.mjs        (exit code 1 on any error)
 // Checks: unique stable IDs, allowed kinds and verification statuses,
 // every cited source exists in the register, appliesTo uses known variant
-// axes/options, and no unverified source is used as the sole support for a
-// "verified" status.
+// axes/options, no unverified source is used as the sole support for a
+// "verified" status, and replacementReferences (current AGCO supply numbers)
+// cite an accessed source and never repeat the oemPartNumber.
 
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -61,6 +62,15 @@ const counts = { total: 0, byStatus: {} };
   }
   if (status !== 'unverified' && !(node.sources?.length) && node.kind !== 'tractor') {
     err(`${where}: status '${status}' needs sources`);
+  }
+  for (const [i, r] of (node.replacementReferences ?? []).entries()) {
+    const w = `${where}: replacementReferences[${i}]`;
+    if (!r.number || !/^[0-9A-Z]{5,12}$/.test(r.number)) err(`${w}: bad number ${r.number}`);
+    if (!r.description) err(`${w}: needs a description`);
+    if (!r.source || !sourceById.has(r.source)) err(`${w}: unknown source ${r.source}`);
+    else if (!sourceById.get(r.source).accessed) err(`${w}: source ${r.source} has not been accessed`);
+    if (r.confidence && !['listed', 'possible'].includes(r.confidence)) err(`${w}: bad confidence ${r.confidence}`);
+    if (node.oemPartNumber && node.oemPartNumber === r.number) err(`${w}: duplicates oemPartNumber (a replacement reference is not the original number)`);
   }
   for (const [axis, opts] of Object.entries(node.appliesTo ?? {})) {
     if (!axes.has(axis)) err(`${where}: appliesTo unknown axis ${axis}`);

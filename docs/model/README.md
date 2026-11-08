@@ -1,4 +1,4 @@
-# 3D model notes (Phase 3)
+# 3D model notes (Phases 3 and 4)
 
 The model in [`app/js/model.js`](../../app/js/model.js) is original procedural geometry built in
 code. It is not traced from any AGCO drawing or taken from a third-party 3D asset.
@@ -29,6 +29,29 @@ parts book (819045M4) or the tractor itself is available:
 - Internal gear layout of the gearbox, PTO gears and differential (simplified cylinders).
 - The forward extension of the sump carrying the front axle.
 
+## Appearance pass (after Phase 4)
+
+Shapes the owner's photograph and period views of the FE35 were used for, by eye:
+
+- Bonnet lofted through cross-sections (rounded crown, slight taper and nose dip), separate
+  louvred side panels, open cast-shield grille with a bar mesh and the triple-triangle badge,
+  lamp pods either side.
+- Clamshell mudguards: crowned sheet over the wheel, flat inner skirt, rolled outer edge, bracket
+  to the axle housing. Dished pressed-steel rear wheel centres with six nuts and six rim clamps;
+  six-bolt front wheels with hub caps; three-rib front tyres and bar-lug rear tyres.
+- Dash cowl with a sloping instrument panel: chrome-bezelled ammeter, water temperature, oil
+  pressure and tractormeter, key switch, serial plate. Three-spoke ribbed steering wheel.
+- De Luxe cushion seat on a sprung pan with the coil spring; chequer-plate footplates and steps.
+- Castings: centre housing with its top flange and nuts, flanged tapering axle housings with
+  brake flanges, water-jacket side plates and port bosses on the engine, alloy rocker cover with
+  filler cap, sump drain plug, DPA pump with outlet unions, starter with solenoid.
+- Air cleaner moved to the left-hand side with its stack and pre-cleaner bowl beside the dash;
+  exhaust stack with the silencer on the right (owner photo).
+- Surface grain for cast iron, paint and rubber is generated in code (no texture files). The
+  viewer builds a studio environment map in code for reflections.
+
+None of this changes any measured dimension above. It is appearance, not evidence.
+
 ## How it is used
 
 - One group per hierarchy id. A part fitted in several places (four pistons, eight valves) is one
@@ -38,3 +61,15 @@ parts book (819045M4) or the tractor itself is available:
   are hidden by default.
 - Parts named as casings in `CASINGS` go see-through in X-ray mode, and automatically when the
   selected part is inside one.
+
+## Exploded views (Phase 4)
+
+- `EXPLODE` in `model.js` gives, for selected hierarchy ids, how far the group moves away from its
+  parent at full explosion (metres). `'mirror'` sends left-hand parts the opposite way in z.
+- Groups without a hint move radially away from the parent's centre, with an extra push along the
+  main axis scaled to the parent's size. Children that share the parent's centre (parts on one
+  shaft or inside one housing) slide out one after another along `EXPLODE_AXIS` (default: up).
+- The left- and right-hand halves of one part (both rear tyres, both lift arms) split apart.
+- The whole layout is lifted if needed so nothing goes below the floor.
+- These directions are chosen so the views are clear. They are not a dismantling order, and they
+  are not taken from any AGCO exploded diagram.

@@ -326,10 +326,25 @@
         "date": "2026-11-07",
         "by": "owner",
         "observation": "Owner reports the tractor can be slowed with the clutch while attached equipment keeps working.",
-        "inference": "Matches dual-stage clutch behaviour (half pedal disengages the gearbox, PTO and hydraulics stay driven; SRC-001, SRC-010). Clutch recorded as dual-stage, so PTO is live. Not yet confirmed by the serial prefix letter (M)."
+        "inference": "Matches dual-stage clutch behaviour (half pedal disengages the gearbox, PTO and hydraulics stay driven; SRC-001, SRC-010). Clutch recorded as dual-stage, so PTO is live."
+      },
+      {
+        "date": "2026-11-07",
+        "by": "owner",
+        "observation": "Owner reports the serial plate prefix includes the letter M. The full prefix and serial number were not available.",
+        "inference": "In the FE-35 prefix scheme the third letter codes the clutch, and M means dual-stage clutch (SRC-035 B.1). This agrees with the reported clutch behaviour. The full prefix has not been seen, so the chassis and fuel letters remain unknown."
+      },
+      {
+        "date": "2026-11-07",
+        "by": "owner (relayed from the person who drives the tractor)",
+        "observation": "Pressing the clutch pedal half-way lets the gears be changed; pressing it all the way down stops the PTO, and releasing it restarts the PTO.",
+        "inference": "This is the defining two-stage pedal action of the dual-stage clutch (first stage: transmission plate released; second stage: PTO plate released; SRC-035 clutch section, SRC-001, SRC-010). It confirms the dual-stage clutch and live PTO independently of the plate letter M. Clutch now rests on two owner observations plus the plate letter; it stays owner-reported until the full serial prefix is read."
       }
     ],
-    "clutchStatus": "owner-reported"
+    "clutchStatus": "plate-letter-reported",
+    "serialPrefixLetters": {
+      "clutch": "M"
+    }
   },
   "defaultTarget": {
     "$comment": "What the 3D model and catalogue render when the owner's value is null. Every component that depends on a null axis must be shown as variant-dependent.",

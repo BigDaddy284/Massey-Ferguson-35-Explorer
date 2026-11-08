@@ -19,11 +19,13 @@ The owner's project CLAUDE.md is kept verbatim as `docs/spec/PRODUCT_SPEC.md` an
   precedence** where it differs from DESIGN.md.
 - `docs/spec/DESIGN.md`: the earlier, broader design spec (also covers petrol/TVO). It is used for
   layout and UX intent.
+- `docs/research/06-agco-heritage-2008.md`: current AGCO supply numbers for 35/23C parts from the
+  2008 Heritage catalogue (SRC-038), stored on nodes as `replacementReferences`.
 - `docs/research/01–05`: Phase 1 findings. They override the spec's *assumed* scope lists where
   research contradicts them (for example, the 23C camshaft is chain-driven, not gear-driven).
 
 Development follows the spec's roadmap (§15) **strictly in phase order**, one task at a time, with
-research, build, test and verify before moving on. Current status: **Phase 3 (3D model) built; Phase 4 (exploded views) is next.**
+research, build, test and verify before moving on. Current status: **Phase 4 (exploded views) built; Phase 5 (component catalogue) is next.**
 
 ## Commands
 
@@ -71,7 +73,14 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
 - `app/js/viewer.js`: Three.js scene, OrbitControls, picking, highlight, hide, isolate, X-ray
   (casing list in model.js), auto see-through for parts blocking the selection, camera presets.
   The anatomy view moves one persistent viewer element into each re-render (no WebGL re-creation).
-  Without WebGL it falls back to the SVG schematic. The explode slider stays disabled until Phase 4.
+  Without WebGL it falls back to the SVG schematic.
+- Exploded views (Phase 4, viewer.js): `setExplode({scope, depth, t})` moves meshes from their
+  stored home positions. Directions come from `EXPLODE` hints in model.js (metres at full explode,
+  relative to the parent; `'mirror'` flips z for the LH side), otherwise radially from the parent's
+  centre. Children sharing the parent's centre stack along `EXPLODE_AXIS`. LH/RH halves of a part
+  split apart. Exploding one assembly ghosts the rest. Numbered callouts with leader lines and the
+  exploded parts list use `explodeRefs()`. `#/exploded/<id>` opens an assembly exploded. The layout is
+  a presentation choice, not a dismantling procedure.
 - `app/vendor/three/`: Three.js r147 (MIT), the last release with a classic `three.min.js` and
   `examples/js/OrbitControls.js`. Don't upgrade without replacing those with a non-module build.
 - `window.MF35Explorer.viewer()` is a read-only handle for browser tests.
@@ -95,10 +104,16 @@ These are enforced by the validator where possible.
 - A status other than `unverified` must cite sources.
 - OEM numbers quoted by suppliers or forums go in `supplierClaimedOem`, never in `oemPartNumber`,
   until checked against parts book 819045M4 (SRC-032).
+- Numbers from the 2008 AGCO Heritage catalogue (SRC-038) go in `replacementReferences`
+  (`{number, description, models, source, page, confidence}`), never in `oemPartNumber`: they are
+  the numbers AGCO supplied the part under in 2008 and may supersede the 1958 number. `confidence`
+  is `listed` when the row names the 23C / 35 diesel / FE35 or the 35 without an engine
+  restriction, and `possible` when it depends on a US serial range or does not name the engine.
+  The validator checks each one cites an accessed source and never repeats `oemPartNumber`.
 - Never present missing data as confirmed in the UI. Show "not yet documented" instead.
 - The Perkins 3.152/A3.152 is **not** 1958 equipment (introduced 1959, c. serial 165596).
 - Live PTO depends on the dual-stage clutch. The owner reports dual-clutch behaviour
-  (`clutchStatus: owner-reported`), but the serial prefix (M) has not been seen, so label it as reported.
+  and reports the clutch letter M on the serial plate (`clutchStatus: plate-letter-reported`). The full prefix and number are still unknown, so it stays labelled as owner-reported.
 - Do not apply US-built MF35 serial breaks to Coventry serials.
 - Do not reproduce copyrighted AGCO diagrams or text. Diagrams and 3D assets must be original.
 - Torques come from the workshop manual (SRC-035 B.29–B.30) in lb ft. SRC-006's "Nm" figures mix

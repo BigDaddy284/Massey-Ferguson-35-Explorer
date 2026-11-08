@@ -524,7 +524,7 @@
       "reliability": "primary",
       "accessed": true,
       "dateResearched": "2026-11-07",
-      "reference": "383-page scan. Page references below give the manual's own section/page number (e.g. B.29) followed by the printed page number. Publication number is not visible on the scan, so it is not yet matched to SRC-030 (1448811M1). Clutch page I.4 is marked 'Second issue'; injector data runs to engine SJ 125725E, so the copy was revised c.1959.",
+      "reference": "383-page scan. Page references below give the manual's own section/page number (e.g. B.29) followed by the printed page number. Publication number is not visible on the scan, so it is not yet matched to SRC-030 (1448811M1). Clutch page I.4 is marked 'Second issue'; injector data runs to engine SJ 125725E, so the copy was revised c.1959. The owner also supplied a ManualsLib print of the same manual (manualslib.com/manual/1014005, 412 pages: a 29-page contents index followed by the same 383 scanned pages). Same content; the ManualsLib index was used only as a page finder.",
       "extracted": [
         "B.1 (p5): tractor codes. Chassis S standard, V vineyard, J industrial. Engines G petrol, H high-altitude petrol, D diesel (23C), N diesel (3-A-152), K vaporising oil, L lamp oil. Other variations F single clutch, M dual clutch",
         "B.1 (p5): 'The De Luxe version of the Tractor is fitted with Dual Clutch, live P.T.O., Tractormeter, and cushion seat'",
@@ -558,6 +558,69 @@
         "Liner type: the manual describes removable flanged sleeves but does not say wet or dry; SRC-008/SRC-018 say dry, SRC-007 groups the 23C with wet-liner engines",
         "Perkins engine letter is N here; SRC-003 says P",
         "Oil pressure 40–60 lb/sq in here; earlier notes quoted 60 lb/sq in as the relief figure only"
+      ]
+    },
+    {
+      "id": "SRC-036",
+      "name": "SlideShare upload titled 'Massey Ferguson MF 35 X tractors service parts catalogue manual (part number 819045)'",
+      "url": "https://www.slideshare.net/slideshow/massey-ferguson-mf-35-x-tractors-service-parts-catalogue-manual-part-number-819045-240590930/240590930",
+      "type": "aggregator",
+      "reliability": "aggregator",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Suggested by the owner. An anonymous upload of about 20 preview slides, ending with a prompt to 'Get COMPLETE MANUAL' elsewhere. It is not an AGCO publication page and shows no AGCO publication number other than the title. Read only through a text extract of the preview; the full book is not shown. A Scribd upload with the same title (https://www.scribd.com/document/814954669/, 22 pages, anonymous uploader) was also checked on 2026-11-07. Only its cover and metadata are visible, and it has no publication number beyond '819045', so it appears to be the same preview.",
+      "extracted": [
+        "Preview covers only engine sections: cylinder block, cylinder head, crankshaft, cylinder head cover, air induction and timing gear. No clutch, gearbox, PTO, hydraulic or linkage pages are visible.",
+        "Visible numbers include liner 31358308, inlet valve 31431261, head cover 37188519, camshaft 31415241 and timing case 37161481, with engine-number breaks such as 1935853/1935854 and 19B7093–19F1998.",
+        "The 31xxxxxx/37xxxxxx numbers look like Perkins-style numbers, so these pages probably cover the Perkins 3-cylinder engine of the MF35X / later MF35 rather than the Standard 23C diesel. Not confirmed: the engine type is not stated in the visible text."
+      ],
+      "conflicts": [
+        "Title quotes 819045 (no M4 suffix) and 'MF 35 X'. The visible pages appear to be Perkins engine pages, so none of their numbers can be applied to the 23C engine. Not used to set any oemPartNumber."
+      ]
+    },
+    {
+      "id": "SRC-037",
+      "name": "AGCO: Massey Ferguson (Agricultural Equipment) Technical Publication Catalog 79017810B (27 Mar 2006)",
+      "url": "https://www.amcpartstool.com/catalogs/agco/Publications%20Catalog%20-%20MF%20Agricultural.pdf",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "Suggested by the owner. AGCO dealer ordering guide listing publication numbers by model. Read through a text extract; the column layout (operator / repair / time schedule / parts / microfiche) could not be matched with certainty, so numbers are recorded in the order printed. No prices, no serial ranges. It is a catalogue of publications, not a publication with part data.",
+      "extracted": [
+        "FE 35 (4 cyl. Dsl.): 690274M2, 819146M4, 819045M4, 653116M91 (microfiche Red 22). Reading across the column order these are the operator manual, repair manual, parts book and microfiche.",
+        "FE 35 (3 cyl. Dsl.): 819146M4, 819045M4, 653116M91. The same parts book 819045M4 and repair manual 819146M4 serve both FE35 engines.",
+        "35 Dsl. (U.S.): 690454M4, 1448811M91, 651093M93, 653110M91. 35 Gas.: 690495M3, 1448811M91, 651093M93, 653118M91. So 1448811M91 is the US-built 35 repair manual and 651093M93 its parts book, which are not the Coventry FE35 publications.",
+        "TO 35 Gas (Ferguson): 690241M4, 693063M4, 653115M91; TO 35 Dsl.: 690348M2, 693063M4, 653115M91.",
+        "Publications are ordered through AGCO dealers as regular parts orders."
+      ],
+      "conflicts": [
+        "SRC-015 pairs the FE-35 4-cyl diesel with service manual 1448811M1 plus supplement 690560M1. This catalogue lists 1448811M91 against the US-built 35 and 819146M4 against the FE 35, so 819146M4 is the better candidate for the Coventry diesel repair manual. Unconfirmed until a copy is seen."
+      ]
+    },
+    {
+      "id": "SRC-038",
+      "name": "AGCO: 2008 AGCO Heritage Parts and Merchandise Catalog (Massey-Harris, Ferguson, Massey Ferguson, 1940–96 tractors)",
+      "url": "http://gptractorparts.co.za/downloads/mfheritage.pdf",
+      "type": "primary",
+      "reliability": "primary",
+      "accessed": true,
+      "dateResearched": "2026-11-07",
+      "reference": "PDF supplied by the owner via the project files on 2026-11-07 (342 pages; the site itself blocks downloads). Copyright 2008 AGCO Corporation; a dealer catalogue of genuine parts still supplied for classic tractors, US-oriented, listed by section (filters, aesthetics and gauges, engine, fuel, cooling, electrical, intake and exhaust, steering, clutch, hydraulics, PTO and 3-point hitch, rear axle, brakes, tyres and hubs). Every page naming the 35, 35X, TO35, FE 35, TE35 or 23C was read; ambiguous tables were checked on rendered page images. Findings: docs/research/06-agco-heritage-2008.md.",
+      "extracted": [
+        "Publications table repeats SRC-037: FE 35 (4 cyl. Diesel) operator manual 690274M2, repair manual 819146M4, parts book 819045M4.",
+        "23C-specific rows: piston kit 830972V92 and ring kit 836117V91 (p.168); inlet valve 1884123V1, exhaust valve 1884124V1 (p.171); top gasket set 1810028V91 for 35/35X Eff. Eng. SN SJ41890E and TO35 (p.175); bottom gasket set 1810027V91 (p.176, MUO misprinted \"175\"); big-end bearing set std 830899V91 (p.178); timing chain 826094V1 (p.183); fan belt 826960V1 FE 35 Diesel 23C (p.188); fuel lift pump 1884857V91 Eff. Eng. SN SJ37180E and 826154V91 before it (p.209); starter switch 883928V91 FE35 Diesel 23C (p.241); tachometer 1850092V93 (p.67); side panels 826815V91 RH and 826816V91 LH for 23C and 87 mm engines (p.56); brake shoes 830480V93, drum 827707V5, springs 180815M1 and 180832M1 for TO35 (23C and A3-152) and 35 (p.319).",
+        "FE 35 filters (p.92): oil element 1018121V91 (diesel), fuel primary 1012006V2, fuel secondary 1850450V2, sediment bowl element 632952M1.",
+        "35/35X/TO35 rows without engine restriction: clutch set 79022255 (cover 180263V91 = OEM 180263M91, disc 181114V91 = 181114M91, release bearing 833085V2 or 894303V1; single clutch only, no dual clutch listed for the 35); hydraulics (relief valve 883402V92, pump piston 190799V1, control valve 189427V92, lift shaft 184359V91, repair kits 7928769V and 1810684V92); PTO shaft 181204V92, cap 1868778V1; top link 1870075V91; front axle beam 183219V91, pivot 182850V1, front hub 180338V92; radiator cap 3475308V1; rear axle seals 195677V1 and 195678V2; lift cover gasket 886549V2; gearbox countershaft 183054V92 and gears; steering column 1850003V92.",
+        "No 23C entries for liners, camshaft, crankshaft, main bearings, oil pump, water pump, injectors, injection pump, dynamo, starter motor or heater plugs. MF35 engine overhaul kits are Continental and A3.152 only.",
+        "Numbers are current AGCO supply numbers (V91/M91 suffixes), i.e. the part as supplied in 2008, which may supersede the number in parts book 819045M4. They are recorded as replacementReferences on hierarchy nodes, never as oemPartNumber. Serial breaks quoted are US TO35/MF35 serials and are not applied to Coventry serials."
+      ],
+      "conflicts": [
+        "Three fan belt numbers for what reads as the same application: 826960V1 (FE 35 Diesel 23C), 184930V1 (TO 35 Diesel 23C), 186976V1 (35 Diesel) (p.188).",
+        "Engine oil capacity: FE 35 row 7.5 qt (7.0 L), TO35 Standard Motors Diesel row 10 qt (9.5 L) (p.92). SRC-035 gives the sump capacity; the TO35 figure is suspect.",
+        "Two PTO retainer housings (1860889V91 and 1867223V1) are both listed for the 35 with no stated difference (p.309).",
+        "Bottom gasket set 1810027V91 is listed against \"175 23C Diesel Engine\"; the 175 never had a 23C (p.176).",
+        "The earlier text extract paired 836117V91 with a 23C liner; the page image shows it is the ring kit, and no 23C liner is listed."
       ]
     }
   ]

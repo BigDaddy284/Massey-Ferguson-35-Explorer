@@ -54,6 +54,9 @@ accessed primary source.
 | SRC-033 | Operator book 819046M1 | primary | **Not yet obtained** |
 | SRC-034 | 23C engine operator manual 819050M1 | primary | **Not yet obtained** |
 | SRC-035 | MF35 Workshop Service Manual (FE-35), scanned copy at nrgsurveys.co.uk | primary | **Read 2026-11-07.** Specs, torques, clutch, gearbox, PTO, hydraulics. Publication number not visible; may be SRC-030 |
+| SRC-036 | SlideShare / Scribd preview of a "MF 35X parts catalogue 819045" upload | aggregator | Cover and Perkins-looking pages only; not usable for the 23C |
+| SRC-037 | AGCO Technical Publication Catalog 79017810B | primary | **Read 2026-11-07.** FE 35 4-cyl diesel: operator manual 690274M2, repair manual 819146M4, parts book 819045M4 |
+| SRC-038 | 2008 AGCO Heritage Parts and Merchandise Catalog (PDF from the owner) | primary | **Read 2026-11-07.** Current AGCO supply numbers for 35/23C parts, recorded as `replacementReferences`. See `06-agco-heritage-2008.md` |
 
 ## Sources tried but not readable from this environment
 

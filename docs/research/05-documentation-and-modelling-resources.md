@@ -15,6 +15,11 @@
 and text must not be reproduced. All app diagrams and 3D assets are to be original work.
 
 **Recommendation to the owner:** buy parts book 819045M4 (and ideally 1448811M1 + 690560M1).
+
+Update 2026-11-07 (SRC-037, AGCO publication catalogue 79017810B): for the FE 35 4-cyl diesel AGCO lists
+operator manual **690274M2**, repair manual **819146M4**, parts book **819045M4** and microfiche 653116M91.
+1448811M91 and parts book 651093M93 are listed against the US-built 35, so 819146M4 is the better candidate
+for the Coventry workshop manual. Parts book 819045M4 is confirmed as the FE35 parts book for both engines.
 Without it, OEM part numbers cannot be marked verified and Phase 5 will stall at "partially
 verified".
 
