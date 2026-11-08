@@ -519,7 +519,9 @@
       });
       // Cylinder head details over each bore
       add('combustion-chamber-insert', cyl(0.0178, 0.0178, 0.02, 'y', 20), M.steelDark, V(x, 1.0, -0.055));
-      [[-0.025, 'inlet'], [0.025, 'exhaust']].forEach(function (v) {
+      // Adjacent cylinders mirror their valves (head port face, SRC-035 Fig. 122): E I | I E | E I | I E from the front.
+      var vo = i % 2 === 0 ? 1 : -1;
+      [[-0.025 * vo, 'inlet'], [0.025 * vo, 'exhaust']].forEach(function (v) {
         var vx = x + v[0];
         var kind = v[1];
         add(kind + '-valve', cyl(0.0039, 0.0039, 0.13, 'y', 8), M.steel, V(vx, 1.05, 0.0));
@@ -546,6 +548,7 @@
     add('rear-crank-seal', ring(0.052, 0.008, 'x', 28), M.rubber, V(EX0 - 0.005, CY, 0));
     add('front-crank-seal', ring(0.03, 0.006, 'x', 24), M.rubber, V(EX1 + 0.055, CY, 0));
     add('crank-pulley', cyl(0.073, 0.073, 0.035, 'x', 32), M.greyDark, V(1.79, CY, 0));
+    add('crank-pulley', cyl(0.025, 0.025, 0.04, 'x', 12), M.steel, V(1.825, CY, 0));               // starting-handle dog
     // Camshaft and timing chain (chain drive: SRC-035, SRC-008)
     add('camshaft', cyl(0.016, 0.016, EX1 - EX0 + 0.04, 'x', 14), M.steel, V((EX0 + EX1) / 2, 0.76, -0.11));
     CYLX.forEach(function (x) { [-0.025, 0.025].forEach(function (o) { add('camshaft', cyl(0.022, 0.022, 0.012, 'x', 3), M.steel, V(x + o, 0.76, -0.11)); }); });
@@ -561,16 +564,25 @@
     add('sump', rbox(0.22, 0.13, 0.26, 0.04), M.grey, V(1.82, 0.535, 0));   // forward extension carrying the front axle (shape approximate)
     hexNut('sump', V(1.40, 0.435, 0.0), 0.012, 'y');   // drain plug
     for (var sb = 0; sb < 6; sb++) SIDES.forEach(function (s) { hexNut('sump', V(1.14 + sb * 0.105, 0.62, s * 0.16), 0.007, 'y'); });
-    add('oil-pump', cyl(0.03, 0.03, 0.08, 'y', 18), M.steelDark, V(1.55, 0.56, 0.04));
-    add('oil-pressure-relief', cyl(0.012, 0.012, 0.03, 'z', 10), M.brass, V(1.55, 0.58, 0.16));
+    // Rotor oil pump flange-bolted to the front main bearing housing, gear-driven from the crankshaft
+    // (SRC-035 C.102, Figs. 101 and 130); gauze strainer in the sump below it; relief valve in the filter head.
+    add('oil-pump', cyl(0.035, 0.035, 0.06, 'x', 18), M.steelDark, V(1.67, CY - 0.085, 0));
+    add('oil-pump', cyl(0.03, 0.03, 0.015, 'x', 24), M.steelDark, V(1.745, CY - 0.085, 0));       // driven gear
+    add('oil-pump', cyl(0.05, 0.05, 0.015, 'x', 30), M.steelDark, V(1.758, CY, 0));               // driving gear on the crank nose
+    add('oil-strainer', rbox(0.12, 0.012, 0.10, 0.004), M.steel, V(1.64, 0.47, 0));
+    rod('oil-strainer', V(1.65, 0.48, 0), V(1.67, CY - 0.12, 0), 0.008, M.steel);
+    add('oil-pressure-relief', cyl(0.012, 0.012, 0.04, 'x', 10), M.brass, V(1.52, 0.815, -0.255));
     add('oil-filter', cyl(0.05, 0.05, 0.16, 'y', 24), M.greyDark, V(1.52, 0.72, -0.225));
     add('oil-filter', cyl(0.055, 0.055, 0.03, 'y', 24), M.grey, V(1.52, 0.815, -0.225));
     hexNut('oil-filter', V(1.52, 0.63, -0.225), 0.012, 'y');
-    tube('oil-pipes', [V(1.55, 0.62, 0.04), V(1.56, 0.64, -0.12), V(1.53, 0.66, -0.2)], 0.005, M.copper);
-    tube('oil-pipes', [V(1.52, 0.80, -0.2), V(1.45, 0.86, -0.16), V(1.40, 1.12, -0.05)], 0.004, M.copper);
+    // Engine oil filler: ribbed cap on the left of the block below the head joint, near the front (SRC-035 Fig. 109 'O')
+    add('engine-block', cyl(0.02, 0.02, 0.04, 'z', 16), M.grey, V(1.60, 0.93, -0.19));
+    add('engine-block', cyl(0.03, 0.03, 0.025, 'z', 20), M.black, V(1.60, 0.93, -0.215));
+    // Pump to filter head on the left; the rocker shaft is fed through internal drillings, not a pipe.
+    tube('oil-pipes', [V(1.67, CY - 0.085, -0.03), V(1.64, 0.62, -0.14), V(1.55, 0.70, -0.21), V(1.53, 0.80, -0.225)], 0.005, M.copper);
     rod('dipstick', V(1.30, 0.55, -0.16), V(1.32, 0.96, -0.23), 0.004, M.steel);
     add('dipstick', ring(0.014, 0.003, 'x'), M.steel, V(1.32, 0.975, -0.23));
-    tube('engine-breather', [V(1.30, 1.16, 0.06), V(1.27, 1.19, 0.12), V(1.25, 0.90, 0.19)], 0.008, M.black);
+    tube('engine-breather', [V(1.30, 1.16, 0.06), V(1.27, 1.19, 0.12), V(1.25, 0.90, 0.20), V(1.24, 0.55, 0.20)], 0.008, M.black);
     // Flywheel
     add('flywheel', cyl(0.20, 0.20, 0.05, 'x', 48), M.steelDark, V(1.065, CY, 0));
     add('ring-gear', ring(0.205, 0.008, 'x', 64), M.steel, V(1.07, CY, 0));
@@ -581,22 +593,27 @@
     // Head, gasket, rocker gear
     add('head-gasket', box(0.58, 0.004, 0.32), M.copper, V(1.40, DECK + 0.002, 0));
     add('cylinder-head', rbox(0.58, 0.105, 0.30, 0.02), M.grey, V(1.40, DECK + 0.057, 0));
-    CYLX.forEach(function (x) {
-      add('cylinder-head', cyl(0.024, 0.024, 0.02, 'z', 16), M.grey, V(x - 0.025, 1.04, 0.158));   // inlet port boss
-      add('cylinder-head', cyl(0.024, 0.024, 0.02, 'z', 16), M.grey, V(x + 0.025, 1.0, 0.158));    // exhaust port boss
+    CYLX.forEach(function (x, i) {
+      var vo = i % 2 === 0 ? 1 : -1;
+      add('cylinder-head', cyl(0.024, 0.024, 0.02, 'z', 16), M.grey, V(x - 0.025 * vo, 1.04, 0.158));   // inlet port boss
+      add('cylinder-head', cyl(0.024, 0.024, 0.02, 'z', 16), M.grey, V(x + 0.025 * vo, 1.0, 0.158));    // exhaust port boss
     });
     add('cylinder-head', rbox(0.08, 0.06, 0.06, 0.015), M.grey, V(1.69, 1.05, 0.04));   // thermostat outlet boss
-    for (var hn = 0; hn < 5; hn++) SIDES.forEach(function (s) { hexNut('head-studs-nuts', V(1.15 + hn * 0.125, 1.115, s * 0.12), 0.011, 'y'); });
+    // 22 head set screws and nuts (SRC-035 Fig. 120): two outer rows of nine and four between the valve groups.
+    for (var hn = 0; hn < 9; hn++) SIDES.forEach(function (s) { hexNut('head-studs-nuts', V(1.14 + hn * 0.065, 1.115, s * 0.12), 0.011, 'y'); });
+    [1.27, 1.40, 1.53, 1.66].forEach(function (x) { hexNut('head-studs-nuts', V(x, 1.115, 0.03), 0.011, 'y'); });
     add('rocker-shaft', cyl(0.0079, 0.0079, 0.50, 'x', 12), M.steel, V(1.40, 1.13, -0.06));
     [1.17, 1.40, 1.63].forEach(function (x) { add('rocker-shaft', rbox(0.025, 0.04, 0.03, 0.006), M.greyDark, V(x, 1.115, -0.06)); });
     add('rocker-cover', rbox(0.50, 0.085, 0.22, 0.035), M.alu, V(1.40, 1.155, -0.01));
-    add('rocker-cover', cyl(0.03, 0.03, 0.03, 'y', 20), M.black, V(1.60, 1.21, -0.01));     // oil filler cap
     [1.22, 1.40, 1.58].forEach(function (x) { hexNut('rocker-cover', V(x, 1.205, -0.01), 0.008, 'y'); });
     // Manifolds on the right-hand side, exhaust stack ahead of the dash (owner photo)
     add('inlet-manifold', rbox(0.48, 0.05, 0.06, 0.02), M.greyDark, V(1.40, 1.07, 0.185));
-    CYLX.forEach(function (x) { add('exhaust-manifold', cyl(0.022, 0.022, 0.07, 'z', 14), M.core, V(x + 0.025, 1.0, 0.18)); });
+    CYLX.forEach(function (x, i) { add('exhaust-manifold', cyl(0.022, 0.022, 0.07, 'z', 14), M.core, V(x + 0.025 * (i % 2 === 0 ? 1 : -1), 1.0, 0.18)); });
     add('exhaust-manifold', cyl(0.035, 0.035, 0.46, 'x', 18), M.core, V(1.40, 0.99, 0.225));
-    tube('exhaust-elbow', [V(1.55, 0.99, 0.23), V(1.585, 1.05, 0.235), V(1.59, 1.14, 0.235), V(1.59, 1.22, 0.235)], 0.035, M.core);
+    // The manual's outlet leaves the middle of the manifold (Fig. 110). Its standard exhaust then runs down and back
+    // under the RH footplate; the owner's tractor has an upright stack through the bonnet instead (owner photo), so the
+    // stack is kept and fed from the mid-manifold outlet.
+    tube('exhaust-elbow', [V(1.45, 0.99, 0.24), V(1.50, 1.0, 0.265), V(1.57, 1.06, 0.25), V(1.59, 1.14, 0.235), V(1.59, 1.22, 0.235)], 0.035, M.core);
     add('silencer', lathe([[0.0, 0.0], [0.03, 0.0], [0.046, 0.03], [0.046, 0.30], [0.03, 0.33], [0.0, 0.33]], 'y', 24), M.core, V(1.59, 1.22, 0.235));
     add('silencer', cyl(0.024, 0.024, 0.22, 'y', 16), M.core, V(1.59, 1.65, 0.235));
     add('silencer', ring(0.047, 0.006, 'y', 24), M.steelDark, V(1.59, 1.26, 0.235));
