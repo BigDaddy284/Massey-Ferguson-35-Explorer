@@ -76,9 +76,9 @@ The data is kept strictly separate from the UI and 3D code (spec §11):
     row per node may be `primary`: it sets `oemPartNumber` and `quantity`, and the node becomes `verified` (unless it is
     `variant-dependent`). A row was made primary only when it names the 23C (or no engine) and any serial condition
     covers the whole 1958 Coventry range 79553–125067; (J)/(N) "to service 829420M91" rows were preferred over the later
-    (K)/(P) rows. Splits inside 1958 (e.g. 111443/111444, 107892/107893, 117267/117268) or on the 23C engine number
-    (SJ…E, except the first few thousand engines) leave `oemPartNumber` null, every candidate listed, and a
-    `partsBookNote` on the node saying why. `docs/research/09-parts-book-819045.md` records the method and the page map.
+    (K)/(P) rows. Serial and engine-number splits are decided by the owner's plates (serial 105284, engine SJ64975ES);
+    composite sets and alternatives the book lists without a condition leave `oemPartNumber` null, every
+    candidate listed, and a `partsBookNote` on the node saying why. `docs/research/09-parts-book-819045.md` records the method and the page map.
   The validator checks the book, the source per book, the number pattern, the page, one primary = `oemPartNumber`,
   and that every `verified` component has a primary. The mapping was produced by scripts kept outside the repo; edit the
   JSON directly for corrections.
@@ -170,8 +170,11 @@ These are enforced by the validator where possible.
   The validator checks each one cites an accessed source and never repeats `oemPartNumber`.
 - Never present missing data as confirmed in the UI. Show "not yet documented" instead.
 - The Perkins 3.152/A3.152 is **not** 1958 equipment (introduced 1959, c. serial 165596).
-- Live PTO depends on the dual-stage clutch. The owner reports dual-clutch behaviour
-  and reports the clutch letter M on the serial plate (`clutchStatus: plate-letter-reported`). The full prefix and number are still unknown, so it stays labelled as owner-reported.
+- Live PTO depends on the dual-stage clutch. The owner's plates were read on 2026-11-08: serial
+  **SDM 105284** (S standard chassis, D 23C diesel, M dual-stage clutch; 1958) and engine **SJ 64975 ES**
+  (`clutchStatus`, `engineStatus`, `chassisStatus`: `plate-read`). The trailing S on the engine number is
+  unexplained; record it as stamped. These numbers decide which side of a parts-book serial or
+  engine-number split applies.
 - Do not apply US-built MF35 serial breaks to Coventry serials.
 - Do not reproduce copyrighted AGCO diagrams or text. Diagrams and 3D assets must be original.
 - Torques come from the workshop manual (SRC-035 B.29–B.30) in lb ft. SRC-006's "Nm" figures mix

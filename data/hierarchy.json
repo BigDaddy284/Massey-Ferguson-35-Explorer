@@ -267,6 +267,29 @@
                     "confidence": "listed"
                   },
                   {
+                    "number": "826159M1",
+                    "description": "Plug",
+                    "qty": 4,
+                    "source": "SRC-032",
+                    "page": 79,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "10",
+                    "letters": "H",
+                    "condition": "Up to Serial or Engine Number SJ44129E"
+                  },
+                  {
+                    "number": "826158M1",
+                    "description": "Plug",
+                    "qty": 1,
+                    "source": "SRC-032",
+                    "page": 79,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "letters": "J",
+                    "condition": "From Serial or Engine Number SJ44130E"
+                  },
+                  {
                     "number": "825190M1",
                     "description": "Plug, 3/4\"",
                     "qty": 2,
@@ -336,7 +359,8 @@
                   "SRC-032"
                 ],
                 "status": "partially-verified",
-                "oemPartNumber": null
+                "oemPartNumber": null,
+                "partsBookNote": "Engine SJ64975ES is after SJ43470E and SJ44130E, so the later plugs 827834M1, 827835M1 and 826158M1 apply."
               },
               {
                 "id": "block-studs-dowels",
@@ -586,7 +610,7 @@
                 "id": "head-gasket",
                 "name": "Cylinder head gasket",
                 "kind": "component",
-                "status": "partially-verified",
+                "status": "verified",
                 "sources": [
                   "SRC-008",
                   "SRC-019",
@@ -628,17 +652,18 @@
                     "inBook819045": false
                   },
                   {
-                    "number": "1883003M1",
-                    "description": "Gasket",
-                    "qty": 1,
+                    "number": "827561M92",
+                    "description": "Top gasket set (includes the cylinder head gasket), items marked L",
+                    "qty": null,
                     "source": "SRC-032",
                     "page": 79,
                     "book": "MF35",
                     "confidence": "listed",
-                    "item": "42",
-                    "letters": "L",
-                    "bookNote": "INCLUDED IN 827561M92, REPAIR KIT",
-                    "note": "listed only as 'Gasket', included in top set 827561M92"
+                    "letters": "F,K",
+                    "condition": "From Serial or Engine Number SJ41890E",
+                    "bookNote": "INCLUDES ITEMS MARKED (L)",
+                    "note": "(F, K) from engine SJ41890E; owner's engine SJ64975ES",
+                    "primary": true
                   },
                   {
                     "number": "828694M91",
@@ -652,20 +677,20 @@
                     "condition": "Up to Serial or Engine Number SJ41889E"
                   },
                   {
-                    "number": "827561M92",
-                    "description": "Gasket",
+                    "number": "894904M91",
+                    "description": "Kit, Repair",
                     "qty": null,
                     "source": "SRC-032",
                     "page": 79,
                     "book": "MF35",
                     "confidence": "listed",
-                    "letters": "F,K",
+                    "letters": "F",
                     "condition": "From Serial or Engine Number SJ41890E",
-                    "bookNote": "INCLUDES ITEMS MARKED (L)"
+                    "note": "repair kit from SJ41890E"
                   }
                 ],
-                "partsBookNote": "819045 gives no separate head gasket row for the 23C; the gasket is supplied in the top gasket set (828694M91 up to engine SJ41889E, 827561M92 from SJ41890E). The TO35 number 827612M1 is not listed.",
-                "oemPartNumber": null
+                "partsBookNote": "819045 gives no separate head gasket row for the 23C; the gasket is supplied only in the top gasket set, 827561M92 from engine SJ41890E (828694M91 before). The owner's engine SJ64975ES takes 827561M92. The TO35 number 827612M1 is not listed.",
+                "oemPartNumber": "827561M92"
               },
               {
                 "id": "head-studs-nuts",
@@ -851,7 +876,8 @@
                     "confidence": "listed"
                   }
                 ],
-                "oemPartNumber": null
+                "oemPartNumber": null,
+                "partsBookNote": "Head fixings: 5 studs with nuts plus 17 bolts. The owner's engine SJ64975ES is before SJ107814E, so the (A) rows apply: 9 off 827614M1 and 8 off 827613M1 with 17 screws 353676X1."
               },
               {
                 "id": "combustion-chamber-insert",
@@ -3776,6 +3802,29 @@
                     "inBook819045": true
                   },
                   {
+                    "number": "825398M91",
+                    "description": "Cap",
+                    "qty": 1,
+                    "source": "SRC-032",
+                    "page": 95,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "11",
+                    "letters": "A",
+                    "condition": "Up to Serial or Engine Number SJ100804E"
+                  },
+                  {
+                    "number": "828201M1",
+                    "description": "Pin",
+                    "qty": 1,
+                    "source": "SRC-032",
+                    "page": 95,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "letters": "A",
+                    "condition": "Up to Serial or Engine Number SJ100804E"
+                  },
+                  {
                     "number": "826101M1",
                     "description": "Gear",
                     "qty": 1,
@@ -3857,7 +3906,8 @@
                     "item": "20"
                   }
                 ],
-                "oemPartNumber": null
+                "oemPartNumber": null,
+                "partsBookNote": "Engine SJ64975ES is before SJ100805E, so the early cap 825398M91 with pin 828201M1 applies."
               },
               {
                 "id": "timing-cover",
@@ -4513,7 +4563,7 @@
                     "confidence": "listed"
                   }
                 ],
-                "partsBookNote": "Page 91 shows the early filter (no assembly number), page 92 the later 829484M91 from engine SJ102045E; the element is common.",
+                "partsBookNote": "Page 91 shows the early filter (no assembly number), page 92 the later 829484M91 from engine SJ102045E; the owner's engine SJ64975ES has the early filter and the element is common to both.",
                 "oemPartNumber": "826137M91",
                 "quantity": 1
               },
@@ -4661,7 +4711,9 @@
                     "confidence": "listed",
                     "item": "46",
                     "letters": "L",
-                    "condition": "Up to Serial or Engine Number SJ93988E"
+                    "condition": "Up to Serial or Engine Number SJ93988E",
+                    "note": "owner's engine SJ64975ES is before SJ93989E",
+                    "primary": true
                   },
                   {
                     "number": "828906M91",
@@ -4679,9 +4731,10 @@
                   "SRC-041",
                   "SRC-032"
                 ],
-                "status": "partially-verified",
-                "partsBookNote": "Engine-number split at SJ93988E/SJ93989E; the owner's engine number is not known.",
-                "oemPartNumber": null
+                "status": "verified",
+                "partsBookNote": "Engine-number split at SJ93988E/SJ93989E; the owner's engine SJ64975ES takes the earlier dipstick.",
+                "oemPartNumber": "826148M91",
+                "quantity": 1
               },
               {
                 "id": "engine-breather",
@@ -6191,7 +6244,7 @@
                 "id": "fuel-lift-pump",
                 "name": "Fuel lift pump",
                 "kind": "component",
-                "status": "partially-verified",
+                "status": "verified",
                 "sources": [
                   "SRC-019",
                   "SRC-035",
@@ -6368,6 +6421,19 @@
                     "inBook819045": false
                   },
                   {
+                    "number": "1884857M91",
+                    "description": "Pump",
+                    "qty": 1,
+                    "source": "SRC-032",
+                    "page": 116,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "letters": "C",
+                    "condition": "From Serial or Engine Number SJ37181E",
+                    "note": "(C) from engine SJ37181E; owner's engine SJ64975ES",
+                    "primary": true
+                  },
+                  {
                     "number": "826154M91",
                     "description": "Pump",
                     "qty": 1,
@@ -6380,30 +6446,20 @@
                     "condition": "Up to Serial or Engine Number SJ37180E"
                   },
                   {
-                    "number": "1884857M91",
-                    "description": "Pump",
-                    "qty": 1,
-                    "source": "SRC-032",
-                    "page": 116,
-                    "book": "MF35",
-                    "confidence": "listed",
-                    "letters": "C",
-                    "condition": "From Serial or Engine Number SJ37181E"
-                  },
-                  {
                     "number": "26410043",
                     "description": "Diaphragm",
                     "qty": 1,
                     "source": "SRC-032",
-                    "page": 99,
+                    "page": 100,
                     "book": "MF35",
                     "confidence": "listed",
-                    "item": "21",
-                    "note": "diaphragm (early pump)"
+                    "item": "13",
+                    "note": "diaphragm (later pump)"
                   }
                 ],
-                "partsBookNote": "Engine-number split at SJ37180E/SJ37181E (also recorded by the 2008 AGCO catalogue); the owner's engine number is not known.",
-                "oemPartNumber": null
+                "partsBookNote": "The owner's engine SJ64975ES is after SJ37181E, so the later pump applies; 826154M91 is the pump up to SJ37180E (the 2008 AGCO catalogue records the same split).",
+                "oemPartNumber": "1884857M91",
+                "quantity": 1
               },
               {
                 "id": "fuel-filters",
@@ -6687,20 +6743,30 @@
                     "inBook819045": false
                   },
                   {
-                    "number": "827284M91",
+                    "number": "827885M91",
                     "description": "Pipe",
                     "qty": 1,
                     "source": "SRC-032",
                     "page": 116,
                     "book": "MF35",
                     "confidence": "listed",
-                    "item": "18",
-                    "letters": "B",
-                    "condition": "Up to Serial or Engine Number SJ37180E"
+                    "letters": "C",
+                    "condition": "From Serial or Engine Number SJ37181E"
                   },
                   {
-                    "number": "827885M91",
+                    "number": "827887M91",
                     "description": "Pipe",
+                    "qty": 1,
+                    "source": "SRC-032",
+                    "page": 116,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "letters": "C",
+                    "condition": "From Serial or Engine Number SJ37181E"
+                  },
+                  {
+                    "number": "827889M91",
+                    "description": "Pipe, 39 7027/130 3 Stud (D) 5339/998 6 Washer (D)",
                     "qty": 1,
                     "source": "SRC-032",
                     "page": 116,
@@ -6720,6 +6786,18 @@
                     "item": "19"
                   },
                   {
+                    "number": "827284M91",
+                    "description": "Pipe",
+                    "qty": 1,
+                    "source": "SRC-032",
+                    "page": 116,
+                    "book": "MF35",
+                    "confidence": "listed",
+                    "item": "18",
+                    "letters": "B",
+                    "condition": "Up to Serial or Engine Number SJ37180E"
+                  },
+                  {
                     "number": "827288M91",
                     "description": "Pipe",
                     "qty": 1,
@@ -6732,17 +6810,6 @@
                     "condition": "Up to Serial or Engine Number SJ37180E"
                   },
                   {
-                    "number": "827887M91",
-                    "description": "Pipe",
-                    "qty": 1,
-                    "source": "SRC-032",
-                    "page": 116,
-                    "book": "MF35",
-                    "confidence": "listed",
-                    "letters": "C",
-                    "condition": "From Serial or Engine Number SJ37181E"
-                  },
-                  {
                     "number": "827607M91",
                     "description": "Pipe",
                     "qty": 1,
@@ -6752,17 +6819,6 @@
                     "confidence": "listed",
                     "letters": "B",
                     "condition": "Up to Serial or Engine Number SJ37180E"
-                  },
-                  {
-                    "number": "827889M91",
-                    "description": "Pipe, 39 7027/130 3 Stud (D) 5339/998 6 Washer (D)",
-                    "qty": 1,
-                    "source": "SRC-032",
-                    "page": 116,
-                    "book": "MF35",
-                    "confidence": "listed",
-                    "letters": "C",
-                    "condition": "From Serial or Engine Number SJ37181E"
                   }
                 ],
                 "sources": [
@@ -6770,7 +6826,7 @@
                   "SRC-032"
                 ],
                 "status": "partially-verified",
-                "partsBookNote": "Pipes change with the lift pump at engine SJ37180E/SJ37181E.",
+                "partsBookNote": "Pipes change with the lift pump at engine SJ37180E/SJ37181E; the owner's engine SJ64975ES takes the (C) rows 827885M91, 827887M91 and 827889M91.",
                 "oemPartNumber": null
               }
             ]
@@ -7118,7 +7174,7 @@
                 "name": "Injector",
                 "kind": "component",
                 "quantity": 4,
-                "status": "partially-verified",
+                "status": "verified",
                 "sources": [
                   "SRC-006",
                   "SRC-035",
@@ -7263,7 +7319,9 @@
                     "source": "SRC-032",
                     "page": 116,
                     "book": "MF35",
-                    "confidence": "listed"
+                    "confidence": "listed",
+                    "note": "owner's engine SJ64975ES is before SJ86046E",
+                    "primary": true
                   },
                   {
                     "number": "40S697K",
@@ -7304,15 +7362,15 @@
                     "confidence": "listed"
                   }
                 ],
-                "partsBookNote": "CAV holders change at engine SJ86046E (footnotes E/F); the owner's engine number is not known.",
-                "oemPartNumber": null
+                "partsBookNote": "CAV holders change at engine SJ86046E (footnotes E/F); the owner's engine SJ64975ES is before the change.",
+                "oemPartNumber": "BKB40S697"
               },
               {
                 "id": "injector-nozzle",
                 "name": "Injector nozzle",
                 "kind": "component",
                 "quantity": 4,
-                "status": "partially-verified",
+                "status": "verified",
                 "sources": [
                   "SRC-035",
                   "SRC-041",
@@ -7351,7 +7409,9 @@
                     "source": "SRC-032",
                     "page": 116,
                     "book": "MF35",
-                    "confidence": "listed"
+                    "confidence": "listed",
+                    "note": "owner's engine SJ64975ES is before SJ86046E",
+                    "primary": true
                   },
                   {
                     "number": "BND12SP6290",
@@ -7363,8 +7423,8 @@
                     "confidence": "listed"
                   }
                 ],
-                "partsBookNote": "CAV nozzles change at engine SJ86046E.",
-                "oemPartNumber": null
+                "partsBookNote": "CAV nozzles change at engine SJ86046E; the owner's engine SJ64975ES is before the change.",
+                "oemPartNumber": "BND12SP6169"
               },
               {
                 "id": "injector-seals",
@@ -8779,6 +8839,19 @@
                 "bookNote": "INCLUDED IN 827561M92, REPAIR KIT"
               },
               {
+                "number": "1883003M1",
+                "description": "Gasket",
+                "qty": 1,
+                "source": "SRC-032",
+                "page": 79,
+                "book": "MF35",
+                "confidence": "listed",
+                "item": "42",
+                "letters": "L",
+                "bookNote": "INCLUDED IN 827561M92, REPAIR KIT",
+                "note": "housing gasket, in set 827561M92"
+              },
+              {
                 "number": "827484M1",
                 "description": "Elbow",
                 "qty": 1,
@@ -9542,7 +9615,8 @@
                 ],
                 "oemPartNumber": "894313M91",
                 "status": "verified",
-                "quantity": 1
+                "quantity": 1,
+                "partsBookNote": "Serial SDM 105284 is after 36228 and 80004, so cover 894313M91 and pins 891826M1 / 891827M1 apply."
               }
             ],
             "partsBookReferences": [
@@ -17192,7 +17266,7 @@
                 "item": "10"
               }
             ],
-            "partsBookNote": "The levelling-box shaft and fork change at serial 117267/117268, inside the 1958 range.",
+            "partsBookNote": "The RH lift rod is the levelling-box assembly (see Levelling box, 182642M94); its shaft and fork change at serial 117267/117268, and the owner's serial 105284 takes the earlier shaft 182641M1 and fork 182391M1.",
             "oemPartNumber": null
           },
           {
@@ -20342,7 +20416,9 @@
                 "confidence": "listed",
                 "item": "28",
                 "letters": "C",
-                "condition": "Up to Serial or Engine Number 107892"
+                "condition": "Up to Serial or Engine Number 107892",
+                "note": "(C) up to serial 107892; owner's serial 105284",
+                "primary": true
               },
               {
                 "number": "828136M1",
@@ -20364,7 +20440,8 @@
                 "book": "MF35",
                 "confidence": "listed",
                 "letters": "F",
-                "condition": "From Serial or Engine Number 74656"
+                "condition": "From Serial or Engine Number 74656",
+                "note": "side emblems, from serial 74656"
               },
               {
                 "number": "827566M1",
@@ -20402,9 +20479,10 @@
                 "condition": "From Serial or Engine Number 74656"
               }
             ],
-            "partsBookNote": "Nose badge changes at serial 107892/107893, inside the 1958 range; the side emblems 828143M1 apply from 74656.",
-            "oemPartNumber": null,
-            "status": "partially-verified"
+            "partsBookNote": "Serial SDM 105284 is before 107893, so the early nameplate 826686M1 applies; the side emblems 828143M1 apply from 74656.",
+            "oemPartNumber": "826686M1",
+            "status": "verified",
+            "quantity": 1
           },
           {
             "id": "dashboard",

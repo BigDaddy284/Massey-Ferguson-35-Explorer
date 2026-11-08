@@ -3,7 +3,7 @@
 An interactive digital anatomy and parts catalogue for a **1958 Massey Ferguson 35 diesel**
 (Standard 23C engine), built to run locally in a web browser.
 
-**Status:** Phase 9 (final polish) built on top of Phase 8 and the AGCO MF35/35X parts book 819045. 135 components show their original part number and quantity from the book and are marked verified; where the book splits a part by serial or engine number inside 1958, every candidate is listed and the record stays partially verified. A completeness report (`npm run report`) and the Research Status page list what is still missing. The parts books themselves (purchased PDFs) are not in this repository.
+**Status:** Phase 9 (final polish) built on top of Phase 8 and the AGCO MF35/35X parts book 819045. 141 components show their original part number and quantity from the book and are marked verified. The owner's serial plate (SDM 105284: a 1958 Coventry 23C diesel with the dual-stage clutch) and engine number (SJ 64975 ES) decide which side of the book's serial and engine-number splits applies; composite sets list every candidate and stay partially verified. A completeness report (`npm run report`) and the Research Status page list what is still missing. The parts books themselves (purchased PDFs) are not in this repository.
 
 ## Open the app
 

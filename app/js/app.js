@@ -172,6 +172,7 @@
       if ((axis === 'clutch' || axis === 'pto') && !state.overrides.clutch) {
         if (r.owner.clutchStatus === 'owner-reported') suffix = ' (owner-reported)';
         else if (r.owner.clutchStatus === 'plate-letter-reported') suffix = ' (plate letter M, owner-reported)';
+        else if (r.owner.clutchStatus === 'plate-read') suffix = ' (serial plate SDM, letter M)';
       }
       return '<span class="config-chip ' + cls + '"><span class="dot"></span><strong>' + pair[1] + ':</strong> ' + esc(val) + esc(suffix) + '</span>';
     }).join('');
@@ -837,7 +838,7 @@
           '<dl class="fields" style="margin-top:12px"><dt>Not in 3D</dt><dd>' + chips(notModelled) + '</dd>' +
           '<dt>No number yet</dt><dd>' + chips(noNumber) + '</dd>' +
           '<dt>No diagram</dt><dd>' + chips(noDiagram) + '<div class="muted" style="font-size:12px;margin-top:4px">Their parts appear in the parent assembly\'s diagram.</div></dd>' +
-          '<dt>Unresolved</dt><dd><ul class="muted" style="margin:0;padding-left:18px;font-size:13px"><li>Original part numbers: read from parts book 819045 (SRC-032). Records whose row depends on a serial split inside 1958 or on the 23C engine number (lift pump, injectors, dipstick, oil filter, levelling-box shaft, nose badge, clutch springs) list every candidate and stay partially verified until the owner reads the serial and engine plates.</li><li>Owner\'s serial number and prefix letters: not yet entered, so clutch and PTO stay owner-reported.</li><li>Individual fasteners are rows inside their component records, not separate records yet.</li><li>UK Lucas electrical equipment is not in the TO35 book, which lists US Delco-Remy parts.</li><li>Supplier links were live when captured; they are not re-checked automatically.</li></ul></dd></dl>';
+          '<dt>Unresolved</dt><dd><ul class="muted" style="margin:0;padding-left:18px;font-size:13px"><li>Original part numbers: read from parts book 819045 (SRC-032). The owner\'s plates (serial SDM 105284, engine SJ 64975 ES) settled the rows the book splits by serial or engine number; records still without a settled number are composite sets, grade-selected parts or alternatives the book lists without a condition.</li><li>The trailing S on the engine number SJ 64975 ES is not explained by any source read so far.</li><li>Individual fasteners are rows inside their component records, not separate records yet.</li><li>UK Lucas electrical equipment is not in the TO35 book, which lists US Delco-Remy parts.</li><li>Supplier links were live when captured; they are not re-checked automatically.</li></ul></dd></dl>';
       })() +
       '<h2>Source register</h2><div class="table-wrap"><table><thead><tr><th>Id</th><th>Source</th><th>Grade</th><th>Read</th></tr></thead><tbody>' +
       DATA.sources.map(function (s) {

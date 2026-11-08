@@ -85,8 +85,8 @@ test('key 23C engine, hydraulic, PTO and axle numbers read from 819045 are prese
   assert.match(prim.condition, /65685/);
 });
 
-test('serial splits inside 1958 and engine-number splits are left unsettled, with every candidate kept', () => {
-  for (const id of ['fuel-lift-pump', 'dipstick', 'injector', 'lift-rod-rh', 'front-badge', 'flywheel', 'head-gasket']) {
+test('rows the book lists without a usable condition stay unsettled, with every candidate kept', () => {
+  for (const id of ['lift-rod-rh', 'flywheel', 'combustion-chamber-insert', 'valve-spring-inner', 'conrod']) {
     const n = nodeOf(id);
     assert.equal(n.oemPartNumber, null, `${id} has no settled number`);
     assert.notEqual(n.status, 'verified');
@@ -94,7 +94,7 @@ test('serial splits inside 1958 and engine-number splits are left unsettled, wit
     assert.ok(n.partsBookNote, `${id} explains why`);
   }
   const pump = nodeOf('fuel-lift-pump').partsBookReferences.filter((r) => r.book === 'MF35').map((r) => r.number);
-  assert.ok(pump.includes('826154M91') && pump.includes('1884857M91'));
+  assert.ok(pump.includes('826154M91') && pump.includes('1884857M91'), 'both lift pumps stay listed');
   assert.equal(nodeOf('heater-plugs').status, 'variant-dependent', 'variant-dependent parts keep their status even with a number');
   assert.equal(nodeOf('heater-plugs').oemPartNumber, '829162M1');
 });
@@ -130,4 +130,24 @@ test('De Luxe (dual clutch) rows are settled because the owner\'s tractor has th
   assert.equal(nodeOf('release-fork').oemPartNumber, '886719M1');
   assert.equal(nodeOf('pto-drive-shaft').oemPartNumber, '180429M1');
   assert.ok(nodeOf('countershaft').partsBookReferences.some((r) => r.number === '183085M1' && !r.primary), 'the Standard-tractor number is kept as an alternative');
+});
+
+test("the owner's plates (serial SDM 105284, engine SJ 64975 ES) settle the serial- and engine-number splits", () => {
+  const config = read('configurations.json');
+  assert.equal(config.ownerTractor.serialPrefix, 'SDM');
+  assert.equal(config.ownerTractor.serialNumber, 105284);
+  assert.equal(config.ownerTractor.engineNumber, 'SJ64975ES');
+  assert.equal(config.ownerTractor.clutchStatus, 'plate-read');
+  const d = core.decodeSerial('SDM105284', config, read('technical.json'));
+  assert.equal(d.year, 1958);
+  assert.deepEqual(d.axisValues, { chassis: 'standard', engine: 'std-23c-diesel', clutch: 'dual-stage' });
+  assert.equal(d.warnings.length, 0);
+  const oem = (id) => nodeOf(id).oemPartNumber;
+  assert.equal(oem('fuel-lift-pump'), '1884857M91', 'engine after SJ37181E');
+  assert.equal(oem('injector'), 'BKB40S697', 'engine before SJ86046E');
+  assert.equal(oem('injector-nozzle'), 'BND12SP6169');
+  assert.equal(oem('dipstick'), '826148M91', 'engine before SJ93989E');
+  assert.equal(oem('head-gasket'), '827561M92', 'gasket set from SJ41890E');
+  assert.equal(oem('front-badge'), '826686M1', 'serial before 107893');
+  for (const id of ['fuel-lift-pump', 'injector', 'dipstick', 'front-badge']) assert.equal(nodeOf(id).status, 'verified');
 });

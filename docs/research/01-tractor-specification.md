@@ -180,16 +180,16 @@ the lever sets a lift-arm height and the valve holds it there.
 
 | Attribute | Value | Status |
 |---|---|---|
-| Model / year | MF35, believed 1958 | Owner belief, unconfirmed |
-| Engine | Diesel; Standard 23C provisional | Provisional |
+| Model / year | MF35, **1958** (serial 105284 is in the 1958 Coventry range 79553–125067) | Plate read 2026-11-08 |
+| Engine | **Standard 23C diesel**, engine number SJ 64975 ES (prefix letter D = Standard diesel) | Plate read; trailing S unexplained |
 | Hydraulic lift, 3-point linkage, rear PTO | Fitted | Owner confirmed |
-| Serial number / prefix | Unknown (tractor not accessible) | — |
-| Clutch / PTO type | **Dual-stage clutch, live PTO.** Owner reports (2026-11-07) that the tractor can be slowed with the clutch while attached equipment keeps working | Owner-reported; serial prefix (M) not yet seen |
+| Serial number / prefix | **SDM 105284**: S standard chassis, D 23C diesel, M dual-stage clutch (SRC-035 B.1) | Plate read 2026-11-08 |
+| Clutch / PTO type | **Dual-stage clutch, live PTO.** Owner reports (2026-11-07) that the tractor can be slowed with the clutch while attached equipment keeps working | Confirmed by the plate letter M and the two-stage pedal action |
 | Electrics, cold start, diff lock, seat | Unknown | — |
 
 ## 10. Open questions (priority order)
 
-1. Owner: serial plate prefix and number; engine number; clutch half-pedal PTO test.
+1. ~~Owner: serial plate prefix and number; engine number; clutch half-pedal PTO test.~~ Done 2026-11-08: SDM 105284, SJ 64975 ES, two-stage pedal confirmed. Open: the meaning of the trailing S on the engine number.
 2. Obtain parts book 819045M4 (in print from AGCO dealers, c. £136; SRC-016). This
    unlocks OEM numbers and quantities across the whole catalogue.
 3. Obtain service manual 1448811M1 and diesel supplement 690560M1 for torques,
