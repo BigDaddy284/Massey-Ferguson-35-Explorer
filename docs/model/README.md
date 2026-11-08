@@ -95,6 +95,17 @@ selected part's name to it with a dot and leader, so a part stays identifiable w
 Still placed by judgement after this pass: the instrument panel's form, the horn, the kingpin
 angles, the drawbar type and the exact lift-shaft position.
 
+## Parts added from the illustrated parts book (SRC-043)
+
+Eight parts were added after reading the figures of the illustrated 819045 parts book (see
+`docs/research/09-parts-book-819045.md`): the front battery platform with its bracket, stays and strap (the
+platform mesh was previously part of `battery`), the left-hand battery cradle with its two bands and a stay to
+the axle housing (also previously in `battery`), the fuel tank mountings (pads on the battery bracket at the
+rear, spring bolts on the head front), the transmission dipstick and the right-hand centre housing side cover,
+the tool box clamped to the left radius rod, the steering column upper bearing, and the instrument panel bearer
+and brace. Their positions follow the figures by eye. The book does not show which radius rod carries the tool
+box; the left is assumed.
+
 ## Approximate
 
 These are placed by judgement and the owner's photo, not measured, and should be checked when the

@@ -41,7 +41,7 @@
   // Hierarchy ids treated as outer casings: made see-through in X-ray mode.
   var CASINGS = ['engine-block', 'cylinder-head', 'rocker-cover', 'sump', 'timing-cover', 'clutch-housing',
     'gearbox-casing', 'gearbox-top-cover', 'centre-housing', 'axle-trumpet-lh', 'axle-trumpet-rh', 'brake-drum',
-    'lift-cover-casting', 'bonnet', 'side-panels', 'grille', 'fuel-tank', 'radiator', 'dashboard', 'hyd-pump',
+    'lift-cover-casting', 'bonnet', 'side-panels', 'grille', 'fuel-tank', 'radiator', 'dashboard', 'hyd-pump', 'hyd-pump-body',
     'cylinder-liner', 'lift-cylinder', 'clutch-dual-cover', 'clutch-single-cover', 'pto-guard', 'air-cleaner', 'mudguards',
     'footplates', 'seat', 'steering-box', 'flywheel', 'clutch-dual-transmission-plate', 'clutch-dual-pto-plate', 'clutch-single-plate'];
 
@@ -440,6 +440,14 @@
     add('centre-housing', rbox(0.54, 0.575, 0.46, 0.09), M.grey, V(0.07, 0.6125, 0));
     add('centre-housing', rbox(0.56, 0.08, 0.50, 0.02), M.grey, V(0.07, 0.885, 0));        // top flange
     for (var cb = 0; cb < 7; cb++) SIDES.forEach(function (s) { hexNut('centre-housing', V(-0.16 + cb * 0.077, 0.93, s * 0.225), 0.008, 'y'); });
+    // Right-hand side cover with its gasket and five screws, and the transmission dipstick beside it (819045 p207
+    // items 14-17, figure C-5). Positions on the casting are approximate.
+    add('centre-housing-side-cover', cyl(0.057, 0.057, 0.004, 'z', 28), M.gasket, V(0.25, 0.56, 0.252));
+    add('centre-housing-side-cover', cyl(0.055, 0.055, 0.01, 'z', 28), M.grey, V(0.25, 0.56, 0.259));
+    for (var sc5 = 0; sc5 < 5; sc5++) hexNut('centre-housing-side-cover', V(0.25 + Math.cos(sc5 * 1.2566) * 0.044, 0.56 + Math.sin(sc5 * 1.2566) * 0.044, 0.266), 0.005, 'z');
+    add('transmission-dipstick', cyl(0.012, 0.012, 0.02, 'z', 12), M.steelDark, V(0.29, 0.70, 0.255));   // boss
+    rod('transmission-dipstick', V(0.29, 0.70, 0.255), V(0.30, 0.80, 0.29), 0.004, M.steel);
+    add('transmission-dipstick', ring(0.014, 0.003, 'x', 14), M.steel, V(0.30, 0.815, 0.29));          // handle loop
     SIDES.forEach(function (s) {
       var id = s > 0 ? 'axle-trumpet-rh' : 'axle-trumpet-lh';
       // Axle housing: bolted flange at the centre housing, tapering to the hub end with a brake flange.
@@ -566,6 +574,10 @@
       add('injector-seals', ring(0.009, 0.002, 'y', 16), M.copper, V(x, 1.033, -0.07));
       add('heater-plugs', cyl(0.006, 0.006, 0.05, 'z', 8), M.brass, V(x, 1.03, 0.16));
     });
+    // Spigot bearing in the crankshaft flange carrying the gearbox input shaft (819045 p72 items 31-32)
+    add('spigot-bearing', cyl(0.024, 0.024, 0.016, 'x', 18), M.steel, V(1.058, CY, 0));
+    // Heater plug circuit from the starter switch to the plugs (819045 p83), cold-climate tractors only
+    tube('heater-plug-wiring', [V(0.80, 0.96, -0.13), V(0.86, 1.06, -0.05), V(1.00, 1.08, 0.12), V(1.20, 1.036, 0.18)], 0.004, M.black);
     // Crankshaft main journals and the parts along it
     add('crankshaft', cyl(0.035, 0.035, EX1 - EX0 + 0.08, 'x', 20), M.steel, V((EX0 + EX1) / 2, CY, 0));
     [EX0 + 0.02, 1.40, EX1 - 0.02].forEach(function (x) { add('main-bearings', cyl(0.042, 0.042, 0.035, 'x', 24, true), M.bronze, V(x, CY, 0)); });
@@ -677,6 +689,17 @@
       });
       add('fuel-tank', loft(secs, true), M.red).material.side = THREE.DoubleSide;
     })();
+    // Tank mountings (819045 p111 items 4-18, figure J-15): at the rear a bolt, plate, pad and packing on each side
+    // of the bracket over the front battery; at the front a long bolt with a pad and a spring on each side, so the
+    // tank floats on the engine. Positions on the head front are approximate.
+    SIDES.forEach(function (s) {
+      add('fuel-tank-mountings', box(0.04, 0.006, 0.04), M.black, V(0.962, 1.147, s * 0.11));            // pad and packing
+      add('fuel-tank-mountings', box(0.03, 0.003, 0.03), M.steel, V(0.962, 1.1515, s * 0.11));          // plate
+      hexNut('fuel-tank-mountings', V(0.962, 1.157, s * 0.11), 0.006, 'y');
+      rod('fuel-tank-mountings', V(1.675, 1.098, s * 0.135), V(1.675, 1.158, s * 0.135), 0.004, M.steel);   // long bolt
+      add('fuel-tank-mountings', cyl(0.011, 0.011, 0.034, 'y', 10), M.steel, V(1.675, 1.12, s * 0.135));   // spring
+      add('fuel-tank-mountings', cyl(0.016, 0.016, 0.008, 'y', 12), M.black, V(1.675, 1.144, s * 0.135));   // pad
+    });
     add('fuel-cap', cyl(0.024, 0.024, 0.04, 'y', 16), M.steel, V(1.00, bonnetTop(1.0) - 0.005, 0));
     add('fuel-cap', cyl(0.036, 0.036, 0.03, 'y', 20), M.steel, V(1.00, bonnetTop(1.0) + 0.025, 0));
     // Tap and sediment bowl at the tank outlet, under the rear of the tank on the left (SRC-035 E.101, Figs. 103-104)
@@ -884,8 +907,8 @@
     // four cylinders in two opposed valve chambers (SRC-035 L.5-L.6, Figs. 8-9)
     var PX = 0.26, LX = 0.15;   // pump centre; lift shaft, ahead of the axle (SRC-035 L Fig. 7; the manual puts it
                                 // about 0.25-0.3 m ahead, limited here by the modelled centre-housing length)
-    add('hyd-pump', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX + 0.08, CS, 0));
-    add('hyd-pump', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX - 0.08, CS, 0));
+    add('hyd-pump-body', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX + 0.08, CS, 0));   // front and rear pump bodies (819045 p228 items 2, 39)
+    add('hyd-pump-body', rbox(0.03, 0.14, 0.24, 0.02), M.greyDark, V(PX - 0.08, CS, 0));
     add('hyd-pump-camshaft', cyl(0.022, 0.022, 0.18, 'x', 12, true), M.steel, V(PX, CS, 0));
     SIDES.forEach(function (s) {
       add('hyd-pump-camshaft-bearing', ring(0.024, 0.005, 'x', 16), M.steel, V(PX + s * 0.07, CS, 0));
@@ -1000,6 +1023,20 @@
       add('radius-rods', rbox(0.05, 0.03, 0.03, 0.008), M.greyDark, V(WB - 0.02, 0.555, s * 0.42));   // flattened front eye under the extension
       hexNut('radius-rods', V(WB - 0.02, 0.54, s * 0.42), 0.008, 'y');
       add('radius-rods', sphere(0.022), M.steel, V(1.04, 0.48, s * 0.19));                            // rear ball
+      // Tool box clamped by two clips to the left radius rod near its front eye (819045 p168 items 75-80, figure A-9
+      // inset). The book does not say which side; the left is assumed.
+      if (s < 0) {
+        var ra = V(WB - 0.02, 0.57, -0.42), rb = V(1.04, 0.48, -0.19);
+        var rdir = new THREE.Vector3().subVectors(rb, ra).normalize();
+        var yaw = -Math.atan2(rdir.z, rdir.x);
+        var out = new THREE.Vector3(-rdir.z, 0, rdir.x).normalize();          // outboard, horizontal
+        var c0 = ra.clone().lerp(rb, 0.22);
+        add('tool-box', box(0.30, 0.10, 0.10), M.red, c0.clone().addScaledVector(out, 0.065).add(V(0, -0.02, 0)), [0, yaw, 0]);
+        [-0.09, 0.09].forEach(function (o) {
+          var cp = c0.clone().addScaledVector(rdir, o);
+          add('tool-box', box(0.025, 0.045, 0.06), M.steelDark, cp.clone().addScaledVector(out, 0.025), [0, yaw, 0]);   // clip round the rod
+        });
+      }
       add('radius-rods', cyl(0.038, 0.038, 0.03, 'z', 18), M.greyDark, V(1.04, 0.48, s * 0.175));     // socket cap on the clutch housing
       [0, 2.1, 4.2].forEach(function (a) { hexNut('radius-rods', V(1.04 + Math.cos(a) * 0.03, 0.48 + Math.sin(a) * 0.03, s * 0.158), 0.005, 'z'); });
       var kz = s * (TF - 0.075);
@@ -1022,10 +1059,21 @@
       bar('steering-box', V(0.86, 0.91, s * 0.20), V(0.88, 0.65, s * 0.25), 0.04, 0.02, M.greyDark);
     });
     // Front axle support bracket bolted to the engine front, carrying the pivot pin (SRC-035 O.3, O.6)
-    add('sump', rbox(0.24, 0.14, 0.26, 0.04), M.grey, V(1.84, 0.555, 0));
+    add('front-axle-support', rbox(0.24, 0.14, 0.26, 0.04), M.grey, V(1.84, 0.555, 0));   // 819045 p168 item 45
     add('steering-box', rbox(0.16, 0.14, 0.30, 0.03), M.grey, V(0.86, 0.95, 0));
     var colA = V(0.82, 0.98, 0), colB = V(0.62, 1.29, 0);
     rod('steering-column', colA, colB, 0.022, M.greyDark);
+    // Upper column bearing: race, ring and balls with two seals and a bush under the wheel (819045 p175 items 51-56, figure A-17)
+    (function () {
+      var d = new THREE.Vector3().subVectors(colB, colA).normalize();
+      var q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), d);
+      [[-0.035, 0.030, 0.012, M.black], [-0.020, 0.032, 0.016, M.steel], [-0.008, 0.030, 0.006, M.black]].forEach(function (c) {
+        var m = add('steering-column-bearing', cyl(c[1], c[1], c[2], 'y', 20), c[3], colB.clone().addScaledVector(d, c[0]));
+        m.quaternion.copy(q);
+      });
+    })();
+    // Instrument panel bearer (left) and brace (right) from the steering box to the panel (819045 p175 item 64)
+    SIDES.forEach(function (s) { bar('dashboard-supports', V(0.86, 1.0, s * 0.15), V(0.83, 1.10, s * 0.22), 0.03, 0.006, M.greyDark); });
     var colDir = new THREE.Vector3().subVectors(colB, colA).normalize();
     var sw = part('steering-wheel');
     var swG = new THREE.Group();
@@ -1072,8 +1120,20 @@
     add('battery', rbox(0.11, 0.17, 0.18, 0.01), M.battery, V(1.01, 1.02, 0.0));
     add('battery', rbox(0.17, 0.20, 0.13, 0.01), M.battery, V(0.22, 0.76, -0.42));
     [[1.01, 1.115, 0.06], [1.01, 1.115, -0.06], [0.22, 0.87, -0.38], [0.22, 0.87, -0.46]].forEach(function (q) { add('battery', cyl(0.009, 0.009, 0.02, 'y', 10), M.brass, V(q[0], q[1], q[2])); });
-    add('battery', rbox(0.15, 0.01, 0.22, 0.004), M.steelDark, V(1.01, 0.93, 0.0));                // carrier
-    add('battery', rbox(0.21, 0.01, 0.17, 0.004), M.steelDark, V(0.22, 0.655, -0.42));             // rear carrier
+    // Front battery platform with its cross bracket and clamping strap (819045 p152 items 16-18, figure M-11).
+    // The same bracket number (826780M91) carries the back of the fuel tank (p111 item 9).
+    add('battery-platform', rbox(0.15, 0.01, 0.22, 0.004), M.steelDark, V(1.01, 0.93, 0.0));
+    add('battery-platform', box(0.03, 0.012, 0.30), M.steelDark, V(0.95, 0.924, 0.0));                  // cross bracket
+    SIDES.forEach(function (s) { add('battery-platform', box(0.012, 0.215, 0.03), M.steelDark, V(0.962, 1.0425, s * 0.11)); });   // stays up to the tank's rear mounting
+    add('battery-platform', box(0.02, 0.004, 0.19), M.black, V(1.01, 1.107, 0.0));                    // strap over the battery
+    SIDES.forEach(function (s) { add('battery-platform', box(0.02, 0.17, 0.004), M.black, V(1.01, 1.02, s * 0.093)); });
+    // Left-hand battery mounting: cradle with two clamping bands and a stay to the axle housing (819045 p152 items 30-32)
+    add('battery-mounting-lh', rbox(0.21, 0.01, 0.17, 0.004), M.steelDark, V(0.22, 0.655, -0.42));
+    add('battery-mounting-lh', box(0.08, 0.012, 0.05), M.steelDark, V(0.125, 0.655, -0.42));         // stay to the axle housing flange
+    [0.17, 0.27].forEach(function (x) {
+      add('battery-mounting-lh', box(0.018, 0.004, 0.14), M.steelDark, V(x, 0.862, -0.42));          // band over the top
+      SIDES.forEach(function (s) { add('battery-mounting-lh', box(0.018, 0.21, 0.004), M.steelDark, V(x, 0.76, -0.42 + s * 0.067)); });
+    });
     // Headlamps on V brackets bolted to the radiator cowl sides (SRC-035 H.3 Fig. 3, H.5 Fig. 8; part of the lighting kit)
     SIDES.forEach(function (s) {
       add('headlamps', lathe([[0.0, 0.0], [0.05, 0.0], [0.068, 0.04], [0.072, 0.09], [0.0, 0.09]], 'x', 28), M.red, V(1.93, 1.05, s * 0.40));
