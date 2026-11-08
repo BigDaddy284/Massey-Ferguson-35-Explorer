@@ -319,7 +319,29 @@
   /* ---------- Coverage ---------- */
 
   // modelledIds (optional): hierarchy ids that have their own 3D object.
-  function coverage(index, modelledIds) {
+  /**
+   * Drawn diagrams (Phase 6) that show a part: the diagram where the part itself is a numbered
+   * item (exact), or where an ancestor is the item it is drawn inside. Nearest first.
+   */
+  function diagramRefs(index, diagrams, id) {
+    var e = index.byId[id];
+    if (!e || !diagrams) return [];
+    var out = [];
+    Object.keys(diagrams).forEach(function (did) {
+      var d = diagrams[did];
+      var best = null;
+      (d.items || []).forEach(function (it) {
+        var pos = e.path.indexOf(it.id);
+        if (pos === -1) return;
+        if (!best || pos > best.pos) best = { diagram: did, title: d.title, n: it.n, item: it.id, exact: it.id === id, pos: pos };
+      });
+      if (best) out.push(best);
+    });
+    out.sort(function (a, b) { return (b.exact - a.exact) || (b.pos - a.pos); });
+    return out.map(function (r) { return { diagram: r.diagram, title: r.title, n: r.n, item: r.item, exact: r.exact }; });
+  }
+
+  function coverage(index, modelledIds, diagrams) {
     var inModel = {};
     (modelledIds || []).forEach(function (id) { inModel[id] = true; });
     var bySystem = {};
@@ -327,8 +349,9 @@
       var e = index.byId[id];
       if (e.depth === 0) return;
       var sys = e.path[1];
-      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, model: 0 };
+      var c = bySystem[sys] = bySystem[sys] || { total: 0, 'verified': 0, 'partially-verified': 0, 'unverified': 0, 'variant-dependent': 0, oem: 0, replacement: 0, described: 0, diagram: 0, model: 0 };
       c.total++;
+      if (diagrams && diagramRefs(index, diagrams, id).length) c.diagram++;
       if (e.node.description && e.node.function) c.described++;
       c[statusOf(e.node)]++;
       if (e.node.oemPartNumber) c.oem++;
@@ -353,6 +376,7 @@
     editDistance: editDistance,
     buildSearchIndex: buildSearchIndex,
     search: search,
-    coverage: coverage
+    coverage: coverage,
+    diagramRefs: diagramRefs
   };
 });

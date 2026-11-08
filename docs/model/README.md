@@ -73,3 +73,27 @@ None of this changes any measured dimension above. It is appearance, not evidenc
 - The whole layout is lifted if needed so nothing goes below the floor.
 - These directions are chosen so the views are clear. They are not a dismantling order, and they
   are not taken from any AGCO exploded diagram.
+
+## Drawn diagrams (Phase 6)
+
+`npm run diagrams` regenerates `app/data/mf35-diagrams.js`: one SVG line drawing per assembly in the
+`DIAGRAMS` list of `scripts/build-diagrams.mjs`, drawn from this model by `scripts/diagram-gen.js`.
+
+How a drawing is made:
+
+1. The assembly is exploded exactly as the 3D view explodes it (`viewer.setExplode`, depth chosen
+   so that at most 40 items are numbered), so the item numbers are the same in both.
+2. Every mesh is projected with an orthographic camera (direction per diagram: front-right-above,
+   rear-right-above, or side) and its vertices are welded by screen position.
+3. Faces are classed front- or back-facing. Edges between a front and a back face (or open edges on
+   a front face) form the silhouette, which is chained into loops and filled with one tone per mesh
+   (lit from above-front). Edges between two front faces meeting at more than 32° are drawn as
+   crease lines. Meshes are drawn back to front, so nearer parts cover farther ones.
+4. A casing that stays in place over the exploded parts (as in the 3D view) is drawn dashed with no
+   fill, so the parts inside stay visible.
+5. Each numbered item gets a label in the left or right margin and a leader to the nearest visible
+   face of its geometry.
+
+What the drawings are not: they inherit every simplification of the model (see above), they are a
+presentation layout rather than a dismantling order, and they are not reproductions of any AGCO
+illustration.
