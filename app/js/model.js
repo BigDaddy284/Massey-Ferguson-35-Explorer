@@ -762,7 +762,7 @@
       add('throttle-lever', cyl(0.03, 0.03, 0.01, 'x', 24), M.steelDark, face, [0, 0, 0.35]);                // friction disc 826997M1
       add('throttle-lever', cyl(0.009, 0.009, 0.09, 'x', 12), M.steel, piv.clone().addScaledVector(n, -0.01), [0, 0, 0.35]);   // pivot pin and spring sleeve
       var hub = piv.clone().addScaledVector(n, -0.04);
-      var knob = hub.clone().addScaledVector(up, 0.19).add(V(0, 0, 0.04));
+      var knob = hub.clone().addScaledVector(up, -0.03).add(V(0, 0, -0.17));                           // lies across the panel towards the column, as in photographs
       rod('throttle-lever', hub, knob, 0.006, M.steelDark);                                                  // lever 826992M91
       add('throttle-lever', sphere(0.014), M.black, knob);                                                   // ball knob
       var inner = piv.clone().addScaledVector(n, 0.045);
